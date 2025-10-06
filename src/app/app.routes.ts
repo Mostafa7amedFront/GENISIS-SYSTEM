@@ -1,3 +1,4 @@
+import { Addemployee } from './Pages/home/components/addemployee/addemployee';
 import { ProjectDetails } from './Pages/project-details/project-details';
 import { Routes } from '@angular/router';
 import { authGuard } from './Core/guards/auth.guard';
@@ -19,6 +20,11 @@ export const routes: Routes = [
       {
         path: 'home',
         component: Home,
+      },
+         {
+        path: 'addemployee',
+        loadComponent: () =>
+          import('./Pages/home/components/addemployee/addemployee').then(m => m.Addemployee),
       },
       {
         path: 'clients',
@@ -42,6 +48,27 @@ export const routes: Routes = [
         path: 'feedback',
         loadComponent: () =>
           import('./Pages/feed-back-page/feed-back-page').then(m => m.FeedBackPage),
+      },
+        {
+        path: 'client/:id',
+        loadComponent: () =>
+          import('./Pages/client-profile/client-profile').then(m => m.ClientProfile),
+      },
+      {
+        path: 'profile/:id',
+        loadComponent: () =>
+          import('./Pages/profile/profile').then(m => m.Profile),
+      },
+
+      {
+        path: 'notifications',
+        loadComponent: () =>
+          import('./Pages/notifaction/notifaction').then(m => m.Notifaction),
+      },
+      {
+        path: 'projectDetails/:id',
+        loadComponent: () =>
+          import('./Pages/project-details/project-details').then(m => m.ProjectDetails),
       },
     ]
   },

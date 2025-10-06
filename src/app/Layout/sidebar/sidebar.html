@@ -1,1 +1,80 @@
-<p>sidebar works!</p>
+<aside class="sidebar" [class.closed]="!isClosed">
+  <!-- Toggle Button -->
+  <div class="logo ">
+    <div class="logoImages pos ">
+      <div class="  d-flex align-items-center "  routerLink="/" >
+        <img class="border-0" src="assets/img/logo.svg" alt="Logo">
+
+
+      </div>
+
+      <div class=" icon_collaped d-flex align-content-center justify-content-center" (click)="toggle()"
+        [class.right]="isClosed" [class.center]="!isClosed">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="36" viewBox="0 0 36 22" fill="none"
+          class="ng-tns-c3500418680-0 ng-star-inserted">
+          <g transform="scale(-1, 1) translate(-36, 0)" class="ng-tns-c3500418680-0">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M11.6242 10.1176C11.5022 10.1176 11.4386 9.97253 11.5212 9.88281L13.5356 7.69553C13.8136 7.39365 13.8133 6.92893 13.535 6.62736C13.223 6.28931 12.689 6.28931 12.377 6.62735L9.43942 9.81012C8.85353 10.4449 8.85353 11.4374 9.43942 12.0722L12.377 15.255C12.689 15.593 13.223 15.593 13.535 15.255C13.8133 14.9534 13.8136 14.4887 13.5356 14.1868L11.5212 11.9995C11.4386 11.9098 11.5022 11.7647 11.6242 11.7647H23.4177C23.8725 11.7647 24.2412 11.396 24.2412 10.9412C24.2412 10.4864 23.8725 10.1176 23.4177 10.1176H11.6242ZM26.2412 15.0588C26.2412 15.5136 25.8725 15.8824 25.4177 15.8824H16.2602C15.8054 15.8824 15.4367 15.5136 15.4367 15.0588C15.4367 14.604 15.8054 14.2353 16.2602 14.2353H25.4177C25.8725 14.2353 26.2412 14.604 26.2412 15.0588Z"
+              fill="white" class="ng-tns-c3500418680-0"></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    @if(isClosed){
+    <div class="searchInput" [class.close]="!isClosed">
+      <input type="search" name="" id="" placeholder="Search">
+    </div>
+    }
+
+    <div [class.line]="true"></div>
+  </div>
+
+
+  <!-- Sidebar Content -->
+  <div class="sidebar-content">
+
+    <nav class="nav-section overflow-hidden">
+
+      <a routerLink="/home" class="d-flex gap-3 align-items-center" routerLinkActive="active">
+        <i class="fa-solid fa-house me-2 fs-4"></i>
+        <p class="m-0 mb-0">home</p>
+      </a>
+
+      <a routerLink="/service" class="d-flex gap-3 align-items-center" routerLinkActive="active">
+        <i class="fa-solid fa-briefcase me-2 fs-4"></i>
+        <p class="m-0 mb-0">Service</p>
+      </a>
+
+      <a routerLink="/clients" class="d-flex gap-3 align-items-center" routerLinkActive="active">
+        <i class="fa-solid fa-users me-2 fs-4"></i>
+        <p class="m-0 mb-0">Clients</p>
+      </a>
+
+      <a routerLink="/feedback" class="d-flex gap-3 align-items-center" routerLinkActive="active">
+        <i class="fa-solid fa-comments me-2 fs-4"></i>
+        <p class="m-0 mb-0">Feedback</p>
+      </a>
+
+      <a routerLink="/notifications" class="d-flex gap-3 align-items-center" routerLinkActive="active">
+        <i class="fa-solid fa-bell me-2 fs-4"></i>
+        <p class="m-0 mb-0">Notifications</p>
+      </a>
+
+      <a routerLink="/createaccount" class="d-flex gap-3 align-items-center" routerLinkActive="active">
+        <i class="fa-solid fa-user-plus me-2 fs-4"></i>
+        <p class="m-0 mb-0">Create Account</p>
+      </a>
+
+    </nav>
+
+
+    <div class="profile position-absolute  justify-content-between d-flex align-items-center gap-3 "
+      style="bottom: 20px; width: 90%;">
+
+      <p class="mb-0" [class.closed]="!isClosed">logout</p>
+      <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
+    </div>
+
+  </div>
+</aside>

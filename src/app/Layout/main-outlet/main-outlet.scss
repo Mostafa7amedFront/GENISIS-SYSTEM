@@ -1,0 +1,17 @@
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 279px; /* المسافة لما يكون الـ Sidebar مفتوح */
+  padding: 0 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-content.sidebar-closed {
+  margin-left: 80px; /* تقل المسافة لما يتقفل */
+  padding: 0 50px;
+}

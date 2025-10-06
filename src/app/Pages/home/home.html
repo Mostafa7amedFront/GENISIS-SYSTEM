@@ -1,10 +1,15 @@
-<div class="text-white team">
-    <h1 class="mt-5 text-end big">THE TEAM</h1>
-    <div class="container p-md-5 p-3 rounded team-container">
+<div class="text-white team  ">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class=" pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addemployee">Add Employee <i
+                class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h2>
+        <h1 class=" big">THE TEAM</h1>
+
+    </div>
+    <div class=" p-md-5 p-3 rounded team-container">
         <div class=" row g-3 g-lg-4">
             <div class="col-12 col-lg-6 pb-3 pe-lg-4">
                 <div class="d-flex flex-column justify-content-between h-100">
-                    <h1 class="mb-0">4TH, OCT</h1>
+                    <h1 class="mb-0">{{ today | date: 'd, MMM' | uppercase }}</h1>
                     <h4>Hello, Youssef</h4>
                     <div class="flex-wrap pt-4 pb-2 rounded d-flex blue ps-md-0 ps-2 ">
                         <div class="p-0 text-center col me-5 ms-1">
@@ -24,8 +29,7 @@
             </div>
             <div class="col-lg-6 pb-3 pe-lg-3 ps-lg-2">
                 <div class="p-md-4 p-3 mx-0 rounded-3 row h-100 right-box ">
-                    <div
-                        class="p-3 pb-0  mt-1 mt-md-0 rounded-3 inner-box col ">
+                    <div class="p-3 pb-0  mt-1 mt-md-0 rounded-3 inner-box col ">
                         <div class="p-3 d-flex gap-3  ">
                             <div class="px-0 me-3">
                                 <h1 class="mb-3">14</h1>
@@ -54,47 +58,94 @@
         </div>
         <div class="mt-0 row g-lg-4">
             <div class="card-box row">
+<!-- حالة التحميل -->
+@if (isLoading()) {
+  <div class="text-center py-5 w-100">
+    <div class="spinner-border text-info" role="status"></div>
+    <p class="mt-2">Loading data...</p>
+  </div>
+}
 
-                 @for (card of cards(); track $index) {
+<!-- حالة الخطأ -->
+@else if (errorMessage()) {
+  <div class="text-center py-5 w-100">
+    <p class="text-danger fw-bold">{{ errorMessage() }}</p>
+  </div>
+}
+
+<!-- حالة عدم وجود بيانات -->
+@else if (!isLoading() && cards().length === 0) {
+  <div class="text-center py-5 w-100">
+    <p class="text-muted fs-5">No data available at the moment.</p>
+  </div>
+}
+
+                @else {
+                @for (card of cards(); track $index) {
                 <div class="col-lg-3 col-md-4 col-12 me-0 mt-3 cards">
-                    <a [routerLink]="card.route" class="text-decoration-none text-white">
-                    <div class="card position-relative">
-                        <div class="tag position-absolute">
-                        <img [src]="card.tagImg" alt="">
-                        </div>
-                        <img [src]="card.profileImg" class="card-img-top" alt="">
-                        <div class="pb-0 card-body">
-                        <h6 class="mb-1 fw-bold card-title">{{ card.name }}</h6>
-                        <p class="mb-1 card-text">{{ card.job }}</p>
-                        <p>{{ card.date }}</p>
-                        <div class="mt-4 row">
-                            <div class="col">
-                            <p class="mt-2 mb-0">{{ card.talent }}</p>
+                    <a [routerLink]="['/profile', card.id]" class="text-decoration-none text-white">
+                        <div class="card position-relative">
+                            <div class="tag position-absolute">
+                                @switch (card.employeeBadge) {
+                                @case (0) { <img src="assets/employeeBadge/Subtract1.svg" alt=""> }
+                                @case (1) { <img src="assets/employeeBadge/Subtract2.svg" alt=""> }
+                                @case (2) { <img src="assets/employeeBadge/Subtract3.svg" alt=""> }
+                                @case (3) { <img src="assets/employeeBadge/Subtract4.svg" alt=""> }
+                                }
                             </div>
-                            <div class="col text-end">
-                            <h4>{{ card.percent }}</h4>
+
+                            <div class="cardOptions">
+                                <div class="w-100 p-2 d-flex justify-content-between">
+                                    <i class="fa-solid fa-trash" (click)="onDelete(card, $event)"></i>
+                                    <i class="fa-solid fa-pen-to-square" (click)="onEdit(card, $event)"></i>
+                                </div>
+                            </div>
+
+                            <img [src]="baseimageUrl + card.imageUrl" class="card-img-top" alt="" height="283px">
+                            <div class="pb-0 card-body">
+                                <h6 class="mb-1 fw-bold card-title">{{ card.name }}</h6>
+                                <p class="mb-1 card-text">{{ card.jobTitle }}</p>
+
+                                <div class="mt-4 row">
+                                    <div class="col">
+                                        @switch (card.employeeBadge) {
+                                        @case (0) { <p class="mt-2 mb-2">Rising Talent</p> }
+                                        @case (1) { <p class="mt-2 mb-2">Design Star</p> }
+                                        @case (2) { <p class="mt-2 mb-2">Top Tier</p> }
+                                        @case (3) { <p class="mt-2 mb-2">The Maestro</p> }
+                                        }
+                                    </div>
+                                    <div class="col text-end">
+                                        <h4>80%</h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                    </div>
                     </a>
                 </div>
                 }
-   
+                }
             </div>
+
         </div>
     </div>
-    
+
     <div class="row mx-0">
         <div class="col ps-sm-5 ps-3 bottom">
             <p class="mb-0">AVERAGE </p>
             <h2 class="mb-0">FEEDBACK</h2>
-            <img src="assets/img/4blue-star.png" alt="">
+            <div class="d-flex align-items-center mt-0">
+                <div class="stars">
+                    @for (s of [1, 2, 3, 4, 5]; track $index) {
+                    <button class="star-btn" [class.active]="s <= 3">
+                        <i class="fa fa-star"></i>
+                    </button>
+                    }
+                </div>
+            </div>
         </div>
         <div class="col text-end bottom pe-lg-4 pe-md-3 me-4 px-0">
             <h1 class="text-end pt-4 date">2024</h1>
         </div>
     </div>
 </div>
-
-<h2 class="mt-5 text-end pt-sm-4 logout" style="color: #00bec5;">SUBMIT <i class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h2>

@@ -1,7 +1,7 @@
 export interface IResponse  {
 
-    message:string;
-    statusCode:number;
+    // message:string;
+    // statusCode:number;
     success:boolean;
 }
 
@@ -9,7 +9,7 @@ export interface IResponse  {
 
 export interface IResponseOf<TResult>  extends IResponse{
 
-   result:TResult;
+   value:TResult;
 }
 
 

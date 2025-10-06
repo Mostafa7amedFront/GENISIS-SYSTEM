@@ -53,6 +53,8 @@ export class Client {
     { id: 17, tag: 'COMPLETED',    image: 'assets/img/gaflacard (4).svg', title: 'Gucci', subtitle: 'Fashion', date: '20TH, JUN', category: 'UI/UX', status: 'Completed' },
     { id: 18, tag: 'PAUSED',   image: 'assets/img/gaflacard (4).svg',title: 'Zara', subtitle: 'Fashion', date: '25TH, MAY', category: 'BRANDING', status: 'Paused' },
     { id: 19, tag: 'LONG TERM',    image: 'assets/img/gaflacard (4).svg',title: 'H&M', subtitle: 'Fashion', date: '30TH, APR', category: 'MARKETING', status: 'In Progress' },
+    
+
     { id: 20, tag: 'COMPLETED',    image: 'assets/img/gaflacard (4).svg', title: 'Louis Vuitton', subtitle: 'Luxury Brand', date: '5TH, MAR', category: 'DESIGN', status: 'Completed' },
   ];
    
