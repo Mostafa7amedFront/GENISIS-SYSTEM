@@ -58,27 +58,24 @@
         </div>
         <div class="mt-0 row g-lg-4">
             <div class="card-box row">
-<!-- حالة التحميل -->
-@if (isLoading()) {
-  <div class="text-center py-5 w-100">
-    <div class="spinner-border text-info" role="status"></div>
-    <p class="mt-2">Loading data...</p>
-  </div>
-}
+                @if (isLoading()) {
+                <div class="text-center py-5 w-100">
+                    <div class="spinner-border text-info" role="status"></div>
+                    <p class="mt-2">Loading data...</p>
+                </div>
+                }
 
-<!-- حالة الخطأ -->
-@else if (errorMessage()) {
-  <div class="text-center py-5 w-100">
-    <p class="text-danger fw-bold">{{ errorMessage() }}</p>
-  </div>
-}
+                @else if (errorMessage()) {
+                <div class="text-center py-5 w-100">
+                    <p class="text-danger fw-bold">{{ errorMessage() }}</p>
+                </div>
+                }
 
-<!-- حالة عدم وجود بيانات -->
-@else if (!isLoading() && cards().length === 0) {
-  <div class="text-center py-5 w-100">
-    <p class="text-muted fs-5">No data available at the moment.</p>
-  </div>
-}
+                @else if (!isLoading() && cards().length === 0) {
+                <div class="text-center py-5 w-100">
+                    <p class="text-muted fs-5">No data available at the moment.</p>
+                </div>
+                }
 
                 @else {
                 @for (card of cards(); track $index) {

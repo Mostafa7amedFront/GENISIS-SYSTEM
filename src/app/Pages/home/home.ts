@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Routes } from '@angular/router';
 import { Employees } from '../../Core/service/employees';
 import { IEmployee } from '../../Core/Interface/iemployee';
 import { environment } from '../../../environments/environment';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { SweetAlert } from '../../Core/service/sweet-alert';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class Home {
   isLoading = signal(false);
   errorMessage = signal('');
   private _alert = inject(SweetAlert);
-
+  private routes  = inject(Router);
   baseimageUrl = `${environment.baseimageUrl}`;
   cards = signal<IEmployee[]>([]);
 
@@ -85,5 +86,6 @@ export class Home {
     event.preventDefault();
     event.stopPropagation();
     console.log('Edit clicked', card);
+    this.routes.navigate(['/editemployee', card.id]);
   }
 }

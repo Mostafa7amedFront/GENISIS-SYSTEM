@@ -26,10 +26,9 @@ export class Employees {
     return this._httpClient.post(this.API_URL, employee);
   }
 
-  update(id: number, employee: IEmployee): Observable<any> {
-    return this._httpClient.put(`${this.API_URL}/${id}`, employee);
-  }
-
+update(id: number, employee: FormData): Observable<any> {
+  return this._httpClient.put(`${this.API_URL}/${id}`, employee);
+}
   delete(id: number): Observable<any> {
     return this._httpClient.delete(`${this.API_URL}/${id}`);
   }

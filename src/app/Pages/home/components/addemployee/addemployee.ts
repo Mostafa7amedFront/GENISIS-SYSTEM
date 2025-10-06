@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SweetAlert } from '../../../../Core/service/sweet-alert';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addemployee',
@@ -19,9 +20,10 @@ export class Addemployee {
   selectedImageFile: File | null = null;
   clientTitles = ['Rising Talent', 'Desgin Star','Top Tier', 'Maestro'];
   selectedClientTitle: string | null = null;
-  employeeBadgeValue: number = 0; // 👈 متغير مخصص للـbadge
+  employeeBadgeValue: number = 0;
   private Employees = inject(Employees);
-  private _alert = inject(SweetAlert); // ✅ inject SweetAlertService
+  private _alert = inject(SweetAlert); 
+  private _router = inject(Router);
 
   constructor(private fb: FormBuilder, private _http: HttpClient) {
     this.createAccountForm = this.fb.group({
@@ -34,18 +36,13 @@ export class Addemployee {
     });
   }
 
-  /** Preview Image */
-  onImageChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedImageFile = file;
-      const reader = new FileReader();
-      reader.onload = () => (this.imagePreview = reader.result as string);
-      reader.readAsDataURL(file);
-    }
+onImageChange(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    this.selectedImageFile = file;
+    this.imagePreview = URL.createObjectURL(file);
   }
-
-  /** Select Client Title and map badge value */
+}
   selectClientTitle(title: string) {
     this.selectedClientTitle = this.selectedClientTitle === title ? null : title;
 
@@ -91,6 +88,8 @@ export class Addemployee {
         this.imagePreview = null;
         this.selectedImageFile = null;
         this.employeeBadgeValue = 0;
+                this._router.navigate(['/home']);
+
       },
       error: (err) => {
         console.error('❌ Error:', err);
