@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h2
+    class="pt-sm-4 logout"
+    style="color: #00bec5; cursor: pointer;"
+    routerLink="/addservice"
+  >
+    Add Service
+    <i class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
+  </h2>
+  <h1 class="big text-white">THE SERVICE</h1>
+</div>
+
+<div class="CreateAccount-box rounded-3 text-white">
+  <div class="service-container">
+
+    @if (isLoading()) {
+      <div class="text-center py-3 w-100">
+        <div class="spinner-border text-info" role="status"></div>
+        <p class="mt-2">Loading data...</p>
+      </div>
+    }
+
+    @else if (errorMessage()) {
+      <div class="text-center py-5 w-100">
+        <p class="text-danger fw-bold">{{ errorMessage() }}</p>
+      </div>
+    }
+
+    @else if (!isLoading() && services().length === 0) {
+      <div class="text-center py-5 w-100">
+        <p class="text-muted fs-5">No data available at the moment.</p>
+      </div>
+    }
+
+    <!-- 🔹 عرض البيانات -->
+    @else {
+      @for (service of services(); track service.id) {
+        <div class="service-card position-relative">
+          <div class="cardOptions">
+            <div class="w-75 p-2 d-flex justify-content-between">
+              <i class="fa-solid fa-trash" (click)="onDelete(service, $event)"></i>
+              <i class="fa-solid fa-pen-to-square" (click)="onEdit(service, $event)"></i>
+            </div>
+          </div>
+
+          <h3 class="service-name">{{ service.name }}</h3>
+          <p class="service-date">
+            Created on: {{ '2025-01-01' | date:'mediumDate' }}
+          </p>
+        </div>
+      }
+    }
+  </div>
+</div>

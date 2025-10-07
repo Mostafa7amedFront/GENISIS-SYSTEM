@@ -21,12 +21,12 @@ export const routes: Routes = [
         path: 'home',
         component: Home,
       },
-         {
+      {
         path: 'addemployee',
         loadComponent: () =>
           import('./Pages/home/components/addemployee/addemployee').then(m => m.Addemployee),
       },
-        {
+      {
         path: 'editemployee/:id',
         loadComponent: () =>
           import('./Pages/home/components/editemployee/editemployee').then(m => m.Editemployee),
@@ -54,7 +54,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Pages/feed-back-page/feed-back-page').then(m => m.FeedBackPage),
       },
-        {
+      {
         path: 'client/:id',
         loadComponent: () =>
           import('./Pages/client-profile/client-profile').then(m => m.ClientProfile),
@@ -64,7 +64,19 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Pages/profile/profile').then(m => m.Profile),
       },
-
+    {
+        path: 'service',
+        loadComponent: () =>
+          import('./Pages/service/service').then(m => m.Service),
+      },
+      {
+        path:'addservice',
+        loadComponent : () => import('./Pages/service/components/addservice/addservice').then(m => m.Addservice)
+      },
+       {
+        path:'editservice/:id',
+        loadComponent : () => import('./Pages/service/components/editservice/editservice').then(m => m.Editservice)
+      },
       {
         path: 'notifications',
         loadComponent: () =>
@@ -81,27 +93,7 @@ export const routes: Routes = [
     path: '',
     component: MainlayoutNonNav,
     children: [
-      {
-        path: 'client/:id',
-        loadComponent: () =>
-          import('./Pages/client-profile/client-profile').then(m => m.ClientProfile),
-      },
-      {
-        path: 'profile/:id',
-        loadComponent: () =>
-          import('./Pages/profile/profile').then(m => m.Profile),
-      },
-      {
-        path: 'notifications',
-        loadComponent: () =>
-          import('./Pages/notifaction/notifaction').then(m => m.Notifaction),
-      },
-      {
-        path: 'projectDetails/:id',
-        loadComponent: () =>
-          import('./Pages/project-details/project-details').then(m => m.ProjectDetails),
-      },
-
+     
     ]
   },
 

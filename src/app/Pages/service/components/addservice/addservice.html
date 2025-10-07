@@ -1,0 +1,26 @@
+<div class="CreateAccount">
+
+
+    <h1 class="mt-5 text-white text-end big">Create Service</h1>
+
+    <form     [formGroup]="addServiceForm"
+ class="CreateAccount-box rounded-3 text-white">
+        <div class="row">
+                    <p class="fw-bold">Fill in Client Information</p>
+
+            <input class="mt-3 px-0" type="text" formControlName="name" placeholder="Name the Service" />
+                    @if (addServiceForm.controls.name.touched && addServiceForm.controls.name.invalid) {
+          <small class="text-danger">
+            Service name is required (min 3 characters).
+          </small>
+        }
+        </div>
+    </form>
+
+    <!-- Submit -->
+    <h2 class="mt-3 text-end pt-sm-4 logout"     (click)="onSubmit()"
+ style="color: #00bec5; cursor: pointer;">
+        ADD Service
+        <i class="ps-3 fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
+    </h2>
+</div>

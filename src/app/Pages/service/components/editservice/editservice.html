@@ -1,0 +1,25 @@
+<div class="CreateAccount">
+  <h1 class="mt-5 text-white text-end big">Edit Service</h1>
+
+  <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="CreateAccount-box rounded-3 text-white">
+    <div class="row">
+      <p class="fw-bold">Edit Service Information</p>
+
+      <input
+        class="mt-3 px-0"
+        type="text"
+        formControlName="name"
+        placeholder="Service Name"
+      />
+    </div>
+
+    <h2
+      class="mt-3 text-end pt-sm-4 logout"
+      style="color: #00bec5; cursor: pointer;"
+      (click)="onSubmit()"
+    >
+      Update Service
+      <i class="ps-3 fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
+    </h2>
+  </form>
+</div>
