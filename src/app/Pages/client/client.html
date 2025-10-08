@@ -26,23 +26,19 @@
             <div class="col-12 col-lg-6 pb-3 mt-sm-2 pe-lg-4 mt-0">
                 <div class="d-flex flex-column justify-content-between h-90">
                     <div class="dropdown text-end">
-                        <!-- العنوان المختار -->
                         <div class="select" (click)="toggleMenu()">
                             <div class="caret">
                                 <i class="fa-solid fa-angle-down fs-5" [class.rotate]="isOpen" style="color: #00bec5;">
                                 </i>
                             </div>
-                            <span class="selected fs-2">{{ selected }}</span>
+                            <span class="selected fs-2">{{ selected.label }}</span>
 
                         </div>
                         <p class="small mb-0 text-end">KEEP THE GOOD WORK!!</p>
-
-                        <!-- القائمة -->
                         <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
-                            @for ( option of options; track $index) {
-                               <li (click)="selectOption(option)"
-                                [class.active]="selected === option">
-                                {{ option }}
+                            @for (option of options; track option.value) {
+                            <li (click)="selectOption(option)" [class.active]="selected.label === option.label">
+                                {{ option.label }}
                             </li>
                             }
                         </ul>
@@ -69,26 +65,33 @@
         <div class="mt-0 row g-lg-4">
             <div class="card-box row">
 
-                @for (project of projects; track project.id) {
-                        @if (selected === 'ALL CLIENTS' || project.status.toUpperCase() === selected.toUpperCase()) {
+                @for (project of projects(); track project.id) {
 
                 <div class="col-lg-3 col-md-4 col-12 mt-3 me-0 cards">
                     <a [routerLink]="['/client', project.id]" class="text-decoration-none text-white">
                         <div class="card position-relative">
-                            <div class="tag tagٍStates position-absolute px-2 py-1">
-                                <span class="m-0">{{ project.tag }}</span>
+                            <div class="cardOptions">
+                                <div class="w-100 p-2 d-flex justify-content-between">
+                                    <i class="fa-solid fa-trash" (click)="onDelete(project, $event)"></i>
+                                    <i class="fa-solid fa-pen-to-square" (click)="onEdit(project, $event)"></i>
+                                </div>
                             </div>
-                            <img [src]="project.image" class="card-img-top" alt="{{ project.title }}">
+
+                            <img [src]="'assets/img/gafla-3.svg'" class="card-img-top" alt="{{ project.title }}">
                             <div class="pb-0 card-body">
                                 <h6 class="mb-1 fw-bold card-title">{{ project.title }}</h6>
-                                <h5 class="mb-1 card-text">{{ project.subtitle }}</h5>
-                                <p>{{ project.date }}</p>
+                                <h5 class="mb-1 card-text">{{ project.about }}</h5>
+                                <p>{{ project.createdAt | date}}</p>
                                 <div class="mt-4 row">
                                     <div class="col">
-                                        <h6 style="color: #00bec5;">{{ project.category }}</h6>
+                                        <h6 style="color: #00bec5;">{{ project.services[0] }}</h6>
                                     </div>
                                     <div class="col text-end">
-                                        <p class="mt-0 mb-0">{{ project.status }}</p>
+                                        @switch (project.clientType) {
+                                        @case (0) {<p class=" mt-0 mb-0 ">COMPLETED</p> }
+                                        @case (1) { <p class=" mt-0 mb-0 ">IN PROGRESS</p> }
+                                        @case (2) { <p class=" mt-0 mb-0 ">PAUSED</p> }
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +99,12 @@
                     </a>
                 </div>
                 }
-            }
+                @empty {
+
+                <div class="text-center py-5 w-100">
+                    <p class="text-muted fs-5">No data available at the moment.</p>
+                </div>
+                }
             </div>
         </div>
     </div>

@@ -1,31 +1,41 @@
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDecode } from '../Interface/idecode';
+import { IDecode, ILogin } from '../Interface/idecode';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
+import { IResponseOf } from '../../Shared/Interface/iresonse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService  {
   private readonly TOKEN_KEY = 'auth_token';
-  private readonly API_URL = `${environment.apiUrl}/auth`; 
+    private readonly refreshToken = 'refresh_token';
+
+  private readonly API_URL = `${environment.apiUrl}auth`; 
+  private router = inject(Router);
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.API_URL}/login`, credentials);
+  login(credentials: { email: string; password: string }): Observable<IResponseOf<ILogin>> {
+    return this.http.post<IResponseOf<ILogin>>(`${this.API_URL}`, credentials);
   }
 
-  saveToken(token: string): void {
+  saveToken(token: string , refresh:string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
+
+    localStorage.setItem(this.refreshToken, refresh);
+
   }
 
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
-
+  getRefreshToken(): string | null {
+    return localStorage.getItem(this.refreshToken);
+  }
   decodeToken(): IDecode | null {
     const token = this.getToken();
     if (!token) return null;
@@ -52,5 +62,8 @@ export class LoginService  {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+        localStorage.removeItem(this.refreshToken);
+
+      this.router.navigate(['/login']);
   }
 }

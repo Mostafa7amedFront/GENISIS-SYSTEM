@@ -1,3 +1,48 @@
 .team-container{
     height: auto !important;
 }
+.card-img-top{
+        object-fit: cover;
+
+}
+
+.card {
+  position: relative;
+  overflow: hidden; // عشان ما يخرجش أي جزء برا الكارت
+
+  .cardOptions {
+    position: absolute;
+    top: 30%;
+    right: -100px;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 8px 0 0 8px;
+    display: flex
+;
+    /* align-items: center; */
+    gap: 10px;
+    padding: 10px;
+    transition: all 0.4s 
+ease;
+    opacity: 0;
+
+    display: flex;
+    width: 36%;
+
+    i {
+      cursor: pointer;
+      font-size: 18px;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--bs-info); 
+      }
+    }
+  }
+
+  &:hover .cardOptions {
+    right: 0px;
+    opacity: 1;
+  }
+}

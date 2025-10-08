@@ -32,7 +32,7 @@ export class Home {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this._Employees.getAll().subscribe({
+    this._Employees.getAll( { pageNumber: 1,pageSize: 50}).subscribe({
       next: (response) => {
         this.isLoading.set(false);
 
@@ -75,7 +75,7 @@ export class Home {
             },
             error: (err) => {
               console.error('❌ Delete error:', err);
-              this._alert.toast('Failed to delete employee.', 'error');
+            this._alert.toast(err.error.detail, 'error');
             }
           });
         }

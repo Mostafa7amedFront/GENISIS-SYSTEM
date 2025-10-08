@@ -69,8 +69,8 @@
     </nav>
 
 
-    <div class="profile position-absolute  justify-content-between d-flex align-items-center gap-3 "
-      style="bottom: 20px; width: 90%;">
+    <div class="profile cr position-absolute  justify-content-between d-flex align-items-center gap-3 "
+      style="bottom: 20px; width: 90%;" (click)="logout()">
 
       <p class="mb-0" [class.closed]="!isClosed">logout</p>
       <i class="fa-solid fa-arrow-right-from-bracket logout"></i>

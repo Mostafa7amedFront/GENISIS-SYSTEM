@@ -3,29 +3,30 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { IResponseOf } from '../../Shared/Interface/iresonse';
-import { IEmployee } from '../Interface/iemployee';
+import { IClients } from '../Interface/iclients';
 
 @Injectable({
   providedIn: 'root'
 })
-export class Employees {
-    private  API_URL = `${environment.apiUrl}Employees`; 
+export class Clients {
+    private  API_URL = `${environment.apiUrl}Clients`; 
     private _httpClient = inject(HttpClient);
   
 
 
-getAll(data: any): Observable<IResponseOf<IEmployee[]>> {
+getAll(data: any): Observable<IResponseOf<IClients[]>> {
   const params = new HttpParams({
     fromObject: {
         pageNumber: data.pageNumber ?? 1,
         pageSize: data.pageSize ?? 50,
+        ProjectStatus: data.ProjectStatus ?? 0
     }
   });
 
-  return this._httpClient.get<IResponseOf<IEmployee[]>>(this.API_URL, { params });
+  return this._httpClient.get<IResponseOf<IClients[]>>(this.API_URL, { params });
 }
-  getById(id: number): Observable<IResponseOf<IEmployee>> {
-    return this._httpClient.get<IResponseOf<IEmployee>>(`${this.API_URL}/${id}`);
+  getById(id: number): Observable<IResponseOf<IClients>> {
+    return this._httpClient.get<IResponseOf<IClients>>(`${this.API_URL}/${id}`);
   }
 
   add(employee: FormData): Observable<any> {

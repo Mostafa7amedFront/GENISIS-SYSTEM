@@ -28,7 +28,7 @@ export class Service {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this._ServiceApi.getAll().subscribe({
+    this._ServiceApi.getAll({ pageNumber: 1,pageSize: 50}).subscribe({
       next: (res) => {
         this.isLoading.set(false);
         if (res.success && Array.isArray(res.value)) {
@@ -43,7 +43,7 @@ export class Service {
       error: (err) => {
         this.isLoading.set(false);
         console.error('❌ Error fetching services:', err);
-        this.errorMessage.set('Failed to load services.');
+            this._alert.toast(err.error.detail, 'error');
       }
     });
   }
@@ -63,7 +63,7 @@ export class Service {
             },
             error: (err) => {
               console.error('❌ Delete error:', err);
-              this._alert.toast('Failed to delete service.', 'error');
+            this._alert.toast(err.error.detail, 'error');
             }
           });
         }

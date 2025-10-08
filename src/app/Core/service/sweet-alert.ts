@@ -5,8 +5,8 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class SweetAlert {
-  
- constructor() {}
+
+  constructor() { }
 
   success(message: string, title: string = 'Success') {
     Swal.fire({
@@ -35,23 +35,23 @@ export class SweetAlert {
     });
   }
 
-confirm(
-  message: string,
-  title: string = 'Are you sure?',
-  confirmText: string = 'Yes, delete it!',
-  cancelText: string = 'Cancel'
-) {
-  return Swal.fire({
-    title: title,
-    text: message,
-    showCancelButton: true,
-    confirmButtonColor: '#009ea3',
-    cancelButtonColor: '#1b1b1b',
-    confirmButtonText: confirmText,
-    cancelButtonText: cancelText,
-    reverseButtons: true,
-  });
-}
+  confirm(
+    message: string,
+    title: string = 'Are you sure?',
+    confirmText: string = 'Yes, delete it!',
+    cancelText: string = 'Cancel'
+  ) {
+    return Swal.fire({
+      title: title,
+      text: message,
+      showCancelButton: true,
+      confirmButtonColor: '#009ea3',
+      cancelButtonColor: '#1b1b1b',
+      confirmButtonText: confirmText,
+      cancelButtonText: cancelText,
+      reverseButtons: true,
+    });
+  }
   toast(message: string, icon: 'success' | 'error' | 'warning' | 'info' = 'success') {
     Swal.fire({
       toast: true,
@@ -61,6 +61,10 @@ confirm(
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
+          didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer); 
+      toast.addEventListener('mouseleave', Swal.resumeTimer); 
+    }
     });
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -14,9 +14,16 @@ export class ServiceApi {
     
   
   
-    getAll(): Observable<IResponseOf<IService[]>> {
-      return this._httpClient.get<IResponseOf<IService[]>>(`${this.API_URL}?pageNumber=1&pageSize=50`);
+ getAll(data: any): Observable<IResponseOf<IService[]>> {
+  const params = new HttpParams({
+    fromObject: {
+        pageNumber: data.pageNumber ?? 1,
+        pageSize: data.pageSize ?? 50,
     }
+  });
+
+  return this._httpClient.get<IResponseOf<IService[]>>(this.API_URL, { params });
+}
   
     getById(id: number): Observable<IResponseOf<IService>> {
       return this._httpClient.get<IResponseOf<IService>>(`${this.API_URL}/${id}`);

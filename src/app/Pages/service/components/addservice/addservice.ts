@@ -46,7 +46,7 @@ export class Addservice {
       error: (err) => {
         this.isSubmitting = false;
         console.error('❌ Add error:', err);
-        this._alert.toast('Something went wrong while adding.', 'error');
+            this._alert.toast(err.error.detail, 'error');
       }
     });
   }

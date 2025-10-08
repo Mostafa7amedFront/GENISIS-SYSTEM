@@ -5,3 +5,12 @@ export interface IDecode {
   exp: number;        // expiry time
 
 }
+export interface ILogin{
+    id: string
+  email: string
+  username: string
+  token: string
+  expiresIn: number
+  refreshToken: string
+  refreshTokenExpiration: string
+}

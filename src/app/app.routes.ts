@@ -11,6 +11,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainOutlet,
+    canActivate:[authGuard],
     children: [
       {
         path: '',
@@ -92,8 +93,13 @@ export const routes: Routes = [
   {
     path: '',
     component: MainlayoutNonNav,
+    canActivate:[isAuthGuard],
     children: [
-     
+           {
+        path: 'login',
+        loadComponent: () =>
+          import('./Pages/Auth/login/login').then(m => m.Login),
+      },
     ]
   },
 

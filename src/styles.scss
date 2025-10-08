@@ -7,7 +7,9 @@ body {
     font-weight: 100;
     scroll-behavior: smooth;
 }
-
+.cr{
+    cursor: pointer !important;
+}
  .swal2-toast{
         background:linear-gradient(to right, rgb(0 68 68), rgb(0 170 170)) !important;
     color: white !important;

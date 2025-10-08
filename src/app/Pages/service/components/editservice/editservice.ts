@@ -66,7 +66,7 @@ export class Editservice {
     //     }
       },
       error: (err) => {
-        this._alert.toast('Something went wrong while updating.', 'error');
+            this._alert.toast(err.error.detail, 'error');
       }
       
     });

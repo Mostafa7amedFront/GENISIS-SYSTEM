@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveModeuls } from '../../Shared/Modules/ReactiveForms.module';
+import { LoginService } from '../../Core/service/login';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,7 @@ import { ReactiveModeuls } from '../../Shared/Modules/ReactiveForms.module';
 })
 export class Sidebar {
   @Output() toggleSidebar = new EventEmitter<boolean>();
+  _login = inject(LoginService);
 
   isClosed = true;
 
@@ -22,5 +24,8 @@ export class Sidebar {
   toggle() {
     this.isClosed = !this.isClosed;
     this.toggleSidebar.emit(!this.isClosed);
+  }
+   logout() {
+    this._login.logout();
   }
 }
