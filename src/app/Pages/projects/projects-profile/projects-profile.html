@@ -1,0 +1,117 @@
+<!-- Start Projects-->
+<div class="text-white start-projects px-md-0 px-3">
+    <div class=" " style="background-image: none;">
+        <div class="d-flex justify-content-between align-items-center my-5">
+            <h2 class=" pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addproject">Add Project <i
+                    class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h2>
+            <h1 class=" big">PROJECTS</h1>
+
+        </div>
+        <div class="p-md-4 p-3 px-md-5 pb-lg-5 pb-3 rounded-3 g-4 row projects pe-lg-4 ">
+            <div class="px-0 mb-4 pt-4 pb-2 rounded col-lg-7 d-flex blue">
+                <div class="p-0 text-center col me-5">
+                    <p class="mb-0">Completed</p>
+                    <p class="mb-0 fs-3">{{ getProjectCounts().completed | leadingZero }}</p>
+                </div>
+                <div class="p-0 text-center col me-5">
+                    <p class="mb-0">In Progress</p>
+                    <p class="mb-0 fs-3">{{ getProjectCounts().inProgress | leadingZero }}</p>
+                </div>
+                <div class="p-0 text-center col">
+                    <p class="mb-0">Paused</p>
+                    <p class="mb-0 fs-3">{{ getProjectCounts().paused | leadingZero }}</p>
+                </div>
+            </div>
+            <div class="mt-0 col-lg-5 text-end pe-3">
+                <div class="dropdown  mt-3 px-0">
+                    <div class="select" (click)="toggleMenu()">
+                        <div class="caret">
+                            <i class="fa-solid fa-angle-down fs-5" [class.rotate]="isOpen" style="color: #00bec5;">
+                            </i>
+                        </div>
+                        <span class="selected fs-2">{{ selected() }}</span>
+
+                    </div>
+                    <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
+                        <li *ngFor="let option of options" (click)="selectOption(option)"
+                            [class.active]="selected() === option">
+                            {{ option }}
+                        </li>
+                    </ul>
+
+
+                </div>
+                <p class="small">KEEP THE GOOD WORK!!</p>
+            </div>
+            <div class="project-card-box mt-0 px-0">
+
+                @for (project of filteredProjects(); track project.id) {
+                <a [routerLink]="['/projectDetails', project.id]"
+                    class="p-3 py-4 mx-0 mb-lg-3 row rounded-3 project-card mb-3 text-decoration-none text-white mt-0">
+
+                    <div class="col-lg-9 col-xl-8">
+                        <div class="row">
+                            <h5 class="fw-bold mb-3 ps-0 ps-lg-2">SOCIAL MEDIA POSTS</h5>
+
+                            <div class="me-3 col-lg-2 ps-0 ps-lg-2 text-lg-start text-center">
+                                <img [src]="baseurl + project.clientImage" alt="" width="107" height="107"
+                                    class="rounded-2" style="object-fit: cover;">
+                            </div>
+
+                            <div class="col px-0 ps-lg-3 ps-xl-0">
+                                <h6 class="mt-lg-0 mt-2 mb-0 text-lg-start text-center">{{project.clientName}}</h6>
+                                <p class="mb-2 low text-lg-start text-center">{{ project.projectTitle }}</p>
+
+                                <h6 class="mb-1">Project Description</h6>
+                                <p class="mb-0 low lh-1 mb-lg-2" style="white-space: pre-line;">{{
+                                    project.projectDescription | shorten :150
+                                    }}</p>
+                            </div>
+
+                            <div class="px-0 text-center text-lg-start">
+                                <button class="border-0 rounded-3 mt-lg-4 mt-3 pt-lg-2 pt-1 px-4 text-white"
+                                    [style.background-color]="'#0B6B6E'">
+                                    @switch (project.projectStatus) {
+                                    @case (0) { <p class=" mt-0 mb-0 ">IN PROGRESS</p> }
+                                    @case (1) {<p class=" mt-0 mb-0 ">PAUSED</p> }
+                                    @case (2) { <p class=" mt-0 mb-0 ">COMPLETED</p> }
+                                    }
+
+
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-xl-4 text-end px-0">
+                        <p class="small-2 mb-1 me-1 text-lg-end text-start mt-lg-0 mt-3">ASSIGNED TO</p>
+                        <div class="row mx-0">
+                            <div class="d-flex px-0 justify-content-lg-end justify-content-start">
+                                @for (person of project.employees; track $index) {
+                                <div class="me-2">
+                                    <img [src]="baseurl + person.imageUrl" alt="" height="67" width="67"
+                                        style="object-fit: cover;">
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <p class="small-2 mt-lg-5 mt-3 mb-0">{{ project.createdAt | date:'mediumDate' }}</p>
+                        <h2 class="mb-0" style="max-height: 30px;">DUE DATE</h2>
+                        <span class="fw-bold fs-5" style="color: #00bec5;">{{ project.deadLine |
+                            date:'mediumDate'}}</span>
+                    </div>
+                </a>
+                }
+                @empty {
+                <div class="py-5 d-flex justify-content-center align-items-center">
+                    <h2 class="mb-0" style="max-height: 30px;">No data available at the moment .</h2>
+
+                </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Projects -->

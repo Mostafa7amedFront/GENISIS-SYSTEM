@@ -74,7 +74,7 @@ export class Editemployee  implements OnInit{
     });
   }
 
-isFromApi = true; // افتراضيًا الصورة جاية من API
+isFromApi = true; 
 onImageChange(event: any) {
   const file = event.target.files[0];
   if (file) {

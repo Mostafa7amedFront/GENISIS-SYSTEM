@@ -1,0 +1,211 @@
+<div class="project-detail-page">
+  <div class="px-md-0 mx-3">
+    <h1 class="mt-5 text-white text-end big">PROJECT DETAILS</h1>
+    <div class="text-white project rounded-3 p-md-5 p-4">
+      <div class="py-4 pt-0 mx-0 row project-card">
+        <div class="col-xl-8 col-lg-9 text-md-start text-center">
+          <div class="row">
+            <h5 class="fw-bold mb-3 ps-0">SOCIAL MEDIA POSTS</h5>
+            <div class="me-0 pe-0 col-lg-2 ps-0 text-lg-start text-center">
+              <img
+                [src]="baseimageUrl + aboutproject()?.clientImage"
+                class="rounded-2"
+                alt=""
+                width="114"
+                height="114"
+              />
+            </div>
+            <div class="col ps-lg-3 pt-xl-2 px-0">
+              <h6 class="mb-0 mt-lg-0 mt-3 text-lg-start text-center">
+                {{ aboutproject()?.clientName }}
+              </h6>
+              <p class="mb-2 low text-lg-start text-center">{{ aboutproject()?.projectTitle }}</p>
+              <h6 class="mb-1 text-start">Project Description</h6>
+              <p
+                class="mb-0 low lh-1 mb-2 px-lg-0 mx-lg-0 text-start"
+                style="white-space: pre-line"
+              >
+                The {{ aboutproject()?.projectDescription }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-3 text-lg-end px-0">
+          <p class="small-2 mb-1 me-2">ASSIGENED TO</p>
+          <div class="d-flex flex-lg-row-reverse gap-2">
+            @for (employee of aboutproject()?.employees; track employee.id) {
+            <div class="">
+              <img
+                [src]="baseimageUrl + employee.imageUrl"
+                class="rounded-2"
+                alt=""
+                width="63.15593719482422"
+                height="63"
+              />
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+      <h6 class="pt-4">PORJECT DESCRIPTION</h6>
+      <p class="low small mb-1 text-start" style="white-space: pre-line">
+        “ {{ aboutproject()?.projectDescription }} “
+      </p>
+      <h6 class="pt-4">ATTACHMENTS</h6>
+      <div class="d-flex flex-column gap-2">
+        @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
+        <ng-container>
+          @if (isImage(file.fileUrl)) {
+          <div class="d-flex align-items-center gap-2 p-2 rounded">
+            <img
+              [src]="getFileUrl(file.fileUrl)"
+              alt="attachment"
+              class="rounded"
+              style="width: 120px; height: 120px; object-fit: cover"
+            />
+          </div>
+          } @else if (isPdf(file.fileUrl)) {
+          <a
+            [href]="getFileUrl(file.fileUrl)"
+            target="_blank"
+            [download]="getFileName(file.fileUrl)"
+            class="file-card d-flex align-items-center gap-2"
+          >
+            <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
+            <div class="file-info text-lg-start">
+              <div class="file-name">File PDf {{ i }}</div>
+              <div class="file-size">1MB</div>
+            </div>
+          </a>
+          }
+        </ng-container>
+        }
+      </div>
+      <p class="small-2 mt-4 pt-2">Add Attachment</p>
+      <!-- drag -->
+      <div class="drag-area text-center rounded-3 p-4">
+        <div class="dataShow d-flex align-items-center gap-2">
+          @for (file of files; track file.name) {
+          <div class="file-card d-flex align-items-center gap-2">
+            <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
+            <div class="file-info text-lg-start">
+              <div class="file-name">{{ file.name | shorten }}</div>
+              <div class="file-size">{{ file.size }}</div>
+            </div>
+          </div>
+          }
+
+          <div class="iconDataAdd" (click)="onUploadClick()">
+            <img src="assets/img/new-document 2.png" alt="" />
+          </div>
+        </div>
+
+        <button
+          (click)="uploadFiles()"
+          id="uploadButton"
+          class="border-0 rounded-3 w-100 text-white small pt-2 mt-4"
+          style="background-color: #0b6b6e"
+        >
+          UPLOAD
+        </button>
+
+        <input
+          type="file"
+          id="fileInput"
+          hidden
+          #fileInput
+          (change)="onFileSelected($event)"
+          multiple
+        />
+      </div>
+
+      <!-- drag -->
+      <div class="row mx-0">
+        <div class="col-6 text-start mt-5 pt-md-3 pt-4 ps-0">
+          <button
+            class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-4 end-but"
+            style="background-color: #0b6b6e"
+          >
+            <p class="mb-0 mx-auto">COMPLETED</p>
+          </button>
+        </div>
+        <div class="col-6 text-end mt-5 pt-md-3 pt-4 pe-0">
+          <p class="mb-0 small">14, OCT 24</p>
+          <p class="small mb-0">Brand Identity</p>
+          <img class="image" src="assets/img/4blue-star.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-chat />
+
+<div class="mynotes px-md-0 px-3">
+  <h1 class="big text-end text-white mt-5 pt-5 mb-3">MY NOTES</h1>
+
+  <div class="todo-container text-white p-md-5 p-3">
+    <h4 class="mb-0">My Notes</h4>
+    <p class="low">These notes can only be seen by you</p>
+
+    <!-- To-Do List Section -->
+    <div class="todo-list">
+      @if(activeNotes().length === 0){
+      <div class="no-notes">No Notes Yet</div>
+
+      }
+
+      <!-- todo items -->
+      @for (activeNote of activeNotes(); track activeNote.id) {
+      <div class="todo-item">
+        <div class="todo-content">
+          <input type="checkbox" class="circle-btn"               [checked]="activeNote.isCompleted" (change)="toggleComplete(activeNote)" />
+          <p class="todo-text">{{ activeNote.noteContent }}</p>
+        </div>
+
+        <button class="star-btn" [class.active]="activeNote.isFav" (click)="toggleStar(activeNote)">
+          <i class="fa fa-star"></i>
+        </button>
+      </div>
+
+      }
+    </div>
+
+    <!-- Completed Section -->
+    <h4 class="com-header mb-2 mt-2">Completed</h4>
+    <div class="completed-list">
+      @if(completedList().length === 0){
+      <div class="no-notes">No Completed Notes Yet</div>
+
+      } @for (complete of completedList(); track complete.id) {
+      <div class="todo-item">
+        <div class="todo-content">
+          <input type="checkbox" class="circle-btn"    [checked]="complete.isCompleted"  (change)="toggleComplete(complete)" />
+          <p class="todo-text done">{{ complete.noteContent }}</p>
+        </div>
+
+        <button class="star-btn" [class.active]="complete.isFav" (click)="toggleStar(complete)">
+          <i class="fa fa-star"></i>
+        </button>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- add todo input -->
+<div class="add-todo px-3 px-md-0">
+  <input
+    class="border-0 text-white"
+    type="text"
+    id="new-todo-input"
+    placeholder="Write anything..."
+    [(ngModel)]="newTodoText"
+    (keydown)="handleKeyDown($event)"
+  />
+  <button id="add-todo-btn" (click)="addTodo()">
+    <i class="fa fa-arrow-right"></i>
+  </button>
+</div>
+
+<app-feedback />

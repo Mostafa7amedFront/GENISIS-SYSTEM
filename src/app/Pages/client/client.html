@@ -1,5 +1,10 @@
 <div class="text-white team">
-    <h1 class=" text-end big">CLIENTS</h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class=" pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addclient">Add Client <i
+                class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h2>
+        <h1 class=" big">CLIENTS</h1>
+
+    </div>
     <div class=" p-md-5 p-3 rounded team-container">
         <div class=" row g-3 g-lg-4">
             <div class="col-lg-6 pb-3 pe-lg-3 ps-lg-2 ">
@@ -47,16 +52,18 @@
 
                     <div class="flex-wrap pt-4 pb-2 rounded-3 d-flex blue ps-md-0 ps-2 pe-2 pe-sm-0">
                         <div class="p-0 text-center col me-5 ms-1">
-                            <p class="mb-0">Old Clients</p>
-                            <p class="mb-0 fs-3">100</p>
+                            <p class="mb-0">Old Client</p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().oldClient | leadingZero }}</p>
                         </div>
+
                         <div class="p-0 text-center col me-5">
-                            <p class="mb-0">Long Term </p>
-                            <p class="mb-0 fs-3">02</p>
+                            <p class="mb-0">Long Term</p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().longTerm | leadingZero }}</p>
                         </div>
+
                         <div class="p-0 text-center col">
-                            <p class="mb-0">New Clients</p>
-                            <p class="mb-0 fs-3">15</p>
+                            <p class="mb-0">New Client</p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().newClient | leadingZero }}</p>
                         </div>
                     </div>
                 </div>
@@ -77,20 +84,22 @@
                                 </div>
                             </div>
 
-                            <img [src]="'assets/img/gafla-3.svg'" class="card-img-top" alt="{{ project.title }}">
+                            <img [src]="baseimageUrl+ project.imageUrl" height="300px" class="card-img-top"
+                                alt="{{ project.title }}">
                             <div class="pb-0 card-body">
-                                <h6 class="mb-1 fw-bold card-title">{{ project.title }}</h6>
-                                <h5 class="mb-1 card-text">{{ project.about }}</h5>
+                                <h6 class="mb-1 fw-bold card-title">{{ project.name}}</h6>
+                                <h5 class="mb-1 card-text">{{ project.about | shorten: 20}}</h5>
                                 <p>{{ project.createdAt | date}}</p>
                                 <div class="mt-4 row">
                                     <div class="col">
                                         <h6 style="color: #00bec5;">{{ project.services[0] }}</h6>
                                     </div>
+
                                     <div class="col text-end">
                                         @switch (project.clientType) {
-                                        @case (0) {<p class=" mt-0 mb-0 ">COMPLETED</p> }
-                                        @case (1) { <p class=" mt-0 mb-0 ">IN PROGRESS</p> }
-                                        @case (2) { <p class=" mt-0 mb-0 ">PAUSED</p> }
+                                        @case (0) { <p class="mt-0 mb-0">Old Client</p> }
+                                        @case (1) { <p class="mt-0 mb-0">Long Term</p> }
+                                        @case (2) { <p class="mt-0 mb-0">New Client</p> }
                                         }
                                     </div>
                                 </div>

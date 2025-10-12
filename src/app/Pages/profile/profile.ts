@@ -1,13 +1,49 @@
-import { Component } from '@angular/core';
-import { ProjectsProfile } from "./components/projects-profile/projects-profile";
-import { FeedbackProfile } from "./components/feedback-profile/feedback-profile";
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Employees } from '../../Core/service/employees';
+import { ActivatedRoute } from '@angular/router';
+import { IEmployee } from '../../Core/Interface/iemployee';
+import { DatePipe } from '@angular/common';
+import { FeedbackProfile } from '../projects/feedback-profile/feedback-profile';
+import { ProjectsProfile } from '../projects/projects-profile/projects-profile';
 
 @Component({
   selector: 'app-profile',
-  imports: [ProjectsProfile, FeedbackProfile],
+  imports: [ProjectsProfile, FeedbackProfile , DatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
-export class Profile {
+export class Profile implements OnInit {
+  baseimageUrl = `${environment.baseimageUrl}`;
+
+  private _Employees = inject(Employees);
+  private _route = inject(ActivatedRoute);
+  employeeId!: any;
+aboutEmployees = signal<IEmployee | null>(null);
+
+
+  ngOnInit(): void {
+      const idParam = this._route.snapshot.paramMap.get('id');
+
+    this.employeeId = idParam;
+    if (this.employeeId) {
+      this.loadEmployeeData();
+    }
+    console.log(this.employeeId)
+  }
+
+  loadEmployeeData() {
+    this._Employees.getById(this.employeeId).subscribe({
+      next: (res) => {
+        console.log(res.value)
+        this.aboutEmployees.set(res.value)
+      
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
 
 }

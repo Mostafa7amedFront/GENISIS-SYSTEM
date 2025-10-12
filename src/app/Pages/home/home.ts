@@ -6,10 +6,11 @@ import { environment } from '../../../environments/environment';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { SweetAlert } from '../../Core/service/sweet-alert';
 import { Router } from '@angular/router';
+import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, DatePipe, UpperCasePipe],
+  imports: [RouterLink, DatePipe, UpperCasePipe , LeadingZeroPipe],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -59,7 +60,14 @@ export class Home {
   }
 
 
+getProjectCounts() {
+  const risingTalent = this.cards().filter(p => p.employeeBadge === 0).length;
+  const designStar = this.cards().filter(p => p.employeeBadge === 1).length;
+  const topTier = this.cards().filter(p => p.employeeBadge === 2).length;
+  const maestro = this.cards().filter(p => p.employeeBadge === 3).length;
 
+  return { risingTalent, designStar, topTier, maestro };
+}
   onDelete(card: IEmployee, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();

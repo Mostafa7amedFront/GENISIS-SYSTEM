@@ -1,104 +1,118 @@
-    <h1 class="mt-5 text-white text-end big">PROFILE</h1>
-    <div class="text-white profile  mb-5">
-        <div class=" p-xl-5 p-4 rounded-3">
-            <div class="row">
-                <div class="pt-lg-0 col half-logo"><img class="top mt-0" src="assets/img/half-logo.svg" alt="">
-                </div>
-                <div class="text-end col flag"><img class="me-1" src="assets/img/flag.svg" alt="">
-                    <p class="mt-1 mb-0 small">Rising Talent</p>
+<h1 class="mt-5 text-white text-end big">PROFILE</h1>
+<div class="text-white profile  mb-5">
+    <div class=" p-xl-5 p-4 rounded-3">
+        <div class="row">
+            <div class="pt-lg-0 col half-logo"><img class="top mt-0 mb-3" src="assets/img/half-logo.svg" alt="">
+            </div>
+            <div class="text-end col flag ">
+
+                <div class="d-flex flex-column justify-content-center align-items-end">
+                    @switch (aboutEmployees()?.employeeBadge) {
+                    @case (0) { <img class="me-2" width="50" src="assets/employeeBadge/Subtract1.svg" alt=""> }
+                    @case (1) { <img class="me-2" width="50" src="assets/employeeBadge/Subtract2.svg" alt=""> }
+                    @case (2) { <img class="me-2" width="50" src="assets/employeeBadge/Subtract3.svg" alt=""> }
+                    @case (3) { <img class="me-2" width="50" src="assets/employeeBadge/Subtract4.svg" alt=""> }
+                    }
+                    @switch (aboutEmployees()?.employeeBadge) {
+                    @case (0) { <p class="mt-1 text-end mb-0 small">Rising Talent</p> }
+                    @case (1) { <p class="mt-1 text-end mb-0 small">Design Star</p> }
+                    @case (2) { <p class="mt-1 text-end mb-0 small">Top Tier</p> }
+                    @case (3) { <p class="mt-1 text-end mb-0 small">The Maestro</p> }
+                    }
                 </div>
             </div>
-            <div class="mx-0 row ">
-                <div class="px-0 col-lg-3 ">
-                    <img class="mt-0 image-pro" src="assets/img/profile.svg" alt="">
-                    <p class="mt-2 mb-0 small">4TH, OCT</p>
-                    <p class="fw-bold">Hello, Youssef</p>
-                </div>
-                <div class="px-0 col-lg-9 col">
-                    <h1 class="mb-0">YOUSSEF AMR</h1>
-                    <p class="mb-0">SENIOR GRAPHIC DESIGNER</p>
-                    <div class="pt-1 rounded-3 inner">
-                        <div class="mx-0 row first-box ">
-                            <div class="px-3 py-1 ms-lg-2 col">
-                                <p class="mt-2">SALARY</p>
-                                <p class="mb-0 fs-2">10,000</p>
-                            </div>
-                            <div class="px-3 py-1 col pe-3 ps-0">
-                                <p class="mt-2">BONUS</p>
-                                <p class="mb-0 fs-2">1,500</p>
-                            </div>
-                            <div class="px-lg-3 py-1 col pe-3 ps-0">
-                                <p class="mt-2">DEDUCTION </p>
-                                <p class="mb-0 fs-2">500</p>
-                            </div>
-                            <div class="px-lg-3 py-1 col px-0">
-                                <p class="mt-2">TOTAL</p>
-                                <p class="mb-0 fs-2">11,000</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-2 mb-0">OCTOBER FEEDBACK</p>
-                    <p class="text-white-50 small">The design was great maybe the quality of the presentation
-                        could be much better, thank you so much</p>
-                </div>
+        </div>
+        <div class="mx-0 row ">
+            <div class="px-0 col-lg-3 ">
+                <img class=" imageCover" width="210px" height="210px" [src]="baseimageUrl + aboutEmployees()?.imageUrl" alt="">
+                <p class="mt-2 mb-0 small">{{aboutEmployees()?.createdAt  | date:'mediumDate' }}</p>
+                <p class="fw-bold">Hello, {{aboutEmployees()?.name }}</p>
             </div>
-            <div class="mx-0 row gap-0">
-                <div class="col-lg-6 px-2 ms-1 pe-2 me-1 me-lg-0 pe-lg-4 pe-3 mx-lg-0">
-                    <div class="p-md-4 p-3 pe-md-0 left-box row rounded-3">
-                        <h3>KEEP IT UP !</h3>
-                        <div class="col">
-                            <img id="small-flag" src="assets/img/white-flag.svg" alt="">
-                            <p class="mt-2 mb-0">85%</p>
-                            <p class="mb-0">Rising Talent</p>
+            <div class="px-0 col-lg-9 col">
+                <h1 class="mb-0">{{aboutEmployees()?.userName }}</h1>
+                <p class="mb-0">{{aboutEmployees()?.jobTitle }}</p>
+                <div class="pt-1 rounded-3 inner">
+                    <div class="mx-0 row first-box ">
+                        <div class="px-3 py-1 ms-lg-2 col">
+                            <p class="mt-2">SALARY</p>
+                            <p class="mb-0 fs-2">{{aboutEmployees()?.salary }}</p>
                         </div>
-                        <div class="col">
-                            <img class="low mb-0" src="assets/img/green-flag (2).svg" alt="">
-                            <p class="mt-2 mb-0">90%</p>
-                            <p class="mb-0 low">Design Star</p>
+                        <div class="px-3 py-1 col pe-3 ps-0">
+                            <p class="mt-2">BONUS</p>
+                            <p class="mb-0 fs-2">1,500</p>
                         </div>
-                        <div class="col">
-                            <img class="low mb-0" src="assets/img/purple-flag (1).svg" alt="">
-                            <p class="mt-2 mb-0">95%</p>
-                            <p class="mb-0 low">Top Tier</p>
+                        <div class="px-lg-3 py-1 col pe-3 ps-0">
+                            <p class="mt-2">DEDUCTION </p>
+                            <p class="mb-0 fs-2">500</p>
                         </div>
-                        <div class="col">
-                            <img class="low mb-0" src="assets/img/blue-flag.svg" alt="">
-                            <p class="mt-2 mb-0">100%</p>
-                            <p class="mb-0 low">The Maestro</p>
+                        <div class="px-lg-3 py-1 col px-0">
+                            <p class="mt-2">TOTAL</p>
+                            <p class="mb-0 fs-2">11,000</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6  p-0 ps-lg-4 mx-lg-0 pt-lg-0 pt-3">
-                    <div class="p-md-4 p-3 mx-0 rounded-3 row h-100 right-box ">
-                        <div
-                            class="p-3 pb-md-3 pb-0 pt-3  pt-2 mt-1 mt-md-0 rounded-3 inner-box col-xl-5 col-xxl-4 col-lg-6 col-md-4 col-sm-5 col me-2 me-lg-0">
-                            <div class=" mx-0 d-flex pb-lg-0 ">
-                                <div class="px-0 me-3">
-                                    <h1 class="mb-3">14</h1>
-                                    <p class="mb-0 lh-1" style="white-space: pre-line; line-height: 2;">
-                                        Completed
-                                        projects
-                                    </p>
-                                </div>
-                                <div class="p-0 ">
-                                    <img style="margin-top: 0px;" src="assets/img/Rectangle 721.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 ms-auto col-6 text-end px-0">
-                            <div class="mx-0 row">
-                                <h2 class="p-0 mb-0 mt-1">PSR</h2>
-                                <p class="p-0 mb-0 mt-3 lh-1">
-                                    PROJECT SUCCESS RATE
+                <p class="mt-2 mb-0">OCTOBER FEEDBACK</p>
+                <p class="text-white-50 small">The design was great maybe the quality of the presentation
+                    could be much better, thank you so much</p>
+            </div>
+        </div>
+        <div class="mx-0 row gap-0">
+            <div class="col-lg-6 px-2 ms-1 pe-2 me-1 me-lg-0 pe-lg-4 pe-3 mx-lg-0">
+                <div class="p-md-4 p-3 pe-md-0 left-box row rounded-3">
+                    <h3>KEEP IT UP !</h3>
+                    <div class="col">
+                        <img id="small-flag" src="assets/img/white-flag.svg" alt="">
+                        <p class="mt-2 mb-0">85%</p>
+                        <p class="mb-0">Rising Talent</p>
+                    </div>
+                    <div class="col">
+                        <img class="low mb-0" src="assets/img/green-flag (2).svg" alt="">
+                        <p class="mt-2 mb-0">90%</p>
+                        <p class="mb-0 low">Design Star</p>
+                    </div>
+                    <div class="col">
+                        <img class="low mb-0" src="assets/img/purple-flag (1).svg" alt="">
+                        <p class="mt-2 mb-0">95%</p>
+                        <p class="mb-0 low">Top Tier</p>
+                    </div>
+                    <div class="col">
+                        <img class="low mb-0" src="assets/img/blue-flag.svg" alt="">
+                        <p class="mt-2 mb-0">100%</p>
+                        <p class="mb-0 low">The Maestro</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6  p-0 ps-lg-4 mx-lg-0 pt-lg-0 pt-3">
+                <div class="p-md-4 p-3 mx-0 rounded-3 row h-100 right-box ">
+                    <div
+                        class="p-3 pb-md-3 pb-0 pt-3  pt-2 mt-1 mt-md-0 rounded-3 inner-box col-xl-5 col-xxl-4 col-lg-6 col-md-4 col-sm-5 col me-2 me-lg-0">
+                        <div class=" mx-0 d-flex pb-lg-0 ">
+                            <div class="px-0 me-3">
+                                <h1 class="mb-3">14</h1>
+                                <p class="mb-0 lh-1" style="white-space: pre-line; line-height: 2;">
+                                    Completed
+                                    projects
                                 </p>
-                                <span class="p-0 pt-md-0 pt-1">87%</span>
                             </div>
+                            <div class="p-0 ">
+                                <img style="margin-top: 0px;" src="assets/img/Rectangle 721.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 ms-auto col-6 text-end px-0">
+                        <div class="mx-0 row">
+                            <h2 class="p-0 mb-0 mt-1">PSR</h2>
+                            <p class="p-0 mb-0 mt-3 lh-1">
+                                PROJECT SUCCESS RATE
+                            </p>
+                            <span class="p-0 pt-md-0 pt-1">87%</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <app-projects-profile/>
-    <app-feedback-profile/>
+<app-projects-profile />
+<app-feedback-profile />

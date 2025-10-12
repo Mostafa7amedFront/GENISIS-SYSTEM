@@ -1,5 +1,3 @@
-import { Addemployee } from './Pages/home/components/addemployee/addemployee';
-import { ProjectDetails } from './Pages/project-details/project-details';
 import { Routes } from '@angular/router';
 import { authGuard } from './Core/guards/auth.guard';
 import { isAuthGuard } from './Core/guards/is-auth.guard';
@@ -37,7 +35,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Pages/client/client').then(m => m.Client),
       },
-
+      {
+        path: 'addclient',
+        loadComponent: () =>
+          import('./Pages/client/components/addclients/addclients').then(m => m.Addclients),
+      },
+           {
+        path: 'editclient/:id',
+        loadComponent: () =>
+          import('./Pages/client/components/editclients/editclients').then(m => m.Editclients),
+      },
       {
         path: 'signup',
         loadComponent: () =>
@@ -48,6 +55,11 @@ export const routes: Routes = [
         path: 'createaccount',
         loadComponent: () =>
           import('./Pages/Auth/create-account/create-account').then(m => m.CreateAccount),
+      },
+         {
+        path: 'addproject',
+        loadComponent: () =>
+          import('./Pages/projects/addproject/addproject').then(m => m.Addproject),
       },
 
       {
@@ -86,7 +98,7 @@ export const routes: Routes = [
       {
         path: 'projectDetails/:id',
         loadComponent: () =>
-          import('./Pages/project-details/project-details').then(m => m.ProjectDetails),
+          import('./Pages/projects/projectDetalis/project-details').then(m => m.ProjectDetails),
       },
     ]
   },

@@ -7,7 +7,7 @@ export class ShortenPipe implements PipeTransform {
 
    transform(value: string, limit: number = 10): string {
     if (!value) return '';
-    return value.length > limit ? value.substring(0, limit) + '..pdf' : value;
+    return value.length > limit ? value.substring(0, limit) + '....' : value;
   }
 
 }

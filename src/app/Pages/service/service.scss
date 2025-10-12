@@ -3,9 +3,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 2rem 0;
   color: #fff;
-  background: linear-gradient(145deg, #000 60%, #003c3c);
+}
+
+.CreateAccount-box {
+  background: transparent;
+padding: 0;
 }
 
 .service-card {
@@ -23,9 +27,11 @@
     transform: translateY(-5px);
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
   }
-  p{
+
+  p {
     margin: 0;
   }
+
   .service-name {
     font-size: 1.3rem;
     font-weight: 600;

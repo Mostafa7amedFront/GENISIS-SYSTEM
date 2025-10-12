@@ -15,15 +15,17 @@ export class Clients {
 
 
 getAll(data: any): Observable<IResponseOf<IClients[]>> {
-  const params = new HttpParams({
-    fromObject: {
-        pageNumber: data.pageNumber ?? 1,
-        pageSize: data.pageSize ?? 50,
-        ProjectStatus: data.ProjectStatus ?? 0
-    }
-  });
+  const paramsObject: any = {
+    pageNumber: data.pageNumber ?? 1,
+    pageSize: data.pageSize ?? 50,
+    ProjectStatus: data.ProjectStatus
+  };
 
-  return this._httpClient.get<IResponseOf<IClients[]>>(this.API_URL, { params });
+
+
+  const params = new HttpParams({ fromObject: paramsObject });
+
+  return this._httpClient.post<IResponseOf<IClients[]>>(`${this.API_URL}/GetAll`,data);
 }
   getById(id: number): Observable<IResponseOf<IClients>> {
     return this._httpClient.get<IResponseOf<IClients>>(`${this.API_URL}/${id}`);

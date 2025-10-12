@@ -1,3 +1,5 @@
+import { IService } from "./iservice"
+
 export interface IClients {
   id: number
   name: string
@@ -10,5 +12,6 @@ export interface IClients {
   imageUrl: string
   email: string
   userName: string
-  services: string[]
+  services: IService[]
+  
 }

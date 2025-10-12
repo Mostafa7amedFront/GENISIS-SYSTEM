@@ -6,5 +6,7 @@ export interface IEmployee {
   employeeBadge: number
   imageUrl: string
   email: string
+    createdAt: string
+
   userName: string
 }
