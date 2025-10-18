@@ -52,9 +52,8 @@
         “ {{ aboutproject()?.projectDescription }} “
       </p>
       <h6 class="pt-4">ATTACHMENTS</h6>
-      <div class="d-flex flex-column gap-2">
+      <div class="d-flex  gap-2">
         @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
-        <ng-container>
           @if (isImage(file.fileUrl)) {
           <div class="d-flex align-items-center gap-2 p-2 rounded">
             <img
@@ -64,7 +63,12 @@
               style="width: 120px; height: 120px; object-fit: cover"
             />
           </div>
-          } @else if (isPdf(file.fileUrl)) {
+          } 
+        }
+      </div>
+            <div class="d-flex mt-3  gap-2">
+        @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
+         @if (isPdf(file.fileUrl)) {
           <a
             [href]="getFileUrl(file.fileUrl)"
             target="_blank"
@@ -77,8 +81,8 @@
               <div class="file-size">1MB</div>
             </div>
           </a>
-          }
-        </ng-container>
+          
+          } 
         }
       </div>
       <p class="small-2 mt-4 pt-2">Add Attachment</p>

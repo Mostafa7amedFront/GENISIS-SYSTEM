@@ -12,17 +12,16 @@ export class ProjectService {
   private _httpClient = inject(HttpClient);
   private API_URL_Note = `${environment.apiUrl}`;
 
-  // getAll(data: any): Observable<IResponseOf<IProject[]>> {
-  //   const params = new HttpParams({
-  //     fromObject: {
-  //         pageNumber: data.pageNumber ?? 1,
-  //         pageSize: data.pageSize ?? 50,
-  //         ProjectStatus: data.ProjectStatus ?? 0
-  //     }
-  //   });
+  getAll(data: any): Observable<IResponseOf<IProject[]>> {
+    const params = new HttpParams({
+      fromObject: {
+          pageNumber: data.pageNumber ?? 1,
+          pageSize: data.pageSize ?? 50,
+      }
+    });
 
-  //   return this._httpClient.get<IResponseOf<IProject[]>>(this.API_URL, { params });
-  // }
+    return this._httpClient.get<IResponseOf<IProject[]>>(this.API_URL, { params });
+  }
   getProjectClient(clientId: number): Observable<IResponseOf<IProject[]>> {
     return this._httpClient.get<IResponseOf<IProject[]>>(`${this.API_URL}?clientId=${clientId}`);
   }
@@ -42,7 +41,7 @@ export class ProjectService {
   update(id: number, employee: FormData): Observable<any> {
     return this._httpClient.put(`${this.API_URL}/${id}`, employee);
   }
-  delete(id: number): Observable<any> {
+  delete(id: string): Observable<any> {
     return this._httpClient.delete(`${this.API_URL}/${id}`);
   }
   uploadMultipleRequests(projectId: string, files: File[]): Observable<any> {
@@ -58,19 +57,19 @@ export class ProjectService {
   }
 
 
-    editNote(
+  editNote(
     noteId: number,
-  data: { note: string; isFav: boolean; isCompleted: boolean }
+    data: { note: string; isFav: boolean; isCompleted: boolean }
   ): Observable<any> {
     return this._httpClient.post(`${this.API_URL}/EditNote/${noteId}`, data);
   }
 
 
   addNote(projectId: string, data: Note): Observable<any> {
-  return this._httpClient.post(`${this.API_URL}/AddNote/${projectId}`, {
-    note: data.noteContent,
-    isFav: data.isFav,
-    isCompleted: data.isCompleted
-  });
-}
+    return this._httpClient.post(`${this.API_URL}/AddNote/${projectId}`, {
+      note: data.noteContent,
+      isFav: data.isFav,
+      isCompleted: data.isCompleted
+    });
+  }
 }

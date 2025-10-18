@@ -1,8 +1,8 @@
 <div class="text-white team">
     <div class="d-flex justify-content-between align-items-center">
-        <h2 class=" pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addclient">Add Client <i
+        <h2 class=" pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addproject">Add Project <i
                 class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h2>
-        <h1 class=" big">CLIENTS</h1>
+        <h1 class=" big">PROJECTS</h1>
 
     </div>
     <div class=" p-md-5 p-3 rounded team-container">
@@ -10,7 +10,7 @@
             <div class="col-lg-6 pb-3 pe-lg-3 ps-lg-2 ">
                 <div class="p-4  rounded-3 d-flex w-auto  right-box h-90 justify-content-between ">
                     <div class=" ">
-                        <h2 class="mb-xl-3 mb-sm-4 mb-3">NEW CLIENTS</h2>
+                        <h2 class="mb-xl-3 mb-sm-4 mb-3">NEW Projects</h2>
                         <p class="mb-2">IN THE PAST 30 DAYS</p>
                         <span class="mb-0 text-white   p-0 pt-md-0 pt-1 w-auto h-auto "
                             style="font-size: 100px;">15</span>
@@ -36,34 +36,34 @@
                                 <i class="fa-solid fa-angle-down fs-5" [class.rotate]="isOpen" style="color: #00bec5;">
                                 </i>
                             </div>
-                            <span class="selected fs-2">{{ selected.label }}</span>
+                            <span class="selected fs-2">{{ selected() }}</span>
 
                         </div>
                         <p class="small mb-0 text-end">KEEP THE GOOD WORK!!</p>
-                        <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
-                            @for (option of options; track option.value) {
-                            <li (click)="selectOption(option)" [class.active]="selected.label === option.label">
-                                {{ option.label }}
-                            </li>
-                            }
-                        </ul>
+                  <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
+                        <li *ngFor="let option of options" (click)="selectOption(option)"
+                            [class.active]="selected() === option">
+                            {{ option }}
+                        </li>
+                    </ul>
+
                     </div>
 
 
                     <div class="flex-wrap pt-4 pb-2 rounded-3 d-flex blue ps-md-0 ps-2 pe-2 pe-sm-0">
                         <div class="p-0 text-center col me-5 ms-1">
-                            <p class="mb-0">Old Client</p>
-                            <p class="mb-0 fs-3">{{ getProjectCounts().oldClient | leadingZero }}</p>
+                            <p class="mb-0">Completed</p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().completed| leadingZero }}</p>
                         </div>
 
                         <div class="p-0 text-center col me-5">
-                            <p class="mb-0">Long Term</p>
-                            <p class="mb-0 fs-3">{{ getProjectCounts().longTerm | leadingZero }}</p>
+                            <p class="mb-0">Paused</p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().paused| leadingZero }}</p>
                         </div>
 
                         <div class="p-0 text-center col">
-                            <p class="mb-0">New Client</p>
-                            <p class="mb-0 fs-3">{{ getProjectCounts().newClient | leadingZero }}</p>
+                            <p class="mb-0">In Progress  </p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().inProgress | leadingZero }}</p>
                         </div>
                     </div>
                 </div>
@@ -72,10 +72,10 @@
         <div class="mt-0 row g-lg-4">
             <div class="card-box row">
 
-                @for (project of projects(); track project.id) {
+                @for (project of filteredProjects(); track project.id) {
 
                 <div class="col-lg-3 col-md-4 col-12 mt-3 me-0 cards">
-                    <a [routerLink]="['/client', project.id]" class="text-decoration-none text-white">
+                    <a [routerLink]="['/projectDetails', project.id]" class="text-decoration-none text-white">
                         <div class="card position-relative">
                             <div class="cardOptions">
                                 <div class="w-100 p-2 d-flex justify-content-between">
@@ -84,22 +84,20 @@
                                 </div>
                             </div>
 
-                            <img [src]="baseimageUrl+ project.imageUrl" height="300px" class="card-img-top"
-                                alt="{{ project.title }}">
+                            <img [src]="baseimageUrl+ project.clientImage" height="300px" class="card-img-top"
+                                alt="{{ project.clientName }}">
                             <div class="pb-0 card-body">
-                                <h6 class="mb-1 fw-bold card-title">{{ project.name}}</h6>
-                                <h5 class="mb-1 card-text">{{ project.about | shorten: 20}}</h5>
+                                <h6 class="mb-1 fw-bold card-title">{{ project.clientName}}</h6>
+                                <h5 class="mb-1 card-text">{{ project.projectDescription| shorten: 20}}</h5>
                                 <p>{{ project.createdAt | date}}</p>
                                 <div class="mt-4 row">
-                                    <div class="col">
-                                        <h6 style="color: #00bec5;">{{ project.services[0]?.name }}</h6>
-                                    </div>
+                             
 
                                     <div class="col text-end">
-                                        @switch (project.clientType) {
-                                        @case (0) { <p class="mt-0 mb-0">Old Client</p> }
-                                        @case (1) { <p class="mt-0 mb-0">Long Term</p> }
-                                        @case (2) { <p class="mt-0 mb-0">New Client</p> }
+                                        @switch (project.projectStatus) {
+                                            @case (0) { <p class="mt-0 mb-0">In Progress </p> }
+                                        @case (1) { <p class="mt-0 mb-0">Paused</p> }
+                                        @case (2) { <p class="mt-0 mb-0">Completed </p> }
                                         }
                                     </div>
                                 </div>

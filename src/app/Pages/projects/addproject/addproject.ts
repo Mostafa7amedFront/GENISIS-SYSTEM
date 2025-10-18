@@ -7,6 +7,8 @@ import { IClients } from '../../../Core/Interface/iclients';
 import { IEmployee } from '../../../Core/Interface/iemployee';
 import { ShortenPipe } from '../../../Shared/pipes/shorten-pipe';
 import { environment } from '../../../../environments/environment';
+import { SweetAlert } from '../../../Core/service/sweet-alert';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-addproject',
@@ -20,11 +22,13 @@ export class Addproject {
   private _client = inject(Clients);
   private _project = inject(ProjectService);
   private _employee = inject(Employees);
-
+private _alert = inject(SweetAlert); 
+  private _location = inject(Location);
   //  Reactive Signals
   Clients = signal<IClients[]>([]);
   Employee = signal<IEmployee[]>([]);
-
+@ViewChild('titleInput') titleInput!: ElementRef<HTMLInputElement>;
+@ViewChild('descInput') descInput!: ElementRef<HTMLInputElement>;
   //  Environment Variables
   baseimageUrl = `${environment.baseimageUrl}`;
 
@@ -47,7 +51,13 @@ export class Addproject {
   leftSelected = 0;
   rightSelected: number[] = [];
 selectedDate: Date | null = null;
-
+  options = [ 'IN PROGRESS', 'PAUSED', 'COMPLETED'];
+clientTitleMap: { [key: string]: number } = {
+  'IN PROGRESS': 0,
+  'PAUSED': 1,
+  'COMPLETED': 2
+}; 
+ selectedClientTitle: string | null = null;
   //  Lifecycle Hook
   ngOnInit(): void {
     // Fetch clients
@@ -77,29 +87,27 @@ selectedDate: Date | null = null;
   }
 
   /** Handles file selection and stores file info */
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      Array.from(input.files).forEach(file => {
-        this.files.push({
-          name: file.name,
-          size: (file.size / (1024 * 1024)).toFixed(1) + 'MB',
-          type: file.type
-        });
+onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    this.files = []; // تنظيف القائمة قبل التحديث
+    Array.from(input.files).forEach(file => {
+      this.files.push({
+        name: file.name,
+        size: (file.size / (1024 * 1024)).toFixed(1) + 'MB',
+        type: file.type
       });
-    }
+    });
   }
+}
 
-  //  Calendar Methods
 selectDay(day: { number: string; faded: boolean; today: boolean }) {
-  // Prevent selecting faded (previous/next month) days
   if (day.faded) return;
 
   const year = this.yearLabel;
   const month = this.months.indexOf(this.monthLabel); // 0-based month
   const dayNumber = parseInt(day.number);
 
-  // Create full date
   this.selectedDate = new Date(year, month, dayNumber);
   console.log('Selected full date:', this.selectedDate);
 }
@@ -171,8 +179,49 @@ selectDay(day: { number: string; faded: boolean; today: boolean }) {
   }
 
   //  Project Actions
-
-  addProject() {
-    // TODO: Implement project creation logic
+  selectClientTitle(title: string) {
+    this.selectedClientTitle = this.selectedClientTitle === title ? null : title;
   }
+addProject() {
+  if (!this.selectedClientTitle || !this.leftSelected || this.rightSelected.length === 0 || !this.selectedDate) {
+      this._alert.toast('Please fill all required fields and upload an image.' , 'warning');
+    return;
+  }
+
+  const projectStatus = this.clientTitleMap[this.selectedClientTitle];
+
+  const deadline = this.selectedDate.toDateString() + ' ' + this.selectedDate.toLocaleTimeString();
+
+  const formData = new FormData();
+  formData.append('ProjectTitle', this.titleInput.nativeElement.value);
+  formData.append('ProjectDescription', this.descInput.nativeElement.value);
+  formData.append('ProjectStatus', projectStatus.toString());
+  formData.append('DeadLine', deadline);
+  formData.append('ClientId', this.leftSelected.toString());
+
+  this.rightSelected.forEach(id => {
+    formData.append('EmployeeIds', id.toString());
+  });
+
+  const input = this.fileInput.nativeElement;
+  if (input.files && input.files.length > 0) {
+    Array.from(input.files).forEach(file => {
+      formData.append('AttachmentUrl', file, file.name);
+    });
+  }
+
+  this._project.add(formData).subscribe({
+    next: (res) => {
+                  this._alert.toast('Project added successfully!' , 'success');
+            this._location.back(); // 👈 Go back to previous page
+
+                  
+    }, 
+    error: (err) => {
+                  this._alert.toast('Error adding project' , 'error');
+
+    }
+  });
+}
+
 }

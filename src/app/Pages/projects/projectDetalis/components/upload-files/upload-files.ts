@@ -92,7 +92,6 @@ addTodo(): void {
     next: (res) => {
       console.log('✅ Note added successfully:', res);
 
-      // تحديث المصفوفة المحلية
       this.notes.update(notes => [...notes, res.value || newNote]);
       this.loadEmployeeData();
       this.newTodoText = '';
