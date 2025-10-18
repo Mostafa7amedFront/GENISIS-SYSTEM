@@ -28,4 +28,11 @@ export class Sidebar {
    logout() {
     this._login.logout();
   }
+
+  isMobileMenuOpen = false;
+
+toggleMobileMenu() {
+  this.isMobileMenuOpen = !this.isMobileMenuOpen;
+}
+
 }

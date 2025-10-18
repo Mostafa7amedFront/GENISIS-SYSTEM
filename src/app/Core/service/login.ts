@@ -10,22 +10,23 @@ import { IResponseOf } from '../../Shared/Interface/iresonse';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService  {
+export class LoginService {
   private readonly TOKEN_KEY = 'auth_token';
-    private readonly refreshToken = 'refresh_token';
+  private readonly refreshToken = 'refresh_token';
 
-  private readonly API_URL = `${environment.apiUrl}auth`; 
+  private readonly API_URL = `${environment.apiUrl}auth`;
   private router = inject(Router);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(credentials: { email: string; password: string }): Observable<IResponseOf<ILogin>> {
     return this.http.post<IResponseOf<ILogin>>(`${this.API_URL}`, credentials);
   }
 
-  saveToken(token: string , refresh:string , username :string): void {
+  saveToken(token: string, refresh: string, username: string, id: string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
-     localStorage.setItem('user_name',username);
+    localStorage.setItem('user_name', username);
+    localStorage.setItem('user_id', id);
 
     localStorage.setItem(this.refreshToken, refresh);
 
@@ -63,8 +64,8 @@ export class LoginService  {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
-        localStorage.removeItem(this.refreshToken);
+    localStorage.removeItem(this.refreshToken);
 
-      this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 }

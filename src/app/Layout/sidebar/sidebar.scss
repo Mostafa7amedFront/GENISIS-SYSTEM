@@ -21,7 +21,11 @@
 
 
   }
+  &.mobile-open {
+    width: 100%;
 
+
+  }
   .toggle-area {
     display: flex;
     justify-content: flex-end;
@@ -208,4 +212,34 @@
     background: rgba(0, 0, 0, 0.6);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);  ;
+}
+
+
+
+/* Hamburger icon */
+.mobile-menu-icon {
+position: fixed;
+    top: 26px;
+    right: 40px;
+    color: #fff;
+    z-index: 1100;
+    cursor: pointer;
+}
+
+/* Sidebar adjustments for mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%; /* نخفيه */
+    width: 250px;
+    height: 100vh;
+    transition: left 0.3s ease;
+    background: linear-gradient(250deg, #00AAAA -90%, #000 64%);
+    z-index: 1050;
+
+    &.mobile-open {
+      left: 0; /* يظهر عند الضغط */
+    }
+  }
 }

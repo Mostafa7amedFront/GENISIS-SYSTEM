@@ -2,10 +2,11 @@ import { Component, effect, signal, inject } from '@angular/core';
 import { ChatService } from '../../../../../Core/service/chat.service';
 import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
 import { ActivatedRoute } from '@angular/router';
+import { ShortenPipe } from '../../../../../Shared/pipes/shorten-pipe';
 
 @Component({
   selector: 'app-chat',
-  imports: [ReactiveModeuls],
+  imports: [ReactiveModeuls, ShortenPipe],
   templateUrl: './chat.html',
   styleUrl: './chat.scss'
 })
@@ -15,6 +16,7 @@ export class Chat {
   selectedFiles: File[] = [];
   private chatService = inject(ChatService);
   messages = this.chatService.messages;
+   currentUserId = localStorage.getItem('user_id');
 
   constructor(private route: ActivatedRoute) {
     effect(() => {
@@ -69,12 +71,13 @@ export class Chat {
     this.selectedFiles = Array.from(event.target.files);
   }
 
-    handleKeyDown(event: KeyboardEvent): void {
+  handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       this.sendMessage();
     }
   }
+
   ngOnDestroy(): void {
     this.chatService.stopConnection();
   }

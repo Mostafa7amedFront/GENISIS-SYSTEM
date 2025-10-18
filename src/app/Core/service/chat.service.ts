@@ -12,12 +12,12 @@ export class ChatService {
   private token = localStorage.getItem('auth_token');
   private currentProjectId: string | null = null;
 
-  // ✅ Signals
   messages = signal<any[]>([]);
   status = signal<string>('disconnected');
 
   constructor(private http: HttpClient) {}
 
+  // Start SignalR connection
   public async startConnection(): Promise<void> {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${this.API_URL}hubs/chat`, {
@@ -39,40 +39,20 @@ export class ChatService {
     }
   }
 
+  // Register SignalR handlers
   private registerHandlers(): void {
-    const currentUser = localStorage.getItem('user_name') || 'You';
-
     this.hubConnection.on('ReceiveMessage', (msg) => {
-      const formattedMsg = {
-        id: msg.id || crypto.randomUUID(),
-        text: msg.text || msg.message || '',
-        username: msg.username || msg.userName || currentUser,
-        date: msg.date || 'Today',
-        time: msg.time || new Date().toLocaleTimeString(),
-        files: msg.files || msg.attachments?.map((a: any) => ({
-          name: a.name || a.fileName,
-          type: a.type || a.contentType
-        })) || []
-      };
+const formattedMsg = {
+  id: msg.id || crypto.randomUUID(),
+  text: msg.text || msg.message || '',
+  username: msg.userName || localStorage.getItem('user_name') || 'Unknown User',
+  userId: msg.userId || '',
+  date: msg.relativeDateString || 'Today',
+  time: new Date(msg.sentAt).toLocaleTimeString(),
+  files: msg.files || msg.attachments || []
+};
 
-      this.messages.update(curr => {
-        const filtered = curr.filter(m => m.text !== formattedMsg.text || m.username !== currentUser);
-        return [...filtered, formattedMsg];
-      });
-    });
-
-    this.hubConnection.on('UserJoined', (userName) => {
-      this.messages.update(curr => [
-        ...curr,
-        { system: true, text: `${userName || 'Anonymous'} joined the chat` }
-      ]);
-    });
-
-    this.hubConnection.on('UserLeft', (userName) => {
-      this.messages.update(curr => [
-        ...curr,
-        { system: true, text: `${userName || 'Anonymous'} left the chat` }
-      ]);
+      this.messages.update(curr => [...curr, formattedMsg]);
     });
 
     this.hubConnection.onreconnecting(() => this.status.set('reconnecting'));
@@ -80,6 +60,7 @@ export class ChatService {
     this.hubConnection.onclose(() => this.status.set('disconnected'));
   }
 
+  // Join project group
   public async joinProjectGroup(projectId: string): Promise<void> {
     if (!this.hubConnection) return;
     try {
@@ -94,24 +75,15 @@ export class ChatService {
     }
   }
 
-  public sendChatMessage(projectId: string, message: string, files: File[] = []) {
+  // Send message to server
+  public sendChatMessage(projectId: string, message: string, files: File[] = []): void {
+    if (!message && files.length === 0) return;
+
     const formData = new FormData();
     formData.append('Message', message);
     formData.append('ProjectId', projectId);
 
-    files.forEach(file => {
-      formData.append('Attachments', file, file.name);
-    });
-
-    const newMsg = {
-      text: message,
-      username: localStorage.getItem('user_name') || 'You',
-      date: 'Today',
-      time: new Date().toLocaleTimeString(),
-      files: files.map(f => ({ name: f.name, type: f.type }))
-    };
-
-    this.messages.update(curr => [...curr, newMsg]);
+    files.forEach(file => formData.append('Attachments', file, file.name));
 
     this.http.post(`${this.API_URL}api/ProjectChat`, formData, {
       headers: { Authorization: `Bearer ${this.token}` }
@@ -121,11 +93,12 @@ export class ChatService {
     });
   }
 
+  // Get all messages
   public getAllMessages(projectId: string) {
     return this.http.get(`${this.API_URL}api/ProjectChat/${projectId}?pageNumber=1&pageSize=500`);
   }
 
-  // ✅ Stop connection
+  // Stop SignalR connection
   public stopConnection(): void {
     if (this.hubConnection) {
       this.hubConnection.stop();

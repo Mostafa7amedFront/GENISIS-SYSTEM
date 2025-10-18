@@ -1,7 +1,39 @@
+
 input{
     font-size: 20px;
     color: white;
 }
 .signup-box {
-    padding: 80px !important;
+    padding: 80px ;
 }
+
+/* Signup container */
+.signup {
+    display: flex;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .signup-box {
+    padding: 60px;
+  }
+}
+@media (max-width: 992px) {
+    .signup {
+        flex-direction: column-reverse;
+    }
+
+    .signup-box, .rightSide {
+        width: 100% !important;
+    }
+
+
+}
+@media (max-width: 768px) {
+  .signup-box {
+    padding: 40px;
+  }
+}
+

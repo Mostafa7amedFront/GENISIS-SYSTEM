@@ -1,4 +1,10 @@
-<aside class="sidebar" [class.closed]="!isClosed">
+<!-- Hamburger icon for small screens -->
+<div class="mobile-menu-icon d-md-none" (click)="toggleMobileMenu()">
+  <i class="fa fa-bars fa-2x"></i>
+</div>
+
+
+<aside class="sidebar" [class.closed]="!isClosed"  [class.mobile-open]="isMobileMenuOpen">
   <!-- Toggle Button -->
   <div class="logo ">
     <div class="logoImages pos ">
@@ -8,7 +14,7 @@
 
       </div>
 
-      <div class=" icon_collaped d-flex align-content-center justify-content-center" (click)="toggle()"
+      <div  [class.d-none]="isMobileMenuOpen" class=" icon_collaped d-flex align-content-center justify-content-center" (click)="toggle()"
         [class.right]="isClosed" [class.center]="!isClosed">
         <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="36" viewBox="0 0 36 22" fill="none"
           class="ng-tns-c3500418680-0 ng-star-inserted">
@@ -21,7 +27,7 @@
       </div>
     </div>
 
-    @if(isClosed){
+    @if(isClosed && !isMobileMenuOpen){
     <div class="searchInput" [class.close]="!isClosed">
       <input type="search" name="" id="" placeholder="Search">
     </div>

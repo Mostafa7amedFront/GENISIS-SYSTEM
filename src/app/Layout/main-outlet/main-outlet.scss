@@ -15,3 +15,15 @@
   margin-left: 80px; /* تقل المسافة لما يتقفل */
   padding: 0 50px;
 }
+/* Mobile */
+@media (max-width: 768px) {
+
+
+  .main-content {
+    margin-left: 0 !important;
+  }
+  .main-content.sidebar-closed{
+      padding: 0 20px !important;
+       margin-top: 100px !important;
+  }
+}

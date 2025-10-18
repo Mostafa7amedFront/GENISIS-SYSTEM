@@ -3,14 +3,14 @@ import { RouterLink, Routes } from '@angular/router';
 import { Employees } from '../../Core/service/employees';
 import { IEmployee } from '../../Core/Interface/iemployee';
 import { environment } from '../../../environments/environment';
-import { DatePipe, UpperCasePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe, CommonModule } from '@angular/common';
 import { SweetAlert } from '../../Core/service/sweet-alert';
 import { Router } from '@angular/router';
 import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, DatePipe, UpperCasePipe , LeadingZeroPipe],
+  imports: [RouterLink, DatePipe, UpperCasePipe ,CommonModule, LeadingZeroPipe],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -24,7 +24,12 @@ export class Home {
   private routes  = inject(Router);
   baseimageUrl = `${environment.baseimageUrl}`;
   cards = signal<IEmployee[]>([]);
-
+projectItems = [
+  { label: 'Rising Talent', count: this.getProjectCounts().risingTalent },
+  { label: 'Design Star', count: this.getProjectCounts().designStar },
+  { label: 'Top Tier', count: this.getProjectCounts().topTier },
+  { label: 'The Maestro', count: this.getProjectCounts().maestro },
+];
   ngOnInit(): void {
     this.loadEmployees();
   }
