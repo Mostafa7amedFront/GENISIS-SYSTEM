@@ -51,11 +51,7 @@ ease;
 }
 
 @media (max-width: 992px) { /* lg -> md */
-  .headerText{
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
-    flex-direction: column-reverse;
-  }
+
   .card-box{
   grid-template-columns: repeat(auto-fit, minmax(80%, 1fr)) !important;
 

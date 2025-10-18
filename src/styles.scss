@@ -227,6 +227,12 @@ input[type="number"] {
         min-height: 550px;
         max-height: 668px;
     }
+      .headerText{
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    flex-direction: column-reverse;
+    padding-left: 10px;
+  }
     .team-container {
         height: 1340px;
     }
