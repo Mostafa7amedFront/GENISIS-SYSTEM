@@ -5,14 +5,14 @@ import { environment } from '../../../../../../environments/environment';
 import { ProjectService } from '../../../../../Core/service/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { IProject, Note } from '../../../../../Core/Interface/iproject';
-import { Chat } from "../chat/chat";
 import { Todolist } from "../todolist/todolist";
 import { Feedback } from "../feedback/feedback";
 import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
+import { Chat } from "../chat/chat";
 
 @Component({
   selector: 'app-upload-files',
-  imports: [ ShortenPipe, Chat, Feedback , ReactiveModeuls],
+  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat],
   templateUrl: './upload-files.html',
   styleUrl: './upload-files.scss'
 })

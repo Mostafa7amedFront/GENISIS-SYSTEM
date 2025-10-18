@@ -29,8 +29,9 @@ export class Login {
       this.loginService.login(this.loginForm.value).subscribe({
         next: (res) => {
           this.aleart.toast('Logged in successfully', 'success');
-          this.loginService.saveToken(res.value.token, res.value.refreshToken);
+          this.loginService.saveToken(res.value.token, res.value.refreshToken , res.value.username);
           this._route.navigate(['/home']);
+          console.log(this.onCheckUser())
         },
         error: (err) => {
           this.aleart.toast(err.error?.detail || 'Login failed. Please check your credentials.', 'error');

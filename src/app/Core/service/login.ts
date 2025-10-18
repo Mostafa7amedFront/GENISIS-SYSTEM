@@ -23,8 +23,9 @@ export class LoginService  {
     return this.http.post<IResponseOf<ILogin>>(`${this.API_URL}`, credentials);
   }
 
-  saveToken(token: string , refresh:string): void {
+  saveToken(token: string , refresh:string , username :string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
+     localStorage.setItem('user_name',username);
 
     localStorage.setItem(this.refreshToken, refresh);
 

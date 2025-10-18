@@ -1,125 +1,81 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-interface ChatMessage {
-  username: string;
-  text: string;
-  time: string;
-  date: string;
-  timestamp: Date;
-  files?: ChatFile[];
-
-}
-interface ChatFile {
-  name: string;
-  url: string;
-  type: string; // image, pdf, docx ...
-}
+import { Component, effect, signal, inject } from '@angular/core';
+import { ChatService } from '../../../../../Core/service/chat.service';
+import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [ReactiveModeuls],
   templateUrl: './chat.html',
-  styleUrls: ['./chat.scss']
+  styleUrl: './chat.scss'
 })
 export class Chat {
-  messages: ChatMessage[] = [];
-  messageText: string = '';
-  lastMessageTimestamp: Date | null = null;
+  messageText = signal('');
+  projectId = '';
+  selectedFiles: File[] = [];
+  private chatService = inject(ChatService);
+  messages = this.chatService.messages;
 
-  constructor() {
-    const now = new Date();
-    const yesterday = new Date();
-    yesterday.setDate(now.getDate() - 1);
-      now.setDate(now.getDate() - 3);
-    this.messages = [
-      {
-        username: 'Mostafa',
-        text: 'Hey! how are you?',
-        time: this.getCurrentTime(now),
-        date: this.getFormattedDate(now),
-        timestamp: now
-      },
-      {
-        username: 'Miar',
-        text: 'I am good, thanks! Working on Angular project 💻',
-        time: this.getCurrentTime(now),
-        date: this.getFormattedDate(now),
-        timestamp: now,
-         files: [
-          { name: 'design.png', url: 'assets/files/design.png', type: 'image' },
-          { name: 'report.pdf', url: 'assets/files/report.pdf', type: 'pdf' }
-        ],
-      },
-      {
-        username: 'Mostafa',
-        text: 'Nice! Keep going 🚀',
-        time: this.getCurrentTime(now),
-        date: this.getFormattedDate(now),
-        timestamp: now
-      },
-      {
-        username: 'System',
-        text: 'Yesterday message example.',
-        time: this.getCurrentTime(yesterday),
-        date: this.getFormattedDate(yesterday),
-        timestamp: yesterday
+  constructor(private route: ActivatedRoute) {
+    effect(() => {
+      const msgs = this.messages();
+      if (msgs.length) {
+        setTimeout(() => {
+          const box = document.querySelector('.chat-box');
+          box?.scrollTo({ top: box.scrollHeight, behavior: 'smooth' });
+        }, 100);
       }
-    ];
-
-    this.lastMessageTimestamp = now;
+    });
   }
 
-  // get current time in HH:MM AM/PM format
-  private getCurrentTime(date: Date = new Date()): string {
-    let hours = date.getHours();
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const period = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12;
-    return `${hours}:${minutes} ${period}`;
-  }
+  async ngOnInit(): Promise<void> {
+    this.projectId = this.route.snapshot.paramMap.get('id')!;
+    await this.chatService.startConnection();
+    await this.chatService.joinProjectGroup(this.projectId);
 
-  // get formatted date
-  private getFormattedDate(date: Date): string {
-    const today = new Date();
-    const yesterday = new Date();
-    yesterday.setDate(today.getDate() - 1);
+    this.chatService.getAllMessages(this.projectId).subscribe({
+      next: (res: any) => {
+        const items = res?.value?.items ?? [];
 
-    if (date.toDateString() === today.toDateString()) return 'Today';
-    if (date.toDateString() === yesterday.toDateString()) return 'Yesterday';
+        const chats = items.flatMap((group: any) =>
+          group.chats.map((chat: any) => ({
+            id: chat.id,
+            text: chat.message,
+            username: chat.userName,
+            date: group.relativeDateString,
+            time: new Date(chat.sentAt).toLocaleTimeString(),
+            files: chat.attachments || []
+          }))
+        );
 
-    return date.toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' });
-  }
-
-  private isNewDay(current: Date): boolean {
-    if (!this.lastMessageTimestamp) return true;
-    return current.toDateString() !== this.lastMessageTimestamp.toDateString();
+        this.chatService.messages.set(chats);
+      },
+      error: (err) => console.error('Error loading messages:', err)
+    });
   }
 
   sendMessage(): void {
-    const text = this.messageText.trim();
-    if (!text) return;
+    const text = this.messageText().trim();
+    if (!text && this.selectedFiles.length === 0) return;
 
-    const now = new Date();
-    const message: ChatMessage = {
-      username: 'Mostafa Hamed',
-      text,
-      time: this.getCurrentTime(now),
-      date: this.getFormattedDate(now),
-      timestamp: now
-    };
+    const files = [...this.selectedFiles];
+    this.selectedFiles = [];
+    this.messageText.set('');
 
-    this.messages.push(message);
-    this.lastMessageTimestamp = now;
-    this.messageText = '';
+    this.chatService.sendChatMessage(this.projectId, text, files);
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
+  onFileSelected(event: any): void {
+    this.selectedFiles = Array.from(event.target.files);
+  }
+
+    handleKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       this.sendMessage();
     }
+  }
+  ngOnDestroy(): void {
+    this.chatService.stopConnection();
   }
 }

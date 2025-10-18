@@ -17,6 +17,7 @@ export class ProjectService {
       fromObject: {
           pageNumber: data.pageNumber ?? 1,
           pageSize: data.pageSize ?? 50,
+          ProjectStatus: data.ProjectStatus ?? 0
       }
     });
 

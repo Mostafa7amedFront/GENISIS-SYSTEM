@@ -45,7 +45,7 @@ private _alert = inject(SweetAlert);
 
   //  File Upload Variables
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  files: { name: string; size: string; type: string }[] = [];
+files: File[] = [];
 
   //  Selection Variables
   leftSelected = 0;
@@ -89,18 +89,24 @@ clientTitleMap: { [key: string]: number } = {
   /** Handles file selection and stores file info */
 onFileSelected(event: Event) {
   const input = event.target as HTMLInputElement;
+
   if (input.files && input.files.length > 0) {
-    this.files = []; // تنظيف القائمة قبل التحديث
-    Array.from(input.files).forEach(file => {
-      this.files.push({
-        name: file.name,
-        size: (file.size / (1024 * 1024)).toFixed(1) + 'MB',
-        type: file.type
-      });
+    const selectedFiles = Array.from(input.files);
+
+    selectedFiles.forEach(file => {
+      if (!this.files.some(f => f.name === file.name && f.size === file.size)) {
+        this.files.push(file);
+      }
     });
+
+    if (this.files.length > 4) {
+      this.files = this.files.slice(0, 4);
+      this._alert.toast('You can only upload up to 4 files.', 'warning');
+    }
+
+    input.value = '';
   }
 }
-
 selectDay(day: { number: string; faded: boolean; today: boolean }) {
   if (day.faded) return;
 
@@ -162,7 +168,6 @@ selectDay(day: { number: string; faded: boolean; today: boolean }) {
     this.renderCalendar(this.currentDate);
   }
 
-  //  Selection Logic
 
   selectLeft(name: number) {
     this.leftSelected = this.leftSelected === name ? 0 : name;
@@ -203,18 +208,13 @@ addProject() {
     formData.append('EmployeeIds', id.toString());
   });
 
-  const input = this.fileInput.nativeElement;
-  if (input.files && input.files.length > 0) {
-    Array.from(input.files).forEach(file => {
-      formData.append('AttachmentUrl', file, file.name);
-    });
-  }
-
+  this.files.forEach(file => {
+    formData.append('AttachmentUrl', file, file.name);
+  });
   this._project.add(formData).subscribe({
     next: (res) => {
                   this._alert.toast('Project added successfully!' , 'success');
-            this._location.back(); // 👈 Go back to previous page
-
+        this._location.back()
                   
     }, 
     error: (err) => {
