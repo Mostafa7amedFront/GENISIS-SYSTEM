@@ -4,7 +4,7 @@ import { MainlayoutNonNav } from '../Layout/mainlayout-non-nav/mainlayout-non-na
 
 export const authRoutes: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: MainlayoutNonNav,
     canActivate:[isAuthGuard],
     children: [

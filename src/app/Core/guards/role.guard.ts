@@ -30,7 +30,7 @@ export const roleGuard = (allowedRoles: string[]): CanActivateFn => {
           break;
       
         default:
-          _router.navigate(['/auth/login']);
+          _router.navigate(['/login']);
       }
       return false;
     }

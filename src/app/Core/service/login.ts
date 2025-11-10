@@ -66,6 +66,6 @@ export class LoginService {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.refreshToken);
 
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/login']);
   }
 }
