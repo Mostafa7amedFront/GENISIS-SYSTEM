@@ -125,7 +125,7 @@ getProjectCounts() {
     event.preventDefault();
     event.stopPropagation();
     console.log('Edit clicked', card);
-    this.routes.navigate(['/editclient', card.id]);
+    this.routes.navigate(['/editproject', card.id]);
   }
 
 }

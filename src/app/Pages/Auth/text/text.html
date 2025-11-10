@@ -1,0 +1,144 @@
+
+<div class="pm-dialog" *ngIf="isOpen" role="dialog" aria-modal="true">
+  <button class="pm-close" aria-label="Close" >✕</button>
+  <h2 class="pm-title">select your payment method</h2>
+
+  <!-- 1) Credit / Debit -->
+  <section class="pm-item" [class.is-open]="isActive('card')">
+ <button class="pm-head border-0 d-flex" type="button" (click)="toggle('card')">
+  <div class="pm-left">
+    <span class="pm-radio"></span>
+    <div class="pm-head-text">
+      <div class="pm-head-title">Credit/debit Card</div>
+      <div class="pm-head-sub">Visa & Master Card accepted</div>
+    </div>
+  </div>
+
+  <div class="pm-logos">
+    <img src="assets/images/payment-logos/visa.svg" alt="VISA">
+    <img src="assets/images/payment-logos/mastercard.svg" alt="Mastercard">
+  </div>
+</button>
+
+
+
+    <div class="pm-body">
+      <h3 class="pm-subtitle">
+        <span class="pm-ic-card"></span>
+        Enter Card Details
+      </h3>
+
+      <label class="pm-label">Card Number</label>
+      <div class="pm-input-wrap">
+        <input class="pm-input" placeholder="1234 5678 9012 3456" [(ngModel)]="card.number" />
+        <span class="pm-mini-logo">VISA</span>
+      </div>
+
+      <label class="pm-label">Cardholder Name</label>
+      <input class="pm-input" placeholder="AHMED MOHAMMED" [(ngModel)]="card.name" />
+
+      <div class="pm-row">
+        <div class="pm-col">
+          <label class="pm-label">Expiry Date</label>
+          <input class="pm-input" placeholder="MM/YY" [(ngModel)]="card.expiry" />
+        </div>
+        <div class="pm-col">
+          <label class="pm-label">CVV</label>
+          <input class="pm-input" placeholder="123" [(ngModel)]="card.cvv" />
+        </div>
+      </div>
+
+      <div class="pm-total">
+        <div>
+          <div class="pm-total-title">Total Amount</div>
+          <div class="pm-total-sub">your payment secured with 256-bit encryption</div>
+        </div>
+        <div class="pm-total-num">{{ total | number:'1.0-0' }}</div>
+      </div>
+
+      <button class="payment-btn" (click)="payCard()">
+        pay {{ total | number:'1.0-0' }}
+      </button>
+    </div>
+  </section>
+
+  <!-- 2) Apple Pay -->
+  <section class="pm-item" [class.is-open]="isActive('apple')">
+  <!-- Apple Pay header -->
+<button class="pm-head d-flex" type="button" (click)="toggle('apple')">
+  <div class="pm-left">
+    <span class="pm-radio"></span>
+    <div class="pm-head-text">
+      <div class="pm-head-title">Apple pay</div>
+      <div class="pm-head-sub">fast and secure payment</div>
+    </div>
+  </div>
+
+  <!-- كانت <button>، خلوها عنصر عادي -->
+  <span class="pm-chip" aria-hidden="true">Pay</span>
+</button>
+
+
+
+    <div class="pm-body">
+      <label class="pm-check">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="26" viewBox="0 0 18 26" fill="none">
+  <path d="M6.75 4.75H10.75M14.4647 0.75H3.03533C1.774 0.75 0.75 1.82467 0.75 3.15V22.35C0.75 23.6753 1.774 24.75 3.03533 24.75H14.4647C15.7273 24.75 16.75 23.6753 16.75 22.35V3.15C16.75 1.82467 15.7273 0.75 14.4647 0.75Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+        <span>Apple pay payment</span>
+      </label>
+
+      <div class="pm-qr">
+        <!-- صورة QR وهمية — بدليها -->
+        <img src="../../../../../assets/images/payment-logos/qrrrr.png" alt="Apple Pay QR">
+      </div>
+
+      <div class="pm-help">
+        <b>Scan QR Code With Apple pay</b>
+        <div>open the Camera App on your iPhone and point it at the QR Code</div>
+      </div>
+
+      <div class="pm-total">
+        <div>
+          <div class="pm-total-title">Total Amount</div>
+          <div class="pm-total-sub">secured with 256-bit encryption</div>
+        </div>
+        <div class="pm-total-num">{{ total | number:'1.0-0' }}
+            <img src="../../../../../assets/images/payment-logos/Saudi_Riyal_Symbol.svg 3 (1).svg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) Installments -->
+  <section class="pm-item" [class.is-open]="isActive('installments')">
+    <button class="pm-head d-flex" type="button" (click)="toggle('installments')">
+  <div class="pm-left">
+    <span class="pm-radio"></span>
+    <div class="pm-head-text">
+      <div class="pm-head-title">Installment programs</div>
+      <div class="pm-head-sub">fast and secure payment</div>
+    </div>
+  </div>
+
+  <div class="pm-install-logos">
+    <span class="pm-badge">2+</span>
+    <img src="assets/images/payment-logos/tamara.svg" alt="Tamara">
+    <img src="assets/images/payment-logos/tabby.svg" alt="Tabby">
+    <img src="assets/images/payment-logos/moyasar.svg" alt="Moyasar">
+  </div>
+</button>
+
+
+    <div class="pm-body">
+      <div class="pm-note">Choose your provider at the next step.</div>
+      <div class="pm-total">
+        <div>
+          <div class="pm-total-title">Total Amount</div>
+          <div class="pm-total-sub">no hidden fees</div>
+        </div>
+        <div class="pm-total-num">{{ total | number:'1.0-0' }}</div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,674 @@
+/* ====== 1) Header row (radio + text + logos) ====== */
+.pm-head {
+    border: none !important;
+    border-radius: 16px;
+    background: #fff;
+    padding: 12px 16px;
+    /* نفس مسافة فيجما */
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.pm-head-content {
+    /* محتوى الهيدر كله على صف واحد */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.pm-radio {
+    /* الدائرة */
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    border: 2px solid #C7CCD1;
+    border-radius: 50%;
+}
+
+.pm-head.is-active .pm-radio {
+    border-color: #111;
+    background: radial-gradient(#111 50%, transparent 51%);
+}
+
+.pm-head-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    /* يمنع تكسّر التخطيط */
+    flex: 1 1 auto;
+}
+
+.pm-head-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0B0B0C;
+    line-height: 20px;
+}
+
+.pm-head-sub {
+    font-size: 12px;
+    color: #6B7280;
+    line-height: 16px;
+}
+
+/* اللوجوهات على أقصى اليمين وبحجم ثابت */
+.pm-logos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-inline-start: auto;
+}
+
+.pm-logos img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Hover مطابق */
+.pm-head:hover {
+    border-color: #B9BEC4;
+}
+
+/* ====== 2) Accordion body: ما يظهرش أي حاجة وهو مقفول ====== */
+.pm-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    /* مهم: بدون padding وهـو مقفول */
+    transition: max-height .3s ease, padding .2s ease;
+    background: #fff;
+}
+
+.pm-item.is-open .pm-body {
+    padding: 14px 16px 16px;
+    /* نفس مسافات فيجما عند الفتح */
+    max-height: 1200px;
+}
+
+/* خط فاصل خفيف أعلى الجسم عند الفتح لإحساس طبقة داخلية */
+.pm-item.is-open .pm-body {
+    border-top: 1px solid #EEF1F4;
+}
+
+/* ====== 3) Modal: منع ظهور أي شيء تحتها ومنع سكرول الخلفية ====== */
+.pm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    z-index: 1000;
+}
+
+.pm-dialog {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(600px, 92vw);
+    max-height: 60vh;
+    overflow: auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .30);
+    padding: 20px 18px 22px;
+    z-index: 1001;
+}
+
+/* امنعي سكرول الصفحة اللي ورا وقت فتح المودال (ضيفي class على <body>) */
+body.pm-open {
+    overflow: hidden;
+}
+
+/* ====== 4) ضبط البطاقات الأخرى لنفس المقاس والحواف ====== */
+.pm-item {
+    border: 1px solid #DFE3E7;
+    border-radius: 16px;
+    margin: 12px 8px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.pm-item.is-open {
+    box-shadow: 0 0 0 1px #D6DBE0 inset;
+}
+
+/* استجابة بسيطة */
+@media (max-width:520px) {
+    .pm-head {
+        padding: 10px 12px;
+    }
+
+    .pm-logos img {
+        height: 20px;
+    }
+}
+
+
+// 
+/* حتة الشمال: راديو + عنوان + سطر وصف */
+.pm-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 1 1 auto;
+    /* تاخد المساحة وتسيب اللوجوهات تروح للآخر */
+}
+
+/* تأكيد إن اللوجوهات تروح لأقصى اليمين */
+.pm-logos,
+.pm-install-logos {
+    margin-inline-start: auto;
+    /* مهم */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pm-install-logos img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+}
+
+.pm-chip {
+    margin-inline-start: auto;
+}
+
+/* لو زر زي Pay */
+
+/* الهيدر نفسه */
+.pm-head {
+    display: flex;
+    /* لو مش ضايفة d-flex */
+    align-items: center;
+    justify-content: space-between;
+    /* نص الشمال + لوجوهات/زر اليمين */
+    text-align: initial;
+    /* يلغي أي center متورّث */
+}
+
+/* كتلة الشمال: الدايرة + النص */
+.pm-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* خلّيها لازقة أكتر في الكلام */
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+/* مهم: اجبار النص يكون بمحاذاة البداية (LTR/RTL) */
+.pm-head-text {
+    min-width: 0;
+}
+
+.pm-head-title,
+.pm-head-sub {
+    text-align: start;
+    /* يكسّر أي ستايل عام بيعمل center */
+    margin: 0;
+    /* أمان */
+    white-space: nowrap;
+    /* نفس شكل فيجما */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* اللوجوهات يمين تمام */
+.pm-logos,
+.pm-install-logos {
+    margin-inline-start: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pm-install-logos img,
+.pm-logos img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* شكل زر Pay كتشيب بدل زر */
+.pm-chip {
+    margin-inline-start: auto;
+    padding: 6px 10px;
+    border: 1px solid #D0D6DC;
+    border-radius: 8px;
+    font-weight: 600;
+    background: #fff;
+    line-height: 1;
+}
+// 
+/* ====== Header: نفس توزيع فيجما ====== */
+.pm-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #DFE3E7;
+    border-radius: 16px;
+    background: #fff;
+    text-align: initial;
+}
+
+.pm-head:hover {
+    border-color: #C9D0D6;
+}
+
+.pm-head.is-active {
+    box-shadow: 0 0 0 2px #111 inset;
+}
+
+/* حافة خفيفة عند التحديد (شكل الهالة في الصورة) */
+
+/* الشمال: الراديو + النص */
+.pm-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.pm-radio {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    border: 2px solid #C7CCD1;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.pm-head.is-active .pm-radio {
+    border-color: #111;
+    background: radial-gradient(#111 50%, transparent 51%);
+}
+
+.pm-head-text {
+    min-width: 0;
+}
+
+.pm-head-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #0B0B0C;
+    text-align: start;
+    margin: 0;
+}
+
+.pm-head-sub {
+    font-size: 12px;
+    line-height: 16px;
+    color: #6B7280;
+    text-align: start;
+    margin: 2px 0 0;
+}
+
+/* يمين: الشعارات */
+.pm-logos {
+    margin-inline-start: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pm-logos img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ====== Body: مطابق للصورة ====== */
+.pm-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: max-height .3s ease, padding .2s ease;
+    background: #fff;
+}
+
+.pm-item.is-open .pm-body {
+    padding: 14px 16px 16px;
+    max-height: 1200px;
+    border-top: 1px solid #EEF1F4;
+}
+
+/* عنوان Enter Card Details مع أيقونة كرت */
+.pm-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 4px 0 12px;
+    color: #0B0B0C;
+}
+
+.pm-ic-card {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    flex: 0 0 18px;
+}
+
+/* الليبل */
+.pm-label {
+    display: block;
+    font-size: 14px;
+    color: #18181B;
+    margin: 14px 0 6px;
+    font-weight: 600;
+}
+
+/* حقل رقم الكارت + بادچ VISA صغيرة على اليمين */
+.pm-input-wrap {
+    position: relative;
+}
+
+.pm-input {
+    width: 100%;
+    height: 44px;
+    padding: 10px 44px 10px 12px;
+    /* مساحة للبادچ */
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    background: #fff;
+    outline: none;
+    font-size: 13px;
+    color: #0B0B0C;
+}
+
+.pm-input::placeholder {
+    color: #9CA3AF;
+}
+
+.pm-input:focus {
+    border-color: #111;
+    box-shadow: 0 0 0 2px rgba(17, 17, 17, .08);
+}
+
+.pm-mini-logo {
+    position: absolute;
+    inset-inline-end: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 18px;
+    line-height: 18px;
+    padding: 0 6px;
+    border: 1px solid #E2E5EA;
+    border-radius: 6px;
+    font-size: 10px;
+    color: #111;
+    background: #fff;
+    font-weight: 700;
+}
+
+/* صف (Expiry/ CVV) */
+.pm-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.pm-col {
+    flex: 1 1 0;
+}
+
+/* بلوك الـTotal */
+.pm-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #EEF1F4;
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px 14px;
+    margin-top: 12px;
+}
+
+.pm-total-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 4px;
+}
+
+.pm-total-sub {
+    font-size: 12px;
+    color: #6B7280;
+}
+
+.pm-total-num {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0B0B0C;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pm-total-num img {
+    height: 18px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* زر الدفع الأسود */
+.payment-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    border: 0;
+    margin-top: 12px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.payment-btn:hover {
+    filter: brightness(.92);
+}
+
+/* موبايل */
+@media (max-width:520px) {
+    .pm-head {
+        padding: 10px 12px;
+    }
+
+    .pm-logos img {
+        height: 20px;
+    }
+}
+// 
+/* ===== Apple Pay header ===== */
+.pm-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #DFE3E7;
+    border-radius: 16px;
+    background: #fff;
+    text-align: initial;
+}
+
+.pm-head:hover {
+    border-color: #C9D0D6;
+}
+
+.pm-head.is-active {
+    box-shadow: 0 0 0 2px #111 inset;
+}
+
+.pm-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
+}
+
+.pm-radio {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #C7CCD1;
+    border-radius: 50%;
+}
+
+.pm-head.is-active .pm-radio {
+    border-color: #111;
+    background: radial-gradient(#111 50%, transparent 51%);
+}
+
+.pm-head-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #0B0B0C;
+    margin: 0;
+}
+
+.pm-head-sub {
+    font-size: 12px;
+    line-height: 16px;
+    color: #6B7280;
+    margin: 2px 0 0;
+}
+
+.pm-chip {
+    margin-inline-start: auto;
+    padding: 6px 10px;
+    line-height: 1;
+    border: 1.5px solid #111;
+    border-radius: 8px;
+    background: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    color: #111;
+}
+
+/* ===== Body ===== */
+.pm-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: max-height .3s ease, padding .2s ease;
+}
+
+.pm-item.is-open .pm-body {
+    padding: 14px 16px 16px;
+    max-height: 1200px;
+    border-top: 1px solid #EEF1F4;
+    background: #fff;
+}
+
+/* Checkbox row */
+.pm-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #0B0B0C;
+    font-weight: 600;
+}
+
+.pm-check input {
+    width: 16px;
+    height: 16px;
+    accent-color: #111;
+}
+
+/* QR container */
+.pm-qr {
+    margin: 10px 0 12px;
+    padding: 14px;
+    border: 1px solid white;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.pm-qr img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+.pm-help{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Help text + icon (العنوان الغامق) */
+.pm-help b {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #0B0B0C;
+}
+
+.pm-help b::before {
+    content: '?';
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #111;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+}
+
+.pm-help div {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #6B7280;
+}
+
+/* Total block (نفس الصورة) */
+.pm-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    margin-top: 12px;
+    border: 1px solid #EEF1F4;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.pm-total-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 4px;
+}
+
+.pm-total-sub {
+    font-size: 12px;
+    color: #6B7280;
+}
+
+.pm-total-num {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0B0B0C;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

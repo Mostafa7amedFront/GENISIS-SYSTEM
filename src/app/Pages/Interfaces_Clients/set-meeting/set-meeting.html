@@ -1,0 +1,71 @@
+<div class=" mt-5 pt-5">
+    <h1 class="text-end text-white mb-0">SET A MEETING</h1>
+</div>
+<div class="row meeting-container text-white p-4 mt-4 rounded-3">
+    <div class="div col me-lg-5 px-0">
+        <p class="mb-1 mt-4">Choose projects</p>
+        <div class="leftlow p-2">
+            <div class="row p-2" *ngFor="let client of projects()">
+                <div class="col-1">
+                    <img [src]="baseimageUrl + client.clientImage" alt="" class="rounded-2" width="30" height="30" />
+                </div>
+                <div class="col d-flex text pt-1 px-0 mx-4">
+                    <p class="mb-0">{{ client.projectTitle }}</p>
+                    <div class="ms-auto">
+
+                                  <button
+            type="button"
+            class="rounded-1"
+              [class.clicked]="selectedProjectId() === client.id"
+            (click)="selectProject(client.id)"
+          ></button>
+                     
+                    </div>
+                </div>
+            </div>
+
+       <div class="text-center text-muted" *ngIf="projects().length === 0">
+    No projects available.
+  </div>
+        </div>
+    </div>
+
+</div>
+<div class=" meeting-container text-white p-4 mt-4 rounded-3">
+    <!-- Time slots -->
+    <div class="time-slots ps-3 pe-0 border-right">
+        <h6>Time -</h6>
+        <div *ngFor="let slot of slots" class="slot text-center me-5" [class.active]="selectedSlot() === slot"
+            (click)="selectSlot(slot)">
+            {{ slot }}
+        </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="calendar px-5 mt-5 pt-1">
+        <div class="calendar-header px-3">
+            <button (click)="prevMonth()"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></button>
+            <h4>{{ monthYear }}</h4>
+            <button (click)="nextMonth()"><i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i></button>
+        </div>
+
+        <div class="calendar-body">
+            <div class="day-names">
+                <div>Su</div>
+                <div>Mo</div>
+                <div>Tu</div>
+                <div>We</div>
+                <div>Th</div>
+                <div>Fr</div>
+                <div>Sa</div>
+            </div>
+            <div class="days-grid">
+                <div *ngFor="let day of daysInMonth()" [class.active]="isSelected(day)" (click)="selectDate(day)">
+                    {{ day }}
+                </div>
+            </div>
+        </div>
+
+        <button class="book-btn" (click)="bookMeeting()">BOOK</button>
+    </div>
+</div>

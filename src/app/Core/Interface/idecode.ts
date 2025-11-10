@@ -9,6 +9,7 @@ export interface ILogin{
     id: string
   email: string
   username: string
+  role:string,
   token: string
   expiresIn: number
   refreshToken: string

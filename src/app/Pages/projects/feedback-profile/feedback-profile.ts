@@ -1,24 +1,35 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { IFeedbackEmployee } from '../../../Core/Interface/ifeedback';
+import { FeedbackClientsService } from '../../../Core/service/Clients/feedback-clients.service';
 
 @Component({
   selector: 'app-feedback-profile',
-  imports: [CommonModule],
+  imports: [CommonModule , DatePipe],
   templateUrl: './feedback-profile.html',
   styleUrl: './feedback-profile.scss'
 })
 export class FeedbackProfile {
-  isOpen = false;
-  selected = 'ALL CLIENTS';
-  options = ['ALL CLIENTS', 'COMPLETED', 'IN PROGRESS', 'PAUSED'];
+    private _feedbackService = inject(FeedbackClientsService)
+  Feedbacks = signal<IFeedbackEmployee[] | null>(null);
+currentYear = new Date().getFullYear();
 
-  toggleMenu() {
-    this.isOpen = !this.isOpen;
-  }
 
-  selectOption(option: string) {
-    this.selected = option;
-    this.isOpen = false;
+  ngOnInit() {
+    const storedId = localStorage.getItem("Id_Clients");
+
+    if (storedId) {
+      this._feedbackService.getAll(storedId).subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.Feedbacks.set(res.value);
+          }
+        },
+        error: (err) => console.error('❌ Error loading feedback:', err)
+      });
+    } else {
+      console.warn('⚠️ No employeeId found in localStorage');
+    }
   }
 
 }

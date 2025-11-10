@@ -1,0 +1,161 @@
+<div class="addproject px-3 ">
+
+
+    <h1 class="mt-5 pt-5 text-white text-end big">Edit PROJECT</h1>
+
+    <div class="addproject-box rounded-3 text-white p-5">
+      <div class="row first-project ">
+        <div class="col-6 pe-5 ps-0">
+          <div><img src="assets/img/half-logo.svg" alt="" /></div>
+          <input #titleInput type="text" class="text-white w-100 mt-5 ps-0" placeholder="Project Title" />
+        </div>
+
+        <div class="col addproject-rightbox rounded-3"></div>
+
+<input #descInput type="text" class="text-white w-100 mt-4 ps-0" placeholder="Project Description" />
+        <div class="CreateAccount-box  px-0 mt-0 py-0">
+                  <!-- Client Title -->
+        <p class="mt-4 mb-1 title">Client Title</p>
+        <div *ngFor="let title of options" class="d-flex mt-1 align-items-center">
+          <button
+            type="button"
+            class="rounded-1"
+            [class.clicked]="selectedClientTitle === title"
+            (click)="selectClientTitle(title)"
+          ></button>
+          <p class="low ms-2 m-0">{{ title }}</p>
+        </div>
+
+        </div>
+        <p class="ps-0 mt-4 mb-2">Add Deadline</p>
+
+        <div class="calender-sec w-100 p-3 rounded-3">
+          <div class="mb-3 text-center calender">
+            <div class="header d-flex justify-content-center align-items-center">
+              <div class="btn fs-5 me-4" (click)="prevMonth()">
+                <i class="fa-solid fa-angle-left"></i>
+              </div>
+              <div id="month-year">
+                <p class="mb-0">{{ monthLabel }}</p>
+                <span style="font-size: 11px">{{ yearLabel }}</span>
+              </div>
+              <div class="btn fs-5 ms-4" (click)="nextMonth()">
+                <i class="fa-solid fa-angle-right"></i>
+              </div>
+            </div>
+
+            <div class="days d-flex flex-wrap justify-content-end mt-3">
+              <div
+                *ngFor="let day of days"
+                (click)="selectDay(day)"
+                class="mx-1 my-1 day-box"
+                [class.fade]="day.faded"
+                [class.today]="day.today"
+                [class.active]="
+                  selectedDate &&
+                  selectedDate.getDate() === +day.number &&
+                  selectedDate.getMonth() === currentDate.getMonth() &&
+                  !day.faded
+                "
+              >
+                <p>{{ day.number }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-4 pt-2 px-0">Add Attachment</p>
+
+        <div class="drag-area text-center rounded-3 p-4">
+          <div class="dataShow d-flex align-items-center gap-2">
+            @for ( file of files; track file.name) {
+            <div class="file-card d-flex align-items-center gap-2">
+              <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
+              <div class="file-info text-lg-start">
+                <div class="file-name">{{ file.name | shorten }}</div>
+                <div class="file-size">{{ file.size }}</div>
+              </div>
+            </div>
+            }
+
+            <div class="iconDataAdd" (click)="onUploadClick()">
+              <img src="assets/img/new-document 2.png" alt="" />
+            </div>
+          </div>
+          <button
+            (click)="onUploadClick()"
+            id="uploadButton"
+            class="border-0 rounded-3 w-100 text-white small pt-2 mt-4"
+            style="background-color: #0b6b6e"
+          >
+            UPLOAD
+          </button>
+          <input type="file" id="fileInput" multiple hidden #fileInput (change)="onFileSelected($event)" />
+
+        </div>
+
+        <!-- Choose Client -->
+        <div class="bottom">
+          <div class="row">
+            <div class="div col me-lg-5 px-0">
+              <p class="mb-1 mt-4">Choose Client</p>
+              <div class="leftlow p-2">
+                <div class="row p-2" *ngFor="let client of Clients()">
+                  <div class="col-1">
+                    <img
+                      [src]="baseimageUrl + client.imageUrl"
+                      alt=""
+                      class="rounded-2"
+                      width="30"
+                      height="30"
+                    />
+                  </div>
+                  <div class="col d-flex text pt-1 px-0 mx-4">
+                    <p class="mb-0">{{ client.name }}</p>
+                    <div class="ms-auto">
+             <button
+  (click)="selectLeft(client.id)"
+  [class.clicked]="leftSelected() === client.id">
+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assign To -->
+            <div class="col-lg-8 px-0">
+              <p class="mb-1 mt-4">Assign to</p>
+              <div class="rightlow rounded-3 p-2">
+                <div class="row p-2" *ngFor="let user of Employee()">
+                  <div class="col-auto pe-3">
+                    <img
+                      [src]="baseimageUrl + user.imageUrl"
+                      alt=""
+                      class="rounded-2"
+                      width="30"
+                      height="30"
+                    />
+                  </div>
+                  <div class="col d-flex text px-0 me-3">
+                    <p class="mb-0">{{ user.name }}</p>
+                    <div class="ms-auto">
+<button
+  (click)="toggleRight(user.id)"
+  [class.clicked]="rightSelected().includes(user.id)">
+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="mt-3  px-3 text-end pt-sm-4 logout" style="color: #00bec5" (click)="updateProject()">
+      ADD PROJECT
+      <i class="ps-3 fa-solid fa-arrow-right fs-5" style="color: #00bec5"></i>
+    </h2>
+</div>

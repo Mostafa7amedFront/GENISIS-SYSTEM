@@ -1,0 +1,111 @@
+<div class="text-white team">
+    <div class="d-flex justify-content-between align-items-center headerText">
+
+        <h1 class=" big">PROJECTS</h1>
+
+    </div>
+    <div class=" p-md-5 p-3 rounded team-container">
+        <div class=" row g-3 g-lg-4">
+            <div class="col-lg-6 pb-3 pe-lg-3 ps-lg-2 ">
+                <div class="p-4  rounded-3 d-flex w-auto  right-box h-90 justify-content-between ">
+                    <div class=" ">
+                        <h2 class="mb-xl-3 mb-sm-4 mb-3">NEW Projects</h2>
+                        <p class="mb-2">IN THE PAST 30 DAYS</p>
+                        <span class="mb-0 text-white   p-0 pt-md-0 pt-1 w-auto h-auto "
+                            style="font-size: 100px;">15</span>
+
+                    </div>
+                    <div class="d-flex flex-column align-items-end">
+                        <div class="px-0"><img class="mb-3 pb-3 px-0  " src="assets/img/Rectangle 721.png" alt=""></div>
+                        <p class="p-0 ms-sm-4  mb-1 ps-lg-3  align-content-start w-100">INCREASE</p>
+                        <div class="d-flex ps-xl-4 gap-2 ps-0  align-content-start w-100">
+                            <div class="align-content-end h-75">
+                                <img class="mt-sm-4 mt-2 pt-3 pe-1" width="30" src="assets/img/Arrow 1.svg" alt="">
+                            </div>
+                            <span class="p-0 pt-md-0 pt-1 m-0 text-start w-100  h-auto ">30%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 pb-3 mt-sm-2 pe-lg-4 mt-0">
+                <div class="d-flex flex-column justify-content-between h-90">
+                    <div class="dropdown text-end">
+                        <div class="select" (click)="toggleMenu()">
+                            <div class="caret">
+                                <i class="fa-solid fa-angle-down fs-5" [class.rotate]="isOpen" style="color: #00bec5;">
+                                </i>
+                            </div>
+                            <span class="selected fs-2">{{ selected() }}</span>
+
+                        </div>
+                        <p class="small mb-0 text-end">KEEP THE GOOD WORK!!</p>
+                  <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
+                        <li *ngFor="let option of options" (click)="selectOption(option)"
+                            [class.active]="selected() === option">
+                            {{ option }}
+                        </li>
+                    </ul>
+
+                    </div>
+
+
+                    <div class="flex-wrap pt-4 pb-2 rounded-3 d-flex blue ps-md-0 ps-2 pe-2 pe-sm-0">
+                        <div class="p-0 text-center col me-5 ms-1">
+                            <p class="mb-0">Completed</p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().completed| leadingZero }}</p>
+                        </div>
+
+                        <div class="p-0 text-center col me-5">
+                            <p class="mb-0">Paused</p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().paused| leadingZero }}</p>
+                        </div>
+
+                        <div class="p-0 text-center col">
+                            <p class="mb-0">In Progress  </p>
+                            <p class="mb-0 fs-3">{{ getProjectCounts().inProgress | leadingZero }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-0 row g-lg-4">
+            <div class="card-box row">
+
+                @for (project of filteredProjects(); track project.id) {
+
+                <div class="col-lg-3 col-md-4 col-12 mt-3 me-0 cards">
+                    <a [routerLink]="['/client/projectDetails', project.id]" class="text-decoration-none text-white">
+                        <div class="card position-relative">
+                    
+                            <img [src]="baseimageUrl+ project.clientImage" height="300px" class="card-img-top"
+                                alt="{{ project.clientName }}">
+                            <div class="pb-0 card-body">
+                                <h6 class="mb-1 fw-bold card-title">{{ project.clientName}}</h6>
+                                <h5 class="mb-1 card-text">{{ project.projectDescription| shorten: 20}}</h5>
+                                <p>{{ project.createdAt | date}}</p>
+                                <div class="mt-4 row">
+                             
+
+                                    <div class="col text-end">
+                                        @switch (project.projectStatus) {
+                                            @case (0) { <p class="mt-0 mb-0">In Progress </p> }
+                                        @case (1) { <p class="mt-0 mb-0">Paused</p> }
+                                        @case (2) { <p class="mt-0 mb-0">Completed </p> }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                }
+                @empty {
+
+                <div class="text-center py-5 w-100">
+                    <p class="text-muted fs-5">No data available at the moment.</p>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

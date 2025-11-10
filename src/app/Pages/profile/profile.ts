@@ -3,13 +3,13 @@ import { environment } from '../../../environments/environment';
 import { Employees } from '../../Core/service/employees';
 import { ActivatedRoute } from '@angular/router';
 import { IEmployee } from '../../Core/Interface/iemployee';
-import { DatePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 import { FeedbackProfile } from '../projects/feedback-profile/feedback-profile';
 import { ProjectsProfile } from '../projects/projects-profile/projects-profile';
 
 @Component({
   selector: 'app-profile',
-  imports: [ProjectsProfile, FeedbackProfile , DatePipe],
+  imports: [ProjectsProfile, FeedbackProfile , DatePipe , UpperCasePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

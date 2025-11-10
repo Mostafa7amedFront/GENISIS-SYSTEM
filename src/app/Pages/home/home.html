@@ -13,20 +13,20 @@
                     <h4>Hello, Youssef</h4>
                     <div
                         class="project-stats d-flex flex-wrap justify-content-center align-items-center rounded blue p-3">
-                
-                         <div class="p-0 text-center stat-card m-2">
+
+                        <div class="p-0 text-center stat-card m-2">
                             <p class="mb-0">Rising Talent</p>
                             <p class="mb-0 fs-3">{{getProjectCounts().risingTalent| leadingZero}}</p>
                         </div>
-                              <div class="p-0 text-center stat-card m-2">
+                        <div class="p-0 text-center stat-card m-2">
                             <p class="mb-0">Design Star </p>
                             <p class="mb-0 fs-3">{{getProjectCounts().designStar| leadingZero}}</p>
                         </div>
-                              <div class="p-0 text-center stat-card m-2">
+                        <div class="p-0 text-center stat-card m-2">
                             <p class="mb-0">Top Tier </p>
                             <p class="mb-0 fs-3">{{getProjectCounts().topTier| leadingZero}}</p>
                         </div>
-                              <div class="p-0 text-center stat-card m-2">
+                        <div class="p-0 text-center stat-card m-2">
                             <p class="mb-0">The Maestro </p>
                             <p class="mb-0 fs-3">{{getProjectCounts().maestro| leadingZero}}</p>
                         </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="mt-0 row g-lg-4">
-            <div class="card-box row">
+            <div class=" ">
                 @if (isLoading()) {
                 <div class="text-center py-5 w-100">
                     <div class="spinner-border text-info" role="status"></div>
@@ -84,49 +84,52 @@
                 }
 
                 @else {
-                @for (card of cards(); track $index) {
-                <div class="me-0 mt-3 cards">
-                    <a [routerLink]="['/profile', card.id]" class="text-decoration-none text-white w-25">
-                        <div class="card position-relative">
-                            <div class="tag position-absolute">
-                                @switch (card.employeeBadge) {
-                                @case (0) { <img src="assets/employeeBadge/Subtract1.svg" alt=""> }
-                                @case (1) { <img src="assets/employeeBadge/Subtract2.svg" alt=""> }
-                                @case (2) { <img src="assets/employeeBadge/Subtract3.svg" alt=""> }
-                                @case (3) { <img src="assets/employeeBadge/Subtract4.svg" alt=""> }
-                                }
-                            </div>
+                <div class="card-box row ">
 
-                            <div class="cardOptions">
-                                <div class="w-100 p-2 d-flex justify-content-between">
-                                    <i class="fa-solid fa-trash" (click)="onDelete(card, $event)"></i>
-                                    <i class="fa-solid fa-pen-to-square" (click)="onEdit(card, $event)"></i>
+                    @for (card of cards(); track $index) {
+                    <div class="me-0 mt-3 3 cards">
+                        <a [routerLink]="['/profile', card.id]" class="text-decoration-none text-white w-25">
+                            <div class="card position-relative">
+                                <div class="tag position-absolute">
+                                    @switch (card.employeeBadge) {
+                                    @case (0) { <img src="assets/employeeBadge/Subtract1.svg" alt=""> }
+                                    @case (1) { <img src="assets/employeeBadge/Subtract2.svg" alt=""> }
+                                    @case (2) { <img src="assets/employeeBadge/Subtract3.svg" alt=""> }
+                                    @case (3) { <img src="assets/employeeBadge/Subtract4.svg" alt=""> }
+                                    }
                                 </div>
-                            </div>
 
-                            <img [src]="baseimageUrl + card.imageUrl" class="card-img-top" alt="" height="300px">
-                            <div class="pb-0 card-body">
-                                <h6 class="mb-1 fw-bold card-title">{{ card.name }}</h6>
-                                <p class="mb-1 card-text">{{ card.jobTitle }}</p>
-
-                                <div class="mt-4 row">
-                                    <div class="col">
-                                        @switch (card.employeeBadge) {
-                                        @case (0) { <p class="mt-2 mb-2">Rising Talent</p> }
-                                        @case (1) { <p class="mt-2 mb-2">Design Star</p> }
-                                        @case (2) { <p class="mt-2 mb-2">Top Tier</p> }
-                                        @case (3) { <p class="mt-2 mb-2">The Maestro</p> }
-                                        }
-                                    </div>
-                                    <div class="col text-end">
-                                        <h4>80%</h4>
+                                <div class="cardOptions">
+                                    <div class="w-100 p-2 d-flex justify-content-between">
+                                        <i class="fa-solid fa-trash" (click)="onDelete(card, $event)"></i>
+                                        <i class="fa-solid fa-pen-to-square" (click)="onEdit(card, $event)"></i>
                                     </div>
                                 </div>
+
+                                <img [src]="baseimageUrl + card.imageUrl" class="card-img-top" alt="" height="300px">
+                                <div class="pb-0 card-body">
+                                    <h6 class="mb-1 fw-bold card-title">{{ card.name }}</h6>
+                                    <p class="mb-1 card-text">{{ card.jobTitle }}</p>
+
+                                    <div class="mt-4 row">
+                                        <div class="col">
+                                            @switch (card.employeeBadge) {
+                                            @case (0) { <p class="mt-2 mb-2">Rising Talent</p> }
+                                            @case (1) { <p class="mt-2 mb-2">Design Star</p> }
+                                            @case (2) { <p class="mt-2 mb-2">Top Tier</p> }
+                                            @case (3) { <p class="mt-2 mb-2">The Maestro</p> }
+                                            }
+                                        </div>
+                                        <div class="col text-end">
+                                            <h4>80%</h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                    }
                 </div>
-                }
                 }
             </div>
 

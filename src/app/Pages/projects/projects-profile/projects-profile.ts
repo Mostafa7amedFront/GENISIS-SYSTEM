@@ -27,13 +27,13 @@ export class ProjectsProfile {
 
   @Input() tpyeOfProject: boolean = true
   ngOnInit(): void {
-    const idParam = this._route.snapshot.paramMap.get('id');
+   const idParam = this._route.snapshot.paramMap.get('id');
+  console.log('Route ID:', idParam); // 👈 شوف بتطلع إيه
+  this.employeeId = idParam;
+  if (this.employeeId) {
+    this.loadProject(this.employeeId);
+  }
 
-    this.employeeId = idParam;
-
-    console.log("project " + this.employeeId)
-
-    this.loadProject()
   }
 
   
@@ -66,23 +66,28 @@ getProjectCounts() {
   const paused = this.projects().filter(p => p.projectStatus === 1).length;
   return { completed, inProgress, paused };
 }
-  loadProject() {
-
-    if (this.tpyeOfProject) {
-      this._project.getProjectEmployee(this.employeeId).subscribe({
-        next: res => {
-          this.projects.set(res.value)
-        }
-      })
-    }
-    else{
-         this._project.getProjectClient(this.employeeId).subscribe({
-        next: res => {
-          this.projects.set(res.value)
-        }
-      })
-    }
+loadProject(Id: string) {
+  if (this.tpyeOfProject) {
+    this._project.getProjectEmployee({
+      pageNumber: 1,
+      pageSize: 50,
+      employeeId: Id 
+    }).subscribe({
+      next: res => {
+        this.projects.set(res.value);
+      }
+    });
+  } else {
+    this._project.getProjectClient({
+      pageNumber: 1,
+      pageSize: 50,
+      clientId: Id 
+    }).subscribe({
+      next: res => {
+        this.projects.set(res.value);
+      }
+    });
   }
-
+}
 
 }

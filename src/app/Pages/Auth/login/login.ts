@@ -30,6 +30,8 @@ export class Login {
         next: (res) => {
           this.aleart.toast('Logged in successfully', 'success');
           this.loginService.saveToken(res.value.token, res.value.refreshToken , res.value.username , res.value.id );
+                localStorage.setItem('user_type', res.value.role || ''); 
+
           this._route.navigate(['/home']);
           console.log(this.onCheckUser())
         },

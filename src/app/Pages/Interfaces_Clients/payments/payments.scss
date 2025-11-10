@@ -1,0 +1,118 @@
+     .meeting-container {
+         display: flex;
+         background: #171818;
+         border-radius: 10px;
+         padding: 20px;
+         margin: 40px auto;
+         gap: 20px;
+     }
+
+     /* Time slots */
+     .time-slots {
+         flex: 1;
+     }
+
+     .border-right {
+         border-right: 1px solid #ffffff40;
+     }
+
+     .time-slots h6 {
+         font-size: 12px;
+         margin-bottom: 20px;
+     }
+
+     .slot {
+         background: #2D2D2D;
+         padding: 8px;
+         margin-bottom: 8px;
+         border-radius: 6px;
+         cursor: pointer;
+         transition: all 0.3s;
+     }
+
+     .slot.active {
+         background: #123535;
+         border: 1px solid #ffffff7c;
+     }
+.slot:hover {
+         background: #123535;
+}
+     /* Calendar */
+     .calendar {
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+     }
+
+     .calendar-header {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-bottom: 10px;
+     }
+
+     .calendar-header h4 {
+         margin: 0;
+         font-weight: normal;
+     }
+
+     .calendar-header button {
+         background: none;
+         border: none;
+         color: white;
+         font-size: 20px;
+         cursor: pointer;
+     }
+
+     .day-names,
+     .days-grid {
+         display: grid;
+         grid-template-columns: repeat(7, 1fr);
+         text-align: center;
+     }
+
+     .day-names div {
+         font-weight: bold;
+         padding: 5px 0;
+     }
+
+     .days-grid div {
+         padding: 10px 0;
+         cursor: pointer;
+         position: relative;
+         border-radius: 4px;
+     }
+
+     .days-grid div:hover::after,
+     .days-grid div.active::after {
+         content: "";
+         position: absolute;
+         bottom: 2px;
+         left: 25%;
+         width: 50%;
+         height: 2px;
+         background: #00BEC5;
+     }
+
+     .book-btn {
+         margin-top: 15px;
+         background: #00BEC5;
+         border: none;
+         border-radius: 5px;
+         padding: 10px;
+         color: white;
+         font-weight: bold;
+         cursor: pointer;
+     }
+
+@media (max-width: 1200px) {
+        .row{
+            flex-direction: column !important;
+        }
+     }
+
+     @media (max-width: 500px) {
+        .payments button{
+            flex-direction: column !important;
+        }
+     }

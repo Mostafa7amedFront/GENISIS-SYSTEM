@@ -1,0 +1,15 @@
+<div
+  class="app-wrapper"
+  style="
+    background-image: url('assets/img/bg.svg');
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+  "
+>
+  <app-sidebar-cliens (toggleSidebar)="onToggleSidebar($event)"></app-sidebar-cliens>
+
+  <div class="main-content my-5" [class.sidebar-closed]="isSidebarClosed">
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </div>
+</div>

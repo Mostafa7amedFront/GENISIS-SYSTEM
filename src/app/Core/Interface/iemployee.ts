@@ -9,4 +9,11 @@ export interface IEmployee {
     createdAt: string
 
   userName: string
+      feedback :IFeedback
+
+}
+export interface IFeedback {
+  feedback: string;
+  rate: number;
+  createdAt: Date;
 }

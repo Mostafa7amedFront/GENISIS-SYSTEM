@@ -1,0 +1,149 @@
+<div class="project-detail-page">
+  <div class="px-md-0 mx-3">
+    <h1 class="mt-5 text-white text-end big">PROJECT DETAILS</h1>
+    <div class="text-white project rounded-3 p-md-5 p-4">
+      <div class="py-4 pt-0 mx-0 row project-card">
+        <div class="col-xl-8 col-lg-9 text-md-start text-center">
+          <div class="row">
+            <h5 class="fw-bold mb-3 ps-0">SOCIAL MEDIA POSTS</h5>
+            <div class="me-0 pe-0 col-lg-2 ps-0 text-lg-start text-center">
+              <img
+                [src]="baseimageUrl + aboutproject()?.clientImage"
+                class="rounded-2"
+                alt=""
+                width="114"
+                height="114"
+              />
+            </div>
+            <div class="col ps-lg-3 pt-xl-2 px-0">
+              <h6 class="mb-0 mt-lg-0 mt-3 text-lg-start text-center">
+                {{ aboutproject()?.clientName }}
+              </h6>
+              <p class="mb-2 low text-lg-start text-center">{{ aboutproject()?.projectTitle }}</p>
+              <h6 class="mb-1 text-start">Project Description</h6>
+              <p
+                class="mb-0 low lh-1 mb-2 px-lg-0 mx-lg-0 text-start"
+                style="white-space: pre-line"
+              >
+                The {{ aboutproject()?.projectDescription }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-3 text-lg-end px-0">
+          <p class="small-2 mb-1 me-2">ASSIGENED TO</p>
+          <div class="d-flex flex-lg-row-reverse gap-2">
+            @for (employee of aboutproject()?.employees; track employee.id) {
+            <div class="">
+              <img
+                [src]="baseimageUrl + employee.imageUrl"
+                class="rounded-2"
+                alt=""
+                width="63.15593719482422"
+                height="63"
+              />
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+      <h6 class="pt-4">PORJECT DESCRIPTION</h6>
+      <p class="low small mb-1 text-start" style="white-space: pre-line">
+        “ {{ aboutproject()?.projectDescription }} “
+      </p>
+      <h6 class="pt-4">ATTACHMENTS</h6>
+      <div class="d-flex flex-wrap  gap-2">
+        @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
+          @if (isImage(file.fileUrl)) {
+          <div class="d-flex align-items-center gap-2 p-2 rounded">
+            <img
+              [src]="getFileUrl(file.fileUrl)"
+              alt="attachment"
+              class="rounded"
+              style="width: 120px; height: 120px; object-fit: cover"
+            />
+          </div>
+          } 
+        }
+      </div>
+            <div class="d-flex mt-3 flex-wrap gap-2">
+        @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
+         @if (isPdf(file.fileUrl)) {
+          <a
+            [href]="getFileUrl(file.fileUrl)"
+            target="_blank"
+            [download]="getFileName(file.fileUrl)"
+            class="file-card d-flex align-items-center gap-2"
+          >
+            <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
+            <div class="file-info text-lg-start">
+              <div class="file-name">File PDf {{ i }}</div>
+              <div class="file-size">1MB</div>
+            </div>
+          </a>
+          
+          } 
+        }
+      </div>
+      <p class="small-2 mt-4 pt-2">Add Attachment</p>
+      <!-- drag -->
+      <div class="drag-area text-center rounded-3 p-4">
+        <div class="dataShow d-flex align-items-center gap-2">
+          @for (file of files; track file.name) {
+          <div class="file-card d-flex align-items-center gap-2">
+            <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
+            <div class="file-info text-lg-start">
+              <div class="file-name">{{ file.name | shorten }}</div>
+              <div class="file-size">{{ file.size }}</div>
+            </div>
+          </div>
+          }
+
+          <div class="iconDataAdd" (click)="onUploadClick()">
+            <img src="assets/img/new-document 2.png" alt="" />
+          </div>
+        </div>
+
+        <button
+          (click)="uploadFiles()"
+          id="uploadButton"
+          class="border-0 rounded-3 w-100 text-white small pt-2 mt-4"
+          style="background-color: #0b6b6e"
+        >
+          UPLOAD
+        </button>
+
+        <input
+          type="file"
+          id="fileInput"
+          hidden
+          #fileInput
+          (change)="onFileSelected($event)"
+          multiple
+        />
+      </div>
+
+      <!-- drag -->
+      <div class="row mx-0">
+        <div class="col-6 text-start mt-5 pt-md-3 pt-4 ps-0">
+          <button
+            class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-4 end-but"
+            style="background-color: #0b6b6e"
+          >
+            <p class="mb-0 mx-auto">COMPLETED</p>
+          </button>
+        </div>
+        <div class="col-6 text-end mt-5 pt-md-3 pt-4 pe-0">
+          <p class="mb-0 small">14, OCT 24</p>
+          <p class="small mb-0">Brand Identity</p>
+          <img class="image" src="assets/img/4blue-star.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-todolist/>
+<app-chat/>
+<app-feedback />

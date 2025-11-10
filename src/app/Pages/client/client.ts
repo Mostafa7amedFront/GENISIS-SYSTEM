@@ -72,7 +72,7 @@ getProjectCounts() {
       next: (response) => {
         this.isLoading.set(false);
 
-        if (response.success && response.value.length > 0) {
+        if (response.success) {
           this.projects.set(response.value);
         } else {
           this.projects.set([]);

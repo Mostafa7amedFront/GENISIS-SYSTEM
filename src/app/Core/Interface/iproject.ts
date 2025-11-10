@@ -1,5 +1,5 @@
 export interface IProject {
-    id:                 string;
+    id:                 any;
     projectTitle:       string;
     projectDescription: string;
     clientName:         string;
@@ -27,4 +27,10 @@ export interface Note {
   isCompleted: boolean
   isFav: boolean
   noteContent: string
+}
+export interface NoteReq {
+  id: string;
+  noteContent: string;
+  isFav: boolean;
+  isCompleted: boolean;
 }

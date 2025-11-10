@@ -9,24 +9,16 @@ import { IClients } from '../Interface/iclients';
   providedIn: 'root'
 })
 export class Clients {
-    private  API_URL = `${environment.apiUrl}Clients`; 
-    private _httpClient = inject(HttpClient);
-  
-
-
-getAll(data: any): Observable<IResponseOf<IClients[]>> {
-  const paramsObject: any = {
-    pageNumber: data.pageNumber ?? 1,
-    pageSize: data.pageSize ?? 50,
-    ProjectStatus: data.ProjectStatus
-  };
+  private API_URL = `${environment.apiUrl}Clients`;
+  private _httpClient = inject(HttpClient);
 
 
 
-  const params = new HttpParams({ fromObject: paramsObject });
+  getAll(data: any): Observable<IResponseOf<IClients[]>> {
 
-  return this._httpClient.post<IResponseOf<IClients[]>>(`${this.API_URL}/GetAll`,data);
-}
+
+    return this._httpClient.post<IResponseOf<IClients[]>>(`${this.API_URL}/GetAll`, data);
+  }
   getById(id: number): Observable<IResponseOf<IClients>> {
     return this._httpClient.get<IResponseOf<IClients>>(`${this.API_URL}/${id}`);
   }
@@ -35,9 +27,9 @@ getAll(data: any): Observable<IResponseOf<IClients[]>> {
     return this._httpClient.post(this.API_URL, employee);
   }
 
-update(id: number, employee: FormData): Observable<any> {
-  return this._httpClient.put(`${this.API_URL}/${id}`, employee);
-}
+  update(id: number, employee: FormData): Observable<any> {
+    return this._httpClient.put(`${this.API_URL}/${id}`, employee);
+  }
   delete(id: number): Observable<any> {
     return this._httpClient.delete(`${this.API_URL}/${id}`);
   }
