@@ -52,13 +52,30 @@ files: File[] = [];
   rightSelected: number[] = [];
 selectedDate: Date | null = null;
   options = [ 'IN PROGRESS', 'PAUSED', 'COMPLETED'];
+    Duration = [ 'Shor Term', 'Long Term'];
+    Type = [ 'Simple', 'Social Media' , 'Media Buying'];
+
 clientTitleMap: { [key: string]: number } = {
   'IN PROGRESS': 0,
   'PAUSED': 1,
   'COMPLETED': 2
 }; 
+
+
+durationMap: { [key: string]: number } = {
+  'Short Term': 0,
+  'Long Term': 1
+};
+
+typeMap: { [key: string]: number } = {
+  'Simple': 0,
+  'Social Media': 1,
+  'Media Buying': 2
+};
  selectedClientTitle: string | null = null;
-  //  Lifecycle Hook
+ selectedStatus: string | null = null;
+selectedDuration: string | null = null;
+selectedType: string | null = null;
   ngOnInit(): void {
     // Fetch clients
     this._client.getAll({
@@ -69,24 +86,17 @@ clientTitleMap: { [key: string]: number } = {
       next: (res) => this.Clients.set(res.value)
     });
 
-    // Fetch employees
     this._employee.getAll({}).subscribe({
       next: (res) => this.Employee.set(res.value)
     });
 
-    // Render calendar
     this.renderCalendar(this.currentDate);
   }
-
-  //  File Upload Handlers
-
-  /** Opens the hidden file input when upload button is clicked */
   onUploadClick() {
     this.fileInput.nativeElement.click();
     console.log(this.files)
   }
 
-  /** Handles file selection and stores file info */
 onFileSelected(event: Event) {
   const input = event.target as HTMLInputElement;
 
@@ -187,13 +197,29 @@ selectDay(day: { number: string; faded: boolean; today: boolean }) {
   selectClientTitle(title: string) {
     this.selectedClientTitle = this.selectedClientTitle === title ? null : title;
   }
+ selectDuration(dur: string) {
+  this.selectedDuration = this.selectedDuration === dur ? null : dur;
+}
+
+selectType(type: string) {
+  this.selectedType = this.selectedType === type ? null : type;
+}
 addProject() {
-  if (!this.selectedClientTitle || !this.leftSelected || this.rightSelected.length === 0 || !this.selectedDate) {
-      this._alert.toast('Please fill all required fields and upload an image.' , 'warning');
+  if (
+    !this.selectedClientTitle ||
+    !this.selectedDuration ||
+    !this.selectedType ||
+    !this.leftSelected ||
+    this.rightSelected.length === 0 ||
+    !this.selectedDate
+  ) {
+    this._alert.toast('Please fill all required fields and upload an image.', 'warning');
     return;
   }
 
-  const projectStatus = this.clientTitleMap[this.selectedClientTitle];
+const projectStatus = this.clientTitleMap[this.selectedClientTitle!] ?? 0;
+const projectDuration = this.durationMap[this.selectedDuration!] ?? 0;
+const projectType = this.typeMap[this.selectedType!] ?? 0;
 
   const deadline = this.selectedDate.toDateString() + ' ' + this.selectedDate.toLocaleTimeString();
 
@@ -201,6 +227,8 @@ addProject() {
   formData.append('ProjectTitle', this.titleInput.nativeElement.value);
   formData.append('ProjectDescription', this.descInput.nativeElement.value);
   formData.append('ProjectStatus', projectStatus.toString());
+  formData.append('projectDuration', projectDuration.toString());
+  formData.append('ProjectType', projectType.toString());
   formData.append('DeadLine', deadline);
   formData.append('ClientId', this.leftSelected.toString());
 
@@ -211,17 +239,15 @@ addProject() {
   this.files.forEach(file => {
     formData.append('AttachmentUrl', file, file.name);
   });
-  this._project.add(formData).subscribe({
-    next: (res) => {
-                  this._alert.toast('Project added successfully!' , 'success');
-        this._location.back()
-                  
-    }, 
-    error: (err) => {
-                  this._alert.toast('Error adding project' , 'error');
 
+this._project.add(formData).subscribe({
+    next: () => {
+      this._alert.toast('Project added successfully!', 'success');
+      this._location.back();
+    },
+    error: () => {
+      this._alert.toast('Error adding project', 'error');
     }
-  });
-}
+  });}
 
 }

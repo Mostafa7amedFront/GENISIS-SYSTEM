@@ -49,11 +49,15 @@ export const adminroutes: Routes = [
           import('../Pages/client/components/editclients/editclients').then(m => m.Editclients),
       },
       {
-        path: 'signup',
+        path: 'addpayment',
         loadComponent: () =>
-          import('../Pages/Auth/signup/signup').then(m => m.Signup),
+          import('../Pages/add-payments/add-payments').then(m => m.AddPayments),
       },
-
+     {
+        path: 'payment',
+        loadComponent: () =>
+          import('../Pages/payments-admin/payments-admin').then(m => m.PaymentsAdmin),
+      },
       {
         path: 'createaccount',
         loadComponent: () =>
@@ -71,9 +75,9 @@ export const adminroutes: Routes = [
       },
 
       {
-        path: 'feedback',
+        path: 'feedback/:id',
         loadComponent: () =>
-          import('../Pages/Interfaces_Clients/feed-back-page/feed-back-page').then(m => m.FeedBackPage),
+          import('../Pages/add-feedback-employee/add-feedback-employee').then(m => m.AddFeedbackEmployee),
       },
       {
         path: 'client/:id',

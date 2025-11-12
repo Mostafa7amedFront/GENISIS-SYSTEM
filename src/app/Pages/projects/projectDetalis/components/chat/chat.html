@@ -58,7 +58,19 @@
             </div>
         </div>
     </div>
-
+@if (selectedFiles.length > 0) {
+  <div class="dataShow  d-flex align-items-center gap-2 mt-2 px-3">
+    @for (file of selectedFiles; track file.name) {
+      <div class="file-card d-flex align-items-center gap-2">
+        <img class="attach-img" src="assets/img/new-document 2.svg" alt="file" />
+        <div class="file-info text-lg-start">
+          <div class="file-name">{{ file.name | shorten : 10 }}</div>
+          <div class="file-size">{{ (file.size / 1024).toFixed(1) }} KB</div>
+        </div>
+      </div>
+    }
+  </div>
+}
     <!-- Input -->
  <div class="message-input">
     

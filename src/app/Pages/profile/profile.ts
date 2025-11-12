@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Employees } from '../../Core/service/employees';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IEmployee } from '../../Core/Interface/iemployee';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { FeedbackProfile } from '../projects/feedback-profile/feedback-profile';
@@ -9,7 +9,7 @@ import { ProjectsProfile } from '../projects/projects-profile/projects-profile';
 
 @Component({
   selector: 'app-profile',
-  imports: [ProjectsProfile, FeedbackProfile , DatePipe , UpperCasePipe],
+  imports: [ProjectsProfile, FeedbackProfile , DatePipe , UpperCasePipe , RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

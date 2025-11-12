@@ -24,8 +24,9 @@
         </div>
         <div class="mx-0 row ">
             <div class="px-0 col-lg-3 ">
-                <img class=" imageCover" width="210px" height="210px" [src]="baseimageUrl + aboutEmployees()?.imageUrl" alt="">
-                <p class="mt-2 mb-0 small">{{aboutEmployees()?.createdAt  | date:'mediumDate' }}</p>
+                <img class=" imageCover" width="210px" height="210px" [src]="baseimageUrl + aboutEmployees()?.imageUrl"
+                    alt="">
+                <p class="mt-2 mb-0 small">{{aboutEmployees()?.createdAt | date:'mediumDate' }}</p>
                 <p class="fw-bold">Hello, {{aboutEmployees()?.name }}</p>
             </div>
             <div class="px-0 col-lg-9 col">
@@ -51,23 +52,27 @@
                         </div>
                     </div>
                 </div>
-       <div class="d-flex justify-content-between align-items-center">
-                             @if (aboutEmployees()?.feedback) {
-  <div class="feedback-item">
-    <p class="mt-2 mb-0">
-      {{ aboutEmployees()?.feedback?.createdAt| date: 'MMMM' | uppercase }} FEEDBACK
-    </p>
-    <p class="text-white-50 small">
-      {{ aboutEmployees()?.feedback?.feedback }}
-    </p>
+                <div class="d-flex justify-content-between align-items-center my-2 flex-wrap">
+                    @if (aboutEmployees()?.feedback) {
+                    <div class="feedback-item">
+                        <p class="mt-2 mb-0">
+                            {{ aboutEmployees()?.feedback?.createdAt| date: 'MMMM' | uppercase }} FEEDBACK
+                        </p>
+                        <p class="text-white-50 small">
+                            {{ aboutEmployees()?.feedback?.feedback }}
+                        </p>
 
-  </div>
-}
-@else {
-    <p class="text-muted mt-2 fst-italic">No feedback available</p>
+                    </div>
+                    }
+                    @else {
+                    <p class="text-muted mt-2 fst-italic">No feedback available</p>
 
-}
-       </div>
+                    }
+                    <div class="addFeedback">
+                                <h6 class="logout" style="color: #00bec5; cursor: pointer;" [routerLink]="['/feedback' ,aboutEmployees()?.id]">Add feedback <i
+                class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h6>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="mx-0 row gap-0">

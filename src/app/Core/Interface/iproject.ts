@@ -7,6 +7,7 @@ export interface IProject {
     projectStatus:      number;
     deadLine:           Date;
     createdAt:          Date;
+    projectType:number;
     employees:          Employee[];
     notes:              Note[];
     attachments:        Attachment[];

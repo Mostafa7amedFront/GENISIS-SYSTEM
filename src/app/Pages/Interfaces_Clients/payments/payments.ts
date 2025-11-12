@@ -13,7 +13,7 @@ import { IPayments } from '../../../Core/Interface/ipayments';
 export class Payments {
  displayedMonths: { label: string; date: Date }[] = [];
   nextPaymentDate: string = '';
-  userId = 'aaf8fddf-305b-4218-b04e-9c0f9deb64c0';
+userId = localStorage.getItem('Id_Clients') || '';
   selectedIndex = 4;
   payments = signal<IPayments[]>([]);
 
@@ -21,6 +21,8 @@ export class Payments {
 
   ngOnInit() {
     const currentDate = new Date();
+      this.userId = localStorage.getItem('Id_Clients') || '';
+
     this.generateMonths(currentDate);
     this.loadPayments(this.displayedMonths[this.selectedIndex].date);
   }

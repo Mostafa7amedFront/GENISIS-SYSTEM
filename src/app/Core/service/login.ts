@@ -12,32 +12,42 @@ import { IResponseOf } from '../../Shared/Interface/iresonse';
 })
 export class LoginService {
   private readonly TOKEN_KEY = 'auth_token';
-  private readonly refreshToken = 'refresh_token';
-
-  private readonly API_URL = `${environment.apiUrl}auth`;
+  private readonly REFRESH_KEY = 'refresh_token';
+  private readonly API_URL = `${environment.apiUrl}Auth`; // ✅ تأكد من الـ A كابيتال زي السيرفر
   private router = inject(Router);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  // تسجيل الدخول
   login(credentials: { email: string; password: string }): Observable<IResponseOf<ILogin>> {
     return this.http.post<IResponseOf<ILogin>>(`${this.API_URL}`, credentials);
   }
 
-  saveToken(token: string, refresh: string, username: string, id: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
-    localStorage.setItem('user_name', username);
-    localStorage.setItem('user_id', id);
-
-    localStorage.setItem(this.refreshToken, refresh);
-
+  // ✅ دالة لتجديد التوكن
+  refreshToken(): Observable<IResponseOf<ILogin>> {
+    const token = this.getToken();
+    const refresh = this.getRefreshToken();
+    return this.http.post<IResponseOf<ILogin>>(`${this.API_URL}/refresh`, { token, refreshToken: refresh });
   }
 
+  // حفظ التوكنات
+  saveToken(token: string, refresh: string, username: string, id: string): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
+    localStorage.setItem(this.REFRESH_KEY, refresh);
+    localStorage.setItem('user_name', username);
+    localStorage.setItem('user_id', id);
+  }
+
+  // getters
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
+
   getRefreshToken(): string | null {
-    return localStorage.getItem(this.refreshToken);
+    return localStorage.getItem(this.REFRESH_KEY);
   }
+
+  // فك التوكن
   decodeToken(): IDecode | null {
     const token = this.getToken();
     if (!token) return null;
@@ -49,23 +59,22 @@ export class LoginService {
     }
   }
 
+  // بيانات المستخدم
   getUser(): any {
-    const decoded = this.decodeToken();
-    return decoded ? decoded : null;
+    return this.decodeToken();
   }
 
+  // التحقق من تسجيل الدخول
   isLoggedIn(): boolean {
     const decoded = this.decodeToken();
     if (!decoded) return false;
-
     const expiry = decoded.exp * 1000;
     return Date.now() < expiry;
   }
 
+  // تسجيل الخروج
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.refreshToken);
-
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }

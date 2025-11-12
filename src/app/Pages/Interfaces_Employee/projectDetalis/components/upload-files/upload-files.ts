@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef, inject, signal, computed } from '@angular/core';
+import { Component, ViewChild, ElementRef, inject, signal, computed, ChangeDetectorRef } from '@angular/core';
 import { ShortenPipe } from '../../../../../Shared/pipes/shorten-pipe';
 import { environment } from '../../../../../../environments/environment';
 import { ProjectService } from '../../../../../Core/service/project.service';
@@ -9,6 +9,7 @@ import { Todolist } from "../todolist/todolist";
 import { Feedback } from "../feedback/feedback";
 import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
 import { Chat } from "../chat/chat";
+import { SweetAlert } from '../../../../../Core/service/sweet-alert';
 
 @Component({
   selector: 'app-upload-files',
@@ -20,10 +21,10 @@ export class UploadFiles {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   files: File[] = [];
   baseimageUrl = `${environment.baseimageUrl}`;
+  private _alert = inject(SweetAlert);
+  constructor(private cdr: ChangeDetectorRef) {}
 
   private _project = inject(ProjectService);
-    private _alart = inject(ProjectService);
-
   private _route = inject(ActivatedRoute);
   projectId!: any;
   aboutproject = signal<IProject | null>(null);
@@ -44,25 +45,37 @@ export class UploadFiles {
     this.fileInput.nativeElement.click();
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.files = Array.from(input.files);
-    }
+onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const newFiles = Array.from(input.files);
+    this.files = [...this.files, ...newFiles]; 
+  }
+  this.fileInput.nativeElement.value = '';
+}
+
+uploadFiles() {
+  if (this.files.length === 0) {
+    this._alert.toast('Please select files.', 'warning');
+    return;
   }
 
-  uploadFiles() {
-    if (this.files.length === 0) {
-      alert('Please select files.');
-      return;
+  this._project.uploadMultipleRequests(this.projectId, this.files).subscribe({
+    next: (res) => {
+      console.log('✅ Uploaded successfully:', res);
+      this._alert.toast('Files uploaded successfully.', 'success');
+
+this.files = [];
+this.files = [...this.files];
+      this.fileInput.nativeElement.value = '';
+         this.cdr.detectChanges();
+    },
+    error: (err) => {
+      console.error('❌ Upload failed:', err);
+      this._alert.toast('Upload failed. Please try again.', 'error');
     }
-
-    this._project.uploadMultipleRequests(this.projectId, this.files).subscribe({
-      next: (res) => console.log('✅ Uploaded successfully:', res),
-      error: (err) => console.error('❌ Upload failed:', err)
-    });
-  }
-
+  });
+}
 
 
 
@@ -93,6 +106,7 @@ export class UploadFiles {
   getFileName(fileUrl: string): string {
     return fileUrl.split('/').pop() || 'unknown';
   }
+
 
 }
 

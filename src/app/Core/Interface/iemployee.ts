@@ -17,3 +17,7 @@ export interface IFeedback {
   rate: number;
   createdAt: Date;
 }
+export interface AddFeedback {
+  feedback: string;
+  rate: number;
+}

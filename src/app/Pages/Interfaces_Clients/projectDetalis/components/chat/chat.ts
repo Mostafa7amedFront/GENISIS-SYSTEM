@@ -67,9 +67,15 @@ export class Chat {
     this.chatService.sendChatMessage(this.projectId, text, files);
   }
 
-  onFileSelected(event: any): void {
-    this.selectedFiles = Array.from(event.target.files);
+onFileSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const newFiles = Array.from(input.files);
+    this.selectedFiles = [...this.selectedFiles, ...newFiles]; // ✅ ضيف مش استبدل
   }
+
+  (event.target as HTMLInputElement).value = '';
+}
 
   handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter' && !event.shiftKey) {

@@ -227,7 +227,10 @@ input[type="number"] {
         min-height: 550px;
         max-height: 668px;
     }
-      .headerText{
+    .px{
+        padding: 0 30px;
+    }
+    .headerText{
     justify-content: flex-start !important;
     align-items: flex-start !important;
     flex-direction: column-reverse;
@@ -1991,5 +1994,28 @@ overflow-x: hidden;
     .logout{
         font-size: 20px;
     }
+}
+
+.dataShow {
+  width: 1200px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+@media (max-width: 768px) {
+  .dataShow {
+  width: 400px;
+  }
+}
+
+@media (max-width: 508px) {
+  .dataShow {
+  width: 300px;
+  }
+}
+
+@media (max-width:400px) {
+  .dataShow {
+  width: 200px;
+  }
 }
 /* End add project */

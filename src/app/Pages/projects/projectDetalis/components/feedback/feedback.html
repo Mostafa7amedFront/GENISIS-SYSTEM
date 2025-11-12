@@ -1,69 +1,64 @@
-<div class="project-detail-page">
-    <div class="px-md-0 px-3">
-    <h1 class="big text-end text-white mt-5 pt-5 mb-3">FEEDBACKS</h1>
-    <div class="container-feed p-lg-5 p-3  text-white rounded-3">
-        <div class="row feedback-box pe-2 ps-2">
-            <div class="p-md-2  py-md-3 mx-0 mb-2 p-2 mt-md-2 row rounded-3 feedback-card">
-                <div class="col-md-8 col-9">
-                    <div class="row ">
-                        <div class="me-xxl-0 me-lg-3 px-0 col-lg-2">
-                            <img src="assets/img/half-logo.svg" alt="">
-                        </div>
-                        <div class="col px-0 text">
-                            <h6 class="mt-0 mb-md-1 mb-0 mt-md-0 mt-2">ARBUN APP - BRAND IDENTITY</h6>
-                            <p class="mb-0 low lh-2 mb-md-2" style="white-space: pre-line;">“The design was great maybe
-                                the quality of the presentation could be much
-                                better, thank you so much”</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-3 text-end px-0 mt">
-                    <p class="small-2 mb-0">14, OCT 24</p>
-                    <p class="mb-md-1 mb-0 small">Brand Identity</p>
-                    <img class="img-low" src="assets/img/4blue-star.png" alt="">
-                </div>
-            </div>
-            <div class="p-md-2  py-md-3 mx-0 mb-2 p-2 mt-md-2 row rounded-3 feedback-card">
-                <div class="col-md-8 col-9">
-                    <div class="row ">
-                        <div class="me-xxl-0 me-lg-3 px-0 col-lg-2">
-                            <img src="assets/img/half-logo.svg" alt="">
-                        </div>
-                        <div class="col px-0 text">
-                            <h6 class="mt-0 mb-md-1 mb-0 mt-md-0 mt-2">ARBUN APP - BRAND IDENTITY</h6>
-                            <p class="mb-0 low lh-2 mb-md-2" style="white-space: pre-line;">“The design was great maybe
-                                the quality of the presentation could be much
-                                better, thank you so much”</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-3 text-end px-0 mt">
-                    <p class="small-2 mb-0">14, OCT 24</p>
-                    <p class="mb-md-1 mb-0 small">Brand Identity</p>
-                    <img class="img-low" src="assets/img/4blue-star.png" alt="">
-                </div>
-            </div>
-            <div class="p-md-2  py-md-3 mx-0 mb-2 p-2 mt-md-2 row rounded-3 feedback-card">
-                <div class="col-md-8 col-9">
-                    <div class="row ">
-                        <div class="me-xxl-0 me-lg-3 px-0 col-lg-2">
-                            <img src="assets/img/half-logo.svg" alt="">
-                        </div>
-                        <div class="col px-0 text">
-                            <h6 class="mt-0 mb-md-1 mb-0 mt-md-0 mt-2">ARBUN APP - BRAND IDENTITY</h6>
-                            <p class="mb-0 low lh-2 mb-md-2" style="white-space: pre-line;">“The design was great maybe
-                                the quality of the presentation could be much
-                                better, thank you so much”</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-3 text-end px-0 mt">
-                    <p class="small-2 mb-0">14, OCT 24</p>
-                    <p class="mb-md-1 mb-0 small">Brand Identity</p>
-                    <img class="img-low" src="assets/img/4blue-star.png" alt="">
-                </div>
-            </div>
+<div class="text-white feed-back px-md-0 px-3">
+    <div class=" " style="background-image: none;">
+    <div class="d-flex justify-content-between align-items-center my-5 headerText">
+
+                    <h1 class=" text-end px-0 ">FEEDBACKS</h1>
+ 
         </div>
+        <div class="p-lg-5 p-4 pb-5 rounded-3 g-4 row feedback-box mb-5 pe-lg-4">
+            <div class="col-1 p-0 mt-0">
+                <p class="mb-0">AVERAGE </p>
+                <h2 class="mb-0">FEEDBACK</h2>
+                <div class="d-flex align-items-center mt-0">
+                    <div class="stars">
+                        @for (s of [1, 2, 3, 4, 5]; track $index) {
+                        <button class="star-btn" [class.active]="s <= 1">
+                            <i class="fa fa-star"></i>
+                        </button>
+                        }
+                    </div>
+                </div>
+            </div>
+     
+            <div class="feed-boxfeed px-0">
+                
+                   @for (feedback of Feedbacks(); track  $index ; let i = $index) {
+                    <div class="p-3 py-3 mx-0 mt-4 row rounded-3 feedback-card">
+                    <div class="col-xl-8 col-9">
+                        <div class="row ">
+                            <div class="me-xxl-0 me-lg-3 px-0 col-lg-2 col-sm-1 me-4 me-lg-0">
+                                <img src="assets/img/half-logo.svg" alt="">
+                            </div>
+                            <div class="col-lg-9 col-sm-11 col ps-xl-0 ps-sm-4 ps-md-0 text px-0">
+                                <h6 class="mt-md-0 mt-2 mb-1">{{feedback.projectName}}</h6>
+                                <p class="mb-0 low lh-2 mb-2" style="white-space: pre-line;">“{{feedback.questionTow}}”</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-3 text-end px-0">
+                        <p class="small-2  mb-0">{{feedback.dateTime | date}}</p>
+                        <p class="mb-1 small">{{feedback.projectName}}</p>
+                        <div class="stars mt-2 justify-content-end">
+                            @for (s of [1, 2, 3, 4, 5]; track $index) {
+                            <button class="star-btn" [class.active]="s <= feedback.overAllRate">
+                                <i class="fa fa-star"></i>
+                            </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                     
+                   }
+                        @empty {
+                  <div class="py-5 d-flex justify-content-center align-items-center">
+                                            <h2 class="mb-0" style="max-height: 30px;">No data available at the moment .</h2>
+
+                  </div>
+                }
+            </div>
+            <h1 class="text-end pe-0 date">{{currentYear}}</h1>
+        </div>
+
+
     </div>
-</div>
 </div>

@@ -1,0 +1,91 @@
+<div class="third pt-5">
+  <div class="text-white p-5 mt-5" style="background-color: #171818; border-radius: 13px">
+    <div class="row">
+      <div class="col-5">
+        <div class="blue text-center p-2 rounded-3 pe-2" style="background-color: #0b6b6e; margin-left: -70px">
+          <h2 class="pe-4 me-5 mb-0">SOCIAL MEDIA</h2>
+        </div>
+      </div>
+      <div class="d-flex col-8 p-4 rounded-3 mt-5" style="background-color: #2d2d2d">
+        <div class="col-7 pe-3">
+          <div class="d-flex align-items-center">
+            <h3 class="mb-0">{{ posts[currentIndex()].title }}</h3>
+            <div class="box row py-1 px-4 ms-auto rounded-3" style="background-color: #616161">
+              Animated
+            </div>
+          </div>
+          <h5 class="text-white-50">SEP 12</h5>
+          <h6 class="mt-4 pt-3">Title :</h6>
+      <p>{{ posts[currentIndex()].description }}</p>
+          <h6 class="mt-4 pt-3">Caption :</h6>
+        <p style="text-align: justify">{{ posts[currentIndex()].caption }}</p>
+          <h6 class=" text-end mt-4 pt-3"> : وصف</h6>
+
+          <P class="text-end" style="text-align: justify">{{ posts[currentIndex()].captionArabic }}</P>
+        </div>
+        <div class="col-5 ps-4"><img class="w-100 rounded-3" src="assets/img/Rectangle.jpg" alt="" /></div>
+      </div>
+      <div class="d-flex ms-5 col p-4 rounded-3 mt-5" style="background-color: #2d2d2d">
+
+
+        <!-- month-picker.component.html -->
+        <div class="month-picker d-flex w-100 justify-content-between flex-column">
+          <div class="header m-0">
+            <span (click)="prevYear()">&#8592;</span>
+            <span>Page 1</span>
+            <span (click)="nextYear()">&#8594;</span>
+          </div>
+
+          <div class="grid post-card ">
+            <div 
+      *ngFor="let post of posts; let i = index"
+      (click)="selectPost(i)"
+      class="cardSelect"
+      [class.active]="i === currentIndex()"
+      style=" cursor: pointer; border-radius: 5px; "
+    >
+      <img [src]="post.image" class="w-100 h-100 object-fit-cover" />
+    </div>
+          </div>
+
+          <div class="footer m-0">
+            <span (click)="prevMonth()">&#8592;</span>
+            <span>{{ monthNames[currentMonth()] }}</span>
+            <span (click)="nextMonth()">&#8594;</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-5 pt-3">Project Progress</p>
+      <div class="loader rounded-3 p-3" style="background-color: #2d2d2d; color: white">
+        <div class="d-flex w-100 align-items-center">
+          <div>
+            <h1 id="percentText" class="mb-0" style="font-size: 70px">
+              <span id="percentValue" contenteditable="true" aria-label="Edit percentage">60</span>
+              <span class="text-white-50">%</span>
+            </h1>
+          </div>
+
+          <div class="ms-auto text-end">
+            <p class="mb-0">Collaborators</p>
+            <div class="d-flex">
+              <img class="me-1 rounded-3" src="img/EDITED 8 1.jpg" alt="" />
+              <img class="me-1 rounded-3" src="img/EDITED 8 1.jpg" alt="" />
+              <img class="me-1 rounded-3" src="img/EDITED 8 1.jpg" alt="" />
+              <img class="rounded-3" src="img/EDITED 8 1.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <!-- loader bar -->
+        <div class="bar-wrapper mt-3 rounded-3" style="height: 12px">
+          <!-- gradient glow (blurred) behind the fill -->
+          <div id="barGlow" class="bar-glow"></div>
+
+          <!-- actual fill -->
+          <div id="loaderBar" class="bar-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
