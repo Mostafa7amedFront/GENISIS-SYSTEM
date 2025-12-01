@@ -52,6 +52,8 @@ input[type="number"] {
 :root {
     --blue: #00BEC5;
     --dark: #171818;
+        --light-gray: #f0f0f0;
+
 }
 @media (max-width:768px){
     .big {
@@ -2019,3 +2021,64 @@ overflow-x: hidden;
   }
 }
 /* End add project */
+
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.nav-btn:disabled {
+    background-color: #2a3333ff;
+    
+    cursor: not-allowed;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background-color: #009aa0;
+}
+
+.pages {
+    display: flex;
+    gap: 5px;
+}
+
+.page {
+    background-color: #2a3333ff;
+     color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.page.active {
+    background-color: var(--blue);
+    color: white;
+    font-weight: bold;
+}
+
+.page:hover:not(.active) {
+    background-color: var(--blue);
+    color: white;
+}
+
+.date-separator:first-of-type::before {
+  display: none !important;
+}

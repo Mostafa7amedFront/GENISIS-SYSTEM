@@ -20,37 +20,40 @@
         class="rounded-2"
       />
     </div>
-    <div class="ms-xl-5 ms-md-4 ms-3">
+    <div class="ms-xl-5 ms-md-4 ms-3 w-100">
       <h5 class="mb-md-2 mb-1">ABOUT {{ aboutclient()?.name }}</h5>
       <p class="low small lh-1 mb-lg-4 pb--md-2" style="white-space: pre-line">
         The design was great maybe the {{ aboutclient()?.about }}
       </p>
       <h5 class="mb-2">SERVICES</h5>
 
-      <div class="service mb-2 d-flex align-items-center gap-3 w-50 flex-wrap">
+      <div class="service  d-flex align-items-center gap-3 w-50 flex-wrap">
         @for (service of aboutclient()?.services; track service.id) {
         <p class="low small mb-0">{{ service.name }}</p>
 
         }
+        @empty {
+        <p class="text-muted">No services available</p>
+        }
       </div>
-
-      <h5 class="my-3">LOCATION</h5>
+        <div class="row">
+    <div class="col text-start">
+      
+      <h5 class="my-2">LOCATION</h5>
       <p class="low small mb-0">{{ aboutclient()?.location }}</p>
     </div>
-  </div>
-  <div class="row">
-    <div class="col text-start mt-4">
-      <h3 class="fw-bold mb-0">{{ aboutclient()?.name }}</h3>
-      <p>{{ aboutclient()?.userName }}</p>
-    </div>
-    <div class="col text-end mt-4">
+    <div class="col text-end mt-2">
       <p class="low small mb-0">+996 432 2847 22</p>
-      <a href="" class="low small text-decoration-none text-white">
+      <a [href]="aboutclient()?.websiteUrl" target="_blank" class="low small text-decoration-none text-white">
         {{ aboutclient()?.websiteUrl }}
       </a>
     </div>
   </div>
-  <div class="mx-0 g-5 row">
+
+    </div>
+  </div>
+
+  <!-- <div class="mx-0 g-5 row">
     <div class="col-lg-6 ps-2 pe-3 ms-1 ms-lg-0">
       <div class="d-flex row left-box rounded-3 p-4">
         <div class="col px-0">
@@ -102,8 +105,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <app-projects-profile [tpyeOfProject]="false" />
-<app-feedback-profile />

@@ -1,5 +1,8 @@
 export interface IProject {
     id:                 any;
+        projectPayment:     number;
+    projectFeedBack:    number;
+    projectDuration:    number;
     projectTitle:       string;
     projectDescription: string;
     clientName:         string;

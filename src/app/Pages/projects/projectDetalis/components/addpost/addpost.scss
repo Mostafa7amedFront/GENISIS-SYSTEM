@@ -1,0 +1,160 @@
+.bar-wrapper {
+    position: relative;
+    background-color: #444;
+    overflow: visible;
+    /* let the glow spill out */
+    border-radius: 8px;
+    height: 12px;
+}
+
+/* blurred gradient glow that follows the same width as the fill */
+.bar-glow {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    width: 60%;
+    /* initial width; JS will control */
+    background: linear-gradient(to right, #00BEC5, #ffffff);
+    filter: blur(10px);
+    opacity: 0.65;
+    z-index: 0;
+    border-radius: inherit;
+    transition: width 600ms cubic-bezier(.2, .9, .2, 1);
+    pointer-events: none;
+    /* doesn't interfere with clicks/focus */
+}
+
+/* the visible filled bar */
+.bar-fill {
+    position: relative;
+    height: 100%;
+    width: 60%;
+    /* initial width; JS will control */
+    background: linear-gradient(to right, #00BEC5, #ffffff);
+    z-index: 1;
+    border-radius: inherit;
+    transition: width 600ms cubic-bezier(.2, .9, .2, 1);
+    /* subtle inner highlight */
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* small UX nicety for the editable number */
+#percentValue {
+    outline: none;
+    display: inline-block;
+    min-width: 1.4ch;
+    text-align: right;
+    caret-color: #fff;
+}
+
+#percentValue:focus {
+    box-shadow: 0 0 0 3px rgba(0, 190, 197, 0.12);
+    border-radius: 4px;
+}
+
+/* optional: prevent line breaks inside the editable percent */
+#percentValue[contenteditable] {
+    white-space: nowrap;
+}
+
+.month-picker {
+  width: 100%;
+
+}
+.post-card img {
+  object-fit: cover;
+  height: 120px !important;
+}
+
+.cardSelect {
+  border: 2px solid transparent;
+}
+.cardSelect.active {
+  border: 2px solid teal;
+}
+.header, .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.header span, .footer span {
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+input {
+      border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1490196078);
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: #ffffff !important;
+}
+
+textarea {
+      border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1490196078);
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    resize: none;
+      padding-top: 5px;      /* يخلي الكتابة تبدأ من فوق */
+
+    scrollbar-width: none;
+    color: #ffffff !important;
+}
+
+.textarea-start {
+  vertical-align: top;   /* يضمن المحاذاة من الأعلى */
+  text-align: right;     /* للكتابة العربية */
+}
+.upload-card {
+  width: 100%;
+  height: 100%;
+      max-height: 450px;
+
+  background: #1b1b1b;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  .preview-img,
+  .preview-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .upload-content {
+    text-align: center;
+    color: white;
+
+    .icon {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      font-family: "Poppins", sans-serif;
+    }
+  }
+}

@@ -25,7 +25,11 @@
     pointer-events: none;
     /* doesn't interfere with clicks/focus */
 }
+.cardEmpty{
+  background-color: #2D2D2D;
+    height: 150px  !important;
 
+}
 /* the visible filled bar */
 .bar-fill {
     position: relative;
@@ -65,7 +69,7 @@
 }
 .post-card img {
   object-fit: cover;
-  height: 120px !important;
+  height: 150px  !important;
 }
 
 .cardSelect {
@@ -93,4 +97,6 @@
   gap: 10px;
 }
 
-
+.blue.btnlink{
+  cursor: pointer;
+}

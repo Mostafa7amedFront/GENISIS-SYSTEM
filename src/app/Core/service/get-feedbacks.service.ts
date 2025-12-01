@@ -17,6 +17,11 @@ export class GetFeedbacksService {
       `${this.API_URL}/GetProjectFeedbacks/${IdEmployee}`
     );
   }
+   getOneFeedback(IdEmployee: string): Observable<IResponseOf<IFeedbackEmployee>> {
+    return this._httpClient.get<IResponseOf<IFeedbackEmployee>>(
+      `${this.API_URL}/GetProjectFeedbackById/${IdEmployee}`
+    );
+  }
     addProjectFeedback(projectId: string, feedback: {
     skillsRate: number;
     qualityOfRequirementsRate: number;

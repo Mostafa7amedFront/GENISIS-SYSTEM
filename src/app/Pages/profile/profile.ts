@@ -9,7 +9,7 @@ import { ProjectsProfile } from '../projects/projects-profile/projects-profile';
 
 @Component({
   selector: 'app-profile',
-  imports: [ProjectsProfile, FeedbackProfile , DatePipe , UpperCasePipe , RouterLink],
+  imports: [ProjectsProfile, DatePipe , UpperCasePipe , RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

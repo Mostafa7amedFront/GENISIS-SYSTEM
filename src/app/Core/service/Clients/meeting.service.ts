@@ -1,3 +1,4 @@
+import { IMeeting } from './../../Interface/imeeting';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -15,4 +16,9 @@ export class MeetingService {
     const body = { date, time };
     return this._httpClient.post(url, body);
   }
+
+getMeeting(projectId: string): Observable<IResponseOf<IMeeting[]>> {
+  const url = `${environment.apiUrl}Projects/GetMeetings/${projectId}`;
+  return this._httpClient.get<IResponseOf<IMeeting[]>>(url);
+}
 }

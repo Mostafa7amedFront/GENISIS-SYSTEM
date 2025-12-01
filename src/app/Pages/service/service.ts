@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { IService } from '../../Core/Interface/iservice';
 import { SweetAlert } from '../../Core/service/sweet-alert';
@@ -7,7 +7,7 @@ import { ServiceApi } from '../../Core/service/serviceapi';
 
 @Component({
   selector: 'app-service',
-  imports: [DatePipe , RouterLink],
+  imports: [DatePipe , RouterLink , CommonModule],
   templateUrl: './service.html',
   styleUrl: './service.scss'
 })
@@ -28,7 +28,7 @@ export class Service {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this._ServiceApi.getAll({ pageNumber: 1,pageSize: 50}).subscribe({
+    this._ServiceApi.getAll({ pageNumber: 1,pageSize: 100}).subscribe({
       next: (res) => {
         this.isLoading.set(false);
         if (res.success && Array.isArray(res.value)) {

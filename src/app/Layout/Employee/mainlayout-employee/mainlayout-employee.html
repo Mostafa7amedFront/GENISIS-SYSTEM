@@ -8,8 +8,7 @@
 >
   <app-sidebar-employee  (toggleSidebar)="onToggleSidebar($event)"></app-sidebar-employee>
 
-  <div class="main-content my-5" [class.sidebar-closed]="isSidebarClosed">
+  <div class="main-content mb-0" [class.sidebar-closed]="isSidebarClosed">
     <router-outlet></router-outlet>
-    <app-footer></app-footer>
   </div>
 </div>

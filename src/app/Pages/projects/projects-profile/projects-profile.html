@@ -50,7 +50,13 @@
 
                     <div class="col-lg-9 col-xl-8">
                         <div class="row">
-                            <h5 class="fw-bold mb-3 ps-0 ps-lg-2">SOCIAL MEDIA POSTS</h5>
+                            @switch (project.projectType) {
+                            @case (0) { <h5 class="fw-bold mb-3 ps-0">Simple Project</h5>}
+                            @case (1) { <h5 class="fw-bold mb-3 ps-0">Social Media</h5>
+                            }
+                            @case (2) { <h5 class="fw-bold mb-3 ps-0">Media Buying</h5>
+                            }
+                            }
 
                             <div class="me-3 col-lg-2 ps-0 ps-lg-2 text-lg-start text-center">
                                 <img [src]="baseurl + project.clientImage" alt="" width="107" height="107"
@@ -71,9 +77,9 @@
                                 <button class="border-0 rounded-3 mt-lg-4 mt-3 pt-lg-2 pt-1 px-4 text-white"
                                     [style.background-color]="'#0B6B6E'">
                                     @switch (project.projectStatus) {
-                                    @case (0) { <p class=" mt-0 mb-0 ">IN PROGRESS</p> }
-                                    @case (1) {<p class=" mt-0 mb-0 ">PAUSED</p> }
-                                    @case (2) { <p class=" mt-0 mb-0 ">COMPLETED</p> }
+                                    @case (0) { <p class=" mt-1 mb-0 ">IN PROGRESS</p> }
+                                    @case (1) {<p class=" mt-1  mb-0 ">PAUSED</p> }
+                                    @case (2) { <p class=" mt-1  mb-0 ">COMPLETED</p> }
                                     }
 
 
@@ -83,7 +89,7 @@
                     </div>
 
                     <div class="col-lg-3 col-xl-4 text-end px-0">
-                        <p class="small-2 mb-1 me-1 text-lg-end text-start mt-lg-0 mt-3">ASSIGNED TO</p>
+                        <p class="small-2 mb-1 me-1 text-lg-end text-start ">ASSIGNED TO</p>
                         <div class="row mx-0">
                             <div class="d-flex px-0 justify-content-lg-end justify-content-start">
                                 @for (person of project.employees; track $index) {
@@ -95,9 +101,9 @@
                             </div>
                         </div>
 
-                        <p class="small-2 mt-lg-5 mt-3 mb-0">{{ project.createdAt | date:'mediumDate' }}</p>
-                        <h2 class="mb-0" style="max-height: 30px;">DUE DATE</h2>
-                        <span class="fw-bold fs-5" style="color: #00bec5;">{{ project.deadLine |
+                        <p class="small-2 mt-lg-4 mt-3 mb-1">{{ project.createdAt | date:'mediumDate' }}</p>
+                        <h2 class="mb-2" style="max-height: 30px;">DUE DATE</h2>
+                        <span class="fw-bold fs-5 mt-2" style="color: #00bec5;">{{ project.deadLine |
                             date:'mediumDate'}}</span>
                     </div>
                 </a>

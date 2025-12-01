@@ -1,4 +1,4 @@
-<h1 class="mt-5 text-white px text-end big">PROFILE</h1>
+<h1 class="mt-5 text-white px text-end big">PROFILE EMPLOYEE</h1>
 <div class="text-white profile  mb-5">
     <div class=" p-xl-5 p-4 rounded-3">
         <div class="row">
@@ -25,7 +25,7 @@
         <div class="mx-0 row ">
             <div class="px-0 col-lg-3 ">
                 <img class=" imageCover" width="210px" height="210px" [src]="baseimageUrl + aboutEmployees()?.imageUrl" alt="">
-                <p class="mt-2 mb-0 small">{{aboutEmployees()?.createdAt  | date:'mediumDate' }}</p>
+                <p class="mt-4 mb-0 small">{{aboutEmployees()?.createdAt  | date:'mediumDate' }}</p>
                 <p class="fw-bold">Hello, {{aboutEmployees()?.name }}</p>
             </div>
             <div class="px-0 col-lg-9 col">
@@ -51,23 +51,26 @@
                         </div>
                     </div>
                 </div>
-      @if (aboutEmployees()?.feedback) {
-  <div class="feedback-item">
-    <p class="mt-2 mb-0">
-      {{ aboutEmployees()?.feedback?.createdAt| date: 'MMMM' | uppercase }} FEEDBACK
-    </p>
-    <p class="text-white-50 small">
-      {{ aboutEmployees()?.feedback?.feedback }}
-    </p>
+  @if (aboutEmployees()?.feedback) {
+                    <div class="feedback-item">
+                        <p class="mt-2 mb-0">
+                            {{ aboutEmployees()?.feedback?.createdAt| date: 'MMMM' | uppercase }} FEEDBACK
+                        </p>
+                        <p class="text-white-50 small">
+                            {{ aboutEmployees()?.feedback?.feedback }}
+                        </p>
 
-  </div>
-}
-     
+                    </div>
+                    }
+                    @else {
+                    <p class="text-muted mt-2 fst-italic">No feedback available</p>
+
+                    } 
             </div>
         </div>
         <div class="mx-0 row gap-0">
             <div class="col-lg-6 px-2 ms-1 pe-2 me-1 me-lg-0 pe-lg-4 pe-3 mx-lg-0">
-                <div class="p-md-4 p-3 pe-md-0 left-box row rounded-3">
+                <div class="p-md-4 p-3 pe-md-0 left-box row rounded-3" style="padding-top: 35px !important; padding-bottom: 35px  !important;">
                     <h3>KEEP IT UP !</h3>
                     <div class="col">
                         <img id="small-flag" src="assets/img/white-flag.svg" alt="">
@@ -98,7 +101,7 @@
                         <div class=" mx-0 d-flex pb-lg-0 ">
                             <div class="px-0 me-3">
                                 <h1 class="mb-3">14</h1>
-                                <p class="mb-0 lh-1" style="white-space: pre-line; line-height: 2;">
+                                <p class="mb-0 " style="white-space: pre-line; line-height: 1.5;">
                                     Completed
                                     projects
                                 </p>

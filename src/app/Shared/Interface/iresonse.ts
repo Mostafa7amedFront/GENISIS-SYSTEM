@@ -13,14 +13,15 @@ export interface IResponseOf<TResult>  extends IResponse{
 
 
 export interface IPaginationResponse<TResponse> extends IResponse{
-    result: TResponse[]
+    value: TResponse[]
     pageSize: number
-    pageIndex: number
+    pageNumber: number
     totalCount: number
     count: number
     totalPages: number
-    moveNext: boolean
-    movePrevious: boolean    
+    hasNextPage: boolean
+    hasPreviousPage: boolean    
+
 }
 
 export interface IPagination {

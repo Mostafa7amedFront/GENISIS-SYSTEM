@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { IResponseOf } from '../../Shared/Interface/iresonse';
+import { IPaginationResponse, IResponseOf } from '../../Shared/Interface/iresonse';
 import { IProject, Note } from '../Interface/iproject';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ProjectService {
   private _httpClient = inject(HttpClient);
   private API_URL_Note = `${environment.apiUrl}`;
 
-  getAll(data: any): Observable<IResponseOf<IProject[]>> {
+  getAll(data: any): Observable<IPaginationResponse<IProject>> {
     const params = new HttpParams({
       fromObject: {
         pageNumber: data.pageNumber ?? 1,
@@ -21,10 +21,10 @@ export class ProjectService {
         ProjectStatus: data.ProjectStatus ?? 0,
       },
     });
-    return this._httpClient.get<IResponseOf<IProject[]>>(this.API_URL, { params });
+    return this._httpClient.get<IPaginationResponse<IProject>>(this.API_URL, { params });
   }
 
-  getProjectClient(data: { pageNumber?: number; pageSize?: number; clientId?: string }): Observable<IResponseOf<IProject[]>> {
+  getProjectClient(data: { pageNumber?: number; pageSize?: number; clientId?: string }): Observable<IPaginationResponse<IProject>> {
     const params = new HttpParams({
       fromObject: {
         pageNumber: data.pageNumber ?? 1,
@@ -33,10 +33,10 @@ export class ProjectService {
 
       },
     });
-    return this._httpClient.get<IResponseOf<IProject[]>>(`${this.API_URL}`, { params });
+    return this._httpClient.get<IPaginationResponse<IProject>>(`${this.API_URL}`, { params });
   }
 
-getProjectEmployee(data: { pageNumber?: number; pageSize?: number; employeeId?: string }): Observable<IResponseOf<IProject[]>> {
+getProjectEmployee(data: { pageNumber?: number; pageSize?: number; employeeId?: string }): Observable<IPaginationResponse<IProject>> {
   const params = new HttpParams({
     fromObject: {
       pageNumber: data.pageNumber?.toString() ?? '1',
@@ -45,7 +45,7 @@ getProjectEmployee(data: { pageNumber?: number; pageSize?: number; employeeId?: 
     },
   });
 
-  return this._httpClient.get<IResponseOf<IProject[]>>(`${this.API_URL}`, { params });
+  return this._httpClient.get<IPaginationResponse<IProject>>(`${this.API_URL}`, { params });
 }
 
 

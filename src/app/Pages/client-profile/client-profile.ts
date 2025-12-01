@@ -10,7 +10,7 @@ import { IClients } from '../../Core/Interface/iclients';
 
 @Component({
   selector: 'app-client-profile',
-  imports: [ProjectsProfile, FeedbackProfile , DatePipe],
+  imports: [ProjectsProfile],
   templateUrl: './client-profile.html',
   styleUrl: './client-profile.scss'
 })
@@ -46,4 +46,5 @@ aboutclient = signal<IClients | null>(null);
     });
   }
 
+  
 }

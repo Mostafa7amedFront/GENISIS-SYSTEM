@@ -1,7 +1,11 @@
+import { Attachment } from './../Interface/iproject';
 import { Injectable, signal } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { IResponseOf } from '../../Shared/Interface/iresonse';
+import { IChatAttachmentMessages, IChatLink } from '../Interface/ichat';
 
 @Injectable({
   providedIn: 'root'
@@ -45,8 +49,13 @@ export class ChatService {
 const formattedMsg = {
   id: msg.id || crypto.randomUUID(),
   text: msg.text || msg.message || '',
-  username: msg.userName || localStorage.getItem('user_name') || 'Unknown User',
+  username: msg.userName,
   userId: msg.userId || '',
+
+  sentAt: new Date(msg.sentAt),
+  relativeDateString: msg.relativeDateString || '',
+  projectId: msg.projectId || this.currentProjectId,
+  attachmentUrl: msg.attachmentUrl || '',
   date: msg.relativeDateString || 'Today',
   time: new Date(msg.sentAt).toLocaleTimeString(),
   files: msg.files || msg.attachments || []
@@ -95,8 +104,15 @@ const formattedMsg = {
 
   // Get all messages
   public getAllMessages(projectId: string) {
-    return this.http.get(`${this.API_URL}api/ProjectChat/${projectId}?pageNumber=1&pageSize=500`);
+    return this.http.get(`${this.API_URL}api/ProjectChat/${projectId}?pageNumber=1&pageSize=500`); 
+     //  up to incress pageSize
   }
+  getLinkChat(projectId: string): Observable<IResponseOf<IChatLink[]> >{
+    return this.http.get<IResponseOf<IChatLink[]> >(`${this.API_URL}api/ProjectChat/GetLinksMessgaes/${projectId}`); 
+  }
+  GetAttachmentMessages(projectId: string): Observable<IResponseOf<IChatAttachmentMessages[]> > {
+    return this.http.get<IResponseOf<IChatAttachmentMessages[]> >(`${this.API_URL}api/ProjectChat/GetAttachmentMessages/${projectId}`); 
+  } 
 
   // Stop SignalR connection
   public stopConnection(): void {

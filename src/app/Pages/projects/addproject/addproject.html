@@ -13,39 +13,36 @@
       <div class="col addproject-rightbox rounded-3"></div>
 
       <input #descInput type="text" class="text-white w-100 mt-4 ps-0" placeholder="Project Description" />
-<div class="row g-3">
-  <div class="CreateAccount-box col-12 col-sm-6 col-lg-4 px-0 mt-0 py-0">
-        <!-- Client Title -->
-        <p class="mt-4 mb-1 title">Project Status</p>
-        <div *ngFor="let title of options" class="d-flex mt-1 align-items-center">
-          <button type="button" class="rounded-1" [class.clicked]="selectedClientTitle === title"
-            (click)="selectClientTitle(title)"></button>
-          <p class="low ms-2 m-0">{{ title }}</p>
+      <div class="row g-3">
+        <div class="CreateAccount-box col-12 col-sm-6 col-lg-4 px-0 mt-0 py-0">
+          <!-- Client Title -->
+          <p class="mt-4 mb-1 title">Project Status</p>
+          <div *ngFor="let title of options" class="d-flex mt-1 align-items-center">
+            <button type="button" class="rounded-1" [class.clicked]="selectedClientTitle === title"
+              (click)="selectClientTitle(title)"></button>
+            <p class="low ms-2 m-0">{{ title }}</p>
+          </div>
+
+        </div>
+        <div class="CreateAccount-box col-12 col-sm-6 col-lg-4 px-0 mt-0 py-0">
+          <p class="mt-4 mb-1 title">Project Duration</p>
+          <div *ngFor="let dur of Duration" class="d-flex mt-1 align-items-center">
+            <button type="button" class="rounded-1" [class.clicked]="selectedDuration === dur"
+              (click)="selectDuration(dur)">
+            </button>
+            <p class="low ms-2 m-0">{{ dur }}</p>
+          </div>
         </div>
 
+        <div class="CreateAccount-box col-12 col-sm-6 col-lg-4 px-0 mt-0 py-0">
+          <p class="mt-4 mb-1 title">Project Type</p>
+          <div *ngFor="let type of Type" class="d-flex mt-1 align-items-center">
+            <button type="button" class="rounded-1" [class.clicked]="selectedType === type" (click)="selectType(type)">
+            </button>
+            <p class="low ms-2 m-0">{{ type }}</p>
+          </div>
+        </div>
       </div>
-<div class="CreateAccount-box col-12 col-sm-6 col-lg-4 px-0 mt-0 py-0">
-  <p class="mt-4 mb-1 title">Project Duration</p>
-  <div *ngFor="let dur of Duration" class="d-flex mt-1 align-items-center">
-    <button type="button" class="rounded-1"
-      [class.clicked]="selectedDuration === dur"
-      (click)="selectDuration(dur)">
-    </button>
-    <p class="low ms-2 m-0">{{ dur }}</p>
-  </div>
-</div>
-
- <div class="CreateAccount-box col-12 col-sm-6 col-lg-4 px-0 mt-0 py-0">
-  <p class="mt-4 mb-1 title">Project Type</p>
-  <div *ngFor="let type of Type" class="d-flex mt-1 align-items-center">
-    <button type="button" class="rounded-1"
-      [class.clicked]="selectedType === type"
-      (click)="selectType(type)">
-    </button>
-    <p class="low ms-2 m-0">{{ type }}</p>
-  </div>
-</div>
-     </div>
       <p class="ps-0 mt-4 mb-2">Add Deadline</p>
 
       <div class="calender-sec w-100 p-3 rounded-3">
@@ -141,11 +138,43 @@
             </div>
           </div>
         </div>
+
+      <div class="row  my-4 px-0">
+        @if(selectedType === "Social Media" || selectedType === "Media Buying" ){
+        <div class="div col me-lg-5 px-0">
+          <p class="">Repeated Payment</p>
+
+          <input #Month type="number" class="text-white w-100 ps-0 py-1  mt-2" placeholder="Repeated Count" />
+
+        </div>
+        }
+        <div class="col" [ngClass]="{
+    'col-lg-8': selectedType === 'Social Media' || selectedType === 'Media Buying'
+  }">
+          <p class="">Payment</p>
+
+          <div class="  text-white text-start   w-100 d-flex align-items-end justify-content-between rounded-3" style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
+               font-size: 16px; border: 0.1px solid rgba(255, 255, 255, 0.425);">
+            <div class="info flex-grow-1">
+              <input #PaymentAmount type="number" class="text-white w-100 py-2 ps-3" placeholder="Payment " />
+            </div>
+            <div class="account ps-4">
+              <p class="m-0  py-2 pe-3">USD</p>
+            </div>
+          </div>
+        </div>
       </div>
+      </div>
+
+
+
     </div>
+
+
+
   </div>
 
-  <h2 class="mt-3  px-3 text-end pt-sm-4 logout cr" style="color: #00bec5"  (click)="addProject()">
+  <h2 class="mt-3  px-3 text-end pt-sm-4 logout cr" style="color: #00bec5" (click)="addProject()">
     ADD PROJECT
     <i class="ps-3 fa-solid fa-arrow-right fs-5" style="color: #00bec5"></i>
   </h2>

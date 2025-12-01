@@ -1,107 +1,179 @@
 <div class="project-detail-page px-3">
-    <div class="project-chat px-md-0 px-3">
-        <h1 class="big text-end text-white mt-5 pt-5 mb-3">PROJECT CHAT</h1>
+  <div class="project-chat px-md-0 px-3">
+    <h1 class="big text-end text-white mt-5 pt-5 mb-3">PROJECT CHAT</h1>
 
-        <div class="project-chat-box rounded-3 p-md-5 p-4 text-white">
-            <div class="chat-container">
-                <div class="chat-box">
-            <!-- <pre>{{ messages() | json }}</pre> -->
-            
-                    @if (messages().length === 0) {
-                    <div class="no-chat-message">
-                        No Chat Yet
-                    </div>
-                    } @else {
-                    @for (message of messages(); let i = $index; track message) {
-                    <!-- Date Separator -->
-                    @if (i === 0 || messages()[i-1].date !== message.date) {
-                    <div class="date-separator">
-                        {{ message.date }}
-                    </div>
-                    }
+    <div class="project-chat-box rounded-3 p-md-4 text-white ">
+      <div class="chat-container">
+        <div class="tabs">
+          <button class="tab-button" [class.active]="activeTab === 'chat'"(click)="activeTab = 'chat'">
+            Chat
+          </button>
 
-                    <!-- Message -->
-                    <div class="message p-0"    [class.my-message]="message.userId === currentUserId">
-                        <p class="username">{{ message.username }}</p>
+          <button class="tab-button" [class.active]="activeTab === 'documents'" (click)="activeTab = 'documents'">
+            Documents
+          </button>
 
-                        <div class="message-content-wrapper">
-                            <img src="assets/img/chat.png" alt="user" class="user-img" />
+          <button class="tab-button" [class.active]="activeTab === 'links'" (click)="activeTab = 'links'">
+            Links
+          </button>
 
-                            <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
-                                <p class="message-content fst-italic">{{ message.text }}</p>
-
-                                @if (message.files?.length) {
-                                <div class="dataShow d-flex align-items-center gap-2">
-                                    @for (file of message.files; track file.name) {
-                                    <div class="file-card d-flex align-items-center gap-2">
-                                        <img class="attach-img" src="assets/img/new-document 2.svg" alt="">
-                                        <div class="file-info text-lg-start">
-                                            <div class="file-name">{{ file.attachmentUrl | shorten : 10 }}</div>
-                                            <div class="file-size">{{ file.type }}</div>
-                                        </div>
-                                    </div>
-                                    }
-                                </div>
-                                }
-                            </div>
-                        </div>
-
-                        <div class="timestamp-container mt-2">
-                            <span class="timestamp">{{ message.time }}</span>
-                        </div>
-                    </div>
-                    }
-                    }
-
-
-                </div>
-            </div>
+          <span class="active-line" [style.transform]="linePosition"></span>
         </div>
+
+
+        <!-- CHAT TAB -->
+        @if (activeTab === 'chat') {
+        <div class="chat-box">
+          @if (messages().length === 0) {
+          <div class="no-chat-message">No Chat Yet</div>
+          } @else {
+
+          @for (message of messages(); let i = $index; track message) {
+
+          @if (i === 0 || messages()[i-1].date !== message.date) {
+          <div class="date-separator">{{ message.date }}</div>
+          }
+
+          <div class="message p-0" [class.my-message]="message.userId === currentUserId">
+
+            <p class="username">{{ message.username }}</p>
+
+            <div class="message-content-wrapper">
+              <img [src]="baseurl + '/' + message.attachmentUrl" class="user-img" />
+
+              <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
+                <p class="message-content fst-italic">{{ message.text }}</p>
+
+                @if (message.files?.length) {
+                <div class="dataShow d-flex align-items-center gap-2">
+                  @for (file of message.files; track file.name ; let i = $index) {
+                  <a class="file-card d-flex align-items-center gap-2" target="_blank" [href]="baseurl + file.attachmentUrl" download>
+                    <img class="attach-img" src="assets/img/new-document 2.svg" />
+                    <div class="file-info">
+                      <div class="file-name"> File {{i + 1}}</div>
+                      <div class="file-size">{{ file.type }}</div>
+                    </div>
+                  </a>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+
+            <div class="timestamp-container mt-2">
+              <span class="timestamp">{{ message.time }}</span>
+            </div>
+          </div>
+
+          }
+          }
+        </div>
+        }
+
+        <!-- DOCUMENTS TAB -->
+        @if (activeTab === 'documents') {
+         <div class="chat-box">
+          @if (AttachmentMessages().length === 0) {
+          <div class="no-chat-message">No Documents Yet</div>
+          } @else {
+
+          @for (message of AttachmentMessages(); let i = $index; track message) {
+
+     
+
+          <div class="message p-0" >
+
+
+            <div class="message-content-wrapper">
+
+              <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
+
+               <a class="file-card d-flex align-items-center gap-2" target="_blank" [href]="baseurl + message.attachmentUrl" download>
+                    <img class="attach-img" src="assets/img/new-document 2.svg" />
+                    <div class="file-info">
+                      <div class="file-name"> File {{i + 1}}</div>
+                      <div class="file-size">5 MB</div>
+                    </div>
+                  </a>
+              </div>
+            </div>
+
+            <div class="timestamp-container mt-2">
+              <span class="timestamp">{{ message.sentAt | date}}</span>
+            </div>
+          </div>
+
+          }
+          }
+        </div>
+        }
+
+        <!-- LINKS TAB -->
+        @if (activeTab === 'links') {
+           <div class="chat-box">
+          @if (messagesLinks().length === 0) {
+          <div class="no-chat-message">No Link Yet</div>
+          } @else {
+
+          @for (message of messagesLinks(); let i = $index; track message) {
+
+ 
+
+          <div class="message p-0 pt-4" >
+
+            <p class="username">{{ message.username }}</p>
+
+            <div class="message-content-wrapper">
+              <img [src]="''" class="user-img" />
+
+              <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
+                <p class="message-content fst-italic">{{ message.link }}</p>
+
+               
+              </div>
+            </div>
+
+            <div class="timestamp-container mt-2">
+              <span class="timestamp">{{ message.sentAt | date}}</span>
+            </div>
+          </div>
+
+          }
+          }
+        </div>
+        }
+
+
+      </div>
     </div>
-@if (selectedFiles.length > 0) {
+  </div>
+  @if (selectedFiles.length > 0) {
   <div class="dataShow  d-flex align-items-center gap-2 mt-2 px-3">
     @for (file of selectedFiles; track file.name) {
-      <div class="file-card d-flex align-items-center gap-2">
-        <img class="attach-img" src="assets/img/new-document 2.svg" alt="file" />
-        <div class="file-info text-lg-start">
-          <div class="file-name">{{ file.name | shorten : 10 }}</div>
-          <div class="file-size">{{ (file.size / 1024).toFixed(1) }} KB</div>
-        </div>
+    <div class="file-card d-flex align-items-center gap-2">
+      <img class="attach-img" src="assets/img/new-document 2.svg" alt="file" />
+      <div class="file-info text-lg-start">
+        <div class="file-name">{{ file.name | shorten : 10 }}</div>
+        <div class="file-size">{{ (file.size / 1024).toFixed(1) }} KB</div>
       </div>
+    </div>
     }
   </div>
-}
-    <!-- Input -->
- <div class="message-input">
-    
-    <input
-      type="file"
-      multiple
-      (change)="onFileSelected($event)"
-      hidden
-      #fileInput
-    />
+  }
+  <!-- Input -->
+  <div class="message-input">
+
+    <input type="file" multiple (change)="onFileSelected($event)" hidden #fileInput />
 
 
 
-    <input
-      type="text"
-      class="border-0 small text-white"
-      placeholder="Write anything here..."
-      [(ngModel)]="messageText"
-      (keydown)="handleKeyDown($event)"
-    />
+    <input type="text" class="border-0 small text-white" placeholder="Write anything here..." [(ngModel)]="messageText"
+      (keydown)="handleKeyDown($event)" />
     <button type="button" (click)="fileInput.click()">
-      <i
-        class="fa-solid fa-paperclip fs-5"
-        style="color: #00bec5"
-      ></i>
+      <i class="fa-solid fa-paperclip fs-5" style="color: #00bec5"></i>
     </button>
     <button (click)="sendMessage()">
-      <i
-        class="fa-solid fa-arrow-right fs-5 mt-1"
-        style="color: #00bec5"
-      ></i>
+      <i class="fa-solid fa-arrow-right fs-5 mt-1" style="color: #00bec5"></i>
     </button>
   </div>
 </div>

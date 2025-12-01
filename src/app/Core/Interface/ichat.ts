@@ -13,7 +13,19 @@ export interface IChatMessage {
   userName: string;
   attachments: IChatAttachment[];
 }
+export interface IChatLink {
+  id: string;
+  sentAt: string;
+  link: string;
+  username: string;
+}
+export interface IChatAttachmentMessages {
+  id: string;
+  attachmentUrl: string;
+    sentAt: string;
 
+  username: string;
+}
 export interface IChatDayGroup {
   date: string;
   relativeDateString: string;

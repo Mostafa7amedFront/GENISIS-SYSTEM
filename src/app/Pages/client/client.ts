@@ -17,6 +17,13 @@ import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
 })
 export class Client {
   isOpen = false;
+    currentPage = signal<number>(1);
+  totalPages = signal<number>(1);
+  totalCount = signal<number>(0);
+  hasPreviousPage = signal<boolean>(false);
+  hasNextPage = signal<boolean>(false);
+  pageSize = 12;
+
 options = [
   { label: 'ALL CLIENTS', value: null },
   { label: 'OLD CLIENT', value: 0 },
@@ -65,8 +72,8 @@ getProjectCounts() {
     this.errorMessage.set('');
 
     this._Clients.getAll({
-      pageNumber: 1,
-      pageSize: 50,
+      pageNumber: this.currentPage(),
+      pageSize:  this.pageSize,
       ProjectStatus: this.selected.value
     }).subscribe({
       next: (response) => {
@@ -74,6 +81,10 @@ getProjectCounts() {
 
         if (response.success) {
           this.projects.set(response.value);
+           this.totalPages.set(response.totalPages);
+        this.totalCount.set(response.totalCount);
+        this.hasPreviousPage.set(response.hasPreviousPage);
+        this.hasNextPage.set(response.hasNextPage);
         } else {
           this.projects.set([]);
         }
@@ -124,4 +135,38 @@ getProjectCounts() {
   }
 
 
+   nextPage() {
+    if (this.hasNextPage()) {
+      this.currentPage.update(v => v + 1);
+      this.loadEmployees();
+    }
+  }
+get pagesArray() {
+  return Array.from({ length: this.totalPages() });
+}
+get visiblePages() {
+  const total = this.totalPages();
+  const current = this.currentPage();
+  const windowSize = 4;
+
+  let start = Math.max(1, current - Math.floor(windowSize / 2));
+  let end = start + windowSize - 1;
+
+  if (end > total) {
+    end = total;
+    start = Math.max(1, end - windowSize + 1);
+  }
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+}
+  prevPage() {
+    if (this.hasPreviousPage()) {
+      this.currentPage.update(v => v - 1);
+      this.loadEmployees();
+    }
+  }
+
+  goToPage(page: number) {
+    this.currentPage.set(page);
+    this.loadEmployees();
+  }
 }

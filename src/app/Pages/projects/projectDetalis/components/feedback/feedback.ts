@@ -3,10 +3,11 @@ import { IFeedbackEmployee } from '../../../../../Core/Interface/ifeedback';
 import { ActivatedRoute } from '@angular/router';
 import { GetFeedbacksService } from '../../../../../Core/service/get-feedbacks.service';
 import { CommonModule } from '@angular/common';
+import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
 
 @Component({
   selector: 'app-feedback',
-  imports: [CommonModule],
+  imports: [ReactiveModeuls],
   templateUrl: './feedback.html',
   styleUrl: './feedback.scss'
 })

@@ -7,7 +7,7 @@ export const adminroutes: Routes = [
   {
     path: '',
     component: MainOutlet,
-    canActivate:[roleGuard(["admin"])],
+    canActivate: [roleGuard(["admin"])],
     children: [
       {
         path: '',
@@ -23,7 +23,7 @@ export const adminroutes: Routes = [
         loadComponent: () =>
           import('../Pages/home/components/addemployee/addemployee').then(m => m.Addemployee),
       },
-      
+
       {
         path: 'editemployee/:id',
         loadComponent: () =>
@@ -35,15 +35,15 @@ export const adminroutes: Routes = [
           import('../Pages/client/client').then(m => m.Client),
       },
       {
-        path:'projects',
-        loadComponent:()=> import('../Pages/projects/projects/projects').then(m => m.Projects)
+        path: 'projects',
+        loadComponent: () => import('../Pages/projects/projects/projects').then(m => m.Projects)
       },
       {
         path: 'addclient',
         loadComponent: () =>
           import('../Pages/client/components/addclients/addclients').then(m => m.Addclients),
       },
-           {
+      {
         path: 'editclient/:id',
         loadComponent: () =>
           import('../Pages/client/components/editclients/editclients').then(m => m.Editclients),
@@ -53,7 +53,7 @@ export const adminroutes: Routes = [
         loadComponent: () =>
           import('../Pages/add-payments/add-payments').then(m => m.AddPayments),
       },
-     {
+      {
         path: 'payment',
         loadComponent: () =>
           import('../Pages/payments-admin/payments-admin').then(m => m.PaymentsAdmin),
@@ -63,12 +63,12 @@ export const adminroutes: Routes = [
         loadComponent: () =>
           import('../Pages/Auth/create-account/create-account').then(m => m.CreateAccount),
       },
-         {
+      {
         path: 'addproject',
         loadComponent: () =>
           import('../Pages/projects/addproject/addproject').then(m => m.Addproject),
       },
-       {
+      {
         path: 'editproject/:id',
         loadComponent: () =>
           import('../Pages/projects/editproject/editproject').then(m => m.Editproject),
@@ -89,18 +89,25 @@ export const adminroutes: Routes = [
         loadComponent: () =>
           import('../Pages/profile/profile').then(m => m.Profile),
       },
-    {
+      {
         path: 'service',
         loadComponent: () =>
           import('../Pages/service/service').then(m => m.Service),
       },
       {
-        path:'addservice',
-        loadComponent : () => import('../Pages/service/components/addservice/addservice').then(m => m.Addservice)
+        path: 'addservice',
+        loadComponent: () => import('../Pages/service/components/addservice/addservice').then(m => m.Addservice)
       },
-       {
-        path:'editservice/:id',
-        loadComponent : () => import('../Pages/service/components/editservice/editservice').then(m => m.Editservice)
+      {
+        path: 'editservice/:id',
+        loadComponent: () => import('../Pages/service/components/editservice/editservice').then(m => m.Editservice)
+      },
+
+
+      {
+        path: 'getfeedback/:id',
+        loadComponent: () =>
+          import('../Pages/get-feedback/get-feedback').then(m => m.GetFeedback),
       },
       {
         path: 'notifications',
@@ -110,10 +117,37 @@ export const adminroutes: Routes = [
       {
         path: 'projectDetails/:id',
         loadComponent: () =>
-          import('../Pages/projects/projectDetalis/project-details').then(m => m.ProjectDetails),
-      },
+          import('../Pages/projects/projectDetalis/project-details')
+            .then(m => m.ProjectDetails),
+        children: [
+              {
+      path: '',
+      redirectTo: 'posts/add', 
+      pathMatch: 'full'
+    },
+          {
+            path: 'posts',
+            loadComponent: () =>
+              import('../Pages/projects/projectDetalis/components/posts/posts')
+                .then(m => m.Posts)
+          },
+          {
+            path: 'posts/add',
+            loadComponent: () =>
+              import('../Pages/projects/projectDetalis/components/addpost/addpost')
+                .then(m => m.Addpost)
+          },
+          {
+            path: 'posts/:id',
+            loadComponent: () =>
+              import('../Pages/projects/projectDetalis/components/show-post/show-post')
+                .then(m => m.ShowPost)
+          }
+        ]
+      }
+
     ]
   },
-  
+
 
 ];

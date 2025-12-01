@@ -51,21 +51,7 @@
       <p class="low small mb-1 text-start" style="white-space: pre-line">
         “ {{ aboutproject()?.projectDescription }} “
       </p>
-      <h6 class="pt-4">ATTACHMENTS</h6>
-      <div class="d-flex flex-wrap  gap-2">
-        @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
-          @if (isImage(file.fileUrl)) {
-          <div class="d-flex align-items-center gap-2 p-2 rounded">
-            <img
-              [src]="getFileUrl(file.fileUrl)"
-              alt="attachment"
-              class="rounded"
-              style="width: 120px; height: 120px; object-fit: cover"
-            />
-          </div>
-          } 
-        }
-      </div>
+     
             <div class="d-flex mt-3 flex-wrap gap-2">
         @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
          @if (isPdf(file.fileUrl)) {
@@ -136,7 +122,14 @@
         <div class="col-6 text-end mt-5 pt-md-3 pt-4 pe-0">
           <p class="mb-0 small">14, OCT 24</p>
           <p class="small mb-0">Brand Identity</p>
-          <img class="image" src="assets/img/4blue-star.png" alt="" />
+               <div class="stars mt-2 justify-content-end">
+                            @for (s of [1, 2, 3, 4, 5]; track $index) {
+                            <button class="star-btn"[class.active]="s <= (aboutproject()?.projectFeedBack ?? 0)"
+>
+                                <i class="fa fa-star"></i>
+                            </button>
+                            }
+                        </div>
         </div>
       </div>
     </div>

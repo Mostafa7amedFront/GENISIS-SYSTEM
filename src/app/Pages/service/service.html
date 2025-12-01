@@ -1,54 +1,44 @@
 <div class="d-flex justify-content-between align-items-center headerText">
-  <h2
-    class="pt-sm-4 logout"
-    style="color: #00bec5; cursor: pointer;"
-    routerLink="/addservice"
-  >
+  <h2 class="pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addservice">
     Add Service
     <i class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
   </h2>
   <h1 class="big text-white">THE SERVICE</h1>
 </div>
+  @if(services().length === 0){ 
 
-<div class="CreateAccount-box rounded-3 text-white">
-  <div class="service-container">
+    <div class="text-center py-5 w-100">
+      <p class="text-muted fs-5">No data available at the moment.</p>
+    </div>
 
-    @if (isLoading()) {
-      <div class="text-center py-3 w-100">
-        <div class="spinner-border text-info" role="status"></div>
-        <p class="mt-2">Loading data...</p>
-      </div>
-    }
+  }
+      <div class="card-box  ">
 
-    @else if (errorMessage()) {
-      <div class="text-center py-5 w-100">
-        <p class="text-danger fw-bold">{{ errorMessage() }}</p>
-      </div>
-    }
+  @for (service of services(); track service.id ;let i = $index) {
+  <div class="me-0 mt-3 3 cards">
+    <a class="text-decoration-none text-white w-25 team">
+      <div class="card position-relative">
 
-    @else if (!isLoading() && services().length === 0) {
-      <div class="text-center py-5 w-100">
-        <p class="text-muted fs-5">No data available at the moment.</p>
-      </div>
-    }
-
-    <!-- 🔹 عرض البيانات -->
-    @else {
-      @for (service of services(); track service.id) {
-        <div class="service-card position-relative">
-          <div class="cardOptions">
-            <div class="w-75 p-2 d-flex justify-content-between">
-              <i class="fa-solid fa-trash" (click)="onDelete(service, $event)"></i>
-              <i class="fa-solid fa-pen-to-square" (click)="onEdit(service, $event)"></i>
-            </div>
+        <div class="cardOptions">
+          <div class="w-100 p-2 d-flex justify-content-between">
+            <i class="fa-solid fa-trash" (click)="onDelete(service, $event)"></i>
+            <i class="fa-solid fa-pen-to-square" (click)="onEdit(service, $event)"></i>
           </div>
-
-          <h3 class="service-name">{{ service.name }}</h3>
-          <p class="service-date">
-            Created on: {{ service.createdAt | date:'mediumDate' }}
-          </p>
         </div>
-      }
-    }
+
+        <div class=" number-logo">
+          {{ (i + 1) | number:'2.0' }}
+        </div>
+        <div class="pb-0 py-0 px-0 card-body">
+          <h6 class="mb-1 py-0 px-0 fw-bold card-title">{{ service.name }}</h6>
+          <p class="mb-1  py-0 px-0 card-text"> {{ service.createdAt | date:'mediumDate' }}</p>
+
+
+        </div>
+      </div>
+    </a>
   </div>
+  } 
+
+
 </div>

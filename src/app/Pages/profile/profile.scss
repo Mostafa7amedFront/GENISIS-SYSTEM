@@ -1,7 +1,10 @@
 .imageCover{
+    width: 90%;
+    height: 240px;
     object-fit: cover !important;
-    border-radius: 4px;
+    border-radius: 8px;
 }
+
 
 @media (max-width: 576px) {
 

@@ -1,4 +1,5 @@
 export interface IFeedbackEmployee {
+  id: number;
   skillsRate: number
   qualityOfRequirementsRate: number
   meetingDeadlinesRate: number

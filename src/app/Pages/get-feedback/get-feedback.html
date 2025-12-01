@@ -1,0 +1,152 @@
+<div class="feed-back-sec px-3">
+
+    <h1 class="mt-5 text-white text-end big">FEEDBACK</h1>
+
+    <!-- Question 01 -->
+    <div class="first-feedback p-3 rounded-3 text-white border-0">
+      <div class="row">
+        <div class="col-lg-1 me-5">
+          <img src="assets/img/01.png" alt="Question Icon">
+        </div>
+        <div class="col mt-lg-0 text-lg-start mt-4 ms-xl-2 ms-lg-5">
+          <p class="small mb-0">Question 01</p>
+          <h5 class="mb-0">How would you rate our services?</h5>
+
+          <!-- Skills -->
+          <div class="d-flex align-items-center mt-3">
+            <div class="stars">
+              <button *ngFor="let star of [1,2,3,4,5]"
+                      class="star-btn"
+                      [class.active]="ratings['skills'] >= star"
+                    >
+                <i class="fa fa-star"></i>
+              </button>
+            </div>
+            <div class="low mt-0 pt-1 ms-4">
+              <h6 class="mb-0">SKILLS</h6>
+            </div>
+          </div>
+
+          <!-- Quality -->
+          <div class="d-flex align-items-center mt-0">
+            <div class="stars">
+              <button *ngFor="let star of [1,2,3,4,5]"
+                      class="star-btn"
+                      [class.active]="ratings['quality'] >= star"
+                   >
+                <i class="fa fa-star"></i>
+              </button>
+            </div>
+            <div class="low mt-0 pt-1 ms-4">
+              <h6 class="mb-0">QUALITY OF REQUIREMENTS</h6>
+            </div>
+          </div>
+
+          <!-- Deadlines -->
+          <div class="d-flex align-items-center mt-0">
+            <div class="stars">
+              <button *ngFor="let star of [1,2,3,4,5]"
+                      class="star-btn"
+                      [class.active]="ratings['deadlines'] >= star"
+                    >
+                <i class="fa fa-star"></i>
+              </button>
+            </div>
+            <div class="low mt-0 pt-1 ms-4">
+              <h6 class="mb-0">MEETING DEADLINES</h6>
+            </div>
+          </div>
+
+          <!-- Communication -->
+          <div class="d-flex align-items-center mt-0">
+            <div class="stars">
+              <button *ngFor="let star of [1,2,3,4,5]"
+                      class="star-btn"
+                      [class.active]="ratings['communication'] >= star"
+                    >
+                <i class="fa fa-star"></i>
+              </button>
+            </div>
+            <div class="low mt-0 pt-1 ms-4">
+              <h6 class="mb-0">COMMUNICATION</h6>
+            </div>
+          </div>
+
+          <!-- Satisfaction -->
+          <div class="d-flex align-items-center mt-0">
+            <div class="stars">
+              <button *ngFor="let star of [1,2,3,4,5]"
+                      class="star-btn"
+                      [class.active]="ratings['satisfaction'] >= star"
+                    >
+                <i class="fa fa-star"></i>
+              </button>
+            </div>
+            <div class="low mt-0 pt-1 ms-4">
+              <h6 class="mb-0">OVERALL SATISFACTION</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question 02 -->
+    <div class="second-feedback p-3 rounded-3 text-white mt-3">
+      <div class="row">
+        <div class="col-lg-1 me-5">
+          <img src="assets/img/02.png" alt="">
+        </div>
+        <div class="col ms-xl-2 ms-lg-5 mt-lg-0 mt-4">
+          <p class="small mb-0">Question 02</p>
+          <h5 class="mb-0 fs-6">Did the final design meet your expectation?</h5>
+          <input type="text"
+                 [(ngModel)]="feedbackText"
+                 class="mt-4 text-white"
+                 placeholder="Write here ....">
+        </div>
+      </div>
+    </div>
+
+    <!-- Question 03 -->
+    <div class="third-feedback p-3 rounded-3 text-white mt-3">
+      <div class="row">
+        <div class="col-lg-1 me-5">
+          <img src="assets/img/03.png" alt="">
+        </div>
+        <div class="col ms-xl-2 ms-lg-5 mt-4 mt-lg-0">
+          <p class="small mb-0">Question 03</p>
+          <h5 class="mb-0">How likely are you to recommend our services to others?</h5>
+
+          <div class="d-flex mt-4"
+             >
+            <button class="rounded-3"                [class.clicked]="recommendation === 'Unlikely'"
+></button>
+            <p class="low ms-2 m-0 mt-1">Unlikely</p>
+          </div>
+
+          <div class="d-flex mt-1"
+             >
+            <button class="rounded-3"                [class.clicked]="recommendation === 'Maybe'"
+></button>
+            <p class="low ms-2 m-0 mt-1">Maybe</p>
+          </div>
+
+          <div class="d-flex mt-1"
+              >
+            <button class="rounded-3"                [class.clicked]="recommendation === 'Likely'"
+></button>
+            <p class="low ms-2 m-0 mt-1">Likely</p>
+          </div>
+
+          <div class="d-flex mt-1"
+              >
+            <button class="rounded-3"                [class.clicked]="recommendation === 'Very Likely'"></button>
+            <p class="low ms-2 m-0 mt-1">Very Likely</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+</div>

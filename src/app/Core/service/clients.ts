@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { IResponseOf } from '../../Shared/Interface/iresonse';
+import { IPaginationResponse, IResponseOf } from '../../Shared/Interface/iresonse';
 import { IClients } from '../Interface/iclients';
 
 @Injectable({
@@ -14,10 +14,10 @@ export class Clients {
 
 
 
-  getAll(data: any): Observable<IResponseOf<IClients[]>> {
+  getAll(data: any): Observable<IPaginationResponse<IClients>> {
 
 
-    return this._httpClient.post<IResponseOf<IClients[]>>(`${this.API_URL}/GetAll`, data);
+    return this._httpClient.post<IPaginationResponse<IClients>>(`${this.API_URL}/GetAll`, data);
   }
   getById(id: number): Observable<IResponseOf<IClients>> {
     return this._httpClient.get<IResponseOf<IClients>>(`${this.API_URL}/${id}`);

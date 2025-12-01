@@ -29,6 +29,10 @@ private _alert = inject(SweetAlert);
   Employee = signal<IEmployee[]>([]);
 @ViewChild('titleInput') titleInput!: ElementRef<HTMLInputElement>;
 @ViewChild('descInput') descInput!: ElementRef<HTMLInputElement>;
+@ViewChild('PaymentAmount') PaymentAmount!: ElementRef<HTMLInputElement>;
+
+@ViewChild('Month', { static: false }) Month!: ElementRef<HTMLInputElement>;
+
   //  Environment Variables
   baseimageUrl = `${environment.baseimageUrl}`;
 
@@ -223,8 +227,22 @@ const projectType = this.typeMap[this.selectedType!] ?? 0;
 
   const deadline = this.selectedDate.toDateString() + ' ' + this.selectedDate.toLocaleTimeString();
 
+  const title = this.titleInput.nativeElement.value;
+  const payment = this.PaymentAmount.nativeElement.value;
+let month = '0';
+
+if (this.Month) {
+  const monthVal = this.Month.nativeElement.value;
+  if (monthVal && +monthVal > 0) {
+    month = monthVal;
+  }
+}
   const formData = new FormData();
-  formData.append('ProjectTitle', this.titleInput.nativeElement.value);
+  formData.append('ProjectTitle', title);
+  formData.append('PaymentAmount', payment);
+  formData.append('Month', month);
+
+
   formData.append('ProjectDescription', this.descInput.nativeElement.value);
   formData.append('ProjectStatus', projectStatus.toString());
   formData.append('projectDuration', projectDuration.toString());

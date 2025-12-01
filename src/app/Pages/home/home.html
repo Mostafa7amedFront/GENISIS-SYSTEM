@@ -39,7 +39,7 @@
                         <div class="p-3 d-flex gap-3  ">
                             <div class="px-0 me-3">
                                 <h1 class="mb-3">14</h1>
-                                <p class="mb-0 lh-1" style="white-space: pre-line;">
+                                <p class="mb-0 " style="white-space: pre-line; line-height: 1.5;">
                                     Completed
                                     projects
                                 </p>
@@ -136,22 +136,4 @@
         </div>
     </div>
 
-    <div class="row mx-0">
-        <div class="col ps-sm-5 ps-3 bottom">
-            <p class="mb-0">AVERAGE </p>
-            <h2 class="mb-0">FEEDBACK</h2>
-            <div class="d-flex align-items-center mt-0">
-                <div class="stars">
-                    @for (s of [1, 2, 3, 4, 5]; track $index) {
-                    <button class="star-btn" [class.active]="s <= 3">
-                        <i class="fa fa-star"></i>
-                    </button>
-                    }
-                </div>
-            </div>
-        </div>
-        <div class="col text-end bottom pe-lg-4 pe-md-3 me-4 px-0">
-            <h1 class="text-end pt-4 date">2024</h1>
-        </div>
-    </div>
 </div>
