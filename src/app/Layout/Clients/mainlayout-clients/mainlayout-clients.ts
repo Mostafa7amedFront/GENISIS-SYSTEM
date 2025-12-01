@@ -5,7 +5,7 @@ import { SidebarCliens } from '../sidebar-cliens/sidebar-cliens';
 
 @Component({
   selector: 'app-mainlayout-clients',
-  imports: [RouterOutlet, Footer, SidebarCliens],
+  imports: [RouterOutlet,  SidebarCliens],
   templateUrl: './mainlayout-clients.html',
   styleUrl: './mainlayout-clients.scss'
 })

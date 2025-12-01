@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { PaymentsService } from '../../Core/service/Clients/payments.service';
 import { IPayments } from '../../Core/Interface/ipayments';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,7 @@ import { SweetAlert } from '../../Core/service/sweet-alert';
   selector: 'app-payments-admin',
   imports: [ReactiveModeuls],
   templateUrl: './payments-admin.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrl: './payments-admin.scss'
 })
 export class PaymentsAdmin {
@@ -28,24 +29,34 @@ displayedMonths: { label: string; date: Date }[] = [];
     this.loadPayments(this.displayedMonths[this.selectedIndex].date);
   }
 
-  generateMonths(selectedDate: Date) {
-    this.displayedMonths = [];
-    for (let i = -4; i < 4; i++) {
-      const date = new Date(selectedDate);
-      date.setMonth(selectedDate.getMonth() + i);
-      this.displayedMonths.push({
-        label: date.toLocaleString('default', { month: 'long', year: 'numeric' }),
-        date
-      });
-    }
+generateMonths(selectedDate: Date) {
+  this.displayedMonths = [];
 
-    const nextDate = new Date(selectedDate);
-    nextDate.setMonth(selectedDate.getMonth() + 1);
-    this.nextPaymentDate = nextDate
-      .toLocaleString('default', { day: 'numeric', month: 'short' })
-      .toUpperCase();
+  const startYear = selectedDate.getFullYear();
+  const totalMonths = 24;
+
+  for (let i = 0; i < totalMonths; i++) {
+    const date = new Date(startYear, i, 1);
+  date.setFullYear(startYear, i, 3); 
+  date.setHours(0, 0, 0, 0); 
+  this.displayedMonths.push({
+    label: date.toLocaleString('default', { month: 'long', year: 'numeric' }),
+    date
+  });
   }
 
+  this.selectedIndex = this.displayedMonths.findIndex(m =>
+    m.date.getMonth() === selectedDate.getMonth() &&
+    m.date.getFullYear() === selectedDate.getFullYear()
+  );
+
+
+  const nextDate = new Date(selectedDate);
+  nextDate.setMonth(selectedDate.getMonth() + 1);
+  this.nextPaymentDate = nextDate
+    .toLocaleString('default', { day: 'numeric', month: 'short' })
+    .toUpperCase();
+}
   selectMonth(index: number) {
     this.selectedIndex = index;
     const selectedDate = this.displayedMonths[index].date;

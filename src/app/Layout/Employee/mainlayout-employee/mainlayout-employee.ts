@@ -5,7 +5,7 @@ import { SidebarEmployee } from '../sidebar-employee/sidebar-employee';
 
 @Component({
   selector: 'app-mainlayout-employee',
-  imports: [RouterOutlet, Footer, SidebarEmployee],
+  imports: [RouterOutlet, SidebarEmployee],
   templateUrl: './mainlayout-employee.html',
   styleUrl: '../../main-outlet/main-outlet.scss'
 })

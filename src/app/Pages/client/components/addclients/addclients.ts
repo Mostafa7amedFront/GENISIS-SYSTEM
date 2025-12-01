@@ -48,7 +48,6 @@ clientTitleMap: { [key: string]: number } = {
   ngOnInit(): void {
     this._serviceApi.getAll({}).subscribe({
       next: (res) => {
-        console.log('✅ Client added successfully:', res);
         this.services.set(res.value)
 
       },

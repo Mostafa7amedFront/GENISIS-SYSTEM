@@ -46,7 +46,7 @@ this._post.getProjectOnePost(postId).subscribe({
 
 
 downloadFile(fileName: any) {
-  const fileUrl = 'https://genesissystem.runasp.netU'+ fileName;
+  const fileUrl = 'https://genesissystem.runasp.net' + fileName;
 
   fetch(fileUrl)
     .then(response => response.blob())
