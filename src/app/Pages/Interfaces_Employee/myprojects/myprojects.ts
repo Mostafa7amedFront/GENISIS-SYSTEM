@@ -20,6 +20,7 @@ export class Myprojects {
   selected = signal('ALL PROJECTS');
   options = ['ALL PROJECTS', 'IN PROGRESS', 'PAUSED', 'COMPLETED'];
   selectedProjectType = signal<number | null>(null);
+  id!: any; // <-- خليها هنا بدون تهيئة فورية
 
 
   toggleMenu() {
@@ -54,6 +55,8 @@ export class Myprojects {
     return { completed, inProgress, paused };
   }
   ngOnInit(): void {
+        const storedId = localStorage.getItem("Id_Employees");
+    this.id = storedId ;
     this.loadEmployees();
   }
 
@@ -61,9 +64,10 @@ export class Myprojects {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this._project.getProjectClient({
+    this._project.getProjectEmployee({
       pageNumber: this.currentPage(),
       pageSize:   this.pageSize,
+      employeeId: this.id
     }).subscribe({
       next: (response) => {
         this.isLoading.set(false);

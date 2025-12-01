@@ -89,7 +89,6 @@ export class Chat {
     }
   }
 
-  // Lifecycle Hooks
   async ngOnInit(): Promise<void> {
     this.projectId = this.route.snapshot.paramMap.get('id')!;
     await this.chatService.startConnection();
@@ -103,6 +102,7 @@ export class Chat {
             id: chat.id,
             text: chat.message,
             username: chat.userName,
+             userImageUrl: chat.userImageUrl,
             date: group.relativeDateString,
             time: new Date(chat.sentAt).toLocaleTimeString(),
             files: chat.attachments || [],

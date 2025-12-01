@@ -46,6 +46,7 @@ export class Myprojects {
   hasPreviousPage = signal<boolean>(false);
   hasNextPage = signal<boolean>(false);
   pageSize = 12;
+  id!: any; // <-- خليها هنا بدون تهيئة فورية
 
   getProjectCounts() {
     const completed = this.projects().filter(p => p.projectStatus === 2).length;
@@ -54,6 +55,8 @@ export class Myprojects {
     return { completed, inProgress, paused };
   }
   ngOnInit(): void {
+        const storedId = localStorage.getItem("Id_Clients");
+    this.id = storedId ;
     this.loadEmployees();
   }
 
@@ -64,6 +67,7 @@ export class Myprojects {
     this._project.getProjectClient({
       pageNumber: this.currentPage(),
       pageSize:   this.pageSize,
+      clientId: this.id
     }).subscribe({
       next: (response) => {
         this.isLoading.set(false);

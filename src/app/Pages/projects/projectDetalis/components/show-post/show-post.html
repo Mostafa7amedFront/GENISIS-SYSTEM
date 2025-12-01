@@ -19,17 +19,16 @@
     <div class="upload position-relative">
       @if(posts().fileType === 0) {
       <img [src]="baseurl + posts().file" class="preview-img rounded-3" />
-
-      } @if(posts().fileType === 1) {
-      <video [src]="baseurl + posts().file" controls class="preview-video rounded-3"></video>
-
-      }
       <div class="btn_bo">
               <button class="btn w-100" (click)="downloadFile(posts().file)">load</button>
 
       </div>
+      } @if(posts().fileType === 1) {
+      <video [src]="baseurl + posts().file" controls class="preview-video rounded-3"></video>
+
+      }
+
     </div>
 
-    <!-- input مخفي -->
   </div>
 </div>

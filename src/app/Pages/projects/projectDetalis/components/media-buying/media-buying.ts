@@ -5,7 +5,11 @@ interface CalendarDay {
   date: Date;
   current: boolean; // هل اليوم ينتمي للشهر الحالي؟
 }
-
+enum CampaignType {
+  Engagement = 0,
+  Awareness = 1,
+  Sales = 2
+}
 @Component({
   selector: 'app-media-buying',
   imports: [ReactiveModeuls],
@@ -13,16 +17,70 @@ interface CalendarDay {
   styleUrls: ['./media-buying.scss'],
 })
 export class MediaBuying {
-  campaignType = signal<'Engagement' | 'Awareness' | 'Sales'>('Sales');
-  selectCampaign(value: 'Engagement' | 'Awareness' | 'Sales') {
-    this.campaignType.set(value);
-    console.log(value)
-  }
+campaignType = signal<CampaignType>(CampaignType.Sales);
+selectCampaign(value: 'Engagement' | 'Awareness' | 'Sales') {
+  const map = {
+    Engagement: CampaignType.Engagement,
+    Awareness:   CampaignType.Awareness,
+    Sales:       CampaignType.Sales,
+  };
+
+  this.campaignType.set(map[value]);
+
+  console.log("Selected:", value, "→ Code:", this.campaignType());
+}
 
   quickFilters = ['Today', 'Yesterday', 'Last 7 days', 'Last 30 days', 'Last 90 days', 'Last 365 days', 'Last 12 months', 'Last Year'];
-  activeFilter = signal('Last 7 days');
+activeFilter = signal<string | null>(null);
   selectFilter(filter: string) { this.activeFilter.set(filter); this.applyQuickFilter(filter); }
-  applyQuickFilter(filter: string) { /* ... كما سبق */ }
+applyQuickFilter(filter: string) {
+  const today = new Date();
+  let startDate = new Date();
+  let endDate = new Date();
+
+  switch (filter) {
+    case 'Today':
+      startDate = new Date(today);
+      break;
+
+    case 'Yesterday':
+      startDate = new Date(today);
+      startDate.setDate(today.getDate() - 1);
+      endDate = new Date(startDate);
+      break;
+
+    case 'Last 7 days':
+      startDate.setDate(today.getDate() - 7);
+      break;
+
+    case 'Last 30 days':
+      startDate.setDate(today.getDate() - 30);
+      break;
+
+    case 'Last 90 days':
+      startDate.setDate(today.getDate() - 90);
+      break;
+
+    case 'Last 365 days':
+      startDate.setDate(today.getDate() - 365);
+      break;
+
+    case 'Last 12 months':
+      startDate.setFullYear(today.getFullYear() - 1);
+      break;
+
+    case 'Last Year':
+      startDate = new Date(today.getFullYear() - 1, 0, 1);
+      endDate = new Date(today.getFullYear() - 1, 11, 31);
+      break;
+  }
+    this.cancelRange();
+
+  this.dateFrom.set(startDate);
+  this.dateTo.set(endDate);
+  this.activeFilter.set(filter);
+
+}
 
   dateFrom = signal<Date>(new Date(2023, 7, 16));
   dateTo = signal<Date>(new Date(2023, 7, 29));
@@ -71,6 +129,8 @@ export class MediaBuying {
   tempTo: Date | null = null;
 
   onSelect(date: Date) {
+      this.activeFilter.set(null);
+
     if (!this.tempFrom || (this.tempFrom && this.tempTo)) { this.tempFrom = date; this.tempTo = null; }
     else if (this.tempFrom && !this.tempTo) {
       if (date < this.tempFrom) { this.tempTo = this.tempFrom; this.tempFrom = date; }
@@ -97,11 +157,26 @@ export class MediaBuying {
 applyRange() {
   if (this.tempFrom) this.dateFrom.set(this.tempFrom);
   if (this.tempTo) this.dateTo.set(this.tempTo);
-  console.log('Date From:', this.dateFrom());
-  console.log('Date To:', this.dateTo());
-  console.log('Selected Filter:', this.activeFilter());
+
+
+
+  // ابعت 
+  this.sendToBackend();
 }
 
+sendToBackend() {
+    const from = this.dateFrom();
+  const to = this.dateTo();
 
+  const payload = {
+    campaignType: this.campaignType(),
+    from: `${from.getFullYear()}-${(from.getMonth()+1).toString().padStart(2,'0')}-${from.getDate().toString().padStart(2,'0')}`,
+    to: `${to.getFullYear()}-${(to.getMonth()+1).toString().padStart(2,'0')}-${to.getDate().toString().padStart(2,'0')}`,
+  };
+
+  console.log("📤 Payload to backend:", payload);
+
+
+}
   cancelRange() { this.tempFrom = null; this.tempTo = null; }
 }

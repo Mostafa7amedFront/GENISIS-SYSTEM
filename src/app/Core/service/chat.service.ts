@@ -12,7 +12,7 @@ import { IChatAttachmentMessages, IChatLink } from '../Interface/ichat';
 })
 export class ChatService {
   private hubConnection!: signalR.HubConnection;
-  private API_URL = `${environment.baseimageUrl}`;
+  private API_URL = `${environment.baseimageUrl}/`;
   private token = localStorage.getItem('auth_token');
   private currentProjectId: string | null = null;
 
@@ -51,11 +51,11 @@ const formattedMsg = {
   text: msg.text || msg.message || '',
   username: msg.userName,
   userId: msg.userId || '',
-
+ userImageUrl : msg.userImageUrl || '',
   sentAt: new Date(msg.sentAt),
   relativeDateString: msg.relativeDateString || '',
   projectId: msg.projectId || this.currentProjectId,
-  attachmentUrl: msg.attachmentUrl || '',
+  attachmentUrl: msg.attachmentUrl || 'assets/img/chat.png',
   date: msg.relativeDateString || 'Today',
   time: new Date(msg.sentAt).toLocaleTimeString(),
   files: msg.files || msg.attachments || []
@@ -102,10 +102,8 @@ const formattedMsg = {
     });
   }
 
-  // Get all messages
   public getAllMessages(projectId: string) {
     return this.http.get(`${this.API_URL}api/ProjectChat/${projectId}?pageNumber=1&pageSize=500`); 
-     //  up to incress pageSize
   }
   getLinkChat(projectId: string): Observable<IResponseOf<IChatLink[]> >{
     return this.http.get<IResponseOf<IChatLink[]> >(`${this.API_URL}api/ProjectChat/GetLinksMessgaes/${projectId}`); 

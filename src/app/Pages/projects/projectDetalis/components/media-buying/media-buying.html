@@ -7,16 +7,18 @@
                     <h2 class="mb-0">Media Buying</h2>
                 </div>
                 <h6 class="mt-4">Campaign Type</h6>
-                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
-                    [class.active]="campaignType() === 'Engagement'" (click)="selectCampaign('Engagement')">
+                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn" [class.active]="campaignType() === 0"
+                    (click)="selectCampaign('Engagement')">
                     Engagement
                 </button>
-                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
-                    [class.active]="campaignType() === 'Awareness'" (click)="selectCampaign('Awareness')">
+
+                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn" [class.active]="campaignType() === 1"
+                    (click)="selectCampaign('Awareness')">
                     Awareness
                 </button>
-                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
-                    [class.active]="campaignType() === 'Sales'" (click)="selectCampaign('Sales')">
+
+                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn" [class.active]="campaignType() === 2"
+                    (click)="selectCampaign('Sales')">
                     Sales
                 </button>
             </div>
@@ -79,12 +81,12 @@
                             <div class="w-50">
                                 <div class="d-flex justify-content-between mb-2">
                                     <button class="btn btn-sm btn-secondary"
-                                        (click)="prevMonth('left')">&#8592;</button>
+                                        (click)="prevMonth('right')">&#8592;</button>
                                     <div class="calendar-header text-white-50" style="font-size: 13px">
                                         {{ rightMonth() | date:'MMMM yyyy' }}
                                     </div>
                                     <button class="btn btn-sm btn-secondary"
-                                        (click)="nextMonth('left')">&#8594;</button>
+                                        (click)="nextMonth('right')">&#8594;</button>
                                 </div>
                                 <table class="calendar-table mb-2">
                                     <tr>
@@ -160,7 +162,7 @@
                 “The design was great maybe the quality of the presentation could be much better, thank you so much,
                 The design was great maybe the quality of the presentation could be much better, thank you so much
             </p>
-          
+
         </div>
     </div>
 </div>
