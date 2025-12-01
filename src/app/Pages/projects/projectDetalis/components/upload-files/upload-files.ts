@@ -12,10 +12,11 @@ import { SweetAlert } from '../../../../../Core/service/sweet-alert';
 import { Posts } from "../posts/posts";
 import { ShowMeeting } from "../show-meeting/show-meeting";
 import { Addpost } from "../addpost/addpost";
+import { MediaBuying } from "../media-buying/media-buying";
 
 @Component({
   selector: 'app-upload-files',
-  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Posts, ShowMeeting],
+  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Posts, ShowMeeting, MediaBuying],
   templateUrl: './upload-files.html',
   styleUrl: './upload-files.scss'
 })

@@ -1,0 +1,166 @@
+<div class="fourth pt-5">
+    <div class="container-fluid text-white p-5 mt-5" style="background-color: #171818; border-radius: 13px">
+        <div class="row">
+            <!-- Left: Media Buying & Campaign Type -->
+            <div class="col-md-4 btnsactive">
+                <div class="blue text-center p-2 rounded-3 mb-4" style="background-color: #0b6b6e">
+                    <h2 class="mb-0">Media Buying</h2>
+                </div>
+                <h6 class="mt-4">Campaign Type</h6>
+                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
+                    [class.active]="campaignType() === 'Engagement'" (click)="selectCampaign('Engagement')">
+                    Engagement
+                </button>
+                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
+                    [class.active]="campaignType() === 'Awareness'" (click)="selectCampaign('Awareness')">
+                    Awareness
+                </button>
+                <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
+                    [class.active]="campaignType() === 'Sales'" (click)="selectCampaign('Sales')">
+                    Sales
+                </button>
+            </div>
+
+            <!-- Right: Date Range Picker -->
+            <div class="col-md-8 d-flex justify-content-center align-items-center">
+                <div class="date-picker-box d-flex w-100"
+                    style="background: #232323; border-radius: 12px; padding: 32px 24px">
+                    <!-- Quick Filters -->
+                    <div class="quick-filters me-4" style="min-width: 120px">
+                        <div class="filter-item" *ngFor="let f of quickFilters" [class.active]="activeFilter() === f"
+                            (click)="selectFilter(f)">
+                            {{ f }}
+                        </div>
+                    </div>
+
+                    <!-- Date Range Picker UI -->
+                    <div class="w-100">
+                        <div class="d-flex mb-3 gap-2 w-100">
+                            <input type="text" class="form-control form-control-sm date-input"
+                                [value]="dateFrom() | date:'MMMM d, y'" readonly />
+                            <span class="text-white-50 align-self-center">-</span>
+                            <input type="text" class="form-control form-control-sm date-input"
+                                [value]="dateTo() | date:'MMMM d, y'" readonly />
+                        </div>
+
+                        <div class="d-flex gap-4">
+                            <!-- Calendar 1 -->
+                            <div class="w-50">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <button class="btn btn-sm btn-secondary"
+                                        (click)="prevMonth('left')">&#8592;</button>
+                                    <div class="calendar-header text-white-50" style="font-size: 13px">
+                                        {{ leftMonth() | date:'MMMM yyyy' }}
+                                    </div>
+                                    <button class="btn btn-sm btn-secondary"
+                                        (click)="nextMonth('left')">&#8594;</button>
+                                </div>
+                                <table class="calendar-table mb-2">
+                                    <tr>
+                                        <th>S</th>
+                                        <th>M</th>
+                                        <th>T</th>
+                                        <th>W</th>
+                                        <th>T</th>
+                                        <th>F</th>
+                                        <th>S</th>
+                                    </tr>
+                                    <tr *ngFor="let week of generateMonth(leftMonth()) | slice:0:6; let i = index">
+                                        <td *ngFor="let day of week" [class.text-muted]="!day.current"
+                                            [class.selected]="isSelected(day.date)"
+                                            [class.between]="isBetween(day.date)" (click)="onSelect(day.date)">
+                                            {{ day.date.getDate() }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Calendar 2 -->
+                            <div class="w-50">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <button class="btn btn-sm btn-secondary"
+                                        (click)="prevMonth('left')">&#8592;</button>
+                                    <div class="calendar-header text-white-50" style="font-size: 13px">
+                                        {{ rightMonth() | date:'MMMM yyyy' }}
+                                    </div>
+                                    <button class="btn btn-sm btn-secondary"
+                                        (click)="nextMonth('left')">&#8594;</button>
+                                </div>
+                                <table class="calendar-table mb-2">
+                                    <tr>
+                                        <th>S</th>
+                                        <th>M</th>
+                                        <th>T</th>
+                                        <th>W</th>
+                                        <th>T</th>
+                                        <th>F</th>
+                                        <th>S</th>
+                                    </tr>
+                                    <tr *ngFor="let week of generateMonth(rightMonth()); let i = index">
+                                        <td *ngFor="let day of week" [class.text-muted]="!day.current"
+                                            [class.selected]="isSelected(day.date)"
+                                            [class.between]="isBetween(day.date)" (click)="onSelect(day.date)">
+                                            {{ day.date.getDate() }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button class="btn btn-sm btn-secondary px-4"
+                                style="background: #232323; border: 1px solid #444" (click)="cancelRange()">
+                                Cancel
+                            </button>
+                            <button class="btn btn-sm px-4" style="background: #00bec5; color: #fff"
+                                (click)="applyRange()">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="mt-5 px-0">Campaign Stats</h6>
+            <div class="p-3 rounded-3" style="background: linear-gradient(to right, #001a1a, #005e5e)">
+                <div class="d-flex">
+                    <div class="text-center right ms-0 col">
+                        <p class="mb-0">Ad Spent</p>
+                        <h2 class="mb-0">100</h2>
+                    </div>
+                    <div class="text-center right ms-0 col">
+                        <p class="mb-0">Conversions</p>
+                        <h2 class="mb-0">02</h2>
+                    </div>
+                    <div class="text-center right ms-0 col">
+                        <p class="mb-0">Daily Budget</p>
+                        <h2 class="mb-0">150</h2>
+                    </div>
+                    <div class="text-center right ms-0 col">
+                        <p class="mb-0">ROAS</p>
+                        <h2 class="mb-0">2.1</h2>
+                    </div>
+                    <div class="text-center right ms-0 col">
+                        <p class="mb-0">CLICKS</p>
+                        <h2 class="mb-0">15</h2>
+                    </div>
+                    <div class="text-center right ms-0 border-0 col">
+                        <p class="mb-0">FOLLOWERS</p>
+                        <h2 class="mb-0">780</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex px-0 mt-5">
+                <p class="mb-0">Summary</p>
+                <p class="text-white-50 ms-auto mb-0">7 days ago</p>
+            </div>
+            <p class="text-white-50 mt-2 px-0" style="white-space: pre-line">
+                “The design was great maybe the quality of the presentation could be much better, thank you so much,
+                “The design was great maybe the quality of the presentation could be much better, thank you so much,
+                The design was great maybe the quality of the presentation could be much better, thank you so much
+            </p>
+          
+        </div>
+    </div>
+</div>

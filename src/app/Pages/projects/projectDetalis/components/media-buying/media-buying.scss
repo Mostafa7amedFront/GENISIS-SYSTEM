@@ -1,0 +1,100 @@
+        .fourth button {
+            border: none;
+            background-color: #2D2D2D;
+        }
+
+        .btnsactive .active {
+            border: 0.2px solid #ffffff6e;
+            background-color: #123535;
+        }
+
+        .campaign-btn {
+            background-color: #2D2D2D;
+            border: none;
+            font-size: 17px;
+            transition: background 0.2s, border 0.2s;
+        }
+
+        .campaign-btn.active,
+        .campaign-btn:focus {
+            border: 2px solid #00BEC5;
+            background-color: #123535;
+            color: #00BEC5;
+        }
+
+        .date-picker-box {
+            min-width: 400px;
+        }
+
+        .quick-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-item {
+            color: #bdbdbd;
+            font-size: 15px;
+            padding: 3px 0 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .filter-item.active,
+        .filter-item:hover {
+            color: #00BEC5;
+            background: #232323;
+            font-weight: bold;
+        }
+
+        .calendar-table {
+            width: 100%;
+            color: #fff;
+            background: transparent;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+        .calendar-table th,
+        .calendar-table td {
+            text-align: center;
+            padding: 2px 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+        }
+
+        .calendar-table td.selected {
+            background: #00BEC5;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .calendar-table td.text-muted {
+            color: #888 !important;
+        }
+
+        .date-input {
+            background: #232323;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 6px;
+            font-size: 13px;
+            padding: 2px 8px;
+        }
+
+        .fourth h6 {
+            font-size: 12px !important;
+        }
+
+        .fourth p {
+            font-size: 13px !important;
+        }
+
+        .fourth .right {
+            border-right: 1px solid #ffffff60;
+            padding-left: 20px;
+            margin-left: 20px;
+        }
