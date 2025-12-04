@@ -1,0 +1,41 @@
+<div class="d-flex col p-4 rounded-3 mt-5" style="background-color: #2d2d2d">
+  <form [formGroup]="form" class="col-7 pe-3">
+    <input type="date" formControlName="postingAt" />
+
+    <h6 class="mt-2 pt-3">Title :</h6>
+    <input type="text" placeholder="write a Title" class="w-100" formControlName="title" />
+
+    <h6 class="mt-2 pt-3">Number Of Post :</h6>
+    <input type="number" placeholder="write a Title" class="w-100" formControlName="Number" />
+    <h6 class="mt-2 pt-3">Caption :</h6>
+    <textarea cols="15" rows="2" placeholder="write a Caption" class="w-100" formControlName="captionEng"></textarea>
+
+    <h6 class="text-end pt-3">: وصف</h6>
+    <textarea cols="15" rows="2" class="w-100 textarea-start" placeholder="اكتب وصف"
+      formControlName="captionAra"></textarea>
+
+    <button class="border-0 rounded-3 text-white small px-4 mt-3 end-but w-100 py-2" style="background-color: #0b6b6e"
+      (click)="addPost()">
+      ADD POST
+    </button>
+  </form>
+
+  <div class="col-5 ps-4 position-relative">
+    <div class="upload-card" (click)="triggerFileInput()">
+      <!-- لو مفيش صورة/فيديو -->
+      <div class="upload-content" *ngIf="!previewUrl">
+        <i class="fa-solid fa-folder-open icon"></i>
+        <p>upload Media</p>
+      </div>
+
+      <!-- لو الصورة -->
+      <img *ngIf="isImage && previewUrl" [src]="previewUrl" class="preview-img rounded-3" />
+
+      <!-- لو الفيديو -->
+      <video *ngIf="isVideo && previewUrl" [src]="previewUrl" controls class="preview-video rounded-3"></video>
+
+      <!-- input مخفي -->
+      <input #fileInput type="file" accept="image/*,video/*" class="d-none" (change)="onFileSelected($event)" />
+    </div>
+  </div>
+</div>

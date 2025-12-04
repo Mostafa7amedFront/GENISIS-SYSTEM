@@ -8,7 +8,9 @@ export interface IProject {
     clientName:         string;
     clientImage:        string;
     projectStatus:      number;
+    clientAbout:       string;
     deadLine:           Date;
+    clientId:           string;
     createdAt:          Date;
     projectType:number;
     employees:          Employee[];

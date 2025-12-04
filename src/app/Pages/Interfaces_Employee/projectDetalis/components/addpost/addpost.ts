@@ -1,0 +1,95 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { PostService } from '../../../../../Core/service/post.service';
+import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
+import { SweetAlert } from '../../../../../Core/service/sweet-alert';
+
+@Component({
+  selector: 'app-addpost',
+  imports: [ReactiveModeuls]  ,
+  templateUrl: './addpost.html',
+  styleUrls: ['./addpost.scss']
+})
+export class Addpost {
+
+  form!: FormGroup;
+  selectedFile!: File;
+
+  previewUrl: string | null = null;
+  isImage: boolean = false;
+  isVideo: boolean = false;
+
+  id!: string;
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private postService: PostService,
+    private _alert:SweetAlert
+  ) {}
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      postingAt: ['', Validators.required],
+      title: ['', Validators.required],
+       Number: ['', Validators.required],
+      captionEng: ['', Validators.required],
+      captionAra: ['', Validators.required]
+    });
+
+    this.route.parent?.paramMap.subscribe(params => {
+      const projectId = params.get('id');
+      if (projectId) this.id = projectId;
+    });
+  }
+
+  triggerFileInput() {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    this.selectedFile = file;
+
+    this.isImage = file.type.startsWith('image');
+    this.isVideo = file.type.startsWith('video');
+
+    this.previewUrl = URL.createObjectURL(file);
+  }
+
+  addPost() {
+    if (this.form.invalid || !this.selectedFile) {
+            this._alert.toast('Please fill all fields and upload media', 'warning');
+
+      return;
+    }
+
+    this.postService.addProjectPost(
+      this.id,
+      this.form.value.title,
+      this.form.value.Number,
+      this.form.value.captionEng,
+      this.form.value.captionAra,
+      this.form.value.postingAt,
+      this.selectedFile
+    ).subscribe({
+      next: (res) => {
+      this._alert.toast('Post added successfully!', 'success');
+       this.form.reset();
+       this.postService.notifyRefresh();
+       this.previewUrl = null;
+       this.isImage = false;
+       this.isVideo = false;
+      },
+      error: (err) => {
+        console.log(err);
+      this._alert.toast('Error adding Post', 'error');
+      }
+    });
+  }
+}

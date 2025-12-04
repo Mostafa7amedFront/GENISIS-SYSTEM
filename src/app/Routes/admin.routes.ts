@@ -102,8 +102,21 @@ export const adminroutes: Routes = [
         path: 'editservice/:id',
         loadComponent: () => import('../Pages/service/components/editservice/editservice').then(m => m.Editservice)
       },
-
-
+      {
+        path: 'updateStats/:id',
+        loadComponent: () =>
+          import('../Pages/projects/projectDetalis/components/update-campaign-stats/update-campaign-stats').then(m => m.UpdateCampaignStats),
+      },
+      {
+        path: 'updateSummary/:id',
+        loadComponent: () =>
+          import('../Pages/projects/projectDetalis/components/update-summary/update-summary').then(m => m.UpdateSummary),
+      },
+      {
+        path: 'add-media-buying/:id',
+        loadComponent: () =>
+          import('../Pages/projects/projectDetalis/components/add-media-buying/add-media-buying').then(m => m.AddMediaBuying),
+      },
       {
         path: 'getfeedback/:id',
         loadComponent: () =>
@@ -120,11 +133,11 @@ export const adminroutes: Routes = [
           import('../Pages/projects/projectDetalis/project-details')
             .then(m => m.ProjectDetails),
         children: [
-              {
-      path: '',
-      redirectTo: 'posts/add', 
-      pathMatch: 'full'
-    },
+          {
+            path: '',
+            redirectTo: 'posts/add',
+            pathMatch: 'full'
+          },
           {
             path: 'posts',
             loadComponent: () =>

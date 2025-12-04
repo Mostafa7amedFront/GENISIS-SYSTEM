@@ -10,10 +10,12 @@ import { Feedback } from "../feedback/feedback";
 import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
 import { Chat } from "../chat/chat";
 import { SweetAlert } from '../../../../../Core/service/sweet-alert';
+import { Posts } from "../posts/posts";
+import { MediaBuying } from "../media-buying/media-buying";
 
 @Component({
   selector: 'app-upload-files',
-  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Todolist],
+  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Todolist, Posts, MediaBuying],
   templateUrl: './upload-files.html',
   styleUrl: './upload-files.scss'
 })

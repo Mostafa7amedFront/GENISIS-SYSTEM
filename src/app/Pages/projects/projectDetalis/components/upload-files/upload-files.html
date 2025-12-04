@@ -21,15 +21,15 @@
                 {{ aboutproject()?.clientName }}
               </h6>
               <p class="mb-2 low text-lg-start text-center">{{ aboutproject()?.projectTitle }}</p>
-              <h6 class="mb-1 text-start">Project Description</h6>
+              <h6 class="mb-1 text-start">About {{ aboutproject()?.clientName }}</h6>
               <p class="mb-0 low lh-1 mb-2 px-lg-0 mx-lg-0 text-start" style="white-space: pre-line">
-                The {{ aboutproject()?.projectDescription }}
+                 {{ aboutproject()?.clientAbout }}
               </p>
             </div>
           </div>
         </div>
         <div class="col-xl-4 col-lg-3 text-lg-end px-0">
-          <p class="small-2 mb-1 me-2">ASSIGENED TO</p>
+          <p class="small-2 mb-1 ">ASSIGENED TO</p>
           <div class="d-flex flex-lg-row-reverse gap-2">
             @for (employee of aboutproject()?.employees; track employee.id) {
             <div class="">
@@ -121,7 +121,7 @@
 
 }
 @if(aboutproject()?.projectType == 2){
- <app-media-buying />
+<app-media-buying />
 
 }
 <app-chat/>

@@ -1,0 +1,85 @@
+<div class="third pt-5">
+  <div class="text-white p-5 mt-5" style="background-color: #171818; border-radius: 13px">
+    <div class="row">
+      <div class="d-flex justify-content-between mb-5">
+        <div class="col-5">
+          <div class="blue text-center p-2 rounded-3 pe-2" style="background-color: #0b6b6e; margin-left: -70px">
+            <h2 class="pe-4  mb-0">SOCIAL MEDIA </h2>
+          </div>
+        </div>
+      
+      </div>
+      <div class=" col-8">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="d-flex ms-5 col rounded-3 " style="background-color: transparent">
+
+
+        <!-- month-picker.component.html -->
+        <div class="month-picker d-flex w-100 justify-content-between flex-column gap-2">
+          <div class="header m-0">
+            <span (click)="prevPage()">&#8592;</span>
+            <span> Page {{ pageNumber }} </span>
+            <span (click)="nextPage()">&#8594;</span>
+          </div>
+
+          <div class="grid post-card">
+            <div *ngFor="let post of displayPosts; let i = index" class="cardSelect"
+              style="cursor: pointer; border-radius: 5px;">
+
+              <ng-container *ngIf="post.file; else emptyDiv">
+                 @if(post.fileType === 0) {
+                       <img [src]="baseurl + post.file" class="w-100 h-100 object-fit-cover rounded-1" [routerLink]="['posts' , post.id]" />
+                 }
+                  @if(post.fileType === 1) {
+                                              <img src="Image/video-frame-svgrepo-com.svg" class="w-100 h-100 " style="object-fit: fill;" [routerLink]="['posts' , post.id]" />
+
+                  }
+              </ng-container>
+
+              <!-- إذا مفيش ملف -->
+              <ng-template #emptyDiv>
+                <div class="w-100 h-100 bg-gray-800 rounded cardEmpty p-5"></div>
+              </ng-template>
+
+            </div>
+          </div>
+
+          <div class="footer m-0">
+            <span (click)="prevMonth()">&#8592;</span>
+            <span>{{ monthNames[currentMonth()] }}</span>
+            <span (click)="nextMonth()">&#8594;</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-5 pt-3">Project Progress</p>
+      <div class="loader rounded-3 p-3" style="background-color: #2d2d2d; color: white">
+        <div class="d-flex w-100 align-items-center">
+          <div>
+            <h1 id="percentText" class="mb-0" style="font-size: 70px">
+              <span id="percentValue" contenteditable="true" aria-label="Edit percentage">60</span>
+              <span class="text-white-50">%</span>
+            </h1>
+          </div>
+
+          <div class="ms-auto text-end">
+            <p class="mb-0">Collaborators</p>
+            <div class="d-flex">
+              <img class="me-1 rounded-3" height="50" src="assets/img/EDITED 8 1.svg" alt="" />
+              <img class="me-1 rounded-3" height="50" src="assets/img/EDITED 8 1.svg" alt="" />
+              <img class="me-1 rounded-3"  height="50" src="assets/img/EDITED 8 1.svg" alt="" />
+              <img class="rounded-3" height="50"  src="assets/img/EDITED 8 1.svg" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="bar-wrapper mt-3 rounded-3" style="height: 12px">
+          <div id="barGlow" class="bar-glow"></div>
+
+          <div id="loaderBar" class="bar-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

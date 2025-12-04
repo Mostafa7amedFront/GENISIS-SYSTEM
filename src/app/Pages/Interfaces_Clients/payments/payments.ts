@@ -28,14 +28,19 @@ userId = localStorage.getItem('Id_Clients') || '';
   }
 
   generateMonths(selectedDate: Date) {
-    this.displayedMonths = [];
-    for (let i = -4; i < 4; i++) {
-      const date = new Date(selectedDate);
-      date.setMonth(selectedDate.getMonth() + i);
-      this.displayedMonths.push({
-        label: date.toLocaleString('default', { month: 'long', year: 'numeric' }),
-        date
-      });
+  this.displayedMonths = [];
+
+  const startYear = selectedDate.getFullYear();
+  const totalMonths = 24;
+
+  for (let i = 0; i < totalMonths; i++) {
+    const date = new Date(startYear, i, 1);
+  date.setFullYear(startYear, i, 3); 
+  date.setHours(0, 0, 0, 0); 
+  this.displayedMonths.push({
+    label: date.toLocaleString('default', { month: 'long', year: 'numeric' }),
+    date
+  });
     }
 
     const nextDate = new Date(selectedDate);

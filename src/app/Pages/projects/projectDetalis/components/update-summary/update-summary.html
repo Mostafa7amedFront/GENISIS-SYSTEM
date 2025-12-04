@@ -1,0 +1,26 @@
+<div class="CreateAccount px-3">
+    <h1 class="mt-5 text-white text-end big">UPDATE SUMMARY</h1>
+
+    <form class="CreateAccount-box rounded-3 text-white">
+        <div class="row">
+            <p class="fw-bold">Fill in Summary Information</p>
+
+            <textarea
+              [(ngModel)]="summary"
+              name="summary"
+              placeholder="Write the Summary Of Project"
+              rows="6">
+            </textarea>
+        </div>
+    </form>
+
+    <!-- Submit -->
+    <h2
+      class="mt-3 text-end pt-sm-4 logout px-3"
+      style="color: #00bec5; cursor: pointer;"
+      (click)="onSave()"
+    >
+        ADD SUMMARY
+        <i class="ps-3 fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
+    </h2>
+</div>

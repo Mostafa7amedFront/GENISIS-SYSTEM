@@ -1,3 +1,4 @@
+import { PostSelector } from './../Pages/Interfaces_Clients/projectDetalis/components/post-selector/post-selector';
 import { Routes } from '@angular/router';
 import { MainlayoutClients } from '../Layout/Clients/mainlayout-clients/mainlayout-clients';
 import { roleGuard } from '../Core/guards/role.guard';
@@ -25,6 +26,31 @@ export const clientRoutes: Routes = [
         path: 'projectDetails/:id',
         loadComponent: () =>
           import('../Pages/Interfaces_Clients/projectDetalis/project-details').then(m => m.ProjectDetails),
+              children: [
+                 {
+            path: '',
+            redirectTo: 'posts/show',
+            pathMatch: 'full'
+          },
+          {
+            path: 'posts',
+            loadComponent: () =>
+              import('../Pages/projects/projectDetalis/components/posts/posts')
+                .then(m => m.Posts)
+          },
+          {
+            path: 'posts/show',
+            loadComponent: () =>
+              import('../Pages/Interfaces_Clients/projectDetalis/components/post-selector/post-selector')
+                .then(m => m.PostSelector)
+          },
+          {
+            path: 'posts/:id',
+            loadComponent: () =>
+              import('../Pages/projects/projectDetalis/components/show-post/show-post')
+                .then(m => m.ShowPost)
+          }
+              ]
       },
       {
         path: 'feedback',

@@ -39,6 +39,8 @@ export class Editproject {
   rightSelected = signal<any[]>([]); // ✅ employee ids
   selectedClientTitle: string | null = null;
   selectedDate: Date | null = null;
+  paymentAmount = signal<number>(0);
+  projectType = signal<number>(0);
 
   options = ['IN PROGRESS', 'PAUSED', 'COMPLETED'];
   clientTitleMap: { [key: string]: number } = {
@@ -76,15 +78,17 @@ export class Editproject {
     // Load Project Data
     this._project.getById(this.projectId).subscribe({
       next: (res) => {
-        const project = res.value;
+       const project = res.value;
         const employeeIds = project.employees.map((emp: any) => emp.id);
 
         this.titleInput.nativeElement.value = project.projectTitle;
         this.descInput.nativeElement.value = project.projectDescription;
         this.selectedClientTitle = this.options[project.projectStatus];
+              this.projectType.set(project.projectType); // <--- هنا
 
+                      this.paymentAmount.set(project.projectPayment);
         // ✅ fix signals
-        this.leftSelected.set(project.id);
+    this.leftSelected.set(project.clientId); // <--- استخدم clientId
         this.rightSelected.set(employeeIds);
 
         this.selectedDate = new Date(project.deadLine);
@@ -211,6 +215,7 @@ export class Editproject {
     formData.append('ProjectStatus', projectStatus.toString());
     formData.append('DeadLine', deadline);
     formData.append('ClientId', this.leftSelected()!);
+  formData.append('ProjectPayment', String(this.paymentAmount())); 
 
     this.rightSelected().forEach(id => formData.append('EmployeeIds', id));
     this.files.forEach(file => formData.append('AttachmentUrl', file, file.name));

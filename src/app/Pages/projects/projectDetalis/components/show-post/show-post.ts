@@ -1,3 +1,4 @@
+import { DownloadFileService } from './../../../../../Core/service/download-file.service';
 import { Component, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../../../../Core/service/post.service';
@@ -18,7 +19,7 @@ export class ShowPost {
   posts = signal<Post>({} as Post);
   baseurl = environment.baseimageUrl
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private _post: PostService) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private _post: PostService , private _downloadFile :DownloadFileService) { }
 
    ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -45,22 +46,26 @@ this._post.getProjectOnePost(postId).subscribe({
   }
 
 
-downloadFile(fileName: any) {
-  const fileUrl = 'https://genesissystem.runasp.net' + fileName;
-
-  fetch(fileUrl)
-    .then(response => response.blob())
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
+downloadFile(fileUrl: any) {
+  this._downloadFile.downloadFile(fileUrl).subscribe({
+    next: (blob: Blob) => {
       const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName.split('/').pop() || 'download';
-      document.body.appendChild(a);
+      const objectUrl = URL.createObjectURL(blob);
+      a.href = objectUrl;
+
+      // extract filename
+      const fileName = fileUrl.split('/').pop() ?? 'downloaded_file';
+      a.download = fileName;
+
       a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    })
-    .catch(err => console.error('Error downloading file:', err));
+
+      URL.revokeObjectURL(objectUrl);
+    },
+    error: (err) => {
+      console.log("Download error:", err);
+    }
+  });
 }
+
 
 }

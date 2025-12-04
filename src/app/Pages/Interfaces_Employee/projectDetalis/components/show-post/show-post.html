@@ -1,0 +1,34 @@
+<div class="d-flex col p-4 rounded-3 mt-5" style="background-color: #2d2d2d">
+  <div class="col-7 pe-3">
+    <div class="d-flex align-items-center">
+      <h3 class="mb-0">Post {{ posts().number }}</h3>
+      <div class="box row py-1 px-4 ms-auto rounded-3" style="background-color: #616161">
+        @if(posts().fileType === 0) { Static } @if(posts().fileType === 1) { Animated }
+      </div>
+    </div>
+    <h5 class="text-white-50">{{ posts().date | monthDay }}</h5>
+    <h6 class="mt-4 pt-3">Title :</h6>
+    <p>{{ posts().title }}</p>
+    <h6 class="mt-4 pt-3">Caption :</h6>
+    <p style="text-align: justify">{{ posts().captionEng }}</p>
+    <h6 class="text-end mt-4 pt-3">: وصف</h6>
+
+    <P class="text-end" style="text-align: justify">{{ posts().captionAra }}</P>
+  </div>
+  <div class="col-5 ps-4">
+    <div class="upload position-relative">
+      @if(posts().fileType === 0) {
+      <img [src]="baseurl + posts().file" class="preview-img rounded-3" />
+      <div class="btn_bo">
+              <button class="btn w-100" (click)="downloadFile(posts().file)">load</button>
+
+      </div>
+      } @if(posts().fileType === 1) {
+      <video [src]="baseurl + posts().file" controls class="preview-video rounded-3"></video>
+
+      }
+
+    </div>
+
+  </div>
+</div>

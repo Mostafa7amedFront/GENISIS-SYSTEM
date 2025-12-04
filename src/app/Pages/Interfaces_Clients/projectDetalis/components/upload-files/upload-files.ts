@@ -8,10 +8,13 @@ import { IProject, Note } from '../../../../../Core/Interface/iproject';
 import { Feedback } from "../feedback/feedback";
 import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
 import { Chat } from "../chat/chat";
+import { Todolist } from "../../../../Interfaces_Employee/projectDetalis/components/todolist/todolist";
+import { MediaBuying } from "../media-buying/media-buying";
+import { Posts } from "../posts/posts";
 
 @Component({
   selector: 'app-upload-files',
-  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat],
+  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Todolist, MediaBuying, Posts],
   templateUrl: './upload-files.html',
   styleUrl: './upload-files.scss'
 })

@@ -85,7 +85,7 @@ input[type="number"] {
 /* Start team */
 .team-container{
     background-color: var(--dark);
-   max-height: 1700px !important;
+    max-height: 1700px !important;
 }
 .team .team-container h1{
     font-size: 60px;
@@ -205,7 +205,7 @@ input[type="number"] {
         max-height: 480px !important;
     }
     .team-container {
-          max-height: 1500px  !important;
+        max-height: 1500px  !important;
     }
     .team .right-box p {
         font-size: 10px;
@@ -239,7 +239,7 @@ input[type="number"] {
     padding-left: 10px;
   }
     .team-container {
-          max-height: 1340px;
+        max-height: 1340px;
     }
     .team .team-container h1 {
         font-size: 30px;
@@ -304,6 +304,9 @@ input[type="number"] {
 }
 .prfoile .right-box h2 {
     height: 26px;
+}
+.btn-check:focus + .btn-primary, .btn-primary:focus{
+    box-shadow: none !important;
 }
 .profile .right-box span {
     font-size: 100px;
