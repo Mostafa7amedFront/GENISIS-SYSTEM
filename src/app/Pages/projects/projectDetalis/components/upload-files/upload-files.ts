@@ -46,6 +46,16 @@ export class UploadFiles {
   onUploadClick() {
     this.fileInput.nativeElement.click();
   }
+changeStatus() {
+  let project = this.aboutproject();
+
+  if (!project) return;
+
+  let newStatus = (project.projectStatus + 1) % 3;
+
+  project.projectStatus = newStatus;
+
+}
 
 onFileSelected(event: Event) {
   const input = event.target as HTMLInputElement;
