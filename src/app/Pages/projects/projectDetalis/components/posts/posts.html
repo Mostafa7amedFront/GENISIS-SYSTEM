@@ -58,7 +58,16 @@
         </div>
       </div>
 
-      <p class="mt-5 pt-3">Project Progress</p>
+     <div class="d-flex justify-content-between align-items-center">
+           <p class="mt-5 pt-3">Project Progress</p>
+      <div class="mt-3 d-flex gap-2">
+  <button class="btn" (click)="increaseProgress(25)">+25%</button>
+  <button class="btn " (click)="increaseProgress(50)">+50%</button>
+  <button class="btn " (click)="increaseProgress(75)">+75%</button>
+  <button class="btn" (click)="increaseProgress(100)">+100%</button>
+</div>
+
+     </div>
       <div class="loader rounded-3 p-3" style="background-color: #2d2d2d; color: white">
         <div class="d-flex w-100 align-items-center">
           <div>

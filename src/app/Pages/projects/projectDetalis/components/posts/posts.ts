@@ -45,6 +45,9 @@ totalPages = 1;
         this.loadPosts(projectId);
       }
     });
+
+      this.updateBar();
+
   }
 
   goAddPost() {
@@ -102,4 +105,23 @@ prevPage() {
     }
     return filledPosts;
   }
+
+  progress = 0; // القيمة الحالية
+
+
+
+increaseProgress(amount: number) {
+  this.progress = Math.min(100, this.progress + amount); // مينفعش نعدي 100
+  this.updateBar();
+}
+
+updateBar() {
+  const bar = document.getElementById('loaderBar');
+  const percentText = document.getElementById('percentValue');
+  const glow = document.getElementById('barGlow');
+
+  if (bar) bar.style.width = this.progress + '%';
+  if (glow) glow.style.width = this.progress + '%';
+  if (percentText) percentText.innerText = this.progress + '';
+}
 }
