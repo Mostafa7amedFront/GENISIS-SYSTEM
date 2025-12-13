@@ -40,7 +40,6 @@
 
             <div class="message-content-wrapper">
               <img [src]="message.userImageUrl ? baseurl  + message.userImageUrl :  'assets/img/chat.png'" class="user-img" />
-c
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
                 <p class="message-content fst-italic">{{ message.text }}</p>
 
@@ -81,20 +80,26 @@ c
 
      
 
-          <div class="message p-0" >
+          <div class="message p-0 mt-3" >
 
 
             <div class="message-content-wrapper">
 
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
 
-               <a class="file-card d-flex align-items-center gap-2" target="_blank" [href]="baseurl + message.attachmentUrl" download>
+                      @if (message.files.length) {
+                <div class="dataShow d-flex align-items-center gap-2">
+                  @for (file of message.files; track file.id ; let i = $index) {
+                  <a class="file-card d-flex align-items-center gap-2" target="_blank" [href]="baseurl + file.fileUrl" download>
                     <img class="attach-img" src="assets/img/new-document 2.svg" />
                     <div class="file-info">
                       <div class="file-name"> File {{i + 1}}</div>
-                      <div class="file-size">5 MB</div>
+                      <div class="file-size">{{ 4 }} MB</div>
                     </div>
                   </a>
+                  }
+                </div>
+                }
               </div>
             </div>
 

@@ -20,11 +20,15 @@ export interface IChatLink {
   username: string;
 }
 export interface IChatAttachmentMessages {
-  id: string;
-  attachmentUrl: string;
-    sentAt: string;
+  messageId: string
+  senderName: string
+  sentAt: string
+  files: File[]
+}
 
-  username: string;
+export interface File {
+  id: string
+  fileUrl: string
 }
 export interface IChatDayGroup {
   date: string;
