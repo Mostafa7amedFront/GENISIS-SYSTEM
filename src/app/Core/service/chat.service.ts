@@ -51,7 +51,7 @@ const formattedMsg = {
   text: msg.text || msg.message || '',
   username: msg.userName,
   userId: msg.userId || '',
- userImageUrl : msg.userImageUrl || 'assets/img/chat.png',
+    userImageUrl : msg.userImageUrl || 'assets/img/chat.png',
   sentAt: new Date(msg.sentAt),
   relativeDateString: msg.relativeDateString || '',
   projectId: msg.projectId || this.currentProjectId,
