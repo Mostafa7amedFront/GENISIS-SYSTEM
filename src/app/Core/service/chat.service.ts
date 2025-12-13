@@ -50,11 +50,11 @@ const formattedMsg = {
   text: msg.text || msg.message || '',
   username: msg.userName,
   userId: msg.userId || '',
-  userImageUrl : msg.userImageUrl || 'assets/img/chat.png',
+  userImageUrl : msg.userImageUrl,
   sentAt: new Date(msg.sentAt),
   relativeDateString: msg.relativeDateString || '',
   projectId: msg.projectId || this.currentProjectId,
-  attachmentUrl: msg.attachmentUrl || 'assets/img/chat.png',
+  attachmentUrl: msg.attachmentUrl,
   date: msg.relativeDateString || 'Today',
   time: new Date(msg.sentAt).toLocaleTimeString(),
   files:  msg.attachments || []
