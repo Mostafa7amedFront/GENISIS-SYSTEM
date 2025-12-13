@@ -18,6 +18,7 @@ export interface IChatLink {
   sentAt: string;
   link: string;
   username: string;
+  userImageUrl:string
 }
 export interface IChatAttachmentMessages {
   messageId: string
