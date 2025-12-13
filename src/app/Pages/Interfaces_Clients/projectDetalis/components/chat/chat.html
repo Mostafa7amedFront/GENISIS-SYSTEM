@@ -39,8 +39,8 @@
             <p class="username">{{ message.username }}</p>
 
             <div class="message-content-wrapper">
-              <img [src]=" message.userImageUrl === null ? baseurl  + message.userImageUrl : message.userImageUrl  " class="user-img" />
-
+              <img [src]="message.userImageUrl ? baseurl  + message.userImageUrl :  'assets/img/chat.png'" class="user-img" />
+c
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
                 <p class="message-content fst-italic">{{ message.text }}</p>
 
