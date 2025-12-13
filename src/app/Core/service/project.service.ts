@@ -81,7 +81,7 @@ getProjectEmployee(data: { pageNumber?: number; pageSize?: number; employeeId?: 
     const url = `${this.API_URL}/AddAttacment/${projectId}`;
     const formData = new FormData();
     files.forEach(file => {
-      formData.append('AttachmentUrl', file);
+      formData.append('files', file);
     });
     return this._httpClient.post(url, formData);
   }

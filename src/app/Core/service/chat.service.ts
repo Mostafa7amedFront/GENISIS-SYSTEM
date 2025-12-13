@@ -21,7 +21,6 @@ export class ChatService {
 
   constructor(private http: HttpClient) {}
 
-  // Start SignalR connection
   public async startConnection(): Promise<void> {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${this.API_URL}hubs/chat`, {
@@ -51,14 +50,14 @@ const formattedMsg = {
   text: msg.text || msg.message || '',
   username: msg.userName,
   userId: msg.userId || '',
-    userImageUrl : msg.userImageUrl || 'assets/img/chat.png',
+  userImageUrl : msg.userImageUrl || 'assets/img/chat.png',
   sentAt: new Date(msg.sentAt),
   relativeDateString: msg.relativeDateString || '',
   projectId: msg.projectId || this.currentProjectId,
   attachmentUrl: msg.attachmentUrl || 'assets/img/chat.png',
   date: msg.relativeDateString || 'Today',
   time: new Date(msg.sentAt).toLocaleTimeString(),
-  files: msg.files || msg.attachments || []
+  files:  msg.attachments || []
 };
 
       this.messages.update(curr => [...curr, formattedMsg]);
