@@ -6,10 +6,10 @@
     background-position-x: 50%;
   "
 >
-  <app-sidebar (toggleSidebar)="onToggleSidebar($event)"></app-sidebar>
+<app-navbar/>
 
-  <div class="main-content my-5" [class.sidebar-closed]="isSidebarClosed">
-    <router-outlet></router-outlet>
-  </div>
+ <div class="container my-5">
+      <router-outlet></router-outlet>
+
+ </div>
 </div>
-<pre></pre>

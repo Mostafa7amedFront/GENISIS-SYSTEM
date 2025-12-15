@@ -51,7 +51,7 @@
                     <div class="flex-wrap  pb-2 rounded-3 d-flex  gap-4 mb-2">
                         <div class="text-center col seletType " [class.active]="selectedProjectType() === 0"
                             (click)="selectProjectType(0)">
-                            <p class="mb-0">Simple Project</p>
+                            <p class="mb-0">One time  Project</p>
                         </div>
 
                         <div class="text-center col seletType " [class.active]="selectedProjectType() === 1"
@@ -109,7 +109,7 @@
                                 <div class="mt-4 row">
                                     <div class="col ">
                                         @switch (project.projectType) {
-                                        @case (0) { <h6 class="mb-3 booked  mb-0">Simple Project </h6> }
+                                        @case (0) { <h6 class="mb-3 booked  mb-0">One time  Project </h6> }
                                         @case (1) { <h6 class="mb-3 booked  mb-0">Social Media</h6> }
                                         @case (2) { <h6 class="mb-3 booked  mb-0">Media Buying </h6> }
                                         }

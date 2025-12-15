@@ -5,7 +5,9 @@
         object-fit: cover;
 
 }
-
+h6{
+  white-space: nowrap;
+}
 .card {
   position: relative;
   overflow: hidden; // عشان ما يخرجش أي جزء برا الكارت

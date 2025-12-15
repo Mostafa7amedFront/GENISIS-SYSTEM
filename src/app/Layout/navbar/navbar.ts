@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { LoginService } from '../../Core/service/login';
 
 @Component({
   selector: 'app-navbar',
@@ -8,5 +9,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.scss'
 })
 export class Navbar {
+  _login = inject(LoginService);
 
+
+
+     logout() {
+    this._login.logout();
+  }
 }

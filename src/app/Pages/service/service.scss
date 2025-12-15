@@ -2,10 +2,12 @@
         object-fit: cover;
 
 }
-
+.ServiceAPP{
+  min-height: 80vh;
+}
 .card {
   position: relative;
-  overflow: hidden; // عشان ما يخرجش أي جزء برا الكارت
+  overflow: hidden; 
   padding: 1rem;
  background-color: var(--dark);
   .cardOptions {
