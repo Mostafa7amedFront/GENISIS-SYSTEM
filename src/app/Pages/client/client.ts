@@ -11,7 +11,7 @@ import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
 
 @Component({
   selector: 'app-client',
-  imports: [CommonModule, RouterModule, ShortenPipe , LeadingZeroPipe],
+  imports: [CommonModule, RouterModule,  LeadingZeroPipe],
   templateUrl: './client.html',
   styleUrl: './client.scss'
 })
