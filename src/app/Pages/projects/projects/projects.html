@@ -39,7 +39,7 @@
         </div>
             </div>
             <div class="col-12 col-lg-6 pb-3 mt-sm-2 pe-lg-4 mt-0">
-                <div class="d-flex flex-column justify-content-between h-90">
+        <div class="d-flex flex-column justify-content-between gap-1">
                     <div class="dropdown text-end">
                         <div class="select" (click)="toggleMenu()">
                             <div class="caret">
@@ -49,7 +49,7 @@
                             <span class="selected fs-2">{{ selected() }}</span>
 
                         </div>
-                        <p class="small mb-0 text-end">KEEP THE GOOD WORK!!</p>
+            <p class="small mb-1 text-end">KEEP THE GOOD WORK!!</p>
                         <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
                             <li *ngFor="let option of options" (click)="selectOption(option)"
                                 [class.active]="selected() === option">
