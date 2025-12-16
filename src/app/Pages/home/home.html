@@ -2,47 +2,47 @@
     <div class="d-flex justify-content-between align-items-center headerText">
         <h2 class=" pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addemployee">Add Employee <i
                 class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h2>
-        <h1 class=" big">THE TEAM</h1>
+        <h1 class=" big mb-0">THE TEAM</h1>
 
     </div>
     <div class=" p-md-5 p-3 rounded team-container">
         <div class=" row g-3 g-lg-4">
-            <div class="col-12 col-lg-6 pb-3 pe-lg-4">
+            <div class="col-12 col-lg-6 pb-3 px-0 pe-4">
                 <div class="d-flex flex-column justify-content-between h-100">
                     <h1 class="mb-0">{{ today | date: 'd, MMM' | uppercase }}</h1>
                     <h4>Hello, Youssef</h4>
                     <div
-                        class="project-stats d-flex flex-wrap justify-content-center align-items-center rounded blue p-3">
+                        class="project-stats rounded blue ">
 
-                        <div class="p-0 text-center stat-card m-2">
+                        <div class="p-0 text-center  mt-2 m-0 mb-0">
                             <p class="mb-0">Rising Talent</p>
-                            <p class="mb-0 fs-3">{{getProjectCounts().risingTalent| leadingZero}}</p>
+                            <p class="mb-0 mt-2 fs-3">{{getProjectCounts().risingTalent| leadingZero}}</p>
                         </div>
-                        <div class="p-0 text-center stat-card m-2">
+                        <div class="p-0 text-center  mt-2 m-0 mb-0">
                             <p class="mb-0">Design Star </p>
-                            <p class="mb-0 fs-3">{{getProjectCounts().designStar| leadingZero}}</p>
+                            <p class="mb-0  mt-2  fs-3">{{getProjectCounts().designStar| leadingZero}}</p>
                         </div>
-                        <div class="p-0 text-center stat-card m-2">
+                        <div class="p-0 text-center  mt-2 m-0 mb-0">
                             <p class="mb-0">Top Tier </p>
-                            <p class="mb-0 fs-3">{{getProjectCounts().topTier| leadingZero}}</p>
+                            <p class="mb-0  mt-2  fs-3">{{getProjectCounts().topTier| leadingZero}}</p>
                         </div>
-                        <div class="p-0 text-center stat-card m-2">
+                        <div class="p-0 text-center mt-2 m-0 mb-0">
                             <p class="mb-0">The Maestro </p>
-                            <p class="mb-0 fs-3">{{getProjectCounts().maestro| leadingZero}}</p>
+                            <p class="mb-0  mt-2  fs-3">{{getProjectCounts().maestro| leadingZero}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 pb-3 pe-lg-3 ps-lg-2">
-                <div class="p-md-4 p-3 mx-0 rounded-3 row h-100 right-box ">
-                    <div class="p-3 pb-0  mt-1 mt-md-0 rounded-3 inner-box col " style="flex: 0;">
-                        <div class="p-3 d-flex gap-3  ">
-                            <div class="px-0 me-3">
-                                <h1 class="mb-3">14</h1>
-                                <p class="mb-0 " style="white-space: pre-line; line-height: 1.5;">
-                                    Completed
+            <div class="col-lg-6 pb-3 px-0  ">
+                <div class="p-md-4 p-3 mx-0 rounded row h-100 right-box pe-0">
+                    <div class=" inner-box col rounded " style="flex: 0;">
+                        <div class="p-3 d-flex gap-5 align-items-end   ">
+                            <div class="">
+                                <h1 class="numOfEmployee mb-2">14</h1>
+                                <div class="mb-0 mt-2 " >
+                                    <h6 class="fw-bolder fw-bold mt-2 h-auto mb-0">Completed</h6>
                                     projects
-                                </p>
+                                </div>
                             </div>
                             <div class="p-0">
                                 <img src="assets/img/Rectangle 721.svg" alt="">
@@ -51,19 +51,18 @@
                     </div>
                     <div class="col-lg-6 col-sm-7 ms-auto col-6 text-end px-0">
                         <div class="mx-0 row">
-                            <h2 class="p-0 mb-5 mt-1">PSR</h2>
-                            <p class="p-0 mb-2  lh-1" style="white-space: pre-line;">
-                                PROJECT SUCCESS
-                                RATE
+                            <h2 class="p-0 mt-1">PSR</h2>
+                            <p class="p-0  mb-0  " style="white-space: pre-line;">
+                                PROJECT SUCCESS RATE
                             </p>
-                            <span class="pt-2">87%</span>
+                            <span class="px-0">87%</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="mt-0 row g-lg-4">
-            <div class=" ">
+        <div class="mt-0 row py-0 g-lg-4">
+            <div class="mt-3 ">
                 @if (isLoading()) {
                 <div class="text-center py-5 w-100">
                     <div class="spinner-border text-info" role="status"></div>
@@ -84,10 +83,10 @@
                 }
 
                 @else {
-                <div class="card-box row ">
+                <div class="card-box row mt-0 px-0 py-0 ">
 
                     @for (card of cards(); track $index) {
-                    <div class="me-0 mt-3 3 cards">
+                    <div class="p-0 cards pe-2">
                         <a [routerLink]="['/profile', card.id]" class="text-decoration-none text-white w-25">
                             <div class="card position-relative">
                                 <div class="tag position-absolute">

@@ -2,7 +2,9 @@
         object-fit: cover;
 
 }
-
+p{
+  line-height: 100%;
+}
 .card {
   position: relative;
   overflow: hidden; // عشان ما يخرجش أي جزء برا الكارت
@@ -63,12 +65,15 @@ ease;
 .project-stats {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  height: fit-content;
   color: white;
   padding: 20px;
   border-radius: 12px;
 }
-
+.numOfEmployee{
+  font-size: 90px !important;
+}
 .stat-card {
   flex: 1 1 10px;
   margin: 10px;

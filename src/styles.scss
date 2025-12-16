@@ -121,7 +121,7 @@ input[type="number"] {
     height: 26px;
 }
 .team .right-box span {
-    font-size: 75px;
+    font-size: 120px;
     color: var(--blue);
 }
 .team .right-box .text-end {
@@ -138,9 +138,12 @@ input[type="number"] {
 }
 .team .card .tag {
     top: -5px;
-    left: 84%; 
+    right: 8%; 
     background-color: transparent;
     z-index: 10;
+}
+.rounded{
+    border-radius: 9px !important;
 }
 .team .card .tagٍStates {
     top: 20px;
