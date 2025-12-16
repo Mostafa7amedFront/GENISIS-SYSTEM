@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-end align-items-center headerText">
 
-    <h1 class=" text-white text-end big"> Payments</h1>
+    <h1 class=" text-white text-end big"> PAYMENTS</h1>
 
 </div>
 
@@ -9,7 +9,7 @@
 
         <!-- Months -->
         <div class="time-slots flex-grow-1 w-50">
-            <h6>Payments</h6>
+            <h6>MONTHS</h6>
             <div class="border-right">
                 <div *ngFor="let month of displayedMonths; let i = index" class="slot text-center me-0"
                     [class.active]="i === selectedIndex" (click)="selectMonth(i)">
@@ -21,7 +21,7 @@
 
         <!-- Payment info -->
         <div class="payments flex-grow-1  w-50  ">
-            <h6 style="font-size: 12px; margin-bottom: 20px;">Next Payment</h6>
+            <h6 style="font-size: 12px; margin-bottom: 20px;">PAYMENTS</h6>
 
             @for (payment of payments(); track payment.id) {
             <button class="py-3 text-start text-white ps-3 w-100 mb-2 rounded-3"  style="
