@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { FeedbackClientsService } from '../../../../Core/service/Clients/feedback-clients.service';
+import { IFeedbackEmployee } from '../../../../Core/Interface/ifeedback';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-feedback-client',
@@ -8,98 +11,29 @@ import { Component } from '@angular/core';
   styleUrl: './feedback-client.scss'
 })
 export class FeedbackClient {
-  isOpen = false;
-  selected = 'ALL CLIENTS';
-  options = ['ALL CLIENTS', 'COMPLETED', 'IN PROGRESS', 'PAUSED'];
+    private _feedbackService = inject(FeedbackClientsService)
+  Feedbacks = signal<IFeedbackEmployee[] | null>(null);
+    private _route = inject(ActivatedRoute);
 
-  toggleMenu() {
-    this.isOpen = !this.isOpen;
-  }
+currentYear = new Date().getFullYear();
+ clientId!:any
 
-  selectOption(option: string) {
-    this.selected = option;
-    this.isOpen = false;
-  }
-  feedbacks = [
-    {
-      logo: 'assets/img/half-logo.svg',
-      title: 'ARBUN APP - BRAND IDENTITY',
-      comment: `“The design was great maybe the quality of the presentation could be much better, thank you so much”`,
-      date: '14, OCT 24',
-      category: 'Brand Identity',
-      rating: 'assets/img/4blue-star.png'
-    },
-    {
-      logo: 'assets/img/half-logo.svg',
-      title: 'GENESIS - UI/UX DESIGN',
-      comment: `“Amazing experience, the UI looks stunning and very professional, will come back again.”`,
-      date: '20, SEP 24',
-      category: 'UI/UX Design',
-      rating: 'assets/img/4blue-star.png'
-    },
-     {
-      logo: 'assets/img/half-logo.svg',
-      title: 'ARBUN APP - BRAND IDENTITY',
-      comment: `“The design was great maybe the quality of the presentation could be much better, thank you so much”`,
-      date: '14, OCT 24',
-      category: 'Brand Identity',
-      rating: 'assets/img/4blue-star.png'
-    },
-    {
-      logo: 'assets/img/half-logo.svg',
-      title: 'GENESIS - UI/UX DESIGN',
-      comment: `“Amazing experience, the UI looks stunning and very professional, will come back again.”`,
-      date: '20, SEP 24',
-      category: 'UI/UX Design',
-      rating: 'assets/img/4blue-star.png'
-    },
-     {
-      logo: 'assets/img/half-logo.svg',
-      title: 'ARBUN APP - BRAND IDENTITY',
-      comment: `“The design was great maybe the quality of the presentation could be much better, thank you so much”`,
-      date: '14, OCT 24',
-      category: 'Brand Identity',
-      rating: 'assets/img/4blue-star.png'
-    },
-    {
-      logo: 'assets/img/half-logo.svg',
-      title: 'GENESIS - UI/UX DESIGN',
-      comment: `“Amazing experience, the UI looks stunning and very professional, will come back again.”`,
-      date: '20, SEP 24',
-      category: 'UI/UX Design',
-      rating: 'assets/img/4blue-star.png'
-    },
-     {
-      logo: 'assets/img/half-logo.svg',
-      title: 'ARBUN APP - BRAND IDENTITY',
-      comment: `“The design was great maybe the quality of the presentation could be much better, thank you so much”`,
-      date: '14, OCT 24',
-      category: 'Brand Identity',
-      rating: 'assets/img/4blue-star.png'
-    },
-    {
-      logo: 'assets/img/half-logo.svg',
-      title: 'GENESIS - UI/UX DESIGN',
-      comment: `“Amazing experience, the UI looks stunning and very professional, will come back again.”`,
-      date: '20, SEP 24',
-      category: 'UI/UX Design',
-      rating: 'assets/img/4blue-star.png'
-    },
-     {
-      logo: 'assets/img/half-logo.svg',
-      title: 'ARBUN APP - BRAND IDENTITY',
-      comment: `“The design was great maybe the quality of the presentation could be much better, thank you so much”`,
-      date: '14, OCT 24',
-      category: 'Brand Identity',
-      rating: 'assets/img/4blue-star.png'
-    },
-    {
-      logo: 'assets/img/half-logo.svg',
-      title: 'GENESIS - UI/UX DESIGN',
-      comment: `“Amazing experience, the UI looks stunning and very professional, will come back again.”`,
-      date: '20, SEP 24',
-      category: 'UI/UX Design',
-      rating: 'assets/img/4blue-star.png'
+  ngOnInit() {
+      const idParam = this._route.snapshot.paramMap.get('id');
+
+    this.clientId = idParam;
+    if (idParam) {
+      this._feedbackService.getAll(idParam).subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.Feedbacks.set(res.value);
+          }
+        },
+        error: (err) => console.error('❌ Error loading feedback:', err)
+      });
+    } else {
+      console.warn('⚠️ No employeeId found in localStorage');
     }
-  ];
+  }
+
 }

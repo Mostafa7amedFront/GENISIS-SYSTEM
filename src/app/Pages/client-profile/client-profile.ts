@@ -6,11 +6,12 @@ import { environment } from '../../../environments/environment';
 import { Clients } from '../../Core/service/clients';
 import { ActivatedRoute } from '@angular/router';
 import { IClients } from '../../Core/Interface/iclients';
+import { FeedbackClient } from "./Components/feedback-client/feedback-client";
 
 
 @Component({
   selector: 'app-client-profile',
-  imports: [ProjectsProfile],
+  imports: [ProjectsProfile, FeedbackClient],
   templateUrl: './client-profile.html',
   styleUrl: './client-profile.scss'
 })

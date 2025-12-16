@@ -26,7 +26,7 @@
 
     <div class="notification-container">
       @for (item of filteredNotifications(); track $index) {
-      <div class="p-md-4 p-3 py-3 mt-3 mx-0 row rounded-3 notifiction-card" (click)="mark(item)">
+      <div class="p-md-4 p-3 py-3 mt-3 mx-0 row rounded-3 notifiction-card"  [ngClass]="!item.isRead ? 'notifiction-card' : 'notifiction-card-none'"  (click)="mark(item)">
         <div class="col-8 align-content-center px-0">
           @if (item.data) {
           <h3 class="mb-0 small-">

@@ -1,12 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { NotificationService } from '../../Core/service/notification.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { INotification } from '../../Core/Interface/inotification';
 import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-notifaction',
-  imports: [DatePipe],
+  imports: [DatePipe , CommonModule],
   templateUrl: './notifaction.html',
   styleUrl: './notifaction.scss'
 })

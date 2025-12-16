@@ -5,4 +5,5 @@ export interface IPayments {
   isPaid: boolean
   projectName: string
   dateTime:Date
+  clientName:string
 }
