@@ -30,9 +30,9 @@
 
 }
 .decScroll{
-  height: 40px;
+  max-height: 70px;
   padding-inline-end: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   
       &::-webkit-scrollbar {
         width: 6px;

@@ -83,8 +83,17 @@
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;
-}
 
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  background: #0B6B6E;
+ padding: 10px;
+ border-radius: 5px;
+}
 .header span, .footer span {
   cursor: pointer;
   user-select: none;
