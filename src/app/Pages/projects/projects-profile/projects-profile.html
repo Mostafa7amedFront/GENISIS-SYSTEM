@@ -46,7 +46,7 @@
 
                 @for (project of filteredProjects(); track project.id) {
                 <a [routerLink]="['/projectDetails', project.id]"
-                    class="p-3 py-4 mx-0 mb-lg-3 row rounded-3 project-card mb-3 text-decoration-none text-white mt-0">
+                    class="p-4 mx-0 mb-lg-3 row rounded-3 project-card mb-3 text-decoration-none text-white mt-0">
 
                     <div class="col-lg-9 col-xl-8">
                         <div class="row">
@@ -58,9 +58,9 @@
                             }
                             }
 
-                            <div class="me-3 col-lg-2 ps-0 ps-lg-2 text-lg-start text-center">
-                                <img [src]="baseurl + project.clientImage" alt="" width="107" height="107"
-                                    class="rounded-2" style="object-fit: cover;">
+                            <div class="-2 col-lg-2 ps-0 ps-lg-2 text-lg-start text-center">
+                                <img [src]="baseurl + project.clientImage"  alt="" width="110" height="110"
+                                    class="rounded" style="object-fit: cover;">
                             </div>
 
                             <div class="col px-0 ps-lg-3 ps-xl-0">
@@ -77,9 +77,9 @@
                                 <button class="border-0 rounded-3 mt-lg-4 mt-3 pt-lg-2 pt-1 px-4 text-white"
                                     [style.background-color]="'#0B6B6E'">
                                     @switch (project.projectStatus) {
-                                    @case (0) { <p class=" mt-1 mb-0 ">IN PROGRESS</p> }
-                                    @case (1) {<p class=" mt-1  mb-0 ">PAUSED</p> }
-                                    @case (2) { <p class=" mt-1  mb-0 ">COMPLETED</p> }
+                                    @case (0) { <p class=" mb-0 ">IN PROGRESS</p> }
+                                    @case (1) {<p class="  mb-0 ">PAUSED</p> }
+                                    @case (2) { <p class="  mb-0 ">COMPLETED</p> }
                                     }
 
 
@@ -94,7 +94,7 @@
                             <div class="d-flex px-0 justify-content-lg-end justify-content-start">
                                 @for (person of project.employees; track $index) {
                                 <div class="me-2">
-                                    <img [src]="baseurl + person.imageUrl" alt="" height="67" width="67"
+                                    <img [src]="baseurl + person.imageUrl" class="rounded-3" alt="" height="67" width="67"
                                         style="object-fit: cover;">
                                 </div>
                                 }

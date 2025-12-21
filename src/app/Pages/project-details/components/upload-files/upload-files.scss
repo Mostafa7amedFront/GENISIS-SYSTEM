@@ -1,8 +1,4 @@
-.dataShow {
-        overflow: scroll;
-    width: 90%;
-    scrollbar-width: none;
-}
+
 .iconDataAdd{
   padding: 10px 10px;
     border: 2px dashed #3a3a3a;
@@ -17,7 +13,7 @@
   border-radius: 8px;
   padding: 10px 15px;
   margin-top: 10px;
-  width: 200px;
+  min-width: 200px;
   cursor: pointer;
   transition: 0.3s ease;
 

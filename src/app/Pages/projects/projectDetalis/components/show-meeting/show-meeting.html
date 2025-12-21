@@ -5,7 +5,7 @@
 @for(meet of meetings(); track $index) {
 <div class=" meeting-container my-3 text-white p-4 rounded-3" style="background-color: #2d2d2d; color: white;">
     <div class="meeting-info">
-        <h5 class="mb-1">
+        <h5 class="mb-0">
             <span class="booked">{{ meet.clientName }}</span> booked a meeting
             <span class="booked"> {{ formatDate(meet.date) }} ( {{ slots[meet.time] }} )</span>
         </h5>
@@ -16,7 +16,7 @@
 @empty {
 <div class=" meeting-container my-3 text-center p-4 rounded-3" style="background-color: #2d2d2d; color: white;">
     <div class="meeting-info">
-        <h5 class="mb-1 booked">
+        <h5 class="mb-0 booked">
             No meetings booked yet.
         </h5>
     </div>

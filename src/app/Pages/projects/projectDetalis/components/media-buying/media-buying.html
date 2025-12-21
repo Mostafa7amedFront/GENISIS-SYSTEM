@@ -1,8 +1,5 @@
 <div class="fourth pt-5">
-  <div
-    class="container-fluid text-white p-5 mt-5"
-    style="background-color: #171818; border-radius: 13px"
-  >
+  <div class="container-fluid text-white p-5 mt-5" style="background-color: #171818; border-radius: 13px">
     <div class="row">
       <!-- Left: Media Buying & Campaign Type -->
       <div class="col-md-4 btnsactive">
@@ -10,45 +7,29 @@
           <h2 class="mb-0">Media Buying</h2>
         </div>
         <h6 class="mt-4">Campaign Type</h6>
-        <button
-          class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
-          [class.active]="campaignType() === 0"
-          (click)="selectCampaign('Engagement')"
-        >
+        <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn" [class.active]="campaignType() === 0"
+          (click)="selectCampaign('Engagement')">
           Engagement
         </button>
 
-        <button
-          class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
-          [class.active]="campaignType() === 1"
-          (click)="selectCampaign('Awareness')"
-        >
+        <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn" [class.active]="campaignType() === 1"
+          (click)="selectCampaign('Awareness')">
           Awareness
         </button>
 
-        <button
-          class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
-          [class.active]="campaignType() === 2"
-          (click)="selectCampaign('Sales')"
-        >
+        <button class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn" [class.active]="campaignType() === 2"
+          (click)="selectCampaign('Sales')">
           Sales
         </button>
       </div>
 
       <!-- Right: Date Range Picker -->
       <div class="col-md-8 d-flex justify-content-center align-items-center px-0">
-        <div
-          class="date-picker-box d-flex w-100"
-          style="background: #232323; border-radius: 12px; padding: 32px 24px"
-        >
+        <div class="date-picker-box d-flex w-100" style="background: #232323; border-radius: 12px; padding: 32px 24px">
           <!-- Quick Filters -->
           <div class="quick-filters me-4" style="min-width: 120px">
-            <div
-              class="filter-item"
-              *ngFor="let f of quickFilters"
-              [class.active]="activeFilter() === f"
-              (click)="selectFilter(f)"
-            >
+            <div class="filter-item" *ngFor="let f of quickFilters" [class.active]="activeFilter() === f"
+              (click)="selectFilter(f)">
               {{ f }}
             </div>
           </div>
@@ -56,19 +37,11 @@
           <!-- Date Range Picker UI -->
           <div class="w-100">
             <div class="d-flex mb-3 gap-2 w-100">
-              <input
-                type="text"
-                class="form-control form-control-sm date-input"
-                [value]="dateFrom() | date : 'MMMM d, y'"
-                readonly
-              />
+              <input type="text" class="form-control form-control-sm date-input"
+                [value]="dateFrom() | date : 'MMMM d, y'" readonly />
               <span class="text-white-50 align-self-center">-</span>
-              <input
-                type="text"
-                class="form-control form-control-sm date-input"
-                [value]="dateTo() | date : 'MMMM d, y'"
-                readonly
-              />
+              <input type="text" class="form-control form-control-sm date-input" [value]="dateTo() | date : 'MMMM d, y'"
+                readonly />
             </div>
 
             <div class="d-flex gap-4">
@@ -95,16 +68,10 @@
                     <th>F</th>
                     <th>S</th>
                   </tr>
-                  <tr
-                    *ngFor="let week of generateMonth(leftMonth()) | slice : 0 : 6; let i = index"
-                  >
-                    <td
-                      *ngFor="let day of week"
-                      [class.text-muted]="!day.current"
-                      [class.selected]="isSelected(day.date)"
-                      [class.between]="isBetween(day.date)"
-                      (click)="onSelect(day.date)"
-                    >
+                  <tr *ngFor="let week of generateMonth(leftMonth()) | slice : 0 : 6; let i = index">
+                    <td *ngFor="let day of week" [class.text-muted]="!day.current"
+                      [class.selected]="isSelected(day.date)" [class.between]="isBetween(day.date)"
+                      (click)="onSelect(day.date)">
                       {{ day.date.getDate() }}
                     </td>
                   </tr>
@@ -135,13 +102,9 @@
                     <th>S</th>
                   </tr>
                   <tr *ngFor="let week of generateMonth(rightMonth()); let i = index">
-                    <td
-                      *ngFor="let day of week"
-                      [class.text-muted]="!day.current"
-                      [class.selected]="isSelected(day.date)"
-                      [class.between]="isBetween(day.date)"
-                      (click)="onSelect(day.date)"
-                    >
+                    <td *ngFor="let day of week" [class.text-muted]="!day.current"
+                      [class.selected]="isSelected(day.date)" [class.between]="isBetween(day.date)"
+                      (click)="onSelect(day.date)">
                       {{ day.date.getDate() }}
                     </td>
                   </tr>
@@ -151,66 +114,60 @@
 
             <div class="d-flex justify-content-between gap-2 mt-3">
               <div class="btnadd">
-                      <button
-                class="btn btn-sm px-4"
-                style="background: #00bec5; color: #fff"
-                (click)="addMedia()"
-              >
-                Add Media Buying
-              </button>
+                <button class="btn btn-sm px-4" style="background: #00bec5; color: #fff" (click)="addMedia()">
+                  Add Media Buying
+                </button>
               </div>
               <div class="btnEnd">
-                 <button
-                class="btn btn-sm btn-secondary px-4 me-3 "
-                style="background: #232323; border: 1px solid #444"
-                (click)="cancelRange()"
-              >
-                Cancel
-              </button>
-              <button
-                class="btn btn-sm px-4"
-                style="background: #00bec5; color: #fff"
-                (click)="applyRange()"
-              >
-                Apply
-              </button>
+                <button class="btn btn-sm btn-secondary px-4 me-3 " style="background: #232323; border: 1px solid #444"
+                  (click)="cancelRange()">
+                  Cancel
+                </button>
+                <button class="btn btn-sm px-4" style="background: #00bec5; color: #fff" (click)="applyRange()">
+                  Apply
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="d-flex mt-5 mt-5 mb-2 justify-content-between align-items-center">
+      <div class="d-flex mt-5 mt-5 px-0 mb-2 justify-content-between align-items-center">
         <h6 class="px-0">Campaign Stats</h6>
-        <h6
-          class="logout d-flex justify-content-center align-content-center gap-3"
-          style="color: #00bec5; cursor: pointer"
-          routerLink="/updateStats/{{ id() }}"
-        >
+        <h6 class="logout d-flex justify-content-center align-content-center gap-3"
+          style="color: #00bec5; cursor: pointer" routerLink="/updateStats/{{ id() }}">
           Update Campaign Stats <i class="fa-solid fa-arrow-right fs-6" style="color: #00bec5"></i>
         </h6>
       </div>
       <div class="p-3 rounded-3" style="background: linear-gradient(to right, #001a1a, #005e5e)">
-       <div class="statesCards">
-  <div class="stat-card text-center" *ngFor="let stat of mediaBuyingStats()">
-    <p class="mb-0">{{ stat.name }}</p>
-    <h2 class="mb-0">{{ stat.value | shortNumber }}</h2>
-  </div>
-</div>
+        <div class="statesCards">
+          @for (stat of mediaBuyingStats(); track stat.mediaBuyingFielStatsdId) {
+          <div class="stat-card text-center">
+            <p class="mb-2">{{ stat.name }}</p>
+            <h2 class="mb-0">{{ stat.value | shortNumber }}</h2>
+          </div>
+          }
+          @empty {
+          @for (stat of [0,1,2,3,4,5]; track $index) {
+          <div class="stat-card text-center">
+            <p class="mb-2">Title</p>
+            <h2 class="mb-0">{{ 00 | shortNumber }}</h2>
+          </div>
+          }
+          }
+
+        </div>
 
       </div>
-      <div class="d-flex mt-5 mt-5 mb-2 justify-content-between align-items-center">
-        <h6 class="px-0">Summary</h6>
-        <h6
-          class="logout d-flex justify-content-center align-content-center gap-3"
-          style="color: #00bec5; cursor: pointer"
-          routerLink="/updateSummary/{{ id() }}"
-        >
+      <div class="d-flex mt-5 mt-5 mb-2 justify-content-between align-items-center px-0">
+        <h6 class="px-0 mx-0 ">Summary</h6>
+        <h6 class="logout d-flex justify-content-center align-content-center gap-3"
+          style="color: #00bec5; cursor: pointer" routerLink="/updateSummary/{{ id() }}">
           Update Summary <i class="fa-solid fa-arrow-right fs-6" style="color: #00bec5"></i>
         </h6>
       </div>
 
-      <p class="text-white-50 mt-2 px-0" style="white-space: pre-line">“{{ summary() }}“</p>
+      <p class="text-white-50 mt-2 px-0" style="white-space: pre-line">“{{ summaryText() }}“</p>
       <p class="text-white-50 text-end mb-0">{{ timeAgo(updatedOn()) }}</p>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
 import { MediaBuyingService } from '../../../../../Core/service/media-buying.service';
 import { MediaBuyingFieldStat } from '../../../../../Core/Interface/ires-media-buying';
@@ -82,6 +82,10 @@ export class MediaBuying {
     });
   }
 
+  
+readonly summaryText = computed(() =>
+  this.summary().trim() || 'No summary available'
+);
   // ==========================
   // Quick Filters
   // ==========================

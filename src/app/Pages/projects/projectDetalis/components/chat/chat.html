@@ -5,7 +5,7 @@
     <div class="project-chat-box rounded-3 p-md-4 text-white ">
       <div class="chat-container">
         <div class="tabs">
-          <button class="tab-button" [class.active]="activeTab === 'chat'"(click)="activeTab = 'chat'">
+          <button class="tab-button" [class.active]="activeTab === 'chat'" (click)="activeTab = 'chat'">
             Chat
           </button>
 
@@ -39,7 +39,8 @@
             <p class="username">{{ message.username }}</p>
 
             <div class="message-content-wrapper">
-              <img [src]="message.userImageUrl ? baseurl  + message.userImageUrl :  'assets/img/chat.png'" class="user-img" />
+              <img [src]="message.userImageUrl ? baseurl  + message.userImageUrl :  'assets/img/chat.png'"
+                class="user-img" />
 
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
                 <p class="message-content fst-italic">{{ message.text }}</p>
@@ -47,7 +48,8 @@
                 @if (message.files?.length) {
                 <div class="dataShow d-flex align-items-center gap-2">
                   @for (file of message.files; track file.name ; let i = $index) {
-                  <a class="file-card d-flex align-items-center gap-2" target="_blank" [href]="baseurl + file.attachmentUrl" download>
+                  <a class="file-card d-flex align-items-center gap-2" target="_blank"
+                    [href]="baseurl + file.attachmentUrl" download>
                     <img class="attach-img" src="assets/img/new-document 2.svg" />
                     <div class="file-info">
                       <div class="file-name"> File {{i + 1}}</div>
@@ -72,34 +74,57 @@
 
         <!-- DOCUMENTS TAB -->
         @if (activeTab === 'documents') {
-         <div class="chat-box">
+        <div class="chat-box">
           @if (AttachmentMessages().length === 0) {
           <div class="no-chat-message">No Documents Yet</div>
           } @else {
 
           @for (message of AttachmentMessages(); let i = $index; track message) {
 
-     
 
-          <div class="message p-0 mt-3" >
+
+          <div class="message p-0 mt-3">
 
 
             <div class="message-content-wrapper">
 
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
 
-           
-                      @if (message.files.length) {
+
+                @if (message.files.length) {
                 <div class="dataShow d-flex align-items-center gap-2">
                   @for (file of message.files; track file.id ; let i = $index) {
-                  <a class="file-card d-flex align-items-center gap-2" target="_blank" [href]="baseurl + file.fileUrl" download>
-                    <img class="attach-img" src="assets/img/new-document 2.svg" />
+                  @if(isImage(file.fileUrl)){
+                  <a class="file-card d-flex align-items-end justify-content-between gap-2">
+                    <div class="d-flex gap-2">
+                       <img class="attach-img" [src]=" baseurl + file.fileUrl" width="35" height="35" />
                     <div class="file-info">
                       <div class="file-name"> File {{i + 1}}</div>
                       <div class="file-size">{{ 4 }} MB</div>
                     </div>
+                    </div>
+                    <div class="Icon">
+                      <i class="fa-solid fa-download fs-5"></i>
+                    </div>
                   </a>
                   }
+
+                  @else {
+              <a class="file-card d-flex align-items-end justify-content-between gap-2">
+                    <div class="d-flex gap-2">
+                       <img class="attach-img" src="assets/img/new-document 2.svg" />
+                    <div class="file-info">
+                      <div class="file-name"> File {{i + 1}}</div>
+                      <div class="file-size">{{ 4 }} MB</div>
+                    </div>
+                    </div>
+                    <div class="Icon">
+                      <i class="fa-solid fa-download fs-5"></i>
+                    </div>
+                  </a>
+                  }
+                  }
+
                 </div>
                 }
               </div>
@@ -117,26 +142,27 @@
 
         <!-- LINKS TAB -->
         @if (activeTab === 'links') {
-           <div class="chat-box">
+        <div class="chat-box">
           @if (messagesLinks().length === 0) {
           <div class="no-chat-message">No Link Yet</div>
           } @else {
 
           @for (message of messagesLinks(); let i = $index; track message) {
 
- 
 
-          <div class="message p-0 pt-4" >
+
+          <div class="message p-0 pt-4">
 
             <p class="username">{{ message.username }}</p>
 
             <div class="message-content-wrapper">
-              <img [src]="message.userImageUrl ? baseurl  + message.userImageUrl :  'assets/img/chat.png'" class="user-img" />
+              <img [src]="message.userImageUrl ? baseurl  + message.userImageUrl :  'assets/img/chat.png'"
+                class="user-img" />
 
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
                 <p class="message-content fst-italic">{{ message.link }}</p>
 
-               
+
               </div>
             </div>
 

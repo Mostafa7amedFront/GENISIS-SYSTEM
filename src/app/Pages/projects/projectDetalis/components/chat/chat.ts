@@ -118,7 +118,9 @@ export class Chat {
   ngOnDestroy(): void {
     this.chatService.stopConnection();
   }
-
+isImage(fileUrl: string): boolean {
+  return /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(fileUrl);
+}
   // Chat Methods
   sendMessage(): void {
     const text = this.messageText().trim();
