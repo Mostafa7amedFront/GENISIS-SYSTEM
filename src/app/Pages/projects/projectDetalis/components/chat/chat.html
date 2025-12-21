@@ -103,7 +103,7 @@
                       <div class="file-size">{{ 4 }} MB</div>
                     </div>
                     </div>
-                    <div class="Icon">
+                    <div class="Icon" (click)="downloadFile(file.fileUrl)">
                       <i class="fa-solid fa-download fs-5"></i>
                     </div>
                   </a>
@@ -118,7 +118,7 @@
                       <div class="file-size">{{ 4 }} MB</div>
                     </div>
                     </div>
-                    <div class="Icon">
+                    <div class="Icon" (click)="downloadFile(file.fileUrl)">
                       <i class="fa-solid fa-download fs-5"></i>
                     </div>
                   </a>

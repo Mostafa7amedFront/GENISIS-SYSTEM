@@ -29,3 +29,27 @@
     }
 
 }
+.decScroll{
+  height: 40px;
+  padding-inline-end: 10px;
+  overflow-y: scroll;
+  
+      &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #1b1b1b;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #dcdcdc;
+        border-radius: 10px;
+        border: 2px solid #1b1b1b;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #ffffff;
+    }
+}
