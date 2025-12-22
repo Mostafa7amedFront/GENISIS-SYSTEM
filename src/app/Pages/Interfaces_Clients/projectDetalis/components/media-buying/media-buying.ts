@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.module';
 import { MediaBuyingService } from '../../../../../Core/service/media-buying.service';
 import { MediaBuyingFieldStat } from '../../../../../Core/Interface/ires-media-buying';
@@ -56,7 +56,9 @@ export class MediaBuying {
     'Today','Yesterday','Last 7 days','Last 30 days','Last 90 days',
     'Last 365 days','Last 12 months','Last Year'
   ];
-
+readonly summaryText = computed(() =>
+  this.summary().trim() || 'No summary available'
+);
   // ==========================
   // Campaign Type
   // ==========================

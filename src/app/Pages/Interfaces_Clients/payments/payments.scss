@@ -8,12 +8,21 @@
 }
 
 /* Time slots */
-.time-slots {
-    flex: 1;
+.booked {
+  color: #0b6b6e;
+  font-weight: 900 !important ;
+  margin: 0 5px ;
+  
 }
-
+.line{
+    width: 3px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.2509803922);
+    right: 54%;
+    margin-top: 35px;
+ 
+}
 .border-right {
-    border-right: 1px solid #ffffff40;
     height: 400px;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -42,7 +51,10 @@
     font-size: 12px;
     margin-bottom: 20px;
 }
+.notifiction-card-none{
+  background: #2D2D2D;
 
+}
 .slot {
     background: #2d2d2d;
     padding: 8px;

@@ -62,6 +62,11 @@ export const clientRoutes: Routes = [
         loadComponent: () =>
           import('../Pages/Interfaces_Clients/payments/payments').then(m => m.Payments),
       },
+         {
+        path: 'getfeedback/:id',
+        loadComponent: () =>
+          import('../Pages/get-feedback/get-feedback').then(m => m.GetFeedback),
+      },
         {
         path: 'meeting',
         loadComponent: () =>

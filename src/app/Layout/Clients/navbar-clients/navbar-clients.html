@@ -1,0 +1,69 @@
+<!-- Start-nav-bar -->
+<div class="container">
+  <div class="row">
+    <div class="mt-5 px-0 navbar navbar-expand-lg">
+      <div class="container px-0">
+        <a class="border-0 logo navbar-brand text-start me-xl-5 pe-xl-5" routerLink="/client">
+          <img class="border-0" src="assets/img/logo.svg" alt="Logo" />
+        </a>
+
+        <button
+          class="small navbar-toggler navbar-light"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="small navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="gap-xxl-5 gap-lg-4 navbar-nav mx-auto pe-lg-5 text-center">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/client/proflie" routerLinkActive="active">PROFILE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/client/projects" routerLinkActive="active">PROJECTS</a>
+            </li>
+                  <li class="nav-item">
+              <a class="nav-link" routerLink="/client/feedback" routerLinkActive="active">FEEDBACKS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/client/meeting" routerLinkActive="active">MEETING</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/client/payments" routerLinkActive="active">PAYMENT</a>
+            </li>
+      
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/client/notifications" routerLinkActive="active"
+                >NOTIFICATIONS</a
+              >
+            </li>
+            <li class="nav-item d-lg-none">
+              <a
+                class="nav-link d-flex justify-content-center align-items-center gap-2 text-white"
+                (click)="logout()"
+              >
+                LOGOUT
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="text-white d-none d-lg-flex gap-3 align-items-center"
+          (click)="logout()"
+          style="cursor: pointer"
+        >
+          <p class="mb-0">LOGOUT</p>
+          <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End-nav-bar -->
+</div>

@@ -43,7 +43,21 @@
                 class="user-img" />
 
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
-                <p class="message-content fst-italic">{{ message.text }}</p>
+                @if (isLink(message.text)) {
+                <a
+                  class="message-content fst-italic  booked"
+                  [href]="formatLink(message.text)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ message.text }}
+                </a>
+              }
+              @else {
+                <p class="message-content fst-italic">
+                  {{ message.text }}
+                </p>
+              }
 
                 @if (message.files?.length) {
                 <div class="dataShow d-flex align-items-center gap-2">
@@ -182,7 +196,7 @@
                 class="user-img" />
 
               <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
-                <p class="message-content fst-italic">{{ message.link }}</p>
+                <a class="message-content fst-italic booked" [href]="message.link" target="_blank"> {{ message.link }}</a>
 
 
               </div>
@@ -232,4 +246,4 @@
     </button>
   </div>
 </div>
-<!-- End project chat -->
+<!-- End project chat --> 

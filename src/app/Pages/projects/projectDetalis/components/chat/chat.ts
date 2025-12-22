@@ -122,6 +122,20 @@ export class Chat {
 isImage(fileUrl: string): boolean {
   return /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(fileUrl);
 }
+isLink(text: string): boolean {
+  if (!text) return false;
+  const urlRegex =
+    /(https?:\/\/[^\s]+)|(www\.[^\s]+)/i;
+  return urlRegex.test(text);
+}
+
+formatLink(text: string): string {
+  if (text.startsWith('http')) {
+    return text;
+  }
+  return 'https://' + text;
+}
+
 downloadFile(fileUrl: any) {
   this._downloadFile.downloadFile(fileUrl).subscribe({
     next: (blob: Blob) => {

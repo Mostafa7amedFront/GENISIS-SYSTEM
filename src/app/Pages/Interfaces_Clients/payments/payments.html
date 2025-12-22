@@ -1,42 +1,46 @@
-<div class="mt-5 pt-5">
-    <h1 class="text-end text-white mb-0 fw-lighter me-4">PAYMENTS</h1>
+<div class="d-flex justify-content-end align-items-center headerText">
+
+    <h1 class=" text-white text-end big"> PAYMENTS</h1>
 
 </div>
 
-<div class="payments-container text-white p-4 mt-4 rounded-3 mb-5 pb-5" style="background-color: #171818;">
-    <div class="row">
+<div class="payments-container text-white p-4  rounded-3 mb-5 pb-5 " style="background-color: #171818;">
+    <div class="d-flex justify-content-between gap-3 align-items-start ">
 
         <!-- Months -->
-        <div class="time-slots ps-4 pe-0 ">
-            <h6>Payments</h6>
+        <div class="time-slots flex-grow-1 w-50">
+            <h6>MONTHS</h6>
             <div class="border-right">
-                <div *ngFor="let month of displayedMonths; let i = index" class="slot text-center me-5"
+                <div *ngFor="let month of displayedMonths; let i = index" class="slot text-center me-0"
                     [class.active]="i === selectedIndex" (click)="selectMonth(i)">
                     1st, {{ month.label }}
                 </div>
             </div>
         </div>
+        <div class="line "></div>
 
         <!-- Payment info -->
-        <div class="payments col mt-4 pt-1 ">
-            <h6 style="font-size: 12px;">Next Payment</h6>
+        <div class="payments flex-grow-1  w-50  ">
+            <h6 style="font-size: 12px; margin-bottom: 20px;">PAYMENTS</h6>
 
-            @for (payment of payments(); track $index) {
-            <button class="py-2 mb-3 text-white text-start ps-3 w-100 d-flex align-items-center justify-content-between rounded-3" style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
-               font-size: 16px; border: 0.1px solid rgba(255, 255, 255, 0.425);">
-               <div class="info">
-                <p  class="m-0">Amount: {{ payment.amount  |  currency:'USD' }}</p>
-                 <p class="m-0">Project Name :{{payment.projectName}}</p>
-               </div>
-                <p class="m-0" style="font-size: 13px;">
-                    {{ payment.paymentDate  | date}}
-                </p>
-            </button>
+            @for (payment of payments(); track payment.id) {
+            <button class="py-3 text-start text-white ps-3 w-100 mb-2 rounded-3"  style="
+               font-size: 16px; border:none;"  [ngClass]="!payment.isPaid ? 'notifiction-card' : 'notifiction-card-none'"  >
+
+                <span class="booked">{{ payment.clientName }}</span>
+                is due to pay <span class="booked">
+                    {{payment.amount }}
+                    <span class="text-white"> for the</span>
+                    ( {{payment.projectName }} ) <span class="text-white"> Project</span>
+
+                </span> </button>
             }
             @empty {
-                          <button class="py-2 text-white text-center ps-3 w-100 d-flex align-items-center justify-content-center rounded-3" style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
-               font-size: 16px; border: 0.1px solid rgba(255, 255, 255, 0.425);">
-          <p class="m-0 text-center">No payments found for this month</p>
+            <button
+                class="py-3 text-white text-center ps-3 w-100 d-flex align-items-center justify-content-center rounded-3"
+                style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
+               font-size: 16px; border:none;">
+                <p class="m-0 text-center">No payments found for this month</p>
 
             </button>
             }

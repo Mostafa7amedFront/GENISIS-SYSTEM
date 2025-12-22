@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { IFeedbackEmployee } from '../../../Core/Interface/ifeedback';
 import { FeedbackClientsService } from '../../../Core/service/Clients/feedback-clients.service';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-feedbackclient',
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './feedbackclient.html',
   styleUrl: './feedbackclient.scss'
 })
