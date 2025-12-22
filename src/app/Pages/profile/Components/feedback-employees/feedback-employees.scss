@@ -1,0 +1,6 @@
+.star-btn i{
+    color: var(--inactive);
+}
+.star-btn.active i{
+    color: var(--blue);
+}

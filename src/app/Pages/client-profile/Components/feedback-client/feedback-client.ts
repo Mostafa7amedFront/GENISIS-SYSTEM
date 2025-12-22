@@ -3,10 +3,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FeedbackClientsService } from '../../../../Core/service/Clients/feedback-clients.service';
 import { IFeedbackEmployee } from '../../../../Core/Interface/ifeedback';
 import { ActivatedRoute } from '@angular/router';
+import { ReactiveModeuls } from '../../../../Shared/Modules/ReactiveForms.module';
 
 @Component({
   selector: 'app-feedback-client',
-  imports: [CommonModule],
+  imports: [ ReactiveModeuls],
   templateUrl: './feedback-client.html',
   styleUrl: './feedback-client.scss'
 })

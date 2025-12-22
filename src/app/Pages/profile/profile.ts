@@ -6,10 +6,12 @@ import { IEmployee } from '../../Core/Interface/iemployee';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { FeedbackProfile } from '../projects/feedback-profile/feedback-profile';
 import { ProjectsProfile } from '../projects/projects-profile/projects-profile';
+import { AddFeedbackEmployee } from "../add-feedback-employee/add-feedback-employee";
+import { FeedbackEmployees } from './Components/feedback-employees/feedback-employees';
 
 @Component({
   selector: 'app-profile',
-  imports: [ProjectsProfile, DatePipe , UpperCasePipe , RouterLink],
+  imports: [ProjectsProfile, DatePipe, UpperCasePipe, RouterLink, FeedbackEmployees],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

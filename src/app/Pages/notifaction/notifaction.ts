@@ -95,7 +95,7 @@ navigateToType(item: INotification) {
       break;
 
     case 1:
-      this._router.navigate([`/${prefix}/getfeedback`, item.typeId]);
+      this._router.navigate([`/${prefix}/projectDetails`, item.projectId]);
       break;
 
     case 2:
