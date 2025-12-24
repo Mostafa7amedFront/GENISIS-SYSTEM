@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../../../../Core/service/post.service';
 import { environment } from '../../../../../../environments/environment';
 import { Post } from '../../../../../Core/Interface/ipost';
+import { EmployeeResponse } from '../../../../../Core/Interface/iproject-progress-value';
+import { GetProjectProgressService } from '../../../../../Core/service/get-project-progress.service';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class Posts {
   currentYear = signal(this.currentDate.getFullYear());
     pageNumber = 1;
 totalPages = 1;
+Collaborators = signal<EmployeeResponse[]>([]);
 
   monthNames = [
     "JANUARY", "FEBRUARY", "MARCH", "APRIL",
@@ -29,7 +32,7 @@ totalPages = 1;
     "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute, private _post: PostService) {
+  constructor(private router: Router, private route: ActivatedRoute, private _post: PostService,  private projectProgressService :GetProjectProgressService)   {
     
       effect(() => {
       this._post.refreshPosts();
@@ -102,4 +105,27 @@ prevPage() {
     }
     return filledPosts;
   }
+
+  progress = 0;
+
+private progressMap: Record<number, number> = {
+  0: 25,
+  1: 50,
+  2: 75,
+  3: 100
+};
+
+setProgressFromApi(value: number) {
+  this.progress = this.progressMap[value] ?? 0;
+}
+
+loadProgress() {
+  this.projectProgressService.getProjectProgress(this.id).subscribe({
+    next: (res) => {
+      if (res.success) {
+        this.setProgressFromApi(res.value.projectProgress);
+      }
+    }
+  });
+}
 }

@@ -13,7 +13,11 @@ import { Posts } from "../posts/posts";
 import { ShowMeeting } from "../show-meeting/show-meeting";
 import { Addpost } from "../addpost/addpost";
 import { MediaBuying } from "../media-buying/media-buying";
-
+const statusTextMap = {
+  0: 'In Progress',
+  1: 'Paused',
+  2: 'Completed'
+};
 @Component({
   selector: 'app-upload-files',
   imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Posts, ShowMeeting, MediaBuying],
@@ -47,14 +51,24 @@ export class UploadFiles {
     this.fileInput.nativeElement.click();
   }
 changeStatus() {
-  let project = this.aboutproject();
-
+  const project = this.aboutproject();
   if (!project) return;
 
-  let newStatus = (project.projectStatus + 1) % 3;
+  const newStatus = (project.projectStatus + 1) % 3;
 
-  project.projectStatus = newStatus;
+  this._project.editProjectStatus(project.id, newStatus).subscribe({
+    next: () => {
+      this.aboutproject.update(p => ({
+        ...p!,
+        projectStatus: newStatus
+      }));
 
+      this._alert.toast('Project status updated successfully.', 'success');
+    },
+    error: () => {
+      this._alert.toast('Failed to update project status.', 'error');
+    }
+  });
 }
 
 onFileSelected(event: Event) {

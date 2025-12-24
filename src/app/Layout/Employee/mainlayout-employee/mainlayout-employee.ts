@@ -6,7 +6,7 @@ import { NavbarEmployee } from "../navbar-employee/navbar-employee";
 
 @Component({
   selector: 'app-mainlayout-employee',
-  imports: [RouterOutlet, SidebarEmployee, NavbarEmployee],
+  imports: [RouterOutlet, NavbarEmployee],
   templateUrl: './mainlayout-employee.html',
   styleUrl: '../../main-outlet/main-outlet.scss'
 })

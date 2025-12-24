@@ -48,6 +48,18 @@ getProjectEmployee(data: { pageNumber?: number; pageSize?: number; employeeId?: 
   return this._httpClient.get<IPaginationResponse<IProject>>(`${this.API_URL}`, { params });
 }
 
+editProjectStatus(projectId: string, status: number) {
+  return this._httpClient.put(
+    `${this.API_URL}/EditProjectStatus/${projectId}`,
+    null,
+    {
+      params: {
+        changeStatus: status
+      }
+    }
+  );
+}
+
 
   getById(id: any): Observable<IResponseOf<IProject>> {
     return this._httpClient.get<IResponseOf<IProject>>(`${this.API_URL}/GetOneProject/${id}`);

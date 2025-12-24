@@ -28,6 +28,7 @@ export class UploadFiles {
 
   private _project = inject(ProjectService);
   private _route = inject(ActivatedRoute);
+
   projectId!: any;
   aboutproject = signal<IProject | null>(null);
 
@@ -46,6 +47,26 @@ export class UploadFiles {
   onUploadClick() {
     this.fileInput.nativeElement.click();
   }
+changeStatus() {
+  const project = this.aboutproject();
+  if (!project) return;
+
+  const newStatus = (project.projectStatus + 1) % 3;
+
+  this._project.editProjectStatus(project.id, newStatus).subscribe({
+    next: () => {
+      this.aboutproject.update(p => ({
+        ...p!,
+        projectStatus: newStatus
+      }));
+
+      this._alert.toast('Project status updated successfully.', 'success');
+    },
+    error: () => {
+      this._alert.toast('Failed to update project status.', 'error');
+    }
+  });
+}
 
 onFileSelected(event: Event) {
   const input = event.target as HTMLInputElement;

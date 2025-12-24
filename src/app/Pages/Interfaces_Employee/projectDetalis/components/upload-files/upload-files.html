@@ -90,14 +90,18 @@
       <!-- drag -->
       <div class="row mx-0">
         <div class="col-6 text-start mt-5 pt-md-3 pt-4 ps-0">
-          <button class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-4 end-but"
-            style="background-color: #0b6b6e">
-            @switch (aboutproject()?.projectStatus) {
-            @case (0) { <p class="mt-0 mb-0">In Progress </p> }
-            @case (1) { <p class="mt-0 mb-0">Paused</p> }
-            @case (2) { <p class="mt-0 mb-0">Completed </p> }
-            }
-          </button>
+<button
+  class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-4 end-but"
+  style="background-color: #0b6b6e"
+  (click)="changeStatus()">
+
+  @switch (aboutproject()?.projectStatus) {
+    @case (0) { <p class="mt-0 mb-0">In Progress</p> }
+    @case (1) { <p class="mt-0 mb-0">Paused</p> }
+    @case (2) { <p class="mt-0 mb-0">Completed</p> }
+  }
+</button>
+
         </div>
         <div class="col-6 text-end mt-5 pt-md-3 pt-4 pe-0">
           <p class="mb-0 small">{{aboutproject()?.deadLine | date }}</p>
@@ -114,6 +118,7 @@
     </div>
   </div>
 </div>
+
 
 
 

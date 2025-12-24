@@ -10,7 +10,14 @@
             <h2 class="pe-4 mb-0">SOCIAL MEDIA</h2>
           </div>
         </div>
-       
+        <div class="col-2">
+          <div
+            class="blue btnlink text-center p-2 rounded-3 pe-2"
+            style="background-color: #0b6b6e; margin-right: -70px"
+          >
+            <h2 class="pe-4 mb-0" (click)="goAddPost()">Add post</h2>
+          </div>
+        </div>
       </div>
       <div class="col-8 px-3">
         <router-outlet></router-outlet>
@@ -117,36 +124,43 @@
 
       <div class="d-flex justify-content-between align-items-start px-0 my-3 px-3">
         <p class="p-0 m-0">Project Progress</p>
-       
+    
       </div>
-    <div class="px-3">
-         <div class="loader rounded py-4 px-3" style="background-color: #2d2d2d; color: white">
-        <div class="d-flex w-100 align-items-start   justify-content-between ">
-          <div>
-            <h1 id="percentText" class="mb-0" style="font-size: 70px">
-              <span id="percentValue" contenteditable="true" aria-label="Edit percentage">60</span>
-              <span class="text-white-50">%</span>
-            </h1>
-          </div>
+   <div class="px-3">
+  <div class="loader rounded py-4 px-3" style="background-color: #2d2d2d; color: white">
 
-          <div class="">
-            <p class="mb-0">Collaborators</p>
-            <div class="d-flex">
-              <img class="me-1 rounded-3" height="50" src="assets/img/EDITED 8 1.svg" alt="" />
-              <img class="me-1 rounded-3" height="50" src="assets/img/EDITED 8 1.svg" alt="" />
-              <img class="me-1 rounded-3" height="50" src="assets/img/EDITED 8 1.svg" alt="" />
-              <img class="rounded-3" height="50" src="assets/img/EDITED 8 1.svg" alt="" />
-            </div>
-          </div>
-        </div>
+    <div class="d-flex w-100 align-items-start justify-content-between">
+      <div>
+        <h1 class="mb-0" style="font-size: 70px">
+          {{ progress }}
+          <span class="text-white-50">%</span>
+        </h1>
+      </div>
 
-        <div class="bar-wrapper mt-3 rounded-3 " style="height: 12px">
-          <div id="barGlow" class="bar-glow"></div>
+      <div>
+        <p class="mb-0">Collaborators</p>
+        <div class="d-flex gap-1 justify-content-end">
+  <img
+    *ngFor="let emp of Collaborators()"
+    [src]="baseurl + emp.imageUrl"
+    [alt]="emp.name"
+    class=" rounded-3"
+    height="50"
+    width="50"
+  />
+</div>
 
-          <div id="loaderBar" class="bar-fill"></div>
-        </div>
       </div>
     </div>
+
+    <div class="bar-wrapper mt-3 rounded-3" style="height: 12px">
+      <div class="bar-glow" [style.width.%]="progress"></div>
+      <div class="bar-fill" [style.width.%]="progress"></div>
+    </div>
+
+  </div>
+</div>
+
     </div>
   </div>
 </div>
