@@ -4,6 +4,7 @@ import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.mod
 import { MediaBuyingService } from '../../../../../Core/service/media-buying.service';
 import { SweetAlert } from '../../../../../Core/service/sweet-alert';
 import { GetMediaBuyingFields } from '../../../../../Core/Interface/ires-media-buying';
+import { ShortNumberPipe } from '../../../../../Shared/pipes/short-number-pipe';
 
 interface CalendarDay {
   date: Date;
@@ -19,7 +20,7 @@ enum CampaignType {
 
 @Component({
   selector: 'app-add-media-buying',
-  imports: [ReactiveModeuls],
+  imports: [ReactiveModeuls , ShortNumberPipe],
   templateUrl: './add-media-buying.html',
   styleUrl: './add-media-buying.scss'
 })

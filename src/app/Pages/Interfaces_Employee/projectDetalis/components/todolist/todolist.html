@@ -21,7 +21,7 @@
           <p class="todo-text">{{ activeNote.noteContent }}</p>
         </div>
 
-        <button class="star-btn" [class.active]="activeNote.isFav" (click)="toggleStar(activeNote)">
+        <button class="star-btn mb-0" [class.active]="activeNote.isFav" (click)="toggleStar(activeNote)">
           <i class="fa fa-star"></i>
         </button>
       </div>
@@ -42,7 +42,7 @@
           <p class="todo-text done">{{ complete.noteContent }}</p>
         </div>
 
-        <button class="star-btn" [class.active]="complete.isFav" (click)="toggleStar(complete)">
+        <button class="star-btn mb-0" [class.active]="complete.isFav" (click)="toggleStar(complete)">
           <i class="fa fa-star"></i>
         </button>
       </div>

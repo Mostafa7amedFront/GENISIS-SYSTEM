@@ -908,7 +908,7 @@ body {
     background-color: var(--dark);
     border-radius: 8px;
     padding: 40px;
-    min-height: 790px;
+    min-height: 700px;
 }
 
 .low {
@@ -933,7 +933,7 @@ body {
 }
 
 .todo-list {
-    min-height: 450px;
+    min-height: 300px;
 }
 
 .todo-item {
@@ -955,6 +955,8 @@ body {
 .todo-text {
     font-size: 13px;
     margin-bottom: 0px;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .circle-btn {
@@ -1036,7 +1038,7 @@ body {
 }
 
 .todo-list {
-    max-height: 450px;
+    max-height: 300px;
     overflow-y: auto;
     padding-right: 20px;
 }

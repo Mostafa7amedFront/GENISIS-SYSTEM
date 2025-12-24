@@ -1,34 +1,44 @@
 <div class="text-white team">
     <div class="d-flex justify-content-end align-items-center headerText">
 
-<h1 class="mt-5 text-white px text-end big"> PROJECTS</h1>
+        <h1 class=" big">PROJECTS</h1>
 
     </div>
     <div class=" p-md-5 p-3 rounded team-container">
         <div class=" row g-3 g-lg-4">
             <div class="col-lg-6 pb-3 pe-lg-3 ps-lg-2 ">
-                <div class="p-4  rounded-3 d-flex w-auto  right-box h-90 justify-content-between ">
-                    <div class=" ">
-                        <h2 class="mb-xl-3 mb-sm-4 mb-3">NEW PROJECTS</h2>
-                        <p class="mb-2">IN THE PAST 30 DAYS</p>
-                        <p class=" h3 text-white  mt-4 " style="font-size: 110px;">15</p>
+              <div class="p-4 rounded right-box h-100">
+          <div class="headerBox d-flex justify-content-between align-items-start">
+            <div class="text">
+              <h2 class="mb-xl-3 mb-sm-4 mb-3">NEW PROJECTS</h2>
+              <p class="mb-0">IN THE PAST 30 DAYS</p>
+            </div>
+            <div class="imageLeft">
+              <img class="mb-3 pb-3 px-0" src="assets/img/Rectangle 721.png" alt="" />
+            </div>
+          </div>
 
-                    </div>
-                    <div class="d-flex flex-column align-items-end">
-                        <div class="px-0 d-flex justify-content-end align-items-end w-100"><img class="mb-3 pb-3 px-0  "
-                                src="assets/img/Rectangle 721.png" width="80%" alt=""></div>
-                        <p class="p-0 ms-sm-4  mb-1 align-content-start w-100">INCREASE</p>
-                        <div class="d-flex ps-xl-4 mt-4 gap-2 ps-0  align-content-start w-100">
-                            <div class="align-content-end h-75">
-                                <img class=" mt-0  pe-1 mb-2" width="30" src="assets/img/Arrow 1.svg" alt="">
-                            </div>
-                            <span class="p-0 h3 pt-md-0 pt-1 m-0 text-start  ">30%</span>
-                        </div>
-                    </div>
+          <div class="bottomBox mt-3 d-flex mb-0 justify-content-between align-items-start">
+            <h6 class="text-white mb-0">15</h6>
+
+            <div class="leftBottom h-100 ">
+                <div class="mb-3">
+                                            <p class="p-0 m-0   align-content-start w-100">INCREASE</p>
+
                 </div>
+                <div class="m-0 d-flex gap-2 align-items-end ">
+                    <img class=" " width="22" src="assets/img/Arrow 1.svg" alt="">
+                                                <h5 class="p-0 h3 m-0  ">30%</h5>
+
+
+                </div>
+   
+            </div>
+          </div>
+        </div>
             </div>
             <div class="col-12 col-lg-6 pb-3 mt-sm-2 pe-lg-4 mt-0">
-                <div class="d-flex flex-column justify-content-between h-90">
+        <div class="d-flex flex-column justify-content-between gap-1">
                     <div class="dropdown text-end">
                         <div class="select" (click)="toggleMenu()">
                             <div class="caret">
@@ -38,8 +48,8 @@
                             <span class="selected fs-2">{{ selected() }}</span>
 
                         </div>
-                        <p class="small mb-0 text-end">KEEP THE GOOD WORK!!</p>
-                        <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
+            <p class="small mb-1 text-end">KEEP THE GOOD WORK!!</p>
+                        <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
                             <li *ngFor="let option of options" (click)="selectOption(option)"
                                 [class.active]="selected() === option">
                                 {{ option }}
@@ -47,10 +57,10 @@
                         </ul>
 
                     </div>
-                    <div class="flex-wrap  pb-2 rounded-3 d-flex  gap-4 mb-2">
+                    <div class="flex-wrap  pb-2 rounded d-flex  gap-4 mb-2">
                         <div class="text-center col seletType " [class.active]="selectedProjectType() === 0"
                             (click)="selectProjectType(0)">
-                            <p class="mb-0">Simple Project</p>
+                            <p class="mb-0">One time  </p>
                         </div>
 
                         <div class="text-center col seletType " [class.active]="selectedProjectType() === 1"
@@ -65,7 +75,7 @@
                         </div>
                     </div>
 
-                    <div class="flex-wrap  py-2 rounded-3 d-flex blue ">
+                    <div class="flex-wrap  py-2 rounded d-flex blue ">
                         <div class="p-0 text-center col me-5 ms-1">
                             <p class="mb-0">Completed</p>
                             <p class="mb-0 fs-3">{{ getProjectCounts().completed| leadingZero }}</p>
@@ -92,8 +102,7 @@
                 <div class="col-lg-3 col-md-4 col-12 mt-3 me-0 cards">
                     <a [routerLink]="['/employee/projectDetails', project.id]" class="text-decoration-none text-white">
                         <div class="card position-relative">
-                    
-
+                          
                             <img [src]="baseimageUrl+ project.clientImage" height="300px" class="card-img-top"
                                 alt="{{ project.clientName }}">
                             <div class="pb-0 card-body">
@@ -103,7 +112,7 @@
                                 <div class="mt-4 row">
                                     <div class="col ">
                                         @switch (project.projectType) {
-                                        @case (0) { <h6 class="mb-3 booked  mb-0">Simple Project </h6> }
+                                        @case (0) { <h6 class="mb-3 booked  mb-0">One time  Project </h6> }
                                         @case (1) { <h6 class="mb-3 booked  mb-0">Social Media</h6> }
                                         @case (2) { <h6 class="mb-3 booked  mb-0">Media Buying </h6> }
                                         }

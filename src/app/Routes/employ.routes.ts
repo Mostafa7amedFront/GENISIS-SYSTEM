@@ -36,6 +36,11 @@ export const employeroutes: Routes = [
         loadComponent: () =>
           import('../Pages/projects/projectDetalis/components/add-media-buying/add-media-buying').then(m => m.AddMediaBuying),
       },
+        {
+        path: 'getfeedback/:id',
+        loadComponent: () =>
+          import('../Pages/get-feedback/get-feedback').then(m => m.GetFeedback),
+      },
 
      {
         path: 'projectDetails/:id',

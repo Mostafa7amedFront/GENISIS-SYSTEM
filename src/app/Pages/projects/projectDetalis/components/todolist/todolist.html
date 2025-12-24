@@ -21,7 +21,7 @@
           <p class="todo-text">{{ item.noteContent }}</p>
         </div>
 
-        <button class="star-btn" [class.active]="item.isFav" (click)="toggleStar(item)">
+        <button class="star-btn mb-0" [class.active]="item.isFav" (click)="toggleStar(item)">
           <i class="fa fa-star"></i>
         </button>
 
@@ -44,7 +44,7 @@
           <p class="todo-text done">{{ item.noteContent }}</p>
         </div>
 
-        <button class="star-btn" [class.active]="item.isFav" (click)="toggleStar(item)">
+        <button class="star-btn mb-0" [class.active]="item.isFav" (click)="toggleStar(item)">
           <i class="fa fa-star"></i>
         </button>
 

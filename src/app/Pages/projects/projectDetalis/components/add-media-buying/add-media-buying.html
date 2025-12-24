@@ -76,7 +76,8 @@
       </div>
       <div class="p-3 rounded-3" style="background: linear-gradient(to right, #001a1a, #005e5e)">
         <div class="statesCards">
-          <div class="stat-card " *ngFor="let stat of mediaBuyingStats()">
+          @for (stat of mediaBuyingStats(); track stat.id) {
+              <div class="stat-card " >
             <p class="my-2">{{ stat.name }}</p>
                   <input
               type="number"
@@ -85,6 +86,16 @@
               placeholder="Value"
             />
           </div>
+          }
+          @empty {
+          @for (stat of [0,1,2,3,4,5]; track $index) {
+          <div class="stat-card text-center">
+            <p class="mb-2">Title</p>
+            <h2 class="mb-0">{{ 00 | shortNumber }}</h2>
+          </div>
+          }
+          }
+        
         </div>
       </div>
 

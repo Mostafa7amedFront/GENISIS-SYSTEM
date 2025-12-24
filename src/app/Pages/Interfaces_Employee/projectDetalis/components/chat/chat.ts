@@ -4,6 +4,7 @@ import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.mod
 import { ActivatedRoute } from '@angular/router';
 import { ShortenPipe } from '../../../../../Shared/pipes/shorten-pipe';
 import { IChatAttachmentMessages, IChatLink } from '../../../../../Core/Interface/ichat';
+import { DownloadFileService } from '../../../../../Core/service/download-file.service';
 
 @Component({
   selector: 'app-chat',
@@ -34,7 +35,7 @@ export class Chat {
    // Reactive messages
    messages = this.chatService.messages;
  
-   constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute ,  private _downloadFile :DownloadFileService) {
      effect(() => {
        const msgs = this.messages();
        if (msgs.length) {
@@ -156,6 +157,43 @@ export class Chat {
      });
    }
  
+   isImage(fileUrl: string): boolean {
+  return /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(fileUrl);
+}
+isLink(text: string): boolean {
+  if (!text) return false;
+  const urlRegex =
+    /(https?:\/\/[^\s]+)|(www\.[^\s]+)/i;
+  return urlRegex.test(text);
+}
+
+formatLink(text: string): string {
+  if (text.startsWith('http')) {
+    return text;
+  }
+  return 'https://' + text;
+}
+
+downloadFile(fileUrl: any) {
+  this._downloadFile.downloadFile(fileUrl).subscribe({
+    next: (blob: Blob) => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(blob);
+      a.href = objectUrl;
+
+      // extract filename
+      const fileName = fileUrl.split('/').pop() ?? 'downloaded_file';
+      a.download = fileName;
+
+      a.click();
+
+      URL.revokeObjectURL(objectUrl);
+    },
+    error: (err) => {
+      console.log("Download error:", err);
+    }
+  });
+}
    getMessageAttachment() {
      this.chatService.GetAttachmentMessages(this.projectId).subscribe({
        next: (msg) => {

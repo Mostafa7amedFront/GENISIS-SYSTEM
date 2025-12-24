@@ -1,4 +1,4 @@
-<div class="d-flex col p-4 rounded-3" style="background-color: #2d2d2d">
+<div class="d-flex col p-4 rounded-3 mt-5 " style="background-color: #2d2d2d">
   <form [formGroup]="form" class="col-7 pe-3">
     <input type="date" formControlName="postingAt" />
 
@@ -22,13 +22,11 @@
 
   <div class="col-5 ps-4 position-relative">
     <div class="upload-card" (click)="triggerFileInput()">
-      <!-- لو مفيش صورة/فيديو -->
       <div class="upload-content" *ngIf="!previewUrl">
         <i class="fa-solid fa-folder-open icon"></i>
         <p>upload Media</p>
       </div>
 
-      <!-- لو الصورة -->
       <img *ngIf="isImage && previewUrl" [src]="previewUrl" class="preview-img rounded-3" />
 
       <!-- لو الفيديو -->
