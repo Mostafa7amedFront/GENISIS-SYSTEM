@@ -36,7 +36,8 @@ export class Editemployee  implements OnInit{
       salary: [null, Validators.required],
       email: ['', Validators.required],
       password: ['',],
-      username: ['', Validators.required]
+      username: ['', Validators.required],
+      phoneNumber: ['', Validators.required]
     });
   }
 
@@ -59,6 +60,9 @@ export class Editemployee  implements OnInit{
           salary: emp.salary,
           email: emp.email,
           username: emp.userName,
+          phoneNumber: emp.phoneNumber,
+
+
           password: '' 
         });
         this.imagePreview = emp.imageUrl;
@@ -119,6 +123,7 @@ onImageChange(event: any) {
     formData.append('EmployeeBadge', String(this.employeeBadgeValue));
     formData.append('Email', this.createAccountForm.value.email);
     formData.append('UserName', this.createAccountForm.value.username);
+    formData.append('PhoneNumber', this.createAccountForm.value.phoneNumber);
 
     this._Employees.update(this.employeeId, formData).subscribe({
       next: () => {

@@ -51,6 +51,7 @@ export class Editclients implements OnInit {
       password: [''],
       username: [''],
       clientType: [0],
+      phoneNumber: ['']
     });
   }
 
@@ -75,6 +76,8 @@ export class Editclients implements OnInit {
           email: client.email,
           username: client.userName,
           clientType: client.clientType
+          ,
+          phoneNumber: client.phoneNumber
         });
 
         this.imagePreview = client.imageUrl ? client.imageUrl : null;
@@ -142,6 +145,7 @@ onImageChange(event: any) {
     formData.append('Email', this.createAccountForm.value.email);
     formData.append('Password', this.createAccountForm.value.password || '');
     formData.append('UserName', this.createAccountForm.value.username);
+    formData.append('PhoneNumber', this.createAccountForm.value.phoneNumber);
 
     this.selectedServices.forEach(serviceId => {
       formData.append('Services', serviceId);

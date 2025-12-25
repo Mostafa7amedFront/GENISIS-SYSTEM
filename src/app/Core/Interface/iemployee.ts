@@ -7,7 +7,7 @@ export interface IEmployee {
   imageUrl: string
   email: string
     createdAt: string
-
+phoneNumber:number
   userName: string
       feedback :IFeedback
 
