@@ -61,7 +61,7 @@
 
                 @if (message.files?.length) {
                 <div class="dataShow d-flex align-items-center gap-2">
-                  @for (file of message.files; track file.name ; let i = $index) {
+                  @for (file of message.files; track  $index ; let i = $index) {
                    @if(isImage(file.attachmentUrl)){
                   <a class="file-card d-flex align-items-end justify-content-between gap-2">
                     <div class="d-flex gap-2">
@@ -218,7 +218,7 @@
   </div>
   @if (selectedFiles.length > 0) {
   <div class="dataShow  d-flex align-items-center gap-2 mt-2 px-3">
-    @for (file of selectedFiles; track file.name) {
+    @for (file of selectedFiles; track  $index) {
     <div class="file-card d-flex align-items-center gap-2">
       <img class="attach-img" src="assets/img/new-document 2.svg" alt="file" />
       <div class="file-info text-lg-start">

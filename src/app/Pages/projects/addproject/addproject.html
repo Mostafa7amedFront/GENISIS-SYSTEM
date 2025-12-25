@@ -78,7 +78,7 @@
 
       <div class="drag-area text-center rounded-3 p-4">
         <div class="dataShow d-flex align-items-center gap-2">
-          @for ( file of files; track file.name) {
+          @for ( file of files; track  $index) {
           <div class="file-card d-flex align-items-center gap-2">
             <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
             <div class="file-info text-lg-start">

@@ -32,7 +32,7 @@
 
                     @if (message.files?.length) {
                       <div class="dataShow d-flex align-items-center gap-2">
-                        @for (file of message.files; track file.name) {
+                        @for (file of message.files; track  $index) {
                           <div class="file-card d-flex align-items-center gap-2">
                             <img class="attach-img" src="assets/img/new-document 2.svg" alt="">
                             <div class="file-info text-lg-start">

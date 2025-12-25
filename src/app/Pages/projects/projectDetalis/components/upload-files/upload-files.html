@@ -46,7 +46,7 @@
       </p>
 
       <div class="d-flex mt-3 flex-wrap gap-2">
-        @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
+        @for (file of aboutproject()?.attachments; track $index ; let i = $index) {
         @if (isPdf(file.fileUrl)) {
         <a [href]="getFileUrl(file.fileUrl)" target="_blank" [download]="getFileName(file.fileUrl)"
           class="file-card d-flex align-items-center gap-2">
@@ -64,7 +64,7 @@
       <!-- drag -->
       <div class="drag-area text-center rounded-3 p-4">
         <div class="dataShow d-flex align-items-center gap-2">
-          @for (file of files; track file.name) {
+          @for (file of files; track  $index) {
           <div class="file-card d-flex align-items-center gap-2">
             <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
             <div class="file-info text-lg-start">
@@ -119,7 +119,6 @@
   </div>
 </div>
 
-
 @if(aboutproject()?.projectType == 1){
 <app-posts />
 
@@ -130,4 +129,4 @@
 }
 <app-chat/>
 <app-show-meeting/>
-<app-feedback/>
+<app-feedback/> 
