@@ -32,7 +32,8 @@ export class Addemployee {
       salary: [null, Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      username: ['', Validators.required]
+      username: ['', Validators.required],
+      PhoneNumber: ['', Validators.required],
     });
   }
 
@@ -79,6 +80,7 @@ onImageChange(event: any) {
     formData.append('Email', this.createAccountForm.value.email);
     formData.append('Password', this.createAccountForm.value.password);
     formData.append('UserName', this.createAccountForm.value.username);
+    formData.append('PhoneNumber', this.createAccountForm.value.PhoneNumber);
 
     this.Employees.add(formData).subscribe({
        next: (res) => {

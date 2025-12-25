@@ -6,4 +6,5 @@ export interface IPayments {
   projectName: string
   dateTime:Date
   clientName:string
+  isLate: boolean
 }

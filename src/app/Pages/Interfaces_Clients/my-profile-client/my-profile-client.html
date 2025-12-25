@@ -43,8 +43,15 @@
       <p class="low small mb-0">{{ aboutclient()?.location }}</p>
     </div>
     <div class="col text-end mt-2">
-      <p class="low small mb-0">+996 432 2847 22</p>
-      <a [href]="aboutclient()?.websiteUrl" target="_blank" class="low small text-decoration-none text-white">
+      <p class="low small mb-0">
+        @if (aboutclient()?.phoneNumber; as phoneNumber) {
+          {{ phoneNumber }}
+        }
+        @else {
+          N/A
+        }
+      </p>
+      <a [href]="aboutclient()?.websiteUrl" target="_blank" class="low small text-decoration-none  booked">
         {{ aboutclient()?.websiteUrl }}
       </a>
     </div>

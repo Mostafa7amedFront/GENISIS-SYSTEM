@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveModeuls } from '../../../../Shared/Modules/ReactiveForms.module';
 import { ServiceApi } from '../../../../Core/service/serviceapi';
 import { IService } from '../../../../Core/Interface/iservice';
@@ -31,19 +31,21 @@ clientTitleMap: { [key: string]: number } = {
   services = signal<IService[]>([]);
   selectedServices: string[] = [];
 
-  constructor(private fb: FormBuilder) {
-    this.createAccountForm = this.fb.group({
-      name: [''],
-      title: [''],
-      about: [''],
-      location: [''],
-      website: [''],
-      email: [''],
-      password: [''],
-      username: [''],
-      clientType: [0],
-    });
-  }
+
+constructor(private fb: FormBuilder) {
+  this.createAccountForm = this.fb.group({
+    name: ['', Validators.required],
+    title: ['', Validators.required],
+    about: ['', Validators.required],
+    location: ['', Validators.required],
+    website: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    username: ['', Validators.required],
+    clientType: [0, Validators.required],
+    PhoneNumber: ['', Validators.required],
+  });
+}
 
   ngOnInit(): void {
     this._serviceApi.getAll({}).subscribe({
@@ -93,7 +95,7 @@ onSubmit() {
   formData.append('Email', this.createAccountForm.value.email);
   formData.append('Password', this.createAccountForm.value.password);
   formData.append('UserName', this.createAccountForm.value.username);
-
+  formData.append('PhoneNumber', this.createAccountForm.value.PhoneNumber);
   this.selectedServices.forEach(serviceId => {
     formData.append('Services', serviceId);
   });
