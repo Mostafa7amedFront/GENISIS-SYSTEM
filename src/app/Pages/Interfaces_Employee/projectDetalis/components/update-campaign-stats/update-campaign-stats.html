@@ -84,7 +84,10 @@
       </div>
 
       <div class="d-flex justify-content- mt-4 w-100">
-        <button class="btn w-100 py-2" (click)="send()">Update Stats</button>
+        <button class="btn w-100 py-2" (click)="send()" 
+         [disabled]="isLoading()"
+  [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'">
+         {{ isLoading() ? 'Updating...' : 'Update Stats' }}</button>
       </div>
     </div>
   </div>

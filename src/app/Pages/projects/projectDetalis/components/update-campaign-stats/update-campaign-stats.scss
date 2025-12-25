@@ -197,3 +197,9 @@
     from { opacity: 0; transform: translateX(-50%) translateY(4px); }
     to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
+
+.statesCards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); // 6 كروت في الصف
+  gap: 1rem; // المسافة بين الكروت أفقياً وعمودياً
+}

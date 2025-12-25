@@ -25,6 +25,7 @@ export class Editproject {
   private _alert = inject(SweetAlert);
   private _location = inject(Location);
   private _route = inject(ActivatedRoute);
+    isLoading = signal(false);
 
   Clients = signal<IClients[]>([]);
   Employee = signal<IEmployee[]>([]);
@@ -207,6 +208,7 @@ export class Editproject {
       this._alert.toast('Please fill all required fields.', 'warning');
       return;
     }
+    this.isLoading.set(true);
 
     const projectStatus = this.clientTitleMap[this.selectedClientTitle];
     const deadline = this.selectedDate.toISOString();
@@ -228,9 +230,11 @@ export class Editproject {
       next: () => {
         this._alert.toast('Project updated successfully!', 'success');
         this._location.back();
+        this.isLoading.set(false);
       },
       error: () => {
         this._alert.toast('Error updating project', 'error');
+        this.isLoading.set(false);
       }
     });
   }

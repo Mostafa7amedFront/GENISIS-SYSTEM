@@ -11,4 +11,5 @@ export interface MediaBuyingFieldStat {
 export interface GetMediaBuyingFields {
   name: string
   id: number
+  fieldType: number
 }

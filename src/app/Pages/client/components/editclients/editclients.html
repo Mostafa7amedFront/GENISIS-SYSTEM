@@ -83,12 +83,18 @@
   </form>
 
   <!-- Submit -->
-  <h2
-    class="mt-3 text-end pt-sm-4 logout px-3"
+
+   <div class="w-100  d-flex    justify-content-end align-items-center">
+    <button
+    class="mt-3 btn h2 border-0 text-end logout px-3"
     style="color: #00bec5; cursor: pointer;"
     (click)="onSubmit()"
+      [disabled]="isLoading()"
+  [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'"
   >
-    UPDATE CLIENT
-    <i class="ps-3 fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
-  </h2>
+             {{ isLoading() ? 'Updating...' : 'Update Client' }}
+    <i class=" fa-solid fa-arrow-right fs-4" style="color: #00bec5;"></i>
+  </button>
+ </div>
+
 </div>

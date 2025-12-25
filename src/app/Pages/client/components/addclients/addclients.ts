@@ -22,6 +22,7 @@ export class Addclients implements OnInit {
 private _alert = inject(SweetAlert); 
   private _router = inject(Router);
 
+  isLoading = signal(false);
 clientTitles = ['Old Client', 'Long Term', 'New Client'];
 clientTitleMap: { [key: string]: number } = {
   'Old Client': 0,
@@ -84,6 +85,7 @@ onSubmit() {
     return;
   }
 
+  this.isLoading.set(true);
   const formData = new FormData();
   formData.append('ImageFile', this.selectedImageFile, this.selectedImageFile.name);
   formData.append('Name', this.createAccountForm.value.name);
@@ -105,9 +107,11 @@ onSubmit() {
     next: (res) => {
             this._alert.toast('Client added successfully!' , 'success');
             this._router.navigate(['/clients'])
+            this.isLoading.set(false);
     },
     error: (err) => {
                   this._alert.toast('Error adding client!' , 'error');
+            this.isLoading.set(false);
 
     }
   });

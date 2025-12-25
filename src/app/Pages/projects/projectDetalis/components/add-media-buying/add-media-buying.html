@@ -101,8 +101,13 @@
 
 
       <div class="ddd mt-4 d-flex w-100">
-        <button class="btn btn-sm px-4 w-100 py-3" style="background: #00bec5; color: #fff" (click)="applyRange()">
-          Add Media Buying
+        <button class="btn btn-sm px-4 w-100 py-3 " 
+         style="background: #00bec5; color: #fff" 
+         (click)="applyRange()"
+          [disabled]="isLoading()"
+  [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'"
+         >
+          {{ isLoading() ? 'Adding...' : 'Add Media Buying' }}
         </button>
       </div>
     </div>

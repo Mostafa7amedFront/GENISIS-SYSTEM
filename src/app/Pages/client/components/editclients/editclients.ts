@@ -27,6 +27,7 @@ export class Editclients implements OnInit {
   private _router = inject(Router);
   private _route = inject(ActivatedRoute);
 
+  isLoading = signal(false);
   clientTitles = ['Old Client', 'Long Term', 'New Client'];
   clientTitleMap: { [key: string]: number } = {
     'Old Client': 0,
@@ -136,6 +137,7 @@ onImageChange(event: any) {
       formData.append('ImageFile', this.selectedImageFile, this.selectedImageFile.name);
     }
 
+    this.isLoading.set(true);
     formData.append('Name', this.createAccountForm.value.name);
     formData.append('Title', this.createAccountForm.value.title);
     formData.append('About', this.createAccountForm.value.about);
@@ -155,9 +157,12 @@ onImageChange(event: any) {
       next: (res) => {
         this._alert.toast('Client updated successfully!', 'success');
         this._router.navigate(['/clients']);
+        this.isLoading.set(false);
       },
       error: (err) => {
+
         this._alert.toast('Error updating client!', 'error');
+        this.isLoading.set(false);
       }
     });
   }

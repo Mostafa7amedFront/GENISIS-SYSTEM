@@ -29,6 +29,7 @@ export class UpdateCampaignStats {
   private location = inject(Location);
   private _alert = inject(SweetAlert);
 
+  isLoading = signal(false);
   campaignType = signal<CampaignType>(CampaignType.Engagement);
   id = signal<string>('');
 
@@ -48,7 +49,23 @@ export class UpdateCampaignStats {
   ngOnInit() {
     const projectId = this.route.snapshot.paramMap.get('id')!;
     this.id.set(projectId);
+    this.loadStats();
   }
+
+
+  // ==========================
+  // Load Stats
+  // ==========================
+  loadStats() {
+    if (!this.id()) return;
+
+    this.api.GetMediaBuyingFields(this.id(), this.campaignType())
+      .subscribe({
+        next: res => { this.fields.set(res.value.map(f => ({ name: f.name, type: f.fieldType }))); },
+        error: err => this._alert.toast(err.error.detail, 'error')
+      });
+  }
+
 
   selectCampaign(value: 'Engagement' | 'Awareness' | 'Sales') {
     const map = {
@@ -57,6 +74,8 @@ export class UpdateCampaignStats {
       Awareness: CampaignType.Awareness,
     };
     this.campaignType.set(map[value]);
+        this.loadStats();
+
   }
 
   setType(index: number, value: number) {
@@ -84,18 +103,20 @@ export class UpdateCampaignStats {
       this._alert.toast('Please fill all field titles', 'warning');
       return;
     }
+    this.isLoading.set(true);
 
     this.api.addMediaBuyingField(this.id(), this.campaignType(), this.fields())
       .subscribe({
         next: () => {
           this._alert.toast('Updated Campaign Stats Successfully', 'success');
-          
+          this.isLoading.set(false);
         setTimeout(() => {
           this.location.back();
         }, 0);
         },
         error: () => {
           this._alert.toast('Error updating Campaign Stats', 'error');
+          this.isLoading.set(false);
         }
       });
   }

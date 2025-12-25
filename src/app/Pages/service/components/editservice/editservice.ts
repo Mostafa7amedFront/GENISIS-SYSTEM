@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServiceApi } from '../../../../Core/service/serviceapi';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { SweetAlert } from '../../../../Core/service/sweet-alert';
 export class Editservice {
   serviceForm!: FormGroup;
   serviceId!: any;
-  isLoading = false;
+  isLoading = signal(false);
 
   constructor(
     private fb: FormBuilder,
@@ -36,13 +36,12 @@ export class Editservice {
   }
 
   loadService(): void {
-    this.isLoading = true;
+    
     this._service.getById(this.serviceId).subscribe({
       next: (res) => {
-        this.isLoading = false;
         this.serviceForm.patchValue(res.value);
       },
-      error: () => (this.isLoading = false)
+      error: () => {}
     });
   }
 
@@ -52,11 +51,13 @@ export class Editservice {
     const updatedService: IService = {
       ...this.serviceForm.value
     };
+    (this.isLoading.set(true));
 
     this._service.update(this.serviceId, updatedService).subscribe({
       next: res => {
           this._alert.toast('Service updated  successfully!', 'success');
           this.router.navigate(['/service']);
+          this.isLoading.set(false);
     // if (res.success) {
     //       this._alert.toast('Service updated  successfully!', 'success');
     //       this.router.navigate(['/service']);
@@ -66,6 +67,7 @@ export class Editservice {
       },
       error: (err) => {
             this._alert.toast(err.error.detail, 'error');
+            this.isLoading.set(false);
       }
       
     });

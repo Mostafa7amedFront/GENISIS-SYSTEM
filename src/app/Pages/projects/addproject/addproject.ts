@@ -24,6 +24,7 @@ export class Addproject {
   private _employee = inject(Employees);
 private _alert = inject(SweetAlert); 
   private _location = inject(Location);
+   isLoading = signal(false);
   //  Reactive Signals
   Clients = signal<IClients[]>([]);
   Employee = signal<IEmployee[]>([]);
@@ -216,6 +217,7 @@ addProject() {
     this._alert.toast('Please fill all required fields and upload an image.', 'warning');
     return;
   }
+  this.isLoading.set(true);
 
 const projectStatus = this.clientTitleMap[this.selectedClientTitle!] ?? 0;
 const projectDuration = this.durationMap[this.selectedDuration!] ?? 0;
@@ -258,9 +260,11 @@ this._project.add(formData).subscribe({
     next: () => {
       this._alert.toast('Project added successfully!', 'success');
       this._location.back();
+      this.isLoading.set(false);
     },
     error: () => {
       this._alert.toast('Error adding project', 'error');
+      this.isLoading.set(false);
     }
   });}
 

@@ -29,7 +29,7 @@ export class AddMediaBuying {
   private _mediaService = inject(MediaBuyingService);
   private _alert = inject(SweetAlert);
   private Link = inject(Router);
-
+  isLoading = signal(false);
   id = signal<any | null>(null);
   campaignType = signal<CampaignType>(CampaignType.Engagement);
   mediaBuyingStats = signal<GetMediaBuyingFields[]>([]);
@@ -83,7 +83,7 @@ export class AddMediaBuying {
     const month = date.getMonth();
     const first = new Date(year, month, 1);
     const last = new Date(year, month + 1, 0);
-
+ 
     const weeks: CalendarDay[][] = [];
     let week: CalendarDay[] = [];
 
@@ -125,6 +125,7 @@ export class AddMediaBuying {
       return;
     }
 
+    this.isLoading.set(true);
     const statsPayload = this.mediaBuyingStats().map((stat, index) => {
       const inputEl = document.querySelectorAll<HTMLInputElement>('.stat-card input')[index];
       return {
@@ -141,12 +142,14 @@ export class AddMediaBuying {
     ).subscribe({
       next: res => {
         this._alert.toast('Saved successfully', 'success');
-     
+        this.isLoading.set(false);
         history.back()
         
       },
 
-      error: err => this._alert.toast(err.error.detail, 'error')
+      error: err =>{ this._alert.toast(err.error.detail, 'error')
+      this.isLoading.set(false);
+      }
     });
   }
 

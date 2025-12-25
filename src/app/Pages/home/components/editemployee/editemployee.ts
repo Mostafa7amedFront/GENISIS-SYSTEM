@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Employees } from '../../../../Core/service/employees';
 import { ReactiveModeuls } from '../../../../Shared/Modules/ReactiveForms.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,6 +26,7 @@ export class Editemployee  implements OnInit{
   private _alert = inject(SweetAlert);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
+isLoading = signal(false);
 
   employeeId!: any;
 
@@ -114,6 +115,7 @@ onImageChange(event: any) {
       return;
     }
 
+    this.isLoading.set(true);
     const formData = new FormData();
     if (this.selectedImageFile) formData.append('ImageFile', this.selectedImageFile);
     formData.append('Id', String(this.employeeId));
@@ -129,9 +131,11 @@ onImageChange(event: any) {
       next: () => {
         this._alert.toast('Employee updated successfully ✅', 'success');
         this._router.navigate(['/home']);
+        this.isLoading.set(false);
       },
       error: (err) => {
         this._alert.toast('Failed to update employee', 'error');
+        this.isLoading.set(false);
       }
     });
   }
