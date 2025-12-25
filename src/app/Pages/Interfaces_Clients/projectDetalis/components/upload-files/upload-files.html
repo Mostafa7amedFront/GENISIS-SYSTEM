@@ -41,12 +41,21 @@
         </div>
       </div>
       <h6 class="pt-4">PORJECT DESCRIPTION</h6>
-      <p class="low small mb-1 text-start" style="white-space: pre-line">
+      <p class="low small mb-1 text-start mb-2" style="white-space: pre-line">
         “ {{ aboutproject()?.projectDescription }} “
       </p>
+        <h6 class="">ATTACHMENTS</h6>
+                 <div class="d-flex w-100 flex-wrap gap-2 ">
+                  @for (file of aboutproject()?.projectAttachment; track $index ) {
+                    <div class=""><img class="attach-img" height="70" width="100" [src]="baseimageUrl + file" alt=""></div>
+                  }
+                  
+                 </div>
+             
+      <p class="small-2  mt-3">Add Attachment</p>
 
       <div class="d-flex mt-3 flex-wrap gap-2">
-        @for (file of aboutproject()?.attachments; track file.fileUrl ; let i = $index) {
+        @for (file of aboutproject()?.attachments; track $index ; let i = $index) {
         @if (isPdf(file.fileUrl)) {
         <a [href]="getFileUrl(file.fileUrl)" target="_blank" [download]="getFileName(file.fileUrl)"
           class="file-card d-flex align-items-center gap-2">
@@ -60,7 +69,6 @@
         }
         }
       </div>
-      <p class="small-2 mt-4 pt-2">Add Attachment</p>
       <!-- drag -->
       <div class="drag-area text-center rounded-3 p-4">
         <div class="dataShow d-flex align-items-center gap-2">
@@ -88,18 +96,22 @@
       </div>
 
       <!-- drag -->
-      <div class="row mx-0">
-        <div class="col-6 text-start mt-5 pt-md-3 pt-4 ps-0">
-          <button class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-4 end-but"
-            style="background-color: #0b6b6e">
-            @switch (aboutproject()?.projectStatus) {
-            @case (0) { <p class="mt-0 mb-0">In Progress </p> }
-            @case (1) { <p class="mt-0 mb-0">Paused</p> }
-            @case (2) { <p class="mt-0 mb-0">Completed </p> }
-            }
-          </button>
+      <div class="row mx-0 mt-2">
+        <div class="col-6 text-start  pt-md-3 pt-4 ps-0">
+<button
+  class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-4 end-but"
+  style="background-color: #0b6b6e"
+  (click)="changeStatus()">
+
+  @switch (aboutproject()?.projectStatus) {
+    @case (0) { <p class="mt-0 mb-0">In Progress</p> }
+    @case (1) { <p class="mt-0 mb-0">Paused</p> }
+    @case (2) { <p class="mt-0 mb-0">Completed</p> }
+  }
+</button>
+
         </div>
-        <div class="col-6 text-end mt-5 pt-md-3 pt-4 pe-0">
+        <div class="col-6 text-end pt-md-3 pt-4 pe-0">
           <p class="mb-0 small">{{aboutproject()?.deadLine | date }}</p>
           <p class="small mb-0">{{aboutproject()?.clientName}}</p>
           <div class="stars mt-2 justify-content-end">
@@ -114,8 +126,6 @@
     </div>
   </div>
 </div>
-
-
 
 @if(aboutproject()?.projectType == 1){
 <app-posts />
