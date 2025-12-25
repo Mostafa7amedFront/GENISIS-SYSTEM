@@ -7,7 +7,6 @@ import { environment } from '../../../environments/environment';
 import { IClients } from '../../Core/Interface/iclients';
 import { ShortenPipe } from '../../Shared/pipes/shorten-pipe';
 import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
-import { Feedback } from "../project-details/components/feedback/feedback";
 
 
 @Component({

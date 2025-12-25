@@ -13,6 +13,7 @@ import { Posts } from "../posts/posts";
 import { ShowMeeting } from "../show-meeting/show-meeting";
 import { Addpost } from "../addpost/addpost";
 import { MediaBuying } from "../media-buying/media-buying";
+import { DownloadFileService } from '../../../../../Core/service/download-file.service';
 const statusTextMap = {
   0: 'In Progress',
   1: 'Paused',
@@ -29,7 +30,7 @@ export class UploadFiles {
   files: File[] = [];
   baseimageUrl = `${environment.baseimageUrl}`;
   private _alert = inject(SweetAlert);
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef , private _downloadFile: DownloadFileService) {}
 
   private _project = inject(ProjectService);
   private _route = inject(ActivatedRoute);
@@ -101,6 +102,25 @@ this.files = [...this.files];
 }
 
 
+downloadFile(fileUrl: any) {
+  this._downloadFile.downloadFile(fileUrl).subscribe({
+    next: (blob: Blob) => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(blob);
+      a.href = objectUrl;
+
+      // extract filename
+      const fileName = fileUrl.split('/').pop() ?? 'downloaded_file';
+      a.download = fileName;
+
+      a.click();
+
+      URL.revokeObjectURL(objectUrl);
+    },
+    error: (err) => {
+    }
+  });
+}
 
   loadEmployeeData() {
     this._project.getById(this.projectId).subscribe({
