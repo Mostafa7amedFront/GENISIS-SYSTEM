@@ -1,6 +1,28 @@
 <div class="d-flex col p-4 rounded-3 mt-5 " style="background-color: #2d2d2d">
-  <form [formGroup]="form" class="col-7 pe-3">
+  <form [formGroup]="form" class="col-7 pe-3 position-relative">
     <input type="date" formControlName="postingAt" />
+
+  <!-- يظهر بس لو Video -->
+<div class="upload-Cover" *ngIf="isVideo" (click)="triggerCoverInput()">
+  <i class="fa-solid fa-image" *ngIf="!coverPreviewUrl"></i>
+
+  <!-- preview للـ cover -->
+  <img
+    *ngIf="coverPreviewUrl"
+    [src]="coverPreviewUrl"
+    class="cover-preview"
+  />
+
+  <!-- input مخفي للـ cover -->
+  <input
+    #coverInput
+    type="file"
+    accept="image/*"
+    class="d-none"
+    (change)="onCoverSelected($event)"
+  />
+</div>
+
 
     <h6 class="mt-2 pt-3">Title :</h6>
     <input type="text" placeholder="write a Title" class="w-100" formControlName="title" />

@@ -102,7 +102,8 @@ Collaborators = signal<EmployeeResponse[]>([]);
           caption: '',
           captionArabic: '',
           description: '',
-          file: null
+          file: null,
+          cover: null
         });
       }
       return filledPosts;

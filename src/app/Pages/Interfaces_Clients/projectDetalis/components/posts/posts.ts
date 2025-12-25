@@ -100,6 +100,7 @@ prevPage() {
         caption: '',
         captionArabic: '',
         description: '',
+        cover: null,
         file: null
       });
     }

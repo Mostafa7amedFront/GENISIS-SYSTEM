@@ -71,12 +71,22 @@
                   [routerLink]="['posts', post.id]"
                 />
                 } @if(post.fileType === 1) {
-                <img
+                  @if(post.cover) {
+                         <img
+                  [src]="baseurl + post.cover"
+                  class="w-100 h-100 object-fit-cover rounded-1"
+                  [routerLink]="['posts', post.id]"
+                />
+                  }
+                  @else {
+                     <img
                   src="Image/video-frame-svgrepo-com.svg"
                   class="w-100 h-100"
                   style="object-fit: fill"
                   [routerLink]="['posts', post.id]"
                 />
+                  }
+               
 
                 }
               </ng-container>

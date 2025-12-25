@@ -63,7 +63,7 @@
               class="cardSelect"
               style="cursor: pointer; border-radius: 5px"
             >
-              <ng-container *ngIf="post.file; else emptyDiv">
+                 <ng-container *ngIf="post.file; else emptyDiv">
                 @if(post.fileType === 0) {
                 <img
                   [src]="baseurl + post.file"
@@ -71,15 +71,26 @@
                   [routerLink]="['posts', post.id]"
                 />
                 } @if(post.fileType === 1) {
-                <img
+                  @if(post.cover) {
+                         <img
+                  [src]="baseurl + post.cover"
+                  class="w-100 h-100 object-fit-cover rounded-1"
+                  [routerLink]="['posts', post.id]"
+                />
+                  }
+                  @else {
+                     <img
                   src="Image/video-frame-svgrepo-com.svg"
                   class="w-100 h-100"
                   style="object-fit: fill"
                   [routerLink]="['posts', post.id]"
                 />
+                  }
+               
 
                 }
               </ng-container>
+
 
               <!-- إذا مفيش ملف -->
               <ng-template #emptyDiv>

@@ -23,12 +23,14 @@ export class PostService {
     captionEng: string,
     captionAra: string,
     postingAt: string,
-    file: File
+    file: File,
+    Cover: File
   ): Observable<any> {
 
     // form-data
     const formData = new FormData();
     formData.append('File', file);
+    formData.append('Cover', Cover);
 
     // query params
     const params = new HttpParams()

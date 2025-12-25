@@ -8,6 +8,7 @@ export interface  Post {
   captionAra?: string;
   description: string;
   number?: number;
+  cover: string | null;
   fileType: number;
   file?: string | null; // خلى file اختياري
 }

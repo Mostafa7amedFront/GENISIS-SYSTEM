@@ -15,6 +15,10 @@ export class Addpost {
 
   form!: FormGroup;
   selectedFile!: File;
+  coverFile!: File;
+coverPreviewUrl: string | null = null;
+
+@ViewChild('coverInput') coverInput!: ElementRef;
 
   previewUrl: string | null = null;
   isImage: boolean = false;
@@ -50,17 +54,38 @@ export class Addpost {
     this.fileInput.nativeElement.click();
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (!file) return;
+triggerCoverInput() {
+  this.coverInput.nativeElement.click();
+}
+  onCoverSelected(event: any) {
+  const file = event.target.files[0];
+  if (!file) return;
 
-    this.selectedFile = file;
-
-    this.isImage = file.type.startsWith('image');
-    this.isVideo = file.type.startsWith('video');
-
-    this.previewUrl = URL.createObjectURL(file);
+  if (!file.type.startsWith('image')) {
+    this._alert.toast('Cover must be an image', 'warning');
+    return;
   }
+
+  this.coverFile = file;
+  this.coverPreviewUrl = URL.createObjectURL(file);
+}
+onFileSelected(event: any) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  this.selectedFile = file;
+
+  this.isImage = file.type.startsWith('image');
+  this.isVideo = file.type.startsWith('video');
+
+  this.previewUrl = URL.createObjectURL(file);
+
+  if (!this.isVideo) {
+    this.coverFile = undefined as any;
+    this.coverPreviewUrl = null;
+  }
+}
+
 
   addPost() {
     if (this.form.invalid || !this.selectedFile) {
@@ -76,7 +101,8 @@ export class Addpost {
       this.form.value.captionEng,
       this.form.value.captionAra,
       this.form.value.postingAt,
-      this.selectedFile
+      this.selectedFile,
+      this.coverFile
     ).subscribe({
       next: (res) => {
       this._alert.toast('Post added successfully!', 'success');
@@ -85,6 +111,10 @@ export class Addpost {
        this.previewUrl = null;
        this.isImage = false;
        this.isVideo = false;
+        this.coverPreviewUrl = null;
+        this.selectedFile = null as any;
+        this.coverFile = null as any;
+        
       },
       error: (err) => {
       this._alert.toast('Error adding Post', 'error');
