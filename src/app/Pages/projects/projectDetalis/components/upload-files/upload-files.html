@@ -103,11 +103,16 @@
             <img src="assets/img/new-document 2.png" alt="" />
           </div>
         </div>
-
-        <button (click)="uploadFiles()" id="uploadButton" class="border-0 rounded-3 w-100 text-white small pt-2 mt-4"
+  <button (click)="uploadFiles()" id="uploadButton"
+     [disabled]="isLoading()"
+        [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'"
+        
+        class="border-0 rounded-3 w-100 text-white small py-2 mt-4"
           style="background-color: #0b6b6e">
-          UPLOAD
+                 {{ isLoading() ? 'UPLOADING...' : 'UPLOAD' }}
+
         </button>
+
 
         <input type="file" id="fileInput" hidden #fileInput (change)="onFileSelected($event)" multiple />
       </div>

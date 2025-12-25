@@ -31,7 +31,7 @@ export class UploadFiles {
   baseimageUrl = `${environment.baseimageUrl}`;
   private _alert = inject(SweetAlert);
   constructor(private cdr: ChangeDetectorRef , private _downloadFile: DownloadFileService) {}
-
+  isLoading = signal(false);
   private _project = inject(ProjectService);
   private _route = inject(ActivatedRoute);
   projectId!: any;
@@ -85,18 +85,20 @@ uploadFiles() {
     this._alert.toast('Please select files.', 'warning');
     return;
   }
-
+  this.isLoading.set(true);
   this._project.uploadMultipleRequests(this.projectId, this.files).subscribe({
     next: (res) => {
       this._alert.toast('Files uploaded successfully.', 'success');
-
+ 
 this.files = [];
 this.files = [...this.files];
       this.fileInput.nativeElement.value = '';
          this.cdr.detectChanges();
+      this.isLoading.set(false);
     },
     error: (err) => {
       this._alert.toast('Upload failed. Please try again.', 'error');
+      this.isLoading.set(false);
     }
   });
 }

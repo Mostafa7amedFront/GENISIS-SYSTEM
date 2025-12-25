@@ -50,3 +50,32 @@
 img{
   object-fit: cover;
 }
+
+.img-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.Icon {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 5px;
+}
+
+.img-wrapper:hover .Icon {
+  opacity: 1;
+}
+
+.attach-img {
+  border-radius: 6px;
+  object-fit: cover;
+}

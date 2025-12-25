@@ -12,6 +12,7 @@ import { Todolist } from "../../../../Interfaces_Employee/projectDetalis/compone
 import { MediaBuying } from "../media-buying/media-buying";
 import { Posts } from "../posts/posts";
 import { SweetAlert } from '../../../../../Core/service/sweet-alert';
+import { DownloadFileService } from '../../../../../Core/service/download-file.service';
 
 @Component({
   selector: 'app-upload-files',
@@ -24,8 +25,8 @@ export class UploadFiles {
   files: File[] = [];
   baseimageUrl = `${environment.baseimageUrl}`;
   private _alert = inject(SweetAlert);
-  constructor(private cdr: ChangeDetectorRef) {}
-
+  constructor(private cdr: ChangeDetectorRef , private _downloadFile: DownloadFileService) {}
+  isLoading = signal(false);
   private _project = inject(ProjectService);
   private _route = inject(ActivatedRoute);
   projectId!: any;
@@ -69,6 +70,7 @@ uploadFiles() {
     this._alert.toast('Please select files.', 'warning');
     return;
   }
+  this.isLoading.set(true);
 
   this._project.uploadMultipleRequests(this.projectId, this.files).subscribe({
     next: (res) => {
@@ -78,13 +80,33 @@ this.files = [];
 this.files = [...this.files];
       this.fileInput.nativeElement.value = '';
          this.cdr.detectChanges();
+      this.isLoading.set(false);
     },
     error: (err) => {
       this._alert.toast('Upload failed. Please try again.', 'error');
+      this.isLoading.set(false);
     }
   });
 }
+downloadFile(fileUrl: any) {
+  this._downloadFile.downloadFile(fileUrl).subscribe({
+    next: (blob: Blob) => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(blob);
+      a.href = objectUrl;
 
+      // extract filename
+      const fileName = fileUrl.split('/').pop() ?? 'downloaded_file';
+      a.download = fileName;
+
+      a.click();
+
+      URL.revokeObjectURL(objectUrl);
+    },
+    error: (err) => {
+    }
+  });
+}
 
 
   loadEmployeeData() {

@@ -36,9 +36,13 @@
     <textarea cols="15" rows="2" class="w-100 textarea-start" placeholder="اكتب وصف"
       formControlName="captionAra"></textarea>
 
-    <button class="border-0 rounded-3 text-white small px-4 mt-3 end-but w-100 py-2" style="background-color: #0b6b6e"
+    <button
+     class="border-0 rounded-3 text-white small px-4 mt-3 end-but w-100 py-2" 
+     style="background-color: #0b6b6e"
+      [disabled]="isLoading()"
+      [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'"
       (click)="addPost()">
-      ADD POST
+      {{ isLoading() ? 'Adding...' : 'ADD POST' }}
     </button>
   </form>
 
