@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveModeuls } from '../../../../Shared/Modules/ReactiveForms.module';
 import { FeedbackEmployeeService } from '../../../../Core/service/Employee/feedback-employee.service';
-import { IFeedbackEmployee } from '../../../../Core/Interface/ifeedback';
+import { IFeedbackClients, IFeedbackEmployee } from '../../../../Core/Interface/ifeedback';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class FeedbackEmployees {
 
   private _feedbackService = inject(FeedbackEmployeeService)
-  Feedbacks = signal<IFeedbackEmployee[] | null>(null);
+  Feedbacks = signal<IFeedbackClients>({} as IFeedbackClients);
 currentYear = new Date().getFullYear();
     private _route = inject(ActivatedRoute);
 storedId!:any;

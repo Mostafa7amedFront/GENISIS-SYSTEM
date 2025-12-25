@@ -13,5 +13,6 @@ export interface IClients {
   email: string
   userName: string
   services: IService[]
+  clientProjectStatus: number
   
 }

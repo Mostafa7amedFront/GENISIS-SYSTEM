@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { IFeedbackEmployee } from '../../../Core/Interface/ifeedback';
+import { IFeedbackClients, IFeedbackEmployee } from '../../../Core/Interface/ifeedback';
 import { FeedbackClientsService } from '../../../Core/service/Clients/feedback-clients.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { FeedbackClientsService } from '../../../Core/service/Clients/feedback-c
 })
 export class FeedbackProfile {
     private _feedbackService = inject(FeedbackClientsService)
-  Feedbacks = signal<IFeedbackEmployee[] | null>(null);
+  Feedbacks = signal<IFeedbackClients>({} as IFeedbackClients);
 currentYear = new Date().getFullYear();
 
 

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FeedbackClientsService } from '../../../../Core/service/Clients/feedback-clients.service';
-import { IFeedbackEmployee } from '../../../../Core/Interface/ifeedback';
 import { ActivatedRoute } from '@angular/router';
 import { ReactiveModeuls } from '../../../../Shared/Modules/ReactiveForms.module';
+import { IFeedbackClients } from '../../../../Core/Interface/ifeedback';
 
 @Component({
   selector: 'app-feedback-client',
@@ -13,7 +13,7 @@ import { ReactiveModeuls } from '../../../../Shared/Modules/ReactiveForms.module
 })
 export class FeedbackClient {
     private _feedbackService = inject(FeedbackClientsService)
-  Feedbacks = signal<IFeedbackEmployee[] | null>(null);
+  Feedbacks = signal<IFeedbackClients>({} as IFeedbackClients);
     private _route = inject(ActivatedRoute);
 
 currentYear = new Date().getFullYear();

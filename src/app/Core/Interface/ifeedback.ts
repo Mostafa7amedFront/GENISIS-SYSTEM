@@ -11,3 +11,10 @@ export interface IFeedbackEmployee {
   projectName: string
   clientName: string
 }
+
+export interface IFeedbackClients {
+  overAllRate: number;
+  feedbacks: IFeedbackEmployee[];
+
+
+}

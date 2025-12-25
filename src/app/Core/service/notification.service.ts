@@ -3,14 +3,16 @@ import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signal
 import { INotification } from '../Interface/inotification';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
   
-  private baseUrl = 'https://genesissystem.runasp.net/api/Notification';
-private hubUrl = 'https://genesissystem.runasp.net/hubs/notification';
+  private baseUrl = `${environment.baseimageUrl}/api/Notification`;
+private hubUrl = `${environment.baseimageUrl}/hubs/notification`;
+
 
   private hubConnection!: HubConnection;
 
@@ -48,6 +50,7 @@ private hubUrl = 'https://genesissystem.runasp.net/hubs/notification';
     this.hubConnection.on("ReceiveNotification", (data: INotification) => {
 
       this.newNotification.set(data);
+      console.log("first")
 
       this.notifications.update(list => [data, ...list]);
     });

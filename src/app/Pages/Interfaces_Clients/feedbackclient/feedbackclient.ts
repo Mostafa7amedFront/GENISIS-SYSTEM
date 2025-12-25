@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { IFeedbackEmployee } from '../../../Core/Interface/ifeedback';
+import { IFeedbackClients, IFeedbackEmployee } from '../../../Core/Interface/ifeedback';
 import { FeedbackClientsService } from '../../../Core/service/Clients/feedback-clients.service';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from "@angular/router";
@@ -12,7 +12,7 @@ import { RouterLink } from "@angular/router";
 })
 export class Feedbackclient {
   private _feedbackService = inject(FeedbackClientsService)
-  Feedbacks = signal<IFeedbackEmployee[] | null>(null);
+  Feedbacks = signal<IFeedbackClients>({} as IFeedbackClients);
 currentYear = new Date().getFullYear();
 
 

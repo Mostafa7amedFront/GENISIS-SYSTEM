@@ -135,14 +135,27 @@ readonly summaryText = computed(() =>
   // ==========================
   // Time Ago
   // ==========================
-  timeAgo(date: string): string {
-    const now = new Date();
-    const past = new Date(date);
-    const diff = Math.floor((now.getTime() - past.getTime()) / (1000 * 60 * 60 * 24));
-    if (diff === 0) return "Today";
-    if (diff === 1) return "1 day ago";
-    return `${diff} days ago`;
+timeAgo(date: string | null | undefined): string {
+  if (!date) {
+    return 'no updated day';
   }
+
+  const now = new Date();
+  const past = new Date(date);
+
+  // في حالة إن التاريخ غير 
+  if (isNaN(past.getTime())) {
+    return 'no updated day';
+  }
+
+  const diff = Math.floor(
+    (now.getTime() - past.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  if (diff === 0) return 'Today';
+  if (diff === 1) return '1 day ago';
+  return `${diff} days ago`;
+}
 
   // ==========================
   // Calendar Navigation
