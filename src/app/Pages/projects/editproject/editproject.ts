@@ -41,6 +41,7 @@ export class Editproject {
   selectedDate: Date | null = null;
   paymentAmount = signal<number>(0);
   projectType = signal<number>(0);
+  month = signal<number>(0);
 
   options = ['IN PROGRESS', 'PAUSED', 'COMPLETED'];
   clientTitleMap: { [key: string]: number } = {
@@ -87,6 +88,7 @@ export class Editproject {
               this.projectType.set(project.projectType); // <--- هنا
 
                       this.paymentAmount.set(project.projectPayment);
+                      this.month.set(project.month);
         // ✅ fix signals
     this.leftSelected.set(project.clientId); // <--- استخدم clientId
         this.rightSelected.set(employeeIds);
@@ -216,6 +218,8 @@ export class Editproject {
     formData.append('DeadLine', deadline);
     formData.append('ClientId', this.leftSelected()!);
   formData.append('ProjectPayment', String(this.paymentAmount())); 
+
+  formData.append('month', String(this.month())); 
 
     this.rightSelected().forEach(id => formData.append('EmployeeIds', id));
     this.files.forEach(file => formData.append('AttachmentUrl', file, file.name));

@@ -44,6 +44,15 @@
       <p class="low small mb-1 text-start" style="white-space: pre-line">
         “ {{ aboutproject()?.projectDescription }} “
       </p>
+        <h6 class="pt-4">ATTACHMENTS</h6>
+                 <div class="d-flex w-100 flex-wrap gap-2 ">
+                  @for (file of aboutproject()?.projectAttachment; track $index ) {
+                    <div class=""><img class="attach-img" height="70" width="100" [src]="baseimageUrl + file" alt=""></div>
+                  }
+                  
+                 </div>
+                   <h6 class="pt-4">ATTACHMENTS</h6>
+             
 
       <div class="d-flex mt-3 flex-wrap gap-2">
         @for (file of aboutproject()?.attachments; track $index ; let i = $index) {
@@ -130,3 +139,7 @@
 <app-chat/>
 <app-show-meeting/>
 <app-feedback/> 
+<!-- 
+
+
+-->

@@ -1,5 +1,6 @@
 export interface IProject {
     id:                 any;
+    month:number;
         projectPayment:     number;
     projectFeedBack:    number;
     projectDuration:    number;
@@ -16,6 +17,7 @@ export interface IProject {
     employees:          Employee[];
     notes:              Note[];
     attachments:        Attachment[];
+    projectAttachment:string[];
 }
 
 export interface Attachment {
