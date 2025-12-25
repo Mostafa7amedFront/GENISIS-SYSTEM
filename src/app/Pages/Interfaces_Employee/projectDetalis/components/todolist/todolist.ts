@@ -42,17 +42,14 @@ export class Todolist {
       this.loadNotes();
     }
 
-    console.log('📌 Project ID:', this.projectId);
   }
 
   loadNotes(): void {
     this._notesService.getProjectNotes(this.projectId).subscribe({
       next: (res) => {
         this.notes.set(res.value || []);
-        console.log('✅ Notes loaded:', res);
       },
       error: (err) => {
-        console.error('❌ Error loading notes:', err);
       }
     });
   }
@@ -66,10 +63,9 @@ export class Todolist {
 
     this._notesService.editNote(note.id, updatedData).subscribe({
       next: (res) => {
-        console.log('✅ Note updated successfully:', res);
       },
       error: (err) => {
-        console.error('❌ Error updating note:', err);
+
       },
     });
   }
@@ -107,7 +103,6 @@ export class Todolist {
 
   this._notesService.addNote(this.projectId.toString(), requestBody).subscribe({
     next: (res) => {
-      console.log('✅ Note added successfully:', res);
 
       // ضيف الملاحظة الجديدة محلياً بنفس البنية اللي الـ API بيرجعها
       const addedNote: Note = {
@@ -124,7 +119,7 @@ export class Todolist {
       this.newTodoText = '';
     },
     error: (err) => {
-      console.error('❌ Error adding note:', err);
+
     }
   });
   }

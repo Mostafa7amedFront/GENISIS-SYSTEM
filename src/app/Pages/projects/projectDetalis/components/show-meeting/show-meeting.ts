@@ -52,7 +52,7 @@ formatDate(dateStr: string): string {
     this._meeting.getMeeting(projectId).subscribe({
       next: (res) => {
         this.meetings.set(res.value);
-        console.log(this.meetings)
+      
       },
       error: err => console.error('❌ Error fetching meetings:', err)
     });

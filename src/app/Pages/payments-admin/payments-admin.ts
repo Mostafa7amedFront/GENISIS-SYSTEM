@@ -70,7 +70,6 @@ generateMonths(selectedDate: Date) {
         this.payments.set(res.value)  
       },
       error: (err) => {
-        console.error(err);
         this.payments.set([])  
       }
     });
@@ -83,14 +82,12 @@ generateMonths(selectedDate: Date) {
 
   this._payments.togglePayment(payment.id, newValue).subscribe({
     next: res => {
-      console.log('✅ Payment toggled:', res);
       this._alert.toast(
         newValue ? 'Payment marked as Paid.' : 'Payment marked as Unpaid.',
         'success'
       );
     },
     error: err => {
-      console.error('❌ Error toggling payment:', err);
       this._alert.toast('Failed to update payment status.', 'error');
 
       payment.isPaid = !newValue;

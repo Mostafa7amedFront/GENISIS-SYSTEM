@@ -40,7 +40,6 @@ export class UpdateSummary {
       },
 
       error: (err) => {
-          console.log(err);
     this._alert.toast(err.error.detail,'error')
       }
     });

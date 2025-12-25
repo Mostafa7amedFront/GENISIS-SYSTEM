@@ -5,6 +5,7 @@ import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.mod
 import { ShortenPipe } from '../../../../../Shared/pipes/shorten-pipe';
 import { IChatAttachmentMessages, IChatLink } from '../../../../../Core/Interface/ichat';
 import { DownloadFileService } from '../../../../../Core/service/download-file.service';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -23,7 +24,7 @@ export class Chat {
   loadedTabs = { documents: false, links: false };
   projectId = '';
   selectedFiles: File[] = [];
-  baseurl = 'https://genesissystem.runasp.net';
+  baseurl = environment.baseimageUrl;
   currentUserId = localStorage.getItem('user_id');
 
   // Services
@@ -152,7 +153,6 @@ downloadFile(fileUrl: any) {
       URL.revokeObjectURL(objectUrl);
     },
     error: (err) => {
-      console.log("Download error:", err);
     }
   });
 }

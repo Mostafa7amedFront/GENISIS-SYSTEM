@@ -47,13 +47,11 @@ private _project = inject(ProjectService);
     if (this.id) {
       this.loadProjects(this.id);
     } else {
-      console.warn('⚠️ Id_Clients not found in localStorage');
     }
   }
 
   selectProject(id: string) {
     this.selectedProjectId.set(id);
-    console.log('Selected Project ID:', id);
   }
 
   private loadProjects(clientId: string): void {
@@ -128,7 +126,6 @@ private _project = inject(ProjectService);
     const slot = this.selectedSlot();
 
     if (!projectId || !slot) {
-      console.warn('Please select a project and a slot.');
       this._alert.toast('Please select a project and a slot.', 'warning');
       return;
     }

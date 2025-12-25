@@ -87,7 +87,6 @@ export class Addpost {
        this.isVideo = false;
       },
       error: (err) => {
-        console.log(err);
       this._alert.toast('Error adding Post', 'error');
       }
     });

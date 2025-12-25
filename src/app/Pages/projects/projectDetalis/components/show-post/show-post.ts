@@ -33,13 +33,11 @@ export class ShowPost {
 
   getOnePost(postId: string) {
 this._post.getProjectOnePost(postId).subscribe({
+
   next: (res) => {
-    console.log(res);
     this.posts.set(res.value);
-    console.log(this.posts())
   },
   error: (err) => {
-    console.log(err); 
 
   }
 });
@@ -62,7 +60,6 @@ downloadFile(fileUrl: any) {
       URL.revokeObjectURL(objectUrl);
     },
     error: (err) => {
-      console.log("Download error:", err);
     }
   });
 }

@@ -31,18 +31,15 @@ aboutEmployees = signal<IEmployee | null>(null);
     if (this.employeeId) {
       this.loadEmployeeData();
     }
-    console.log(this.employeeId)
   }
 
   loadEmployeeData() {
     this._Employees.getById(this.employeeId).subscribe({
       next: (res) => {
-        console.log(res.value)
         this.aboutEmployees.set(res.value)
       
       },
       error: (err) => {
-        console.error(err);
       }
     });
   }

@@ -28,13 +28,11 @@ ngOnInit(): void {
   loadEmployeeData() {
     this._Employees.getMy().subscribe({
       next: (res) => {
-        console.log(res.value)
         this.aboutEmployees.set(res.value)
         localStorage.setItem("Id_Employees", res.value.id.toString());
       
       },
       error: (err) => {
-        console.error(err);
       }
     });
   }

@@ -137,10 +137,8 @@ updateProgress(value: number) {
     .editProjectProgress(this.id, value)
     .subscribe({
       next: () => {
-        console.log('Progress updated successfully!');
       },
       error: (err) => {
-        console.error('Failed to update progress', err);
       }
     });
 }

@@ -39,8 +39,8 @@ export class UpdateSummary {
         }, 0);
       },
 
+
       error: (err) => {
-        console.log(err);
         this._alert.toast('Error updating summary', 'error');
       }
     });

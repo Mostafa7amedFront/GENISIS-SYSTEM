@@ -98,7 +98,6 @@ selectedType: string | null = null;
   }
   onUploadClick() {
     this.fileInput.nativeElement.click();
-    console.log(this.files)
   }
 
 onFileSelected(event: Event) {
@@ -129,7 +128,6 @@ selectDay(day: { number: string; faded: boolean; today: boolean }) {
   const dayNumber = parseInt(day.number);
 
   this.selectedDate = new Date(year, month, dayNumber);
-  console.log('Selected full date:', this.selectedDate);
 }
   renderCalendar(date: Date) {
     const year = date.getFullYear();
@@ -185,7 +183,6 @@ selectDay(day: { number: string; faded: boolean; today: boolean }) {
 
   selectLeft(name: number) {
     this.leftSelected = this.leftSelected === name ? 0 : name;
-    console.log(this.leftSelected);
   }
 
   toggleRight(name: number) {
@@ -194,7 +191,6 @@ selectDay(day: { number: string; faded: boolean; today: boolean }) {
     } else {
       this.rightSelected.push(name);
     }
-    console.log(this.rightSelected);
   }
 
   //  Project Actions

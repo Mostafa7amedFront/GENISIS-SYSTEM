@@ -88,7 +88,7 @@ Collaborators = signal<EmployeeResponse[]>([]);
         next: (res) =>{ this.posts.set(res.value)
             this.totalPages = res.totalPages;
         },
-        error: (err) => console.error('Error fetching posts', err)
+        error: (err) =>{}
       });
     }
     get displayPosts() {
@@ -138,10 +138,8 @@ updateProgress(value: number) {
     .editProjectProgress(this.id, value)
     .subscribe({
       next: () => {
-        console.log('Progress updated successfully!');
       },
       error: (err) => {
-        console.error('Failed to update progress', err);
       }
     });
 }
