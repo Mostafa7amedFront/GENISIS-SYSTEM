@@ -24,7 +24,6 @@ export class Login {
   }
 
   onLogin() {
-    console.log(this.loginForm.value)
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value).subscribe({
         next: (res) => {
@@ -33,7 +32,6 @@ export class Login {
                 localStorage.setItem('user_type', res.value.role || ''); 
 
           this._route.navigate(['/home']);
-          console.log(this.onCheckUser())
         },
         error: (err) => {
           this.aleart.toast(err.error?.detail || 'Login failed. Please check your credentials.', 'error');
@@ -44,8 +42,5 @@ export class Login {
     }
   }
 
-  onCheckUser() {
-    console.log('Decoded User:', this.loginService.getUser());
-    console.log('Is Logged In:', this.loginService.isLoggedIn());
-  }
+
 }

@@ -82,7 +82,6 @@ onImageChange(event: any) {
 
     this.Employees.add(formData).subscribe({
        next: (res) => {
-        console.log('✅ Employee added:', res);
         this._alert.toast('Employee added successfully 🎉', 'success');
         this.createAccountForm.reset();
         this.imagePreview = null;
@@ -92,7 +91,6 @@ onImageChange(event: any) {
 
       },
       error: (err) => {
-        console.error('❌ Error:', err);
         if (err.status === 503) {
           this._alert.toast('Service temporarily unavailable (503). Try again later.' , 'error');
         } else {

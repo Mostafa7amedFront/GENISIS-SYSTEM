@@ -46,7 +46,6 @@ amount = signal<number | null>(null);
 
   selectProject(id: string) {
     this.selectedProjectId.set(id);
-    console.log('Selected Project ID:', id);
   }
 
   get monthYear(): string {
@@ -100,7 +99,6 @@ if (amount <= 0) {
   return;
 }
     const data = { amount, dateTime: dateISO };
-    console.log('Payment Data:', data);
 
     this._payment.addPayment(projectId, data).subscribe({
       next: res => {
@@ -108,7 +106,6 @@ if (amount <= 0) {
         this.clearSelection();
       },
       error: err => {
-        console.error(err);
         this._alert.toast('Error adding payment.', 'error');
       }
     });

@@ -87,7 +87,6 @@ export class Editclients implements OnInit {
         }
       },
       error: (err) => {
-        console.error('❌ Error loading client:', err);
         this._alert.toast('Failed to load client data.', 'error');
       }
     });
@@ -100,7 +99,6 @@ export class Editclients implements OnInit {
         this.services.set(res.value);
       },
       error: (err) => {
-        console.error('❌ Error loading services:', err);
       }
     });
   }
@@ -151,12 +149,10 @@ onImageChange(event: any) {
 
     this._clientAPi.update(this.clientId, formData).subscribe({
       next: (res) => {
-        console.log('✅ Updated successfully:', res);
         this._alert.toast('Client updated successfully!', 'success');
         this._router.navigate(['/clients']);
       },
       error: (err) => {
-        console.error('❌ Error updating client:', err);
         this._alert.toast('Error updating client!', 'error');
       }
     });

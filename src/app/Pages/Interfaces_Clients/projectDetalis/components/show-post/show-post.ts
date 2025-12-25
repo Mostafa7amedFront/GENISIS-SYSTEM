@@ -33,12 +33,9 @@ export class ShowPost {
   getOnePost(postId: string) {
 this._post.getProjectOnePost(postId).subscribe({
   next: (res) => {
-    console.log(res);
     this.posts.set(res.value);
-    console.log(this.posts())
   },
   error: (err) => {
-    console.log(err); 
 
   }
 });
@@ -46,7 +43,7 @@ this._post.getProjectOnePost(postId).subscribe({
 
 
 downloadFile(fileName: any) {
-  const fileUrl = 'https://genesissystem.runasp.net' + fileName;
+  const fileUrl = this.baseurl + fileName;
 
   fetch(fileUrl)
     .then(response => response.blob())

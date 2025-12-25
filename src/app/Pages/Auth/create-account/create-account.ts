@@ -71,7 +71,6 @@ createAccountForm: FormGroup;
       services: this.selectedServices,
       image: this.imagePreview,
     };
-    console.log('Form Submitted:', formData);
     alert('Form submitted! 🎉');
   }
 }

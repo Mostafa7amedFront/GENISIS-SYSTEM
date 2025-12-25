@@ -52,7 +52,6 @@ clientTitleMap: { [key: string]: number } = {
 
       },
       error: (err) => {
-        console.error('❌ Error adding client:', err);
       }
     });
   }
@@ -99,16 +98,13 @@ onSubmit() {
     formData.append('Services', serviceId);
   });
   
-  console.log(formData)
   this._clientAPi.add(formData).subscribe({
   
     next: (res) => {
-      console.log('✅ Added successfully', res);
             this._alert.toast('Client added successfully!' , 'success');
             this._router.navigate(['/clients'])
     },
     error: (err) => {
-      console.error('❌ Error adding client:', err);
                   this._alert.toast('Error adding client!' , 'error');
 
     }

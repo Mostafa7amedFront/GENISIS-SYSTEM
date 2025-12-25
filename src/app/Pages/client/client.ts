@@ -101,7 +101,6 @@ getProjectCounts() {
           this.errorMessage.set('An unexpected error occurred while loading data.');
         }
 
-        console.error('Error fetching employees:', err);
       }
     });
   }
@@ -115,12 +114,10 @@ getProjectCounts() {
         if (result.isConfirmed) {
           this._Clients.delete(card.id).subscribe({
             next: (res) => {
-              console.log('✅ Deleted:', res);
               this._alert.toast('Employee deleted successfully.', 'success');
               this.projects.update((list) => list.filter(e => e.id !== card.id));
             },
             error: (err) => {
-              console.error('❌ Delete error:', err);
               this._alert.toast(err.error.detail, 'error');
             }
           });
@@ -131,7 +128,6 @@ getProjectCounts() {
   onEdit(card: any, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('Edit clicked', card);
     this.routes.navigate(['/editclient', card.id]);
   }
 

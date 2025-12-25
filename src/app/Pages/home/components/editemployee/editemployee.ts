@@ -47,7 +47,6 @@ export class Editemployee  implements OnInit{
     if (this.employeeId) {
       this.loadEmployeeData();
     }
-    console.log(this.employeeId)
   }
 
   loadEmployeeData() {
@@ -68,7 +67,6 @@ export class Editemployee  implements OnInit{
         this.selectedClientTitle = this.clientTitles[emp.employeeBadge] || null;
       },
       error: (err) => {
-        console.error(err);
         this._alert.toast('Failed to load employee data', 'error');
       }
     });
@@ -128,7 +126,6 @@ onImageChange(event: any) {
         this._router.navigate(['/home']);
       },
       error: (err) => {
-        console.error(err);
         this._alert.toast('Failed to update employee', 'error');
       }
     });

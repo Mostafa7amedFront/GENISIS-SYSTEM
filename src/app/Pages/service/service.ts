@@ -42,7 +42,6 @@ export class Service {
       },
       error: (err) => {
         this.isLoading.set(false);
-        console.error('❌ Error fetching services:', err);
             this._alert.toast(err.error.detail, 'error');
       }
     });
@@ -62,7 +61,6 @@ export class Service {
               this.services.update((list) => list.filter((s) => s.id !== service.id));
             },
             error: (err) => {
-              console.error('❌ Delete error:', err);
             this._alert.toast(err.error.detail, 'error');
             }
           });
@@ -73,7 +71,6 @@ export class Service {
   onEdit(service: IService, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    console.log(service)
     this._router.navigate(['/editservice', service.id]);
   }
 }

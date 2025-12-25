@@ -90,7 +90,6 @@ export class Projects {
           this.errorMessage.set('An unexpected error occurred while loading data.');
         }
 
-        console.error('Error fetching employees:', err);
       }
     });
   }
@@ -104,12 +103,10 @@ export class Projects {
         if (result.isConfirmed) {
           this._project.delete(card.id).subscribe({
             next: (res) => {
-              console.log('✅ Deleted:', res);
               this._alert.toast('Employee deleted successfully.', 'success');
               this.projects.update((list) => list.filter(e => e.id !== card.id));
             },
             error: (err) => {
-              console.error('❌ Delete error:', err);
               this._alert.toast(err.error.detail, 'error');
             }
           });
@@ -142,7 +139,6 @@ export class Projects {
   onEdit(card: any, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('Edit clicked', card);
     this.routes.navigate(['/editproject', card.id]);
   }
 

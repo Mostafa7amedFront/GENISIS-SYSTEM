@@ -15,7 +15,6 @@ ngAfterViewInit() {
     Id: '.my-anim',
     Data: __Animations['520251'],
     Status: (progress: any, id: any) => {
-      console.log("Progress:", progress);
     }
   });
 

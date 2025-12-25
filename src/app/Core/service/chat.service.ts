@@ -35,9 +35,7 @@ export class ChatService {
     try {
       await this.hubConnection.start();
       this.status.set('connected');
-      console.log('✅ SignalR connected');
     } catch (err) {
-      console.error('❌ Error establishing connection: ', err);
       this.status.set('error');
     }
   }
@@ -77,9 +75,7 @@ const formattedMsg = {
 
       await this.hubConnection.invoke('JoinProjectGroup', projectId);
       this.currentProjectId = projectId;
-      console.log(`✅ Joined project group: ${projectId}`);
     } catch (err) {
-      console.error('❌ Failed to join project group:', err);
     }
   }
 
@@ -96,8 +92,8 @@ const formattedMsg = {
     this.http.post(`${this.API_URL}api/ProjectChat`, formData, {
       headers: { Authorization: `Bearer ${this.token}` }
     }).subscribe({
-      next: () => console.log('✅ Message sent to server'),
-      error: err => console.error('❌ Error sending message:', err)
+      next: () => {},
+      error: err => {console.error('❌ Error sending message:', err);}
     });
   }
 

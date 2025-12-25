@@ -62,8 +62,8 @@ userId = localStorage.getItem('Id_Clients') || '';
       next: (res) => {
         this.payments.set(res.value)  
       },
+
       error: (err) => {
-        console.error(err);
         this.payments.set([])  
       }
     });

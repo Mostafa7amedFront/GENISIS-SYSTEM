@@ -39,7 +39,6 @@ export class UploadFiles {
     if (this.projectId) {
       this.loadEmployeeData();
     }
-    console.log(this.projectId)
   }
 
   onUploadClick() {
@@ -73,7 +72,6 @@ uploadFiles() {
 
   this._project.uploadMultipleRequests(this.projectId, this.files).subscribe({
     next: (res) => {
-      console.log('✅ Uploaded successfully:', res);
       this._alert.toast('Files uploaded successfully.', 'success');
 
 this.files = [];
@@ -82,7 +80,6 @@ this.files = [...this.files];
          this.cdr.detectChanges();
     },
     error: (err) => {
-      console.error('❌ Upload failed:', err);
       this._alert.toast('Upload failed. Please try again.', 'error');
     }
   });
@@ -93,12 +90,10 @@ this.files = [...this.files];
   loadEmployeeData() {
     this._project.getById(this.projectId).subscribe({
       next: (res) => {
-        console.log(res.value)
         this.aboutproject.set(res.value)
 
       },
       error: (err) => {
-        console.error(err);
       }
     });
   }

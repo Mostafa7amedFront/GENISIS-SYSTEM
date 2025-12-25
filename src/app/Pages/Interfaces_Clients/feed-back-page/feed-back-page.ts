@@ -91,12 +91,10 @@ export class FeedBackPage {
       next: res => {
         this._alert.toast('Feedback submitted successfully!', 'success');
         this._routes.navigate(['/client/feedback']);
-        console.log('Feedback Response:', res);
       },
       error: err => {
         this._alert.toast('Failed to submit feedback', 'error');
 
-        console.error(err);
       }
     });
   }

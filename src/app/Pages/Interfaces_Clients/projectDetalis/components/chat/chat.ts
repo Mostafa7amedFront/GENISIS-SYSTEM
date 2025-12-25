@@ -152,7 +152,6 @@ downloadFile(fileUrl: any) {
       URL.revokeObjectURL(objectUrl);
     },
     error: (err) => {
-      console.log("Download error:", err);
     }
   });
 }

@@ -28,7 +28,6 @@ export class ProjectsProfile {
   @Input() tpyeOfProject: boolean = true
   ngOnInit(): void {
    const idParam = this._route.snapshot.paramMap.get('id');
-  console.log('Route ID:', idParam); // 👈 شوف بتطلع إيه
   this.employeeId = idParam;
   if (this.employeeId) {
     this.loadProject(this.employeeId);

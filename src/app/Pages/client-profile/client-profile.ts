@@ -31,18 +31,15 @@ aboutclient = signal<IClients | null>(null);
     if (this.clientId) {
       this.loadEmployeeData();
     }
-    console.log(this.clientId)
   }
 
   loadEmployeeData() {
     this._client.getById(this.clientId).subscribe({
       next: (res) => {
-        console.log(res.value)
         this.aboutclient.set(res.value)
       
       },
       error: (err) => {
-        console.error(err);
       }
     });
   }

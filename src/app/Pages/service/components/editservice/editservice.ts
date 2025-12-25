@@ -28,7 +28,6 @@ export class Editservice {
   ngOnInit(): void {
     this.serviceId =  this.route.snapshot.paramMap.get('id');
    
-    console.log(this.serviceId)
     this.serviceForm = this.fb.group({
       name: ['', Validators.required]
     });

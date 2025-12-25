@@ -38,7 +38,6 @@ private cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
     this.projectId = this._route.snapshot.paramMap.get('id') || '';
-    console.log(this.projectId);
     this.GetFeedback();
   }
 
@@ -63,9 +62,8 @@ private cdr = inject(ChangeDetectorRef);
         this.recommendation = this.mapRecommendation(fb.questionThree);
       this.cdr.detectChanges();
 
-        console.log("Mapped Feedback:", this.ratings, this.feedbackText, this.recommendation);
       },
-      error: (err) => console.error('❌ Error loading feedback details:', err)
+      error: (err) =>{}
     });
   }
 

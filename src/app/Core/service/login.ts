@@ -54,7 +54,6 @@ export class LoginService {
     try {
       return jwtDecode<IDecode>(token);
     } catch (e) {
-      console.error('Invalid token', e);
       return null;
     }
   }

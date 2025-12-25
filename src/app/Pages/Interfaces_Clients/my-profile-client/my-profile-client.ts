@@ -26,13 +26,11 @@ aboutclient = signal<IClients | null>(null);
   loadEmployeeData() {
     this._client.getMy().subscribe({
       next: (res) => {
-        console.log(res.value)
         this.aboutclient.set(res.value)
         localStorage.setItem("Id_Clients", res.value.id.toString());
 
       },
       error: (err) => {
-        console.error(err);
       }
     });
   }

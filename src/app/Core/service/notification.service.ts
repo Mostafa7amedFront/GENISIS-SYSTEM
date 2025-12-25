@@ -35,10 +35,9 @@ private hubUrl = 'https://genesissystem.runasp.net/hubs/notification';
     this.hubConnection
       .start()
       .then(() => {
-        console.log("SignalR Connected");
         this.addListeners();
       })
-      .catch(err => console.log("Error while starting SignalR", err));
+      .catch(err => {});
   }
 
   stopConnection() {
@@ -47,7 +46,6 @@ private hubUrl = 'https://genesissystem.runasp.net/hubs/notification';
 
   private addListeners() {
     this.hubConnection.on("ReceiveNotification", (data: INotification) => {
-      console.log("New Notification From Server:", data);
 
       this.newNotification.set(data);
 

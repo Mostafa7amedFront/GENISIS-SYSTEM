@@ -40,7 +40,5 @@ export class Signup {
     }
   }
 
-  onSubmit() {
-   console.log(this.signupForm.value)
-  }
+
 }

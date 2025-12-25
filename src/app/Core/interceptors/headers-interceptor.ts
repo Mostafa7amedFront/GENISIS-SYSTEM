@@ -21,7 +21,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(clonedReq).pipe(
     catchError((error) => {
       if (error.status === 401 && !req.url.includes('/refresh')) {
-        console.warn('Token expired - attempting refresh...');
         return loginService.refreshToken().pipe(
           switchMap((res: any) => {
             loginService.saveToken(
@@ -36,7 +35,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
             return next(newReq);
           }),
           catchError((refreshError) => {
-            console.error('Refresh failed - redirecting to login.');
             loginService.logout();
             router.navigate(['/login']);
             return throwError(() => refreshError);

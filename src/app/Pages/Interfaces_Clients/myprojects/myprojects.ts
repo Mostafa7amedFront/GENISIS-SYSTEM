@@ -93,7 +93,7 @@ export class Myprojects {
           this.errorMessage.set('An unexpected error occurred while loading data.');
         }
 
-        console.error('Error fetching employees:', err);
+
       }
     });
   }

@@ -34,8 +34,6 @@ export class FeedBackPage {
   
 
   submitFeedback() {
-    console.log('Ratings:', this.ratings);
-    console.log('Feedback Text:', this.feedbackText);
-    console.log('Recommendation:', this.recommendation);
+
   }
 }
