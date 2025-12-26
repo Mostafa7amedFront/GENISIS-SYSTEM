@@ -58,15 +58,15 @@
             </ul>
           </div>
           <div class="flex-wrap pb-2 rounded d-flex gap-4">
-            <div class="text-center col seletType">
+            <div class="text-center col seletType" (click)="selectProjectType(0)" [class.selectedType]="selectedProjectType() === 0">
               <p class="mb-0">OLD CLIENT</p>
             </div>
 
-            <div class="text-center col seletType">
+            <div class="text-center col seletType" (click)="selectProjectType(1)" [class.selectedType]="selectedProjectType() === 1">
               <p class="mb-0">Long Term</p>
             </div>
 
-            <div class="text-center col seletType">
+            <div class="text-center col seletType"  (click)="selectProjectType(2)" [class.selectedType]="selectedProjectType() === 2">
               <p class="mb-0">New Client</p>
             </div>
           </div>

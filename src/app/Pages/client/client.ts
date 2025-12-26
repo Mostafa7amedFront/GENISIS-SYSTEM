@@ -55,6 +55,7 @@ options = [
   private routes = inject(Router);
   baseimageUrl = `${environment.baseimageUrl}`;
   projects = signal<IClients[]>([]);
+  selectedProjectType = signal<number | null>(null);
 
 
 getProjectCounts() {
@@ -66,6 +67,15 @@ getProjectCounts() {
   ngOnInit(): void {
     this.loadEmployees();
   }
+  selectProjectType(type: number) {
+     if (this.selectedProjectType() === type) {
+      this.selectedProjectType.set(null);
+    } else {
+      this.selectedProjectType.set(type);
+    }
+    this.currentPage.set(1);
+    this.loadEmployees();
+  }
 
   loadEmployees(): void {
     this.isLoading.set(true);
@@ -74,7 +84,7 @@ getProjectCounts() {
     this._Clients.getAll({
       pageNumber: this.currentPage(),
       pageSize:  this.pageSize,
-      ProjectStatus: this.selected.value
+      clientType:this.selectedProjectType()
     }).subscribe({
       next: (response) => {
         this.isLoading.set(false);
