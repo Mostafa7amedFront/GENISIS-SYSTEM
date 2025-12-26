@@ -51,7 +51,7 @@ ease;
   display: grid !important;
   grid-template-columns: repeat(4, 1fr); /* 👈 4 أعمدة ثابتة */
   gap: 1rem;
-  padding: 1rem;
+  padding: 0rem;
 }
 @media (max-width: 992px) { /* lg -> md */
 
