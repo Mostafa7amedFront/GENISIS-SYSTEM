@@ -7,15 +7,7 @@
           <img class="border-0" src="assets/img/logo.svg" alt="Logo" />
         </a>
 
-        <button
-          class="small navbar-toggler navbar-light"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="small navbar-toggler navbar-light" type="button" (click)="toggleMenu()">
           <span class="small navbar-toggler-icon"></span>
         </button>
 
@@ -27,7 +19,7 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/clients" routerLinkActive="active">CLIENTS</a>
             </li>
-                  <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link" routerLink="/projects" routerLinkActive="active">PROJECTS</a>
             </li>
             <li class="nav-item">
@@ -36,17 +28,12 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/payment" routerLinkActive="active">PAYMENT</a>
             </li>
-      
+
             <li class="nav-item">
-              <a class="nav-link" routerLink="/notifications" routerLinkActive="active"
-                >NOTIFICATIONS</a
-              >
+              <a class="nav-link" routerLink="/notifications" routerLinkActive="active">NOTIFICATIONS</a>
             </li>
             <li class="nav-item d-lg-none">
-              <a
-                class="nav-link d-flex justify-content-center align-items-center gap-2 text-white"
-                (click)="logout()"
-              >
+              <a class="nav-link d-flex justify-content-center align-items-center gap-2 text-white" (click)="logout()">
                 LOGOUT
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
               </a>
@@ -54,16 +41,51 @@
           </ul>
         </div>
 
-        <div
-          class="text-white d-none d-lg-flex gap-3 align-items-center"
-          (click)="logout()"
-          style="cursor: pointer"
-        >
+        <div class="text-white d-none d-lg-flex gap-3 align-items-center" (click)="logout()" style="cursor: pointer">
           <p class="mb-0">LOGOUT</p>
           <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
         </div>
       </div>
     </div>
   </div>
+
+  <div *ngIf="isMenuOpen" style="
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(250deg, #00AAAA -90%, #000 64%);    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  ">
+    <ul class="gap-xxl-5 gap-lg-4 navbar-nav mx-auto pe-lg-5 text-center">
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenu()" routerLink="/home" routerLinkActive="active">THE TEAM</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenu()" routerLink="/clients" routerLinkActive="active">CLIENTS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenu()" routerLink="/projects" routerLinkActive="active">PROJECTS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenu()" routerLink="/service" routerLinkActive="active">SERVICE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenu()" routerLink="/payment" routerLinkActive="active">PAYMENT</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenu()" routerLink="/notifications"
+          routerLinkActive="active">NOTIFICATIONS</a>
+      </li>
+      <li class="nav-item d-lg-none">
+        <a class="nav-link d-flex justify-content-center align-items-center gap-2 text-danger" (click)="logout()">
+          LOGOUT
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
   <!-- End-nav-bar -->
 </div>
