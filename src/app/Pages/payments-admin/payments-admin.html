@@ -2,22 +2,15 @@
   <h1 class="text-white text-end big">PAYMENTS</h1>
 </div>
 
-<div
-  class="payments-container text-white p-4 rounded-3 mb-5 pb-5"
-  style="background-color: #171818"
->
-  <div class="d-flex justify-content-between gap-3 align-items-start">
+<div class="payments-container text-white p-4 rounded mb-5 pb-5" style="background-color: #171818">
+  <div class="d-flex justify-content-between pt-5  gap-3 align-items-start">
     <!-- Months -->
     <div class="time-slots flex-grow-1 w-50">
-      <h6>MONTHS</h6>
+      <h6  style="font-size: 18px; margin-bottom: 20px" >MONTHS</h6>
       <div class="border-right">
-        <div
-          *ngFor="let month of displayedMonths; let i = index"
-          class="slot text-center me-0"
-          [class.active]="i === selectedIndex"
-          (click)="selectMonth(i)"
-        >
-          1st, {{ month.label }}
+        <div *ngFor="let month of displayedMonths; let i = index" class="slot text-center me-0"
+          [class.active]="i === selectedIndex" (click)="selectMonth(i)">
+          <p class="m-0"> 1st, {{ month.label }}</p>
         </div>
       </div>
     </div>
@@ -25,32 +18,64 @@
 
     <!-- Payment info -->
     <div class="payments flex-grow-1 w-50">
-      <h6 style="font-size: 12px; margin-bottom: 20px">PAYMENTS</h6>
+      <h6 style="font-size: 18px; margin-bottom: 20px">PAYMENTS</h6>
 
-      @for (payment of payments(); track payment.id) {
+      <!-- PAID -->
+
+      <div class="IsPaid">
+        @for (payment of paidPayments(); track payment.id) {
+       <div class="paymentAdd mb-3">
+          <p class="mb-2">
+            <span>{{ payment.clientName }} ({{ payment.projectName }})</span>
+          </p>
+
+          <div class="text-start paymentbtn text-white w-100 rounded" [ngClass]="{ isLate: payment.isLate }"
+            (click)="togglePaymentStatus(payment)">
+            <p class="fw-bolder mb-0">
+              USD {{ payment.amount }}
+            </p>
+          </div>
+        </div>
+        }
+         @empty {
       <button
-        class="py-3 text-start text-white ps-3 w-100 mb-2 rounded-3"
-        style="font-size: 16px; border: none"
-        [ngClass]="{
-          'notifiction-card': !payment.isPaid,
-          'notifiction-card-none': payment.isPaid,
-          isLate: payment.isLate
-        }"
-        (click)="togglePaymentStatus(payment)"
+        class="py-3 text-white text-center ps-3 w-100 s d-flex align-items-center justify-content-center rounded"
+        style="
+          background: linear-gradient(90deg, #2d2d2d00 0%, #00bec540 65%);
+          font-size: 18px;
+          border: none;
+        "
       >
-        <span  [class.booked]="!payment.isLate">{{ payment.clientName }}</span>
-        is due to pay
-        <span   [class.booked]="!payment.isLate">
-          {{ payment.amount }}
-          <span class="text-white"> for the</span>
-          ( {{ payment.projectName }} )
-          <span class="text-white"> Project</span>
-        </span>
+        <p class="m-0 text-center">No payments found for this month</p>
       </button>
+      }
+      </div>
 
-      } @empty {
+
+      <!-- LINE ثابت -->
+      <hr class="payments-divider" />
+      <h6 style="font-size: 18px; margin-bottom: 20px">PAID</h6>
+
+      <!-- UNPAID -->
+      <div class="IsPaid">
+        @for (payment of unPaidPayments(); track payment.id) {
+        <div class="paymentAdd mb-3">
+          <p class="mb-2">
+            <span>{{ payment.clientName }} ({{ payment.projectName }})</span>
+          </p>
+
+          <div class="text-start paymentbtn text-white notifiction-card-none w-100 rounded"
+            [ngClass]="{ isLate: !payment.isLate }" (click)="togglePaymentStatus(payment)">
+            <p class="fw-bolder mb-0">
+              USD {{ payment.amount }}
+            </p>
+          </div>
+        </div>
+
+        }
+         @empty {
       <button
-        class="py-3 text-white text-center ps-3 w-100 s d-flex align-items-center justify-content-center rounded-3"
+        class="py-3 text-white text-center ps-3 w-100 s d-flex align-items-center justify-content-center rounded"
         style="
           background: linear-gradient(90deg, #2d2d2d00 0%, #00bec540 65%);
           font-size: 16px;
@@ -60,6 +85,11 @@
         <p class="m-0 text-center">No payments found for this month</p>
       </button>
       }
+
+      </div>
+
+
+
     </div>
   </div>
 </div>

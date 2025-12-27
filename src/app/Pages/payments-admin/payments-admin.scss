@@ -15,19 +15,19 @@
   
 }
 .isLate{
-    background: linear-gradient(90deg, rgba(45, 45, 45, 0) 0%, rgba(214, 13, 13, 0.192) 66.35%);
+    background: linear-gradient(90deg, rgba(45, 45, 45, 0) 0%, rgba(214, 13, 13, 0.192) 66.35%) !important;
 
 }
 .line{
     width: 3px;
-    height: 400px;
+    height: 430px;
     background-color: rgba(255, 255, 255, 0.2509803922);
     right: 54%;
     margin-top: 35px;
  
 }
 .border-right {
-    height: 400px;
+    height: 440px;
     overflow-y: scroll;
     scrollbar-width: none;
 
@@ -50,29 +50,74 @@
     //     background: #ffffff;
     // }
 }
+.time-slots{
+    padding: 0 30px !important;
 
+}
 .time-slots h6 {
     font-size: 12px;
     margin-bottom: 20px;
 }
-.notifiction-card-none{
-  background: #2D2D2D;
+.paymentbtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0.5px solid #FFFFFF !important;
+    background: linear-gradient(90deg, rgba(45, 45, 45, 0) 0%, rgba(0, 190, 197, 0.25) 66.35%);
+    padding: 0 20px;
+    height: 47px !important;
+}
+.paymentbtn p{
+font-size: 20px;
+margin: 0 !important;
+margin-top: 5px !important;
+
+  line-height: 0 !important;
 
 }
+.notifiction-card-none{
+  background: #2D2D2D;
+  
+
+}
+.payments-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
+}
+
 .slot {
     background: #2d2d2d;
-    padding: 8px;
     margin-bottom: 8px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    margin-bottom: 11px;
+
+}
+
+.IsPaid{
+    height: 175px !important;
+    display: flex ;
+    flex-direction: column ;
+    overflow-y: auto ;
+    scrollbar-width: none;
+
 }
 
 .slot.active {
     background: #123535;
     border: 1px solid #ffffff7c;
 }
+.slot p {
+  margin-top: 5px !important;
+  line-height: 0 !important;
 
+}
 /* Calendar */
 .calendar {
     flex: 1;
@@ -143,8 +188,9 @@
 
 .payments {
     overflow-y: scroll;
-    height: 385px;
     scrollbar-width: none;
+    padding: 0 30px !important;
+
 }
 
 .show-checkbox {

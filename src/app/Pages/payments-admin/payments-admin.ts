@@ -74,6 +74,14 @@ generateMonths(selectedDate: Date) {
       }
     });
   }
+  paidPayments() {
+  return this.payments().filter(p => p.isPaid);
+}
+
+unPaidPayments() {
+  return this.payments().filter(p => !p.isPaid);
+}
+
 
   togglePaymentStatus(payment: IPayments) {
   const newValue = !payment.isPaid;
