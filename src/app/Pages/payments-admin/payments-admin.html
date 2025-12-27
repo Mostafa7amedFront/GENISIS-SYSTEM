@@ -34,6 +34,9 @@
             <p class="fw-bolder mb-0">
               USD {{ payment.amount }}
             </p>
+            <p class="m-0">
+              {{payment.dateTime | date:'MMM d'}}
+            </p>
           </div>
         </div>
         }
@@ -65,9 +68,12 @@
           </p>
 
           <div class="text-start paymentbtn text-white notifiction-card-none w-100 rounded"
-            [ngClass]="{ isLate: !payment.isLate }" (click)="togglePaymentStatus(payment)">
+            [ngClass]="{ isLate: payment.isLate }" (click)="togglePaymentStatus(payment)">
             <p class="fw-bolder mb-0">
               USD {{ payment.amount }}
+            </p>
+                  <p class="m-0">
+              {{payment.dateTime | date:'MMM d'}}
             </p>
           </div>
         </div>
