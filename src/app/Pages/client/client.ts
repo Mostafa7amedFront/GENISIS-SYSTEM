@@ -25,11 +25,13 @@ export class Client {
   pageSize = 12;
 
 options = [
-  { label: 'ALL CLIENTS', value: null },
-  { label: 'OLD CLIENT', value: 0 },
-  { label: 'LONG TERM', value: 1 },
-  { label: 'NEW CLIENT', value: 2 }
+  { label: 'ALL TIME', value: null },
+  { label: 'LAST MONTH', value: 1 },
+  { label: 'LAST 3 MONTHS', value: 3 },
+  { label: 'LAST 6 MONTHS', value: 6 },
+  { label: 'LAST YEAR', value: 12 }
 ];
+
 
   selected = this.options[0];
 
@@ -42,7 +44,6 @@ options = [
   selectOption(option: any) {
     this.selected = option;
     this.isOpen = false;
-    this.loadEmployees();
   }
 
 
