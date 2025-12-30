@@ -53,24 +53,32 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center my-2 flex-wrap">
-                    @if (aboutEmployees()?.feedback) {
-                    <div class="feedback-item">
-                        <p class="mt-2 mb-0">
-                            {{ aboutEmployees()?.feedback?.createdAt| date: 'MMMM' | uppercase }} FEEDBACK
+                   
+                    <div class="d-flex justify-content-between align-items-start w-100 mt-2">
+                      <p class="mb-0 cr" [routerLink]="['/feedback' ,aboutEmployees()?.id]">
+                        
+                           SEPTEMBER FEEDBACK
                         </p>
-                        <p class="text-white-50 small">
-                            {{ aboutEmployees()?.feedback?.feedback }}
-                        </p>
+                     
+                       <div class="stars mb-0">
+                        @for (s of [1, 2, 3, 4, 5]; track $index) {
+                        <button class="star-btn" [class.active]="s <= 4">
+                            <i class="fa fa-star"></i>
+                        </button>
+                        }
+                    </div>
 
                     </div>
-                    }
-                    @else {
-                    <p class="text-muted mt-2 fst-italic">No feedback available</p>
+                       <div class="d-flex justify-content-between align-items-start w-100 mt-0">
+                        <p class="text-white-50 small w-75 flex-wrap ">
+                         The design was great maybe the quality of the presentation could be much better, thank you so much for your efforts
+                        </p>
+                           <p class="text-white-50 small  flex-wrap ">
+                            75%
+                        </p>
+                     
+                      
 
-                    }
-                    <div class="addFeedback">
-                                <h6 class="logout" style="color: #00bec5; cursor: pointer;" [routerLink]="['/feedback' ,aboutEmployees()?.id]">Add feedback <i
-                class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i></h6>
                     </div>
                 </div>
             </div>

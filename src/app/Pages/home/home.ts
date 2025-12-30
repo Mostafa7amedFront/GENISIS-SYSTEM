@@ -7,10 +7,11 @@ import { DatePipe, UpperCasePipe, CommonModule } from '@angular/common';
 import { SweetAlert } from '../../Core/service/sweet-alert';
 import { Router } from '@angular/router';
 import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
+import { DateWithSuffixPipe } from '../../Shared/pipes/date-with-suffix-pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, DatePipe, UpperCasePipe ,CommonModule, LeadingZeroPipe],
+  imports: [RouterLink, DatePipe, UpperCasePipe , DateWithSuffixPipe ,CommonModule, LeadingZeroPipe],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
