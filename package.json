@@ -30,6 +30,7 @@
     "@angular/router": "^20.1.0",
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@microsoft/signalr": "^9.0.6",
+    "@zxing/browser": "^0.1.5",
     "bootstrap": "^5.3.7",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",

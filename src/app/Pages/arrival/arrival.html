@@ -1,1 +1,56 @@
-<p>arrival works!</p>
+<div class="arrival-page">
+
+  <!-- Tabs Header -->
+  <div class="tabs">
+    <button
+      class="tab-btn"
+      [class.active]="activeTab() === 'scan'"
+      (click)="setTab('scan')"
+    >
+      Scan QR
+    </button>
+
+    <button
+      class="tab-btn"
+      [class.active]="activeTab() === 'upload'"
+      (click)="setTab('upload')"
+    >
+      Upload QR
+    </button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div class="tab-content">
+
+    <!-- SCAN TAB -->
+    @if (activeTab() === 'scan') {
+      <div class="tab-body">
+        <button class="action-btn" (click)="startScan()">
+          <i class="fa-solid fa-qrcode"></i>
+          Start Scan
+        </button>
+
+        @if (isScanning()) {
+          <video id="video"></video>
+        }
+      </div>
+    }
+
+    <!-- UPLOAD TAB -->
+    @if (activeTab() === 'upload') {
+      <div class="tab-body">
+        <label class="upload-btn">
+          <i class="fa-solid fa-upload"></i>
+          Upload QR Image
+          <input type="file" hidden (change)="onFileSelected($event)">
+        </label>
+
+        @if (loading()) {
+          <p class="loading">Reading QR...</p>
+        }
+      </div>
+    }
+
+  </div>
+
+</div>
