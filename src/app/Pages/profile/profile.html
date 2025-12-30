@@ -24,8 +24,34 @@
         </div>
         <div class="mx-0 row ">
             <div class="px-0 col-lg-3 ">
-                <img class=" imageCover" width="210px" height="210px" [src]="baseimageUrl + aboutEmployees()?.imageUrl"
-                    alt="">
+               <div class="image-flip">
+
+    <!-- Front (Employee Image) -->
+    <div class="image-face front">
+      <img
+        class="imageCover"
+        [src]="baseimageUrl + aboutEmployees()?.imageUrl"
+        alt=""
+      />
+    </div>
+
+    <!-- Back (QR + Download) -->
+    <div class="image-face back">
+      <img
+        class="qr-image"
+        src="Image/ssss_qrcode.png"
+        alt="QR Code"
+      />
+
+      <button
+        class="download-btn position-absolute  w-100 btn_bo "
+      >
+        <i class="fa-solid fa-download"></i>
+        Download
+      </button>
+    </div>
+
+  </div>
                 <p class="mt-4 mb-0 small">{{aboutEmployees()?.createdAt | date:'mediumDate' }}</p>
                 <p class="fw-bold">Hello, {{aboutEmployees()?.name }}</p>
             </div>

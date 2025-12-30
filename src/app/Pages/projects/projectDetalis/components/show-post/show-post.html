@@ -20,7 +20,7 @@
       @if(posts().fileType === 0) {
       <img [src]="baseurl + posts().file" class="preview-img rounded" />
       <div class="btn_bo">
-              <button class="btn w-100" (click)="downloadFile(posts().file)">load</button>
+              <button class="btn w-100" (click)="downloadFile(posts().file)">Download</button>
 
       </div>
       } @if(posts().fileType === 1) {

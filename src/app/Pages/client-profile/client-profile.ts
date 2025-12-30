@@ -11,7 +11,7 @@ import { FeedbackClient } from "./Components/feedback-client/feedback-client";
 
 @Component({
   selector: 'app-client-profile',
-  imports: [ProjectsProfile, FeedbackClient],
+  imports: [ProjectsProfile, FeedbackClient , DatePipe],
   templateUrl: './client-profile.html',
   styleUrl: './client-profile.scss'
 })

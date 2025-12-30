@@ -25,3 +25,67 @@
 .booked{
     color:#00BEC5 !important;
 }
+
+.image-flip {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  perspective: 1000px;
+}
+
+.image-face {
+  position: absolute;
+  width: 260px;
+    height: 260px;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.7s ease;
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  background: #1f1f1f;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.image-flip:hover .front {
+  transform: rotateY(180deg);
+}
+
+.image-flip:hover .back {
+  transform: rotateY(360deg);
+}
+
+
+.qr-image {
+  width: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+    /* Download Button */
+    .download-btn {
+    background: var(--blue);
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 9px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 90% !important;
+    bottom: 25px;
+    transition: 0.3s;
+    }
+
+    .download-btn:hover {
+    background: #009da3;
+    }
