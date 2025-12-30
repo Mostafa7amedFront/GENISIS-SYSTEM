@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FeedbackProfile } from '../projects/feedback-profile/feedback-profile';
 import { ProjectsProfile } from '../projects/projects-profile/projects-profile';
@@ -11,7 +11,7 @@ import { FeedbackClient } from "./Components/feedback-client/feedback-client";
 
 @Component({
   selector: 'app-client-profile',
-  imports: [ProjectsProfile, FeedbackClient , DatePipe],
+  imports: [ProjectsProfile, FeedbackClient , DatePipe, UpperCasePipe],
   templateUrl: './client-profile.html',
   styleUrl: './client-profile.scss'
 })
