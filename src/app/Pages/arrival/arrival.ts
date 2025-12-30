@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, Inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { BrowserMultiFormatReader } from '@zxing/browser';
+import { SweetAlert } from '../../Core/service/sweet-alert';
 
 type TabType = 'scan' | 'upload';
 
@@ -18,6 +19,7 @@ export class Arrival {
   isScanning = signal(false);
   loading = signal(false);
 
+  private _alert = inject(SweetAlert);
   private codeReader = new BrowserMultiFormatReader();
 
   // 🔁 Switch Tabs
@@ -37,16 +39,18 @@ export class Arrival {
 
       this.isScanning.set(false);
 
-      Swal.fire({
-        icon: 'success',
-        title: 'QR Result',
-        text: result.getText(),
-        confirmButtonColor: '#00bec5'
-      });
+      this._alert.toast(
+        `QR Result: ${result.getText()}`,
+        'success'
+      );
 
     } catch {
       this.isScanning.set(false);
-      Swal.fire('Error', 'Camera error or QR not detected', 'error');
+
+      this._alert.toast(
+        'Failed to read QR code',
+        'error'
+      );
     }
   }
 
@@ -61,15 +65,16 @@ export class Arrival {
       const imgUrl = URL.createObjectURL(file);
       const result = await this.codeReader.decodeFromImageUrl(imgUrl);
 
-      Swal.fire({
-        icon: 'success',
-        title: 'QR Result',
-        text: result.getText(),
-        confirmButtonColor: '#00bec5'
-      });
+      this._alert.toast(
+        `QR Result: ${result.getText()}`,
+        'success'
+      );
 
     } catch {
-      Swal.fire('Invalid QR', 'Could not read QR image', 'error');
+      this._alert.toast(
+        'Invalid QR image',
+        'error'
+      );
     } finally {
       this.loading.set(false);
     }
