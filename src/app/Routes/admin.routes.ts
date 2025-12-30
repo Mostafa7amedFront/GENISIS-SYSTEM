@@ -1,3 +1,4 @@
+import { Employees } from './../Core/service/employees';
 import { Routes } from "@angular/router";
 import { MainOutlet } from "../Layout/main-outlet/main-outlet";
 import { roleGuard } from "../Core/guards/role.guard";
@@ -33,6 +34,11 @@ export const adminroutes: Routes = [
         path: 'clients',
         loadComponent: () =>
           import('../Pages/client/client').then(m => m.Client),
+      },
+      {
+        path: 'arrival',
+        loadComponent: () =>
+          import('../Pages/arrival/arrival').then(m => m.Arrival),
       },
       {
         path: 'projects',
