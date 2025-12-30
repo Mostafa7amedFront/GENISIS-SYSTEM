@@ -1,8 +1,8 @@
-<div class="d-flex col p-4 rounded-3 mt-5" style="background-color: #2d2d2d">
+<div class="d-flex col p-4 rounded mt-5" style="background-color: #2d2d2d">
   <div class="col-7 pe-3">
     <div class="d-flex align-items-center">
       <h3 class="mb-0">Post {{ posts().number }}</h3>
-      <div class="box row py-1 px-4 ms-auto rounded-3" style="background-color: #616161">
+      <div class="box row py-1 px-4 ms-auto rounded" style="background-color: #616161">
         @if(posts().fileType === 0) { Static } @if(posts().fileType === 1) { Animated }
       </div>
     </div>
@@ -18,13 +18,13 @@
   <div class="col-5 ps-4">
     <div class="upload position-relative">
       @if(posts().fileType === 0) {
-      <img [src]="baseurl + posts().file" class="preview-img rounded-3" />
+      <img [src]="baseurl + posts().file" class="preview-img rounded" />
       <div class="btn_bo">
               <button class="btn w-100" (click)="downloadFile(posts().file)">load</button>
 
       </div>
       } @if(posts().fileType === 1) {
-      <video [src]="baseurl + posts().file" controls class="preview-video rounded-3"></video>
+      <video [src]="baseurl + posts().file" controls class="preview-video rounded"></video>
 
       }
 

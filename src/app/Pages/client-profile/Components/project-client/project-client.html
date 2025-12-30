@@ -2,7 +2,7 @@
 <div class="text-white start-projects-client ">
     <div class=" " style="background-image: none;">
         <h1 class="mb-4 mb-5 mt-5 pt-5 text-end big">PROJECTS</h1>
-        <div class="p-md-4 px-md-5 pb-5 px-3 rounded-3 g-4 row projects-client justify-content-between">
+        <div class="p-md-4 px-md-5 pb-5 px-3 rounded g-4 row projects-client justify-content-between">
             <div class="col-md-6 col-2">
                 <img src="assets/img/half-logo.svg" alt="">
             </div>
@@ -16,7 +16,7 @@
                         <span class="selected fs-2">{{ selected }}</span>
 
                     </div>
-                    <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
+                    <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
                         <li *ngFor="let option of options" (click)="selectOption(option)"
                             [class.active]="selected === option">
                             {{ option }}
@@ -28,7 +28,7 @@
             <div class="project-card-box mt-0 px-0">
                 @for (project of projects; track project.id) {
                           <a [routerLink]="['/projectDetails', project.id]"
-                    class="p-3 py-4 mx-0 mb-lg-3 row rounded-3 project-card mb-3 text-decoration-none text-white mt-0">
+                    class="p-3 py-4 mx-0 mb-lg-3 row rounded project-card mb-3 text-decoration-none text-white mt-0">
                             <div class="col-xl-8 col-lg-9 ">
                                 <div class="row pe-0 me-0">
                                     <h5 class="fw-bold mb-3 px-0">{{project.title}}</h5>
@@ -37,7 +37,7 @@
                                         <p class="mb-0 low lh-2 mb-2 small-2" style="white-space: pre-line;">{{project.description}}</p>
                                     </div>
                                     <div class="px-0">
-                                        <button  class="border-0 rounded-3 pt-md-2  pt-1 text-white" style="background-color:#0B6B6E; min-width: 150px;"> 
+                                        <button  class="border-0 rounded pt-md-2  pt-1 text-white" style="background-color:#0B6B6E; min-width: 150px;"> 
                                           {{project.status}}
                                         </button>
                                     </div>

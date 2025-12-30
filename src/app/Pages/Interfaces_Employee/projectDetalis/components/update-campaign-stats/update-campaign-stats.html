@@ -10,13 +10,13 @@
     >
       <div class="row">
         <div class="col-md-4 btnsactive">
-          <div class="blue text-center p-2 rounded-3 mb-4" style="background-color: #0b6b6e">
+          <div class="blue text-center p-2 rounded mb-4" style="background-color: #0b6b6e">
             <h2 class="mb-0">Media Buying</h2>
           </div>
 
           <h6 class="mt-4">Campaign Type</h6>
           <button
-            class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
+            class="w-100 rounded py-2 text-white mb-2 campaign-btn"
             [class.active]="campaignType() === 0"
             (click)="selectCampaign('Engagement')"
           >
@@ -24,7 +24,7 @@
           </button>
 
           <button
-            class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
+            class="w-100 rounded py-2 text-white mb-2 campaign-btn"
             [class.active]="campaignType() === 1"
             (click)="selectCampaign('Awareness')"
           >
@@ -32,7 +32,7 @@
           </button>
 
           <button
-            class="w-100 rounded-3 py-2 text-white mb-2 campaign-btn"
+            class="w-100 rounded py-2 text-white mb-2 campaign-btn"
             [class.active]="campaignType() === 2"
             (click)="selectCampaign('Sales')"
           >
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="p-3 rounded-3 mt-5 field-box">
+      <div class="p-3 rounded mt-5 field-box">
         <div class="d-flex text-center">
           @for (f of fields(); track f; let i = $index) {
           <div class="col field-item">

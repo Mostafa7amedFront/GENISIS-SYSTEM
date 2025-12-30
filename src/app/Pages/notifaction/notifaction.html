@@ -1,7 +1,7 @@
 <div class="mb-5 notifiction-sec text-white px mt-4 ">
   <h1 class=" text-end big mt-5">NOTIFICATIONS</h1>
 
-  <div class="p-md-5 p-3 rounded-3 row notifiction">
+  <div class="p-md-5 p-3 rounded row notifiction">
     <div class="col-6"></div>
     <div class="mt-0 col-md-6 text-end pe-4">
       <div class="dropdown ps-5 mt-3">
@@ -13,7 +13,7 @@
           <span class="selected fs-2">{{ selected() }}</span>
 
         </div>
-        <ul class="p-3 rounded-3 menu list-unstyled text-end" [class.menu-open]="isOpen">
+        <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
           @for ( option of options; track $index) {
           <li (click)="selectOption(option)" [class.active]="selected() === option">
             {{ option }}
@@ -26,7 +26,7 @@
 
     <div class="notification-container">
       @for (item of filteredNotifications(); track $index) {
-      <div class="p-md-4 p-3 py-3 mt-3 mx-0 row rounded-3 notifiction-card"  [ngClass]="!item.isRead ? 'notifiction-card' : 'notifiction-card-none'"  (click)="mark(item)">
+      <div class="p-md-4 p-3 py-3 mt-3 mx-0 row rounded notifiction-card"  [ngClass]="!item.isRead ? 'notifiction-card' : 'notifiction-card-none'"  (click)="mark(item)">
         <div class="col-8 align-content-center px-0">
           @if (item.data) {
           <h3 class="mb-0 small-">

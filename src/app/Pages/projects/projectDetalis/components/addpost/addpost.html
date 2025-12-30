@@ -1,4 +1,4 @@
-<div class="d-flex col p-4 rounded-3 mt-5 " style="background-color: #2d2d2d">
+<div class="d-flex col p-4 rounded mt-5 " style="background-color: #2d2d2d">
   <form [formGroup]="form" class="col-7 pe-3 position-relative">
     <input type="date" formControlName="postingAt" />
 
@@ -37,7 +37,7 @@
       formControlName="captionAra"></textarea>
 
     <button
-     class="border-0 rounded-3 text-white small px-4 mt-3 end-but w-100 py-2" 
+     class="border-0 rounded text-white small px-4 mt-3 end-but w-100 py-2" 
      style="background-color: #0b6b6e"
       [disabled]="isLoading()"
       [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'"
@@ -53,10 +53,10 @@
         <p>upload Media</p>
       </div>
 
-      <img *ngIf="isImage && previewUrl" [src]="previewUrl" class="preview-img rounded-3" />
+      <img *ngIf="isImage && previewUrl" [src]="previewUrl" class="preview-img rounded" />
 
       <!-- لو الفيديو -->
-      <video *ngIf="isVideo && previewUrl" [src]="previewUrl" controls class="preview-video rounded-3"></video>
+      <video *ngIf="isVideo && previewUrl" [src]="previewUrl" controls class="preview-video rounded"></video>
 
       <!-- input مخفي -->
       <input #fileInput type="file" accept="image/*,video/*" class="d-none" (change)="onFileSelected($event)" />

@@ -3,14 +3,14 @@
 
   <h1 class="mt-5 pt-5 text-white text-end big">ADD PROJECT</h1>
 
-  <div class="addproject-box rounded-3 text-white p-5">
+  <div class="addproject-box rounded text-white p-5">
     <div class="row first-project ">
       <div class="col-6 pe-5 ps-0">
         <div><img src="assets/img/half-logo.svg" alt="" /></div>
         <input #titleInput type="text" class="text-white w-100 mt-5 ps-0" placeholder="Project Title" />
       </div>
 
-      <div class="col addproject-rightbox rounded-3"></div>
+      <div class="col addproject-rightbox rounded"></div>
 
       <input #descInput type="text" class="text-white w-100 mt-4 ps-0" placeholder="Project Description" />
       <div class="row g-3">
@@ -45,7 +45,7 @@
       </div>
       <p class="ps-0 mt-4 mb-2">Add Deadline</p>
 
-      <div class="calender-sec w-100 p-3 rounded-3">
+      <div class="calender-sec w-100 p-3 rounded">
         <div class="mb-3 text-center calender">
           <div class="header d-flex justify-content-center align-items-center">
             <div class="btn fs-5 me-4" (click)="prevMonth()">
@@ -76,7 +76,7 @@
 
       <p class="mt-4 pt-2 px-0">Add Attachment</p>
 
-      <div class="drag-area text-center rounded-3 p-4">
+      <div class="drag-area text-center rounded p-4">
         <div class="dataShow d-flex align-items-center gap-2">
           @for ( file of files; track  $index) {
           <div class="file-card d-flex align-items-center gap-2">
@@ -92,7 +92,7 @@
             <img src="assets/img/new-document 2.png" alt="" />
           </div>
         </div>
-        <button (click)="onUploadClick()" id="uploadButton" class="border-0 rounded-3 w-100 text-white small pt-2 mt-4"
+        <button (click)="onUploadClick()" id="uploadButton" class="border-0 rounded w-100 text-white small pt-2 mt-4"
           style="background-color: #0b6b6e">
           UPLOAD
         </button>
@@ -123,7 +123,7 @@
           <!-- Assign To -->
           <div class="col-lg-8 px-0">
             <p class="mb-1 mt-4">Assign to</p>
-            <div class="rightlow rounded-3 p-2">
+            <div class="rightlow rounded p-2">
               <div class="row p-2" *ngFor="let user of Employee()">
                 <div class="col-auto pe-3">
                   <img [src]="baseimageUrl + user.imageUrl" alt="" class="rounded-2" width="30" height="30" />
@@ -153,7 +153,7 @@
   }">
           <p class="">Payment</p>
 
-          <div class="  text-white text-start   w-100 d-flex align-items-end justify-content-between rounded-3" style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
+          <div class="  text-white text-start   w-100 d-flex align-items-end justify-content-between rounded" style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
                font-size: 16px; border: 0.1px solid rgba(255, 255, 255, 0.425);">
             <div class="info flex-grow-1">
               <input #PaymentAmount type="number" class="text-white w-100 py-2 ps-3" placeholder="Payment " />
