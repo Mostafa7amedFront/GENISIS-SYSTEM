@@ -1,0 +1,119 @@
+.file-card {
+  display: flex;
+  align-items: center;
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  min-width: 200px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  .file-icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
+  .file-info {
+    display: flex;
+    flex-direction: column;
+
+    .file-name {
+      font-weight: 600;
+      font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+    .file-size {
+      font-size: 12px;
+      opacity: 0.7;
+    }
+  }
+}
+.tabs {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #444;
+}
+.user-img{
+  object-fit: cover;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 16px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab-button.active {
+  color: #fff;
+  font-weight: 500;
+}
+
+.active-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 33.33%;
+  height: 3px;
+  background: #14d7e7;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.empty-tab {
+  padding: 40px;
+  text-align: center;
+  color: #aaa;
+  font-size: 18px;
+}
+.image-card {
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.image-preview {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.attach-img{
+  object-fit: cover;
+  border-radius: 5px;
+}
+.tryagain{
+    background: linear-gradient(90deg, #2D2D2D 27.58%, #0B6B6E 117.25%);
+
+}
+.done{
+    background: linear-gradient(90deg, #2D2D2D 27.58%, #0B6E2E 117.25%);
+
+}
+.isMistack{
+    background: linear-gradient(90deg, #2D2D2D 27.58%, #6E0B0D 117.25%);
+}
+input{
+        border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    font-size: 13px;
+    width: 100%;
+    color: #ffffff !important;
+}
