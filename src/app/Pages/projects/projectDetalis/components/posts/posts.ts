@@ -96,7 +96,7 @@ Collaborators = signal<EmployeeResponse[]>([]);
         filledPosts.push({
           id: 0,
           title: '',
-          date: '',
+          postingAt: '',
           fileType: 0,
           caption: '',
           captionArabic: '',

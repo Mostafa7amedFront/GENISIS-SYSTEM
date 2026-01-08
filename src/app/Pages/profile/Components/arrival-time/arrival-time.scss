@@ -1,0 +1,246 @@
+.meeting-container {
+    display: flex;
+    background: #171818;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px auto;
+    gap: 20px;
+}
+
+.header,
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+
+  button {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 22px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+  }
+}
+.routesX{
+    rotate: 180deg;
+    margin-bottom: 7px !important;
+}
+/* Time slots */
+.booked {
+  color: #0b6b6e;
+  font-weight: 900 !important ;
+  margin: 0 5px ;
+  
+}
+.isLate{
+    background: linear-gradient(90deg, rgba(45, 45, 45, 0) 0%, rgba(214, 13, 13, 0.192) 66.35%) !important;
+    border: .5px solid #fff;
+
+}
+.line{
+    width: 3px;
+    height: 380px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.2509803922);
+    right: 54%;
+    margin: 0 20px;
+;
+ 
+}
+
+.time-slots h6 {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.paymentbtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0.5px solid #FFFFFF !important;
+    background: linear-gradient(90deg, rgba(45, 45, 45, 0) 0%, rgba(0, 190, 197, 0.25) 66.35%);
+    padding: 0 20px;
+    height: 47px !important;
+}
+.paymentbtn p{
+font-size: 20px;
+margin: 0 !important;
+margin-top: 5px !important;
+
+  line-height: 0 !important;
+
+}
+.notifiction-card-none{
+  background: #2D2D2D;
+  
+
+}
+.payments-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
+}
+
+.slot {
+    background: #2d2d2d;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    margin-bottom: 11px;
+
+}
+
+.IsPaid{
+    height: 175px !important;
+    display: flex ;
+    flex-direction: column ;
+    overflow-y: auto ;
+    scrollbar-width: none;
+
+}
+
+.slot.active {
+    background: #123535;
+    border: 1px solid #ffffff7c;
+}
+.slot p {
+  margin-top: 5px !important;
+  line-height: 0 !important;
+
+}
+/* Calendar */
+.calendar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header h4 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.day-names,
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.day-names div {
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.days-grid div {
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+    border-radius: 4px;
+}
+
+.days-grid div:hover::after,
+.days-grid div.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: #00bec5;
+}
+
+.book-btn {
+    margin-top: 15px;
+    background: #00bec5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
+.show-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    user-select: none;
+
+    input[type='checkbox'] {
+        appearance: none;
+        width: 22px;
+        height: 22px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:checked {
+            background-color: var(--blue);
+            /* green when checked */
+            border-color: var(--blue);
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0px;
+                left: 6px;
+                width: 7px;
+                height: 14px;
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        }
+
+        &:hover {
+            border-color: var(--blue);
+            /* blue on hover */
+        }
+    }
+
+    span {
+        color: var(--muted);
+    }
+}
+
+@media (max-width: 1200px) {
+    .row {
+        flex-direction: column !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .payments button {
+        flex-direction: column !important;
+    }
+}

@@ -8,10 +8,11 @@ import { FeedbackProfile } from '../projects/feedback-profile/feedback-profile';
 import { ProjectsProfile } from '../projects/projects-profile/projects-profile';
 import { AddFeedbackEmployee } from "../add-feedback-employee/add-feedback-employee";
 import { FeedbackEmployees } from './Components/feedback-employees/feedback-employees';
+import { ArrivalTime } from "./Components/arrival-time/arrival-time";
 
 @Component({
   selector: 'app-profile',
-  imports: [ProjectsProfile, DatePipe, UpperCasePipe, RouterLink, FeedbackEmployees],
+  imports: [ProjectsProfile, DatePipe, RouterLink, FeedbackEmployees, ArrivalTime],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

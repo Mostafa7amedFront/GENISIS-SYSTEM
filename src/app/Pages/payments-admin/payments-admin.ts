@@ -16,13 +16,14 @@ import { SweetAlert } from '../../Core/service/sweet-alert';
 export class PaymentsAdmin {
 displayedMonths: { label: string; date: Date }[] = [];
   nextPaymentDate: string = '';
-  userId = 'aaf8fddf-305b-4218-b04e-9c0f9deb64c0';
   selectedIndex = 4;
   payments = signal<IPayments[]>([]);
   private _alert = inject(SweetAlert);
 
   constructor(private _payments: PaymentAdminService) {}
-
+paymentSound = new Audio(
+  '/Sound/cashier-quotka-chingquot-sound-effect-129698.mp3'
+);
   ngOnInit() {
     const currentDate = new Date();
     this.generateMonths(currentDate);
@@ -90,6 +91,10 @@ unPaidPayments() {
 
   this._payments.togglePayment(payment.id, newValue).subscribe({
     next: res => {
+            if (!newValue) {
+        this.paymentSound.currentTime = 0; // يعيد الصوت من الأول
+        this.paymentSound.play();
+      }
       this._alert.toast(
         newValue ? 'Payment marked as Paid.' : 'Payment marked as Unpaid.',
         'success'

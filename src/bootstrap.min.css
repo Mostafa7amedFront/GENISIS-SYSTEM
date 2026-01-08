@@ -8353,7 +8353,10 @@ fieldset:disabled .btn {
 }
 
 .rounded-2 {
-    border-radius: .25rem !important
+    border-radius: .2rem !important
+}
+.rounded-3 {
+    border-radius: .4rem !important
 }
 
 .rounded {

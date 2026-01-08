@@ -25,12 +25,12 @@
 
 
     <h6 class="mt-2 pt-3">Title :</h6>
-    <input type="text" placeholder="write a Title" class="w-100" formControlName="title" />
+    <input type="text" placeholder="write a title" class="w-100" formControlName="title" />
 
     <h6 class="mt-2 pt-3">Number Of Post :</h6>
-    <input type="number" placeholder="write a Title" class="w-100" formControlName="Number" />
+    <input type="number" placeholder="write number of  post" class="w-100" formControlName="Number" />
     <h6 class="mt-2 pt-3">Caption :</h6>
-    <textarea cols="15" rows="2" placeholder="write a Caption" class="w-100" formControlName="captionEng"></textarea>
+    <textarea cols="15" rows="2" placeholder="write a caption" class="w-100" formControlName="captionEng"></textarea>
 
     <h6 class="text-end pt-3">: وصف</h6>
     <textarea cols="15" rows="2" class="w-100 textarea-start" placeholder="اكتب وصف"
@@ -42,7 +42,7 @@
       [disabled]="isLoading()"
       [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'"
       (click)="addPost()">
-      {{ isLoading() ? 'Adding...' : 'ADD POST' }}
+      <p class="mt-1 mb-0">      {{ isLoading() ? 'Adding...' : 'ADD POST' }}</p>
     </button>
   </form>
 

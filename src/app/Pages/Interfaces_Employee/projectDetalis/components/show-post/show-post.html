@@ -6,7 +6,7 @@
         @if(posts().fileType === 0) { Static } @if(posts().fileType === 1) { Animated }
       </div>
     </div>
-    <h5 class="text-white-50">{{ posts().date | monthDay }}</h5>
+    <h5 class="text-white-50">{{ posts().postingAt | monthDay }}</h5>
     <h6 class="mt-4 pt-3">Title :</h6>
     <p>{{ posts().title }}</p>
     <h6 class="mt-4 pt-3">Caption :</h6>

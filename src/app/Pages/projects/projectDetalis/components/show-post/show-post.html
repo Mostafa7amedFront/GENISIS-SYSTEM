@@ -2,18 +2,20 @@
   <div class="col-7 pe-3">
     <div class="d-flex align-items-center">
       <h3 class="mb-0">Post {{ posts().number }}</h3>
-      <div class="box row py-1 px-4 ms-auto rounded" style="background-color: #616161">
+      <div class="box row py-1 px-4 ms-auto rounded-3" style="background-color: #616161">
         @if(posts().fileType === 0) { Static } @if(posts().fileType === 1) { Animated }
       </div>
     </div>
-    <h5 class="text-white-50">{{ posts().date | monthDay }}</h5>
+
+
+
+    <h5 class="text-white-50">{{ posts().postingAt| monthDay }}</h5>
     <h6 class="mt-4 pt-3">Title :</h6>
     <p>{{ posts().title }}</p>
     <h6 class="mt-4 pt-3">Caption :</h6>
-    <p class="decScroll" style="text-align: justify">{{ posts().captionEng }}</p>
-    <h6  class="text-end mt-4 pt-3">: وصف</h6>
+   <P style="text-align: justify;" class="decScroll">With Naseem, your products stay in polar conditions even in the peak of heat. With Naseem, your products stay in polar conditions even in the peak of heat. With Naseem, your products stay in polar conditions even in the peak of heat. conditions even in the peak of heat. conditions even in the peak of heat. </P>
 
-    <P   class="text-end decScroll" style="text-align: justify">{{ posts().captionAra }}</P>
+    <P class="text-end decScroll" style="text-align: justify;font-family: cairo;">مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر. مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر.مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر.مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر. مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر. مع نسيم، منتجاتك تفضل في أجواء قطبية</P>
   </div>
   <div class="col-5 ps-4">
     <div class="upload position-relative">

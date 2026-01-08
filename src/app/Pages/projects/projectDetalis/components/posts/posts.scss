@@ -27,7 +27,7 @@
 }
 .cardEmpty{
   background-color: #2D2D2D;
-  height: 130px  !important;
+  height: 135px  !important;
 
 }
 /* the visible filled bar */
@@ -69,7 +69,9 @@
 }
 .post-card img {
   object-fit: cover;
-  height: 130px  !important;
+  height: 135px  !important;
+  border-radius: 9px !important;
+
 }
 
 .cardSelect {

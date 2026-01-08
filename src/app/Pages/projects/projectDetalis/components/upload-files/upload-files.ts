@@ -14,6 +14,7 @@ import { ShowMeeting } from "../show-meeting/show-meeting";
 import { Addpost } from "../addpost/addpost";
 import { MediaBuying } from "../media-buying/media-buying";
 import { DownloadFileService } from '../../../../../Core/service/download-file.service';
+import { Todolist } from "../todolist/todolist";
 const statusTextMap = {
   0: 'In Progress',
   1: 'Paused',
@@ -21,7 +22,7 @@ const statusTextMap = {
 };
 @Component({
   selector: 'app-upload-files',
-  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Posts, ShowMeeting, MediaBuying],
+  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Posts, ShowMeeting, MediaBuying, Todolist],
   templateUrl: './upload-files.html',
   styleUrl: './upload-files.scss'
 })

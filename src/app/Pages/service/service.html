@@ -1,9 +1,6 @@
-<div class="ServiceAPP">
-  <div class="d-flex justify-content-between align-items-center headerText">
-  <h2 class="pt-sm-4 logout" style="color: #00bec5; cursor: pointer;" routerLink="/addservice">
-    Add Service
-    <i class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
-  </h2>
+<div class="ServiceAPP ">
+  <div class="d-flex justify-content-end align-items-center headerText">
+
   <h1 class="big text-white">THE SERVICE</h1>
 </div>
   @if(services().length === 0){ 
@@ -13,7 +10,7 @@
     </div>
 
   }
-      <div class="card-box  ">
+      <div class="card-box rounded   ">
 
   @for (service of services(); track service.id ;let i = $index) {
   <div class="me-0 mt-3 3 cards">
@@ -43,4 +40,8 @@
 
 
 </div>
+  <h2 class="pt-sm-4 logout  text-end mt-4" style="color: #00bec5; cursor: pointer;" routerLink="/addservice">
+    Add Service
+    <i class="fa-solid fa-arrow-right fs-5" style="color: #00bec5;"></i>
+  </h2>
 </div>
