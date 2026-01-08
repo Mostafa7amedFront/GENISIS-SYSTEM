@@ -56,17 +56,34 @@
                     </div>
 
 
-                    <div class="addComment my-2 ms-5 ps-2 w-100 ">
+                    <div class="addComment my-3  ms-5 ps-2  ">
                         <h5 class="mb-1">ADD A COMMENT</h5>
-                         <input type="text" name="" placeholder="write a comment " id="">
+                         <input type="text" name="" placeholder="write a comment "  id="">
 
-                         <div class="quality">
-                            <p></p>
+                         <div class="quality my-3 d-flex  align-items-baseline justify-content-end gap-3">
+                            <p class="m-0">QUALITY OF SUBMISSION</p>
+                              <div class="d-flex align-items-center mt-3">
+          <div class="stars">
+            <button
+              *ngFor="let star of [1,2,3,4,5]"
+              class="star-btn m-0"
+              type="button"
+            >
+              <i class="fa fa-star"></i>
+            </button>
+          </div>
+     
+        </div>
                          </div>
 
+<button class="border-0 rounded-3 w-100 text-white small py-2 " style="background-color: rgb(11, 107, 110); cursor: pointer;"> SUBMISSION </button> 
                     </div>
-                    <hr>
 
+
+                     <div class="my-4">
+                                            <hr>
+
+                     </div>
                     }
                     }
                 </div>
