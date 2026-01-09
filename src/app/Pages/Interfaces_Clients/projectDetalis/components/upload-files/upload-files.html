@@ -1,4 +1,4 @@
-<div class="project-detail-page py-8">
+<!-- <div class="project-detail-page py-8">
   <div class="px-md-0 mx-3">
     <h1 class="mt-5 text-white text-end big">PROJECT DETAILS</h1>
     <div class="text-white project rounded p-md-5 p-4">
@@ -86,7 +86,6 @@
         }
         }
       </div>
-      <!-- drag -->
       <div class="drag-area text-center rounded p-4">
         <div class="dataShow d-flex align-items-center gap-2">
           @for (file of files; track  $index) {
@@ -116,7 +115,6 @@
         <input type="file" id="fileInput" hidden #fileInput (change)="onFileSelected($event)" multiple />
       </div>
 
-      <!-- drag -->
       <div class="row mx-0 mt-2">
         <div class="col-6 text-start  pt-md-3 pt-4 ps-0">
 <button
@@ -146,7 +144,68 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
+        <!-- start-second -->
+        <div class="second pt-5">
+            <div class=" text-white p-5 mt-5" style="background-color: #171818; border-radius: 13px;">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="blue text-center p-2 rounded-3" style="background-color: #0B6B6E; margin-left: -70px;">
+                            <h2 class="mb-0">{{ aboutproject()?.projectTitle }}</h2>
+                        </div>
+                    </div>
+                    <div class="col-7 ">
+                            <div class="d-flex justify-content-end align-items-center w-100">
+                                <h1>  {{ aboutproject()?.deadLine| date:'dd MMM' | uppercase }}</h1>
+                                <h4 class=" ms-2" style="white-space: pre-line;">DUE <br>
+                                    <span>DATE</span>
+                                </h4>
+                            </div>
+                    </div>
+                    <div class="text mt-5 mb-5">
+                        <h6>Project Description</h6>
+                        <p class="text-white-50">
+                                    “ {{ aboutproject()?.projectDescription }} “
+
+                        </p>
+                    
+                    </div>
+                <!-- drag -->
+      <div class="drag-area text-center rounded p-4">
+        <div class="dataShow d-flex align-items-center gap-2">
+          @for (file of files; track  $index) {
+          <div class="file-card d-flex align-items-center gap-2">
+            <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
+            <div class="file-info text-lg-start">
+              <div class="file-name">{{ file.name | shorten }}</div>
+              <div class="file-size">{{ file.size }}</div>
+            </div>
+          </div>
+          }
+
+          <div class="iconDataAdd" (click)="onUploadClick()">
+            <img src="assets/img/new-document 2.png" alt="" />
+          </div>
+        </div>
+  <button (click)="uploadFiles()" id="uploadButton"
+     [disabled]="isLoading()"
+        [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'"
+        
+        class="border-0 rounded w-100 text-white small py-2 mt-4"
+          style="background-color: #0b6b6e">
+      <span class="mt-1">                 {{ isLoading() ? 'UPLOADING...' : 'UPLOAD' }}</span>
+        </button>
+
+
+        <input type="file" id="fileInput" hidden #fileInput (change)="onFileSelected($event)" multiple />
+      </div>
+  
+                </div>
+            </div>
+        </div>
+        <!-- end-second -->
 @if(aboutproject()?.projectType == 1){
 <app-posts />
 
