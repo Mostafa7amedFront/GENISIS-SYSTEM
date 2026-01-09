@@ -1,3 +1,8 @@
+.services {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap; /* لو العدد كبير ينزل سطر جديد */
+}
 @media  (max-width: 900px) {
     .resCoulum{
         flex-direction: column !important;

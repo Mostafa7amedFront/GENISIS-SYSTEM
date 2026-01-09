@@ -3,10 +3,13 @@ import { Component, inject, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ProflieService } from '../../../Core/service/Clients/proflie.service';
 import { IClients } from '../../../Core/Interface/iclients';
+import { OrdinalDatePipe } from '../../../Shared/pipes/ordinal-date-pipe';
+import { Feedbackclient } from '../feedbackclient/feedbackclient';
+import { ProjectClient } from "../project-client/project-client";
 
 @Component({
   selector: 'app-my-profile-client',
-  imports: [],
+  imports: [OrdinalDatePipe, Feedbackclient, ProjectClient],
   templateUrl: './my-profile-client.html',
   styleUrl: './my-profile-client.scss'
 })
@@ -15,10 +18,11 @@ export class MyProfileClient {
 
   private _client = inject(ProflieService);
   clientId!: any;
-aboutclient = signal<IClients | null>(null);
+aboutclient = signal<IClients >({} as IClients);
 
 
   ngOnInit(): void {
+    
       this.loadEmployeeData();
 
   }

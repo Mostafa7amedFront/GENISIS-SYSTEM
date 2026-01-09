@@ -1,116 +1,72 @@
-<h1 class="mt-5 text-white text-end big">CLIENT PROFILE</h1>
-<div class="text-white client-profile p-md-5 p-3 mb-5">
-  <div class="d-flex justify-content-end">
-    @switch (aboutclient()?.clientType) { @case (0) {
-    <h3 class="term pt-md-3 pt-2 pb-1 mb-3 rounded">Old Client</h3>
-    } @case (1) {
-    <h3 class="term pt-md-3 pt-2 pb-1 mb-3 rounded">Long Term</h3>
-    } @case (2) {
-    <h3 class="term pt-md-3 pt-2 pb-1 mb-3 rounded">New Client</h3>
-    } }
-  </div>
-  <div class="d-flex resCoulum">
-    <div>
-      <img
-        [src]="baseimageUrl + aboutclient()?.imageUrl"
-        alt=""
-        width="214"
-        height="214"
-        style="object-fit: cover"
-        class="rounded-2"
-      />
-    </div>
-    <div class="ms-xl-5 ms-md-4 ms-3 w-100">
-      <h5 class="mb-md-2 mb-1">ABOUT {{ aboutclient()?.name }}</h5>
-      <p class="low small  mb-lg-4 pb--md-2" style="white-space: pre-line">
-        The design was great maybe the {{ aboutclient()?.about }}
-      </p>
-      <h5 class="mb-2">SERVICES</h5>
 
-      <div class="service  d-flex align-items-center gap-3 w-50 flex-wrap">
-        @for (service of aboutclient()?.services; track service.id) {
-        <p class="low small mb-0">{{ service.name }}</p>
-
-        }
-        @empty {
-        <p class="text-muted">No services available</p>
-        }
-      </div>
-        <div class="row">
-    <div class="col text-start">
-      
-      <h5 class="my-2">LOCATION</h5>
-      <p class="low small mb-0">{{ aboutclient()?.location }}</p>
-    </div>
-    <div class="col text-end mt-2">
-      <p class="low small mb-0">
-        @if (aboutclient()?.phoneNumber; as phoneNumber) {
-          {{ phoneNumber }}
-        }
-        @else {
-          N/A
-        }
-      </p>
-      <a [href]="aboutclient()?.websiteUrl" target="_blank" class="low small text-decoration-none  booked">
-        {{ aboutclient()?.websiteUrl }}
-      </a>
-    </div>
-  </div>
-
-    </div>
-  </div>
-
-  <!-- <div class="mx-0 g-5 row">
-    <div class="col-lg-6 ps-2 pe-3 ms-1 ms-lg-0">
-      <div class="d-flex row left-box rounded p-4">
-        <div class="col px-0">
-          <h6 class="low">ASSIGEND TO :</h6>
-          <h4 class="mb-0">YOUSSEF - AYMAN</h4>
-          <h4>AHMED</h4>
+<div class="first my-8">
+  <div class="container text-white">
+    <div class="row">
+      <h1 class="text-end fw-light mb-3" style="font-size: 50px;">
+        HELLO {{aboutclient().userName }}!
+      </h1>
+      <div class="firstcontainer d-flex p-5" style="background-color:#171818; border-radius: 11px;">
+        <div class=" me-4">
+          <img [src]="baseimageUrl + aboutclient().imageUrl" alt="" width="250px" height="250px"
+            style="object-fit: cover" class="rounded" />
         </div>
-        <div class="col px-0">
-          <div class="d-flex justify-content-end mt-2">
-            <div><img class="me-2" src="assets/img/Mask group (3).svg" alt="" /></div>
-            <div><img src="assets/img/Mask group (3).svg" alt="" /></div>
+        <div class="row w-100">
+          <div class="d-flex align-content-center w-100">
+            <div class="col-6">
+              <h1 class="mb-1">{{aboutclient().name }}</h1>
+              <p class="mb-1">{{aboutclient().userName }}</p>
+            </div>
+            <div class="text-end ms-auto col-6">
+              <p class="mb-0">Register Date </p>
+              <h5 class="fw-bolder">
+                <p class="mb-1">{{aboutclient().createdAt | ordinalDate }}</p>
+              </h5>
+            </div>
           </div>
-        </div>
-        <div class="d-flex rounded px-0">
-          <div class="col ps-0 mt-auto">
-            <p class="small mb-0">4TH, OCT</p>
-          </div>
-          <div class="col pe-0">
-            <div class="d-flex justify-content-end mt-2">
-              <div><img src="assets/img/Mask group (3).svg" alt="" /></div>
+          <div>
+            <h4 class="mt-3">SERVICES</h4>
+            <div class="services d-flex flex-wrap gap-3">
+              @for (service of aboutclient().services; track service.id) {
+              <h6 class="text-white-50 mb-0">
+                {{ service.name }}
+              </h6>
+              }
+              @empty {
+              <p class="text-muted">No services available</p>
+              }
+            </div>
+
+            <div class="d-flex w-100">
+              <div class="col-8">
+                <h6 class="mt-4">Project Status</h6>
+                <button class="border-0 py-2 text-white"
+                  style="background-color: #0B6B6E;border-radius: 11px;width: 250px; font-size: 20px;">
+                  @switch (aboutclient().clientProjectStatus) { @case (0) {
+                  In Progress } @case (1) {
+                  Paused
+                  } @case (2) {
+                  Completed
+                  } }
+                </button>
+              </div>
+              <div class="col">
+                <div class="d-flex justify-content-end mt-3 pt-1">
+                  <p class="mb-1 me-auto ms-2 ps-1" style="font-size: 15px;">Late Payment</p>
+                  <p class="mb-1" style="font-size: 15px;">15, AUG</p>
+                </div>
+                <div class="d-flex justify-content-end ">
+                  <button class="py-2 text-white text-start ps-3"
+                    style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
+                                                ;border-radius: 11px;width: 265px; font-size: 20px; border: 0.1px solid rgba(255, 255, 255, 0.425);">NO LATE PAYMENTS</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-6 ps-lg-3 ps-0 pe-0">
-      <div class="right-box h-100 rounded p-4">
-        <div class="row ps-0 pe-3 ms-0">
-          <div class="col-lg col-8 px-0 pe-0">
-            <h6 class="">GAFLA - SOCIAL MEDIA</h6>
-            <p class="low small mb-0" style="white-space: pre-line">
-              “The design was great maybe the quality of the presentation could be much better,
-              thank you so much”
-            </p>
-          </div>
-          <div class="col-lg-4 col-4 text-end px-0">
-            <h1 class="mb-0">PSR</h1>
-            <p class="small mb-0">PROJECT SUCCESS RATE</p>
-          </div>
-        </div>
-        <div class="row px-0">
-          <div class="col mt-auto margin">
-            <h6 class="">{{ aboutclient()?.createdAt | date : 'mediumDate' }}</h6>
-            <img src="assets/img/4blue-star.png" alt="" />
-          </div>
-          <div class="col text-end h1-span">
-            <p>87%</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
+  </div>
 </div>
+<!-- end-first -->
+  <app-project-client/>
+ <app-feedbackclient/>

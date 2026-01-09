@@ -1,36 +1,23 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { ShortenPipe } from '../../../Shared/pipes/shorten-pipe';
-import { LeadingZeroPipe } from '../../../Shared/pipes/leading-zero-pipe';
-import { SweetAlert } from '../../../Core/service/sweet-alert';
-import { environment } from '../../../../environments/environment';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject, Input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ProjectService } from '../../../Core/service/project.service';
+import { environment } from '../../../../environments/environment';
 import { IProject } from '../../../Core/Interface/iproject';
-import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
 
 @Component({
-  selector: 'app-myprojects',
-  imports: [LeadingZeroPipe , ReactiveModeuls , ShortenPipe ,DatePipe],
-  templateUrl: './myprojects.html',
-  styleUrl: './myprojects.scss'
+  selector: 'app-project-client',
+  imports: [CommonModule , RouterLink],
+  templateUrl: './project-client.html',
+  styleUrl: './project-client.scss'
 })
-export class Myprojects {
- isOpen = false;
+export class ProjectClient {
+
+ id!:any 
+  isOpen = false;
   selected = signal('ALL PROJECTS');
   options = ['ALL PROJECTS', 'IN PROGRESS', 'PAUSED', 'COMPLETED'];
   selectedProjectType = signal<number | null>(null);
-
-
-  toggleMenu() {
-    this.isOpen = !this.isOpen;
-  }
-
-  selectOption(option: string) {
-    this.selected.set(option);
-    this.isOpen = false;
-  }
-
 
   private _project = inject(ProjectService);
   today = new Date();
@@ -43,17 +30,26 @@ export class Myprojects {
   totalCount = signal<number>(0);
   hasPreviousPage = signal<boolean>(false);
   hasNextPage = signal<boolean>(false);
-  pageSize = 12;
-  id!: any; // <-- خليها هنا بدون تهيئة فورية
+    toggleMenu() {
+    this.isOpen = !this.isOpen;
+  }
 
+  selectOption(option: string) {
+    this.selected.set(option);
+    this.isOpen = false;
+  }
+
+  pageSize = 12;
   getProjectCounts() {
     const completed = this.projects().filter(p => p.projectStatus === 2).length;
     const inProgress = this.projects().filter(p => p.projectStatus === 0).length;
     const paused = this.projects().filter(p => p.projectStatus === 1).length;
     return { completed, inProgress, paused };
   }
-  ngOnInit(): void {
-        const storedId = localStorage.getItem("Id_Clients");
+
+
+    ngOnInit(): void {
+       const storedId = localStorage.getItem("Id_Clients");
     this.id = storedId ;
     this.loadEmployees();
   }

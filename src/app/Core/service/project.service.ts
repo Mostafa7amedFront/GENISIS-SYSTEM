@@ -24,7 +24,7 @@ export class ProjectService {
     return this._httpClient.get<IPaginationResponse<IProject>>(this.API_URL, { params });
   }
 
-  getProjectClient(data: { pageNumber?: number; pageSize?: number; clientId?: string }): Observable<IPaginationResponse<IProject>> {
+  getProjectClient(data: { pageNumber?: number; pageSize?: number; clientId?: any }): Observable<IPaginationResponse<IProject>> {
     const params = new HttpParams({
       fromObject: {
         pageNumber: data.pageNumber ?? 1,

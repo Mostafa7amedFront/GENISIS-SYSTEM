@@ -27,6 +27,15 @@ userId = localStorage.getItem('Id_Clients') || '';
     this.loadPayments(this.displayedMonths[this.selectedIndex].date);
   }
 
+    paidPayments() {
+  return this.payments().filter(p => p.isPaid);
+}
+
+unPaidPayments() {
+  return this.payments().filter(p => !p.isPaid);
+}
+
+
   generateMonths(selectedDate: Date) {
   this.displayedMonths = [];
 

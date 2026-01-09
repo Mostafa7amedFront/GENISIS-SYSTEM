@@ -1,0 +1,73 @@
+<!-- Start Projects-->
+<div class="text-white start-projects-client my-8 container  ">
+    <div class=" " style="background-image: none;">
+        <h1 class="mb-4 mb-5 mt-5 pt-5 text-end big">PROJECTS</h1>
+        <div class="p-md-4 px-md-5 pb-5 px-3 rounded g-4 row projects-client justify-content-between">
+            <div class="col-md-6 col-2">
+                <img src="assets/img/half-logo.svg" alt="">
+            </div>
+            <div class="mt-0 col-lg-5 col-md-6 col-10 text-end pe-3">
+                <div class="dropdown  mt-3 px-0">
+                    <div class="select" (click)="toggleMenu()">
+                        <div class="caret">
+                            <i class="fa-solid fa-angle-down fs-5" [class.rotate]="isOpen" style="color: #00bec5;">
+                            </i>
+                        </div>
+                        <span class="selected fs-2">{{ selected() }}</span>
+
+                    </div>
+                    <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
+                        <li *ngFor="let option of options" (click)="selectOption(option)"
+                            [class.active]="selected() === option">
+                            {{ option }}
+                        </li>
+                    </ul>
+                </div>
+                <p class="small">KEEP THE GOOD WORK!!</p>
+            </div>
+            <div class="project-card-box mt-0 px-0">
+                @for (project of filteredProjects(); track project.id) {
+                <a [routerLink]="['/client/projectDetails', project.id]"
+                    class="p-3 py-4 mx-0 mb-lg-3 row rounded project-card mb-3 text-decoration-none text-white mt-0">
+                    <div class="col-xl-8 col-lg-9 ">
+                        <div class="row pe-0 me-0">
+                            <h5 class="fw-bold mb-3 px-0">{{project.projectTitle}}</h5>
+                            <div class="me-0 col px-0">
+                                <h6 class="mb-1">PROJECT DESCRIPTION</h6>
+                                <p class="mb-0 low lh-2 mb-2 small-2" style="white-space: pre-line;">
+                                   “The design was great maybe the quality of the presentation could be much better, thank you so much, “The design was great maybe the quality of the presentation could be much better, thank you could be much better, thank you so muc  thank you so muc  thank you so muc  thank you so  </p>
+                            </div>
+                            <div class="px-0">
+                                <button class="border-0 rounded pt-md-2  pt-1 text-white"
+                                    style="background-color:#0B6B6E; min-width: 150px;">
+                                    @switch (project.projectStatus) { @case (0) {
+                                    In Progress } @case (1) {
+                                    Paused
+                                    } @case (2) {
+                                    Completed
+                                    } }
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-3 text-end px-0">
+                        <div class="d-flex mx-0 justify-content-end">
+                            @for (person of project.employees; track $index) {
+                            <div class="me-2">
+                                <img [src]="baseimageUrl + person.imageUrl" alt="" class="rounded-3 object-fit-contain" width="60" height="60">
+                            </div>
+                            }
+                        </div>
+                        <p class="small-2 mt-md-4 mt-3 mb-0">14, OCT 24</p>
+                        <h2 class="my-2" style="max-height: 30px;">DUE DATE</h2>
+                        <span class="fw-bold fs-md-5">15 NOV</span>
+                    </div>
+                </a>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Projects -->
