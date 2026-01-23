@@ -1,10 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
-interface DaySchedule {
-  date: string;
-  day: string;
-  time: string;
-  status?: 'normal' | 'absent' | 'highlight';
-}
+import { Component, computed, signal, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { AttendanceService } from '../../../../Core/service/attendance.service.service';
+import { AttendanceDayDto, DaySchedule } from '../../../../Core/Interface/iattendance';
 
 @Component({
   selector: 'app-arrival-time',
@@ -13,43 +11,132 @@ interface DaySchedule {
   styleUrl: './arrival-time.scss'
 })
 export class ArrivalTime {
+  private attendanceService = inject(AttendanceService);
+  private route = inject(ActivatedRoute);
+
   months = [
     'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL',
     'MAY', 'JUNE', 'JULY', 'AUGUST',
     'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
   ];
 
-  currentMonthIndex = signal(7); // AUGUST
-  currentWeek = signal(1);
+  // 👇 will come from route
+  employeeId = signal<string>('');
 
-  schedules = signal<DaySchedule[]>([
-    { date: '23', day: 'SUNDAY', time: '12:30 PM - 1:00 PM' },
-    { date: '24', day: 'MONDAY', time: '12:30 PM - 1:00 PM' },
-    { date: '25', day: 'TUESDAY', time: '11:15 PM - 6:00 PM', status: 'highlight' },
-    { date: '25', day: 'WEDNESDAY', time: '0:00 PM - 0:00 PM' },
-    { date: '25', day: 'THURSDAY', time: '0:00 PM - 0:00 PM' },
-    { date: '25', day: 'FRIDAY', time: 'ABSENT', status: 'absent' },
-    { date: '25', day: 'SATURDAY', time: '0:00 PM - 0:00 PM' },
-  ]);
+  // state
+  currentMonthIndex = signal(new Date().getMonth());
+  currentWeek = signal<number>(1);
+
+  // date used for API
+  selectedDate = signal<Date>(new Date());
+
+  schedules = signal<DaySchedule[]>([]);
+  loading = signal(false);
+  errorMsg = signal<string | null>(null);
 
   currentMonth = computed(() => this.months[this.currentMonthIndex()]);
 
-  nextMonth() {
-    if (this.currentMonthIndex() < 11)
-      this.currentMonthIndex.update(v => v + 1);
+  ngOnInit() {
+    // ✅ read route param once
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) {
+      this.errorMsg.set('EmployeeId is missing in route.');
+      return;
+    }
+    this.employeeId.set(id);
+
+    // initial load
+    this.loadWeek();
   }
 
-  prevMonth() {
-    if (this.currentMonthIndex() > 0)
-      this.currentMonthIndex.update(v => v - 1);
+  // ✅ called from HTML or buttons
+  loadWeek() {
+    this.loading.set(true);
+    this.errorMsg.set(null);
+
+    this.attendanceService
+      .getWeeklyAttendance(this.employeeId(), this.selectedDate(), this.currentWeek())
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (res) => {
+          if (!res?.success) {
+            this.errorMsg.set('Failed to load attendance.');
+            this.schedules.set([]);
+            return;
+          }
+          this.schedules.set(res.value.map(this.mapApiDayToSchedule));
+        },
+        error: (err) => {
+          this.errorMsg.set(err?.message ?? 'Network error.');
+          this.schedules.set([]);
+        }
+      });
   }
+
+  // ✅ update week from input or UI
+  setWeekFromInput(value: string) {
+    const week = Number(value);
+    if (!Number.isFinite(week) || week < 1) return;
+    this.currentWeek.set(week);
+    this.loadWeek();
+  }
+
+  // ✅ update date from input (yyyy-MM-dd)
+  setDateFromInput(value: string) {
+    if (!value) return;
+    this.selectedDate.set(new Date(value + 'T00:00:00'));
+    this.loadWeek();
+  }
+
+  private mapApiDayToSchedule = (d: AttendanceDayDto): DaySchedule => {
+    const dayUpper = (d.dayName ?? '').toUpperCase();
+    const date = d.dayNumber ?? '';
+    const statusLower = (d.status ?? '').toLowerCase();
+
+    const time =
+      d.timeInterval && d.timeInterval !== 'ABSENT' && d.timeInterval !== 'WEEKEND'
+        ? d.timeInterval
+        : (d.status?.toUpperCase() ?? d.timeInterval ?? '');
+
+    let uiStatus: DaySchedule['status'] = 'normal';
+    if (statusLower === 'absent' || (d.timeInterval ?? '').toUpperCase() === 'ABSENT') uiStatus = 'absent';
+    if (statusLower === 'weekend' || (d.timeInterval ?? '').toUpperCase() === 'WEEKEND') uiStatus = 'weekend';
+
+    return { date, day: dayUpper, time, status: uiStatus };
+  };
 
   nextWeek() {
     this.currentWeek.update(v => v + 1);
+    this.loadWeek();
   }
 
   prevWeek() {
-    if (this.currentWeek() > 1)
+    if (this.currentWeek() > 1) {
       this.currentWeek.update(v => v - 1);
+      this.loadWeek();
+    }
   }
+
+nextMonth() {
+  // move selectedDate +1 month
+  const d = new Date(this.selectedDate());
+  d.setMonth(d.getMonth() + 1);
+
+  this.selectedDate.set(d);
+  this.currentMonthIndex.set(d.getMonth());
+
+  this.loadWeek(); // ✅ call API
+}
+
+prevMonth() {
+  // move selectedDate -1 month
+  const d = new Date(this.selectedDate());
+  d.setMonth(d.getMonth() - 1);
+
+  this.selectedDate.set(d);
+  this.currentMonthIndex.set(d.getMonth());
+
+  this.loadWeek(); // ✅ call API
+}
+
 }

@@ -1,23 +1,30 @@
 export interface IEmployee {
-      id: number,
-  name: string
-  jobTitle: string
-  salary: number
-  employeeBadge: number
-  imageUrl: string
-  email: string
-    createdAt: string
-phoneNumber:number
-  userName: string
-      feedback :IFeedback
-
+  id: number;
+  name: string;
+  jobTitle: string;
+  salary: number;
+  createdAt: string;
+  employeeBadge: number;
+  imageUrl: string;
+  email: string;
+  userName: string;
+  phoneNumber: number | null;
+  feedback: IFeedback | null;
+  projectsStats: IProjectsStats;
+}
+export interface IProjectsStats {
+  totalProjectsCompleted: number;
+  projectsSuccessRate: number;
 }
 export interface IFeedback {
   feedback: string;
-  rate: number;
-  createdAt: Date;
+  feedbackRate: number;
+  createdAt: string;
 }
+
+
 export interface AddFeedback {
   feedback: string;
-  rate: number;
+  overallPerformance: number;
+  attentionToDetails: number;
 }

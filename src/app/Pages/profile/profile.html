@@ -8,50 +8,41 @@
 
                 <div class="d-flex flex-column justify-content-center align-items-end">
                     @switch (aboutEmployees()?.employeeBadge) {
-                    @case (0) { <img  width="50" src="assets/employeeBadge/Subtract1.svg" alt=""> }
-                    @case (1) { <img  width="50" src="assets/employeeBadge/Subtract2.svg" alt=""> }
-                    @case (2) { <img  width="50" src="assets/employeeBadge/Subtract3.svg" alt=""> }
-                    @case (3) { <img  width="50" src="assets/employeeBadge/Subtract4.svg" alt=""> }
+                    @case (1) { <img width="50" src="assets/employeeBadge/Subtract1.svg" alt=""> }
+                    @case (2) { <img width="50" src="assets/employeeBadge/Subtract2.svg" alt=""> }
+                    @case (3) { <img width="50" src="assets/employeeBadge/Subtract3.svg" alt=""> }
+                    @case (4) { <img width="50" src="assets/employeeBadge/Subtract4.svg" alt=""> }
                     }
                     @switch (aboutEmployees()?.employeeBadge) {
-                    @case (0) { <p class="mt-1 text-end mb-0 small">Rising Talent</p> }
-                    @case (1) { <p class="mt-1 text-end mb-0 small">Design Star</p> }
-                    @case (2) { <p class="mt-1 text-end mb-0 small">Top Tier</p> }
-                    @case (3) { <p class="mt-1 text-end mb-0 small">The Maestro</p> }
+                    @case (1) { <p class="mt-1 text-end mb-0 small">Rising Talent</p> }
+                    @case (2) { <p class="mt-1 text-end mb-0 small">Design Star</p> }
+                    @case (3) { <p class="mt-1 text-end mb-0 small">Top Tier</p> }
+                    @case (4) { <p class="mt-1 text-end mb-0 small">The Maestro</p> }
                     }
                 </div>
             </div>
         </div>
         <div class="mx-0 row ">
             <div class="px-0 col-lg-3 ">
-               <div class="image-flip">
+                <div class="image-flip">
 
-    <!-- Front (Employee Image) -->
-    <div class="image-face front">
-      <img
-        class="imageCover"
-        [src]="baseimageUrl + aboutEmployees()?.imageUrl"
-        alt=""
-      />
-    </div>
+                    <!-- Front (Employee Image) -->
+                    <div class="image-face front">
+                        <img class="imageCover" [src]="baseimageUrl + aboutEmployees()?.imageUrl" alt="" />
+                    </div>
 
-    <!-- Back (QR + Download) -->
-    <div class="image-face back">
-      <img
-        class="qr-image"
-        src="Image/ssss_qrcode.png"
-        alt="QR Code"
-      />
+                    <!-- Back (QR + Download) -->
+                    <div class="image-face back">
+                        <img class="qr-image" [src]="qrImage()" alt="Employee QR Code" />
 
-      <button
-        class="download-btn position-absolute  w-100 btn_bo "
-      >
-        <i class="fa-solid fa-download"></i>
-        Download
-      </button>
-    </div>
+                        <button class="download-btn position-absolute  w-100 btn_bo " (click)="downloadQr()"
+                            [disabled]="!qrImage()">
+                            <i class="fa-solid fa-download"></i>
+                            Download
+                        </button>
+                    </div>
 
-  </div>
+                </div>
                 <p class="mt-4 mb-0 small">{{aboutEmployees()?.createdAt | date:'mediumDate' }}</p>
                 <p class="fw-bold">Hello, {{aboutEmployees()?.name }}</p>
             </div>
@@ -79,76 +70,86 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center my-2 flex-wrap">
-                   
+
                     <div class="d-flex justify-content-between align-items-start w-100 mt-2">
-                      <p class="mb-0 cr" [routerLink]="['/feedback' ,aboutEmployees()?.id]">
-                        
-                           SEPTEMBER FEEDBACK
+                        <p class="mb-0 cr" [routerLink]="['/feedback', aboutEmployees()?.id]">
+                            {{ getFeedbackMonth() }} FEEDBACK
                         </p>
-                     
-                       <div class="stars mb-0">
-                        @for (s of [1, 2, 3, 4, 5]; track $index) {
-                        <button class="star-btn" [class.active]="s <= 4">
-                            <i class="fa fa-star"></i>
-                        </button>
-                        }
-                    </div>
+
+                        <div class="stars mb-0">
+                            @for (s of [1, 2, 3, 4, 5]; track $index) {
+                            <button class="star-btn"
+                                [class.active]="s <= (aboutEmployees()?.feedback?.feedbackRate ?? 0)">
+                                <i class="fa fa-star"></i>
+                            </button>
+                            }
+                        </div>
+
 
                     </div>
-                       <div class="d-flex justify-content-between align-items-start w-100 mt-0">
+                    <div class="d-flex justify-content-between align-items-start w-100 mt-0">
                         <p class="text-white-50 small w-75 flex-wrap ">
-                         The design was great maybe the quality of the presentation could be much better, thank you so much for your efforts
+                            {{ aboutEmployees()?.feedback?.feedback || 'No feedback yet' }}
                         </p>
-                           <p class="text-white-50 small  flex-wrap ">
-                            75%
+
+                        <p class="text-white-50 small flex-wrap">
+                            {{ calculateRatePercentage() }}%
                         </p>
-                     
-                      
+
+
+
 
                     </div>
                 </div>
             </div>
         </div>
         <div class="mx-0 row gap-0">
-            <div class="col-lg-6 px-2 ms-1 pe-2 me-1 me-lg-0 pe-lg-4 pe-3 mx-lg-0" >
+            <div class="col-lg-6 px-2 ms-1 pe-2 me-1 me-lg-0 pe-lg-4 pe-3 mx-lg-0">
                 <div class="p-md-4 p-3 pe-md-0 left-box row rounded" style="padding: 25px !important;">
                     <h3 class="m-0">KEEP IT UP !</h3>
                     <div class="col">
-                        <p class="smallMonth  m-0 text-muted">3 MONTH</p>
-                        <img id="small-flag" src="assets/img/white-flag.svg" alt="">
+                        <p class="smallMonth m-0 text-muted">3 MONTH</p>
+                        <img id="small-flag" src="assets/img/white-flag.svg" alt=""
+                            [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 1}">
                         <p class="mt-2 mb-0 booked">+ 85%</p>
-                        <p class="mb-0">Rising Talent</p>
+                        <p class="mb-0" [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 1}">Rising Talent
+                        </p>
                     </div>
-                    <div class="col">
-                                                <p class="smallMonth m-0 text-muted">4 MONTH</p>
 
-                        <img class="low mb-0" src="assets/img/green-flag (2).svg" alt="">
+                    <div class="col">
+                        <p class="smallMonth m-0 text-muted">4 MONTH</p>
+                        <img class="mb-0" src="assets/img/green-flag (2).svg" alt=""
+                            [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 2}">
                         <p class="mt-2 mb-0 booked">+ 90%</p>
-                        <p class="mb-0 low">Design Star</p>
+                        <p class="mb-0" [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 2}">Design Star</p>
                     </div>
-                    <div class="col">
-                                                <p class="smallMonth m-0 text-muted">5 MONTH</p>
 
-                        <img class="low mb-0" src="assets/img/purple-flag (1).svg" alt="">
+                    <div class="col">
+                        <p class="smallMonth m-0 text-muted">5 MONTH</p>
+                        <img class="mb-0" src="assets/img/purple-flag (1).svg" alt=""
+                            [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 3}">
                         <p class="mt-2 mb-0 booked">+90%</p>
-                        <p class="mb-0 low">Top Tier</p>
+                        <p class="mb-0" [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 3}">Top Tier</p>
                     </div>
-                    <div class="col">
-                                                <p class="smallMonth m-0 text-muted">6 MONTH</p>
 
-                        <img class="low mb-0" src="assets/img/blue-flag.svg" alt="">
+                    <div class="col">
+                        <p class="smallMonth m-0 text-muted">6 MONTH</p>
+                        <img class="mb-0" src="assets/img/blue-flag.svg" alt=""
+                            [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 4}">
                         <p class="mt-2 mb-0 booked">+95%</p>
-                        <p class="mb-0 low">The Maestro</p>
+                        <p class="mb-0" [ngClass]="{'low': (aboutEmployees()?.employeeBadge ?? 0) < 4}">The Maestro</p>
                     </div>
+
                 </div>
             </div>
             <div class="col-lg-6  p-0 ps-lg-4 mx-lg-0 pt-lg-0 pt-3">
-                 <div class="p-md-4 p-3 mx-0 rounded row h-100 right-box pe-0">
+                <div class="p-md-4 p-3 mx-0 rounded row h-100 right-box pe-0">
                     <div class=" inner-box col rounded " style="flex: 0;">
                         <div class="p-3 d-flex gap-5 align-items-end   ">
                             <div class="">
-                                <h1 class="numOfEmployee mb-2">14</h1>
-                                <div class="mb-0 mt-2 " >
+                                <h1 class="numOfEmployee mb-2">{{
+                                    aboutEmployees()?.projectsStats?.totalProjectsCompleted}}</h1>
+                                <div class="mb-0 mt-2 ">
                                     <h6 class="fw-bolder fw-bold mt-2 h-auto mb-0">Completed</h6>
                                     projects
                                 </div>
@@ -164,7 +165,7 @@
                             <p class="p-0  mb-3  " style="white-space: pre-line;">
                                 PROJECT SUCCESS RATE
                             </p>
-                            <span class="px-0">87%</span>
+                            <span class="px-0">{{ aboutEmployees()?.projectsStats?.totalProjectsCompleted}}%</span>
                         </div>
                     </div>
                 </div>
@@ -174,5 +175,5 @@
 </div>
 
 <app-projects-profile />
-<app-arrival-time/>
-<app-feedback-employees/>
+<app-arrival-time />
+<app-feedback-employees />

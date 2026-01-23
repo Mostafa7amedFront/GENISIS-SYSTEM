@@ -29,36 +29,28 @@
         <div class="line"></div>
 
         <!-- Payment info -->
-        <div class="payments flex-grow-1 w-50">
+    <div class="payments flex-grow-1 w-50">
+  @for (item of schedules(); track $index) {
 
-            @for (item of schedules(); track $index) {
-            @if($index === 4){
-            <div class="slot isLate text-center me-0">
-                <p class="m-0 ">        {{ item.time }}</p>
+    @if (item.status === 'absent') {
+      <div class="slot isLate text-center me-0">
+        <p class="m-0">ABSENT</p>
+      </div>
+    }
+    @else if (item.status === 'weekend') {
+      <div class="slot text-center me-0">
+        <p class="m-0">WEEKEND</p>
+      </div>
+    }
+    @else {
+      <div class="slot text-center me-0">
+        <p class="m-0">{{ item.time }}</p>
+      </div>
+    }
 
+  }
+</div>
 
-            </div>
-
-            }
-            @else if ($index === 6) {
-            <div class="slot isLate text-center me-0">
-                <p class="m-0 ">ABSENT</p>
-
-
-            </div>
-            }
-            @else {
-            <div class="slot text-center me-0">
-                <p class="m-0 ">12:30 PM - 1:00 PM</p>
-
-
-            </div>
-
-            }
-            }
-
-
-        </div>
     </div>
       <div class="footer">
     <h2 class="m-0 routesX " (click)="nextWeek()" ><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">

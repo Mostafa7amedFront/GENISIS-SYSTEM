@@ -1,8 +1,8 @@
-import { Component, inject, Inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import Swal from 'sweetalert2';
 import { BrowserMultiFormatReader } from '@zxing/browser';
 import { SweetAlert } from '../../Core/service/sweet-alert';
+import { AttendanceService } from '../../Core/service/attendance.service.service';
 
 type TabType = 'scan' | 'upload';
 
@@ -15,11 +15,16 @@ type TabType = 'scan' | 'upload';
 })
 export class Arrival {
 
+  // Signals
   activeTab = signal<TabType>('scan');
   isScanning = signal(false);
   loading = signal(false);
-
+ArrivalSound = new Audio('/Sound/good-boy-102414.mp3');
+  // Services
   private _alert = inject(SweetAlert);
+  private _attendanceService = inject(AttendanceService);
+
+  // QR Code Reader
   private codeReader = new BrowserMultiFormatReader();
 
   // 🔁 Switch Tabs
@@ -39,22 +44,16 @@ export class Arrival {
 
       this.isScanning.set(false);
 
-      this._alert.toast(
-        `QR Result: ${result.getText()}`,
-        'success'
-      );
+      const employeeId = result.getText();
+      this.handleQrResult(employeeId);
 
     } catch {
       this.isScanning.set(false);
-
-      this._alert.toast(
-        'Failed to read QR code',
-        'error'
-      );
+      this._alert.toast('Failed to read QR code', 'error');
     }
   }
 
-  // 📂 Upload QR
+  // 📂 Upload QR Image
   async onFileSelected(event: any) {
     const file = event.target.files[0];
     if (!file) return;
@@ -65,18 +64,39 @@ export class Arrival {
       const imgUrl = URL.createObjectURL(file);
       const result = await this.codeReader.decodeFromImageUrl(imgUrl);
 
-      this._alert.toast(
-        `QR Result: ${result.getText()}`,
-        'success'
-      );
+      const employeeId = result.getText();
+      this.handleQrResult(employeeId);
 
     } catch {
-      this._alert.toast(
-        'Invalid QR image',
-        'error'
-      );
+      this._alert.toast('Invalid QR image', 'error');
     } finally {
       this.loading.set(false);
     }
   }
+
+handleQrResult(employeeId: string) {
+  this._attendanceService.scanAttendance(employeeId).subscribe({
+    next: (res) => {
+
+      if (res.value.firstIn && !res.value.lastOut) {
+        this.ArrivalSound.play();
+        this._alert.toast('Check-in recorded successfully ✅', 'success');
+        return;
+      }
+
+      if (res.value.lastOut) {
+        this._alert.toast('Check-out recorded successfully ✅', 'success');
+        return;
+      }
+
+      if (!res.success) {
+        this._alert.toast(res.message || 'Attendance failed ⚠️', 'warning');
+      }
+    },
+    error: () => {
+      this._alert.toast('Error while recording attendance ❌', 'error');
+    }
+  });
+}
+
 }
