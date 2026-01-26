@@ -100,7 +100,6 @@ input[type="number"] {
 /* Start team */
 .team-container{
     background-color: var(--dark);
-    max-height: 1700px !important;
 }
 .team .team-container h1{
     font-size: 60px;
@@ -201,7 +200,9 @@ input[type="number"] {
 .card-box {
     overflow-y: auto;
     // min-height: 1185px;
-    max-height: 1185px;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
 
 
     padding-right: 0px;
@@ -218,13 +219,8 @@ input[type="number"] {
     background-color: #ffffff10;
 }
 @media (max-width:576px) {
-    .card-box{
-        min-height: 480px !important;
-        max-height: 480px !important;
-    }
-    .team-container {
-        max-height: 1500px  !important;
-    }
+
+
     .team .right-box p {
         font-size: 10px;
     }
@@ -256,9 +252,7 @@ input[type="number"] {
     flex-direction: column-reverse;
     padding-left: 10px;
   }
-    .team-container {
-        max-height: 1340px;
-    }
+
     .team .team-container h1 {
         font-size: 30px;
     }
@@ -1254,13 +1248,7 @@ body {
 .clients-page .card h5{
     font-size: 15px;
 }
-.clients-page .team-container {
-    min-height: 1900px;
-    max-height: 1900px;
-}
-.clients-page .card-box{
-    max-height: 1550px;
-}
+
 .client-page .tag {
     top: 10px;
     left: 10px; 
@@ -1297,10 +1285,7 @@ body {
         font-size: 14px;
     }
 
-    .clients-page .team-container {
-        min-height: 920px !important;
-        max-height: 920px !important;
-    }
+   
 }
 @media (max-width:992px){
     .clients-page .right-box h2{
@@ -1324,10 +1309,7 @@ body {
     .clients-page .card-box{
         max-height: 1005px;
     }
-    .clients-page .team-container {
-        min-height: 1600px;
-        max-height: 1600px;
-    }
+
 }
 @media (max-width:1200px){
     .clients-page .right-box h2{

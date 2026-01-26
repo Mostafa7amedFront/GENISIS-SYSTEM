@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { IPaginationResponse, IResponseOf } from '../../Shared/Interface/iresonse';
-import { IClients } from '../Interface/iclients';
+import { IResponsePage, IResponseOf } from '../../Shared/Interface/iresonse';
+import { ClientRes, IClients } from '../Interface/iclients';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,8 @@ export class Clients {
 
 
 
-  getAll(data: any): Observable<IPaginationResponse<IClients>> {
-
-
-    return this._httpClient.post<IPaginationResponse<IClients>>(`${this.API_URL}/GetAll`, data);
+  getAll(data: any): Observable<IResponsePage<ClientRes>> {
+    return this._httpClient.post<IResponsePage<ClientRes>>(`${this.API_URL}/GetAll`, data);
   }
   getById(id: number): Observable<IResponseOf<IClients>> {
     return this._httpClient.get<IResponseOf<IClients>>(`${this.API_URL}/${id}`);

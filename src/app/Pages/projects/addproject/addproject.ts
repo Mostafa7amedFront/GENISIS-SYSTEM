@@ -88,7 +88,7 @@ selectedType: string | null = null;
       pageSize: 50,
       ProjectStatus: null
     }).subscribe({
-      next: (res) => this.Clients.set(res.value)
+      // next: (res) => this.Clients.set(res.value)
     });
 
     this._employee.getAll({}).subscribe({

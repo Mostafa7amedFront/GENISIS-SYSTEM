@@ -38,7 +38,7 @@ amount = signal<number | null>(null);
     const requestData = { pageNumber: 1, pageSize: 1000 };
     this._project.getAll(requestData).subscribe({
       next: res => {
-        this.projects.set(res.success ? res.value : []);
+        // this.projects.set(res.success ? res.value : []);
       },
       error: err => console.error('❌ Error fetching projects:', err)
     });

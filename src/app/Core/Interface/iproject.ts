@@ -19,6 +19,13 @@ export interface IProject {
     attachments:        Attachment[];
     projectAttachment:string[];
 }
+export interface GetAllProjectsStats{
+  completed: number
+  paused: number
+  inProgress: number
+  totalCompletedAllTime: number
+  successRate: number
+}
 
 export interface Attachment {
     fileUrl: string;
@@ -41,4 +48,33 @@ export interface NoteReq {
   noteContent: string;
   isFav: boolean;
   isCompleted: boolean;
+}
+export interface IEmployeeMini {
+  id: string;
+  name: string;
+  imageUrl: string;
+}
+
+export interface IProject {
+  projectTitle: string;
+  projectDescription: string;
+  projectType: number;
+  projectStatus: number;
+  projectDuration: number;
+  clientId: string;
+  clientName: string;
+  clientImage: string;
+  employees: IEmployeeMini[];
+}
+
+export interface Analytics {
+  currentPeriodCount: number;
+  previousPeriodCount: number;
+  differenceCount: number;
+  isIncreased: boolean;
+}
+
+export interface ProjectsValue {
+  items: IProject[];
+  analytics: Analytics;
 }

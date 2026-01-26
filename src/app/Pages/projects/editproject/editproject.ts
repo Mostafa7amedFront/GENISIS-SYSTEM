@@ -70,7 +70,7 @@ export class Editproject {
 
     // Load Clients + Employees
     this._client.getAll({ pageNumber: 1, pageSize: 50, ProjectStatus: null }).subscribe({
-      next: res => this.Clients.set(res.value)
+      // next: res => this.Clients.set(res.value)
     });
 
     this._employee.getAll({}).subscribe({

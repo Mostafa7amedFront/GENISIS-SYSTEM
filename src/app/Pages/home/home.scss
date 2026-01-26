@@ -2,6 +2,12 @@
         object-fit: cover;
 
 }
+.team-container{
+    height: auto !important;
+}
+.inner-box {
+  flex: 0;
+}
 p{
   line-height: 100%;
 }
@@ -51,14 +57,74 @@ ease;
   gap: 1rem;
   padding: 1rem;
 }
+@media (max-width: 1300px){
+ .card-box{
+  grid-template-columns: repeat(3, 1fr); /* 👈 4 أعمدة ثابتة */
+
+  }
+  .statisOne , .statisTwo{
+    width: 100% !important;
+  }
+}
 @media (max-width: 992px) { /* lg -> md */
 
   .card-box{
-  grid-template-columns: repeat(auto-fit, minmax(80%, 1fr)) !important;
+  grid-template-columns: repeat(2, 1fr); /* 👈 4 أعمدة ثابتة */
 
   }
   .team .right-box .text-end{
     max-height: none;
+  }
+  .row{
+  margin-left:  0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.statisTwo .row{
+  padding: 20px !important;
+}
+.statisTwo .ms-auto{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+  .statisTwo , .statisOne{
+    padding: 0 !important;
+  }
+}
+@media (max-width: 768px) { /* lg -> md */
+
+.inner-box {
+  flex: none !important;
+}  
+
+.CompleteProjects{
+  justify-content: space-between !important;
+}
+.team .right-box .inner-box img{
+  width: 100% !important;
+  height: 100% !important;
+}
+.statisTwo .leftBox {
+  width: 100% !important;
+}
+.statisTwo .row{
+  width: 100% !important;
+   justify-content: end !important;
+   align-items: flex-start;
+   padding-bottom: 0 !important;
+   span{
+    line-height: 1 !important;
+    margin-top: 14px !important;
+   }
+   
+}
+}
+@media (max-width: 600px) {
+
+  .card-box{
+  grid-template-columns: repeat(1, 1fr); /* 👈 4 أعمدة ثابتة */
+
   }
 }
 
@@ -93,5 +159,11 @@ ease;
   .stat-card {
     flex: 1 1 40%;
     margin: 5px 0;
+  }
+  .card-box .cards{
+    padding: 0 !important;
+  }
+  .mt-3{
+    padding: 0 !important;
   }
 }

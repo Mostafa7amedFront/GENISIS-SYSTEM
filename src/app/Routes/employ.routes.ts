@@ -9,7 +9,6 @@ export const employeroutes: Routes = [
   {
     path: 'employee',
     component: MainlayoutEmployee,
-    canActivate:[roleGuard(["employee"])],
     children: [
     { path: '', pathMatch: 'full', redirectTo: 'proflie' },
       {

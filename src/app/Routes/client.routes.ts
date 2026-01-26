@@ -9,7 +9,6 @@ export const clientRoutes: Routes = [
   {
     path: 'client',
     component: MainlayoutClients,
-    canActivate: [roleGuard(['client'])],
     children: [
        { path: '', pathMatch: 'full', redirectTo: 'proflie' },
 

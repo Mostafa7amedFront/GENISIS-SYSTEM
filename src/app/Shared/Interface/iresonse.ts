@@ -23,6 +23,18 @@ export interface IPaginationResponse<TResponse> extends IResponse{
     hasPreviousPage: boolean    
 
 }
+export interface IResponsePage<TResponse> extends IResponse{
+    value: TResponse
+    pageSize: number
+    pageNumber: number
+    totalCount: number
+    count: number
+    totalPages: number
+    hasNextPage: boolean
+    hasPreviousPage: boolean    
+
+}
+
 
 export interface IPagination {
     pageSize: number;

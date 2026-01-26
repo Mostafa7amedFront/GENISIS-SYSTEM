@@ -51,6 +51,27 @@
           ></button>
           <p class="low ms-2 m-0">{{ title }}</p>
         </div>
+        <!-- Role Select -->
+<p class="mt-4 mb-1 title">Role</p>
+
+<div class="d-flex flex-wrap gap-2">
+    <button
+            type="button"
+            class="rounded-1"
+      [class.clicked]="selectedRole === 'admin'"
+    (click)="selectRole('admin')"
+          ></button>
+          <p class="low  m-0">Admin</p>
+  
+          <button
+            type="button"
+            class="rounded-1 ms-4"
+      [class.clicked]="selectedRole === 'super admin'"
+    (click)="selectRole('super admin')"
+          ></button>
+          <p class="low  m-0">Super Admin</p>
+</div>
+
       </div>
     </div>
   </form>

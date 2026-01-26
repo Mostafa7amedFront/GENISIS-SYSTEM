@@ -8,7 +8,6 @@ export const adminroutes: Routes = [
   {
     path: '',
     component: MainOutlet,
-    canActivate: [roleGuard(["admin"])],
     children: [
       {
         path: '',

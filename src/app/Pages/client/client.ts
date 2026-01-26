@@ -4,38 +4,53 @@ import { Router, RouterModule } from '@angular/router';
 import { Clients } from '../../Core/service/clients';
 import { SweetAlert } from '../../Core/service/sweet-alert';
 import { environment } from '../../../environments/environment';
-import { IClients } from '../../Core/Interface/iclients';
-import { ShortenPipe } from '../../Shared/pipes/shorten-pipe';
+import { Item, Analytics, ClientRes } from '../../Core/Interface/iclients';
 import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
-
+import { IResponsePage } from '../../Shared/Interface/iresonse';
 
 @Component({
   selector: 'app-client',
+  standalone: true,
   imports: [CommonModule, RouterModule, LeadingZeroPipe],
   templateUrl: './client.html',
   styleUrl: './client.scss'
 })
 export class Client {
   isOpen = false;
-    currentPage = signal<number>(1);
+
+  currentPage = signal<number>(1);
   totalPages = signal<number>(1);
   totalCount = signal<number>(0);
   hasPreviousPage = signal<boolean>(false);
   hasNextPage = signal<boolean>(false);
   pageSize = 12;
 
-options = [
-  { label: 'ALL TIME', value: null },
-  { label: 'LAST MONTH', value: 1 },
-  { label: 'LAST 3 MONTHS', value: 3 },
-  { label: 'LAST 6 MONTHS', value: 6 },
-  { label: 'LAST YEAR', value: 12 }
-];
-
-
+  options = [
+    { label: 'ALL TIME', value: null },
+    { label: 'LAST MONTH', value: 1 },
+    { label: 'LAST 3 MONTHS', value: 3 },
+    { label: 'LAST 6 MONTHS', value: 6 },
+    { label: 'LAST YEAR', value: 12 }
+  ];
   selected = this.options[0];
 
+  private _Clients = inject(Clients);
+  private _alert = inject(SweetAlert);
+  private routes = inject(Router);
 
+  today = new Date();
+  isLoading = signal(false);
+  errorMessage = signal('');
+
+  baseimageUrl = `${environment.baseimageUrl}`;
+
+  // ✅ دي اللي المفروض نعرضها في الكروت
+  projects = signal<Item[]>([]);
+
+  // ✅ analytics للبوكس اللي فوق
+  analytics = signal<Analytics | null>(null);
+
+  selectedProjectType = signal<number | null>(null);
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
@@ -44,61 +59,89 @@ options = [
   selectOption(option: any) {
     this.selected = option;
     this.isOpen = false;
-  }
-
-
-
-  private _Clients = inject(Clients);
-  today = new Date();
-  isLoading = signal(false);
-  errorMessage = signal('');
-  private _alert = inject(SweetAlert);
-  private routes = inject(Router);
-  baseimageUrl = `${environment.baseimageUrl}`;
-  projects = signal<IClients[]>([]);
-  selectedProjectType = signal<number | null>(null);
-
-
-getProjectCounts() {
-  const oldClient = this.projects().filter(p => p.clientType === 0).length;
-  const longTerm = this.projects().filter(p => p.clientType === 1).length;
-  const newClient = this.projects().filter(p => p.clientType === 2).length;
-  return { oldClient, longTerm, newClient };
-}
-  ngOnInit(): void {
-    this.loadEmployees();
-  }
-  selectProjectType(type: number) {
-     if (this.selectedProjectType() === type) {
-      this.selectedProjectType.set(null);
-    } else {
-      this.selectedProjectType.set(type);
-    }
     this.currentPage.set(1);
-    this.loadEmployees();
+    this.loadClients();
   }
 
-  loadEmployees(): void {
+  ngOnInit(): void {
+    this.loadClients();
+  }
+
+  selectProjectType(type: number) {
+    this.selectedProjectType.set(this.selectedProjectType() === type ? null : type);
+    this.currentPage.set(1);
+    this.loadClients();
+  }
+
+  getProjectCounts() {
+    const oldClient = this.projects().filter(p => p.clientType === 0).length;
+    const longTerm = this.projects().filter(p => p.clientType === 1).length;
+    const newClient = this.projects().filter(p => p.clientType === 2).length;
+    return { oldClient, longTerm, newClient };
+  }
+
+  // ✅ Robust parsing لأي شكل Response
+  private extractItemsAndAnalytics(value: any): { items: Item[]; analytics: Analytics | null } {
+    // case A: value = {items, analytics}
+    if (value && Array.isArray(value.items)) {
+      return { items: value.items as Item[], analytics: (value.analytics ?? null) as Analytics | null };
+    }
+
+    // case B: value = Item[]
+    if (Array.isArray(value)) {
+      return { items: value as Item[], analytics: null };
+    }
+
+    // fallback
+    return { items: [], analytics: null };
+  }
+  get periodText(): string {
+  if (this.selected?.value === null) return 'ALL TIME';
+
+  switch (this.selected.value) {
+    case 1:
+      return 'IN THE PAST 30 DAYS';
+    case 3:
+      return 'IN THE PAST 3 MONTHS';
+    case 6:
+      return 'IN THE PAST 6 MONTHS';
+    case 12:
+      return 'IN THE PAST YEAR';
+    default:
+      return 'ALL TIME';
+  }
+}
+
+
+  loadClients(): void {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
     this._Clients.getAll({
       pageNumber: this.currentPage(),
-      pageSize:  this.pageSize,
-      clientType:this.selectedProjectType()
+      pageSize: this.pageSize,
+      clientType: this.selectedProjectType(),
+      // لو الباك محتاج مدة زمنية:
+      creationPeriod: this.selected.value
     }).subscribe({
-      next: (response) => {
+      next: (response: IResponsePage<any>) => {
         this.isLoading.set(false);
 
-        if (response.success) {
-          this.projects.set(response.value);
-           this.totalPages.set(response.totalPages);
+        if (!response.success) {
+          this.projects.set([]);
+          this.analytics.set(null);
+          return;
+        }
+
+        const { items, analytics } = this.extractItemsAndAnalytics(response.value);
+
+        this.projects.set(items);
+        this.analytics.set(analytics);
+
+        this.totalPages.set(response.totalPages);
         this.totalCount.set(response.totalCount);
         this.hasPreviousPage.set(response.hasPreviousPage);
         this.hasNextPage.set(response.hasNextPage);
-        } else {
-          this.projects.set([]);
-        }
       },
       error: (err) => {
         this.isLoading.set(false);
@@ -110,12 +153,11 @@ getProjectCounts() {
         } else {
           this.errorMessage.set('An unexpected error occurred while loading data.');
         }
-
       }
     });
   }
 
-  onDelete(card: IClients, event: MouseEvent) {
+  onDelete(card: Item, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -123,57 +165,56 @@ getProjectCounts() {
       .then((result) => {
         if (result.isConfirmed) {
           this._Clients.delete(card.id).subscribe({
-            next: (res) => {
-              this._alert.toast('Employee deleted successfully.', 'success');
+            next: () => {
+              this._alert.toast('Client deleted successfully.', 'success');
               this.projects.update((list) => list.filter(e => e.id !== card.id));
             },
             error: (err) => {
-              this._alert.toast(err.error.detail, 'error');
+              this._alert.toast(err?.error?.detail ?? 'Delete failed', 'error');
             }
           });
         }
       });
   }
 
-  onEdit(card: any, event: MouseEvent) {
+  onEdit(card: Item, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.routes.navigate(['/editclient', card.id]);
   }
 
-
-   nextPage() {
+  nextPage() {
     if (this.hasNextPage()) {
       this.currentPage.update(v => v + 1);
-      this.loadEmployees();
+      this.loadClients();
     }
   }
-get pagesArray() {
-  return Array.from({ length: this.totalPages() });
-}
-get visiblePages() {
-  const total = this.totalPages();
-  const current = this.currentPage();
-  const windowSize = 4;
 
-  let start = Math.max(1, current - Math.floor(windowSize / 2));
-  let end = start + windowSize - 1;
-
-  if (end > total) {
-    end = total;
-    start = Math.max(1, end - windowSize + 1);
-  }
-  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-}
   prevPage() {
     if (this.hasPreviousPage()) {
       this.currentPage.update(v => v - 1);
-      this.loadEmployees();
+      this.loadClients();
     }
   }
 
   goToPage(page: number) {
     this.currentPage.set(page);
-    this.loadEmployees();
+    this.loadClients();
+  }
+
+  get visiblePages() {
+    const total = this.totalPages();
+    const current = this.currentPage();
+    const windowSize = 4;
+
+    let start = Math.max(1, current - Math.floor(windowSize / 2));
+    let end = start + windowSize - 1;
+
+    if (end > total) {
+      end = total;
+      start = Math.max(1, end - windowSize + 1);
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
 }

@@ -25,7 +25,15 @@ export class Addemployee {
   private _alert = inject(SweetAlert); 
   private _router = inject(Router);
 isLoading = signal(false);
+selectedRole: 'admin' | 'super admin' | null = null;
+roleSelectValue: number = 0; // admin=0, super admin=1 (أو حسب الباك)
 
+selectRole(role: 'admin' | 'super admin') {
+  this.selectedRole = this.selectedRole === role ? null : role;
+
+  // اختار Mapping مناسب للباك (لو عندك Enum في الباك)
+  this.roleSelectValue = this.selectedRole === 'super admin' ? 1 : 0;
+}
   constructor(private fb: FormBuilder, private _http: HttpClient) {
     this.createAccountForm = this.fb.group({
       name: ['', Validators.required],
@@ -50,16 +58,16 @@ onImageChange(event: any) {
 
     switch (this.selectedClientTitle) {
       case 'Rising Talent':
-        this.employeeBadgeValue = 0;
-        break;
-      case 'Design Star':
         this.employeeBadgeValue = 1;
         break;
-      case 'Top Tier':
+      case 'Design Star':
         this.employeeBadgeValue = 2;
         break;
-      case 'Maestro':
+      case 'Top Tier':
         this.employeeBadgeValue = 3;
+        break;
+      case 'Maestro':
+        this.employeeBadgeValue = 4;
         break;
       default:
         this.employeeBadgeValue = 0;
@@ -88,6 +96,7 @@ onImageChange(event: any) {
   formData.append('Password', this.createAccountForm.value.password);
   formData.append('UserName', this.createAccountForm.value.username);
   formData.append('PhoneNumber', this.createAccountForm.value.PhoneNumber);
+  formData.append('RoleSelect', String(this.roleSelectValue));
 
   this.Employees.add(formData).subscribe({
     next: () => {

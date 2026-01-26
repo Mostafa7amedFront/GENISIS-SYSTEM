@@ -17,7 +17,7 @@ export class Editemployee  implements OnInit{
   createAccountForm: FormGroup;
   imagePreview: string | null = null;
   selectedImageFile: File | null = null;
-  clientTitles = ['Rising Talent', 'Design Star', 'Top Tier', 'Maestro'];
+  clientTitles = [ 'Rising Talent', 'Design Star', 'Top Tier', 'Maestro'];
   selectedClientTitle: string | null = null;
   employeeBadgeValue: number = 0;
   baseimageUrl = `${environment.baseimageUrl}`;
@@ -69,7 +69,7 @@ isLoading = signal(false);
         this.imagePreview = emp.imageUrl;
         this.employeeBadgeValue = emp.employeeBadge;
 
-        this.selectedClientTitle = this.clientTitles[emp.employeeBadge] || null;
+        this.selectedClientTitle = this.clientTitles[emp.employeeBadge +1] || null;
       },
       error: (err) => {
         this._alert.toast('Failed to load employee data', 'error');
@@ -93,16 +93,16 @@ onImageChange(event: any) {
 
     switch (this.selectedClientTitle) {
       case 'Rising Talent':
-        this.employeeBadgeValue = 0;
-        break;
-      case 'Design Star':
         this.employeeBadgeValue = 1;
         break;
-      case 'Top Tier':
+      case 'Design Star':
         this.employeeBadgeValue = 2;
         break;
-      case 'Maestro':
+      case 'Top Tier':
         this.employeeBadgeValue = 3;
+        break;
+      case 'Maestro':
+        this.employeeBadgeValue = 4;
         break;
       default:
         this.employeeBadgeValue = 0;
@@ -134,7 +134,7 @@ onImageChange(event: any) {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this._alert.toast('Failed to update employee', 'error');
+        this._alert.toast(err.error.detail, 'error');
         this.isLoading.set(false);
       }
     });

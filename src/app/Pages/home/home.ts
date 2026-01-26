@@ -1,3 +1,4 @@
+import { GetAllProjectsStats } from './../../Core/Interface/iproject';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, Routes } from '@angular/router';
 import { Employees } from '../../Core/service/employees';
@@ -8,6 +9,7 @@ import { SweetAlert } from '../../Core/service/sweet-alert';
 import { Router } from '@angular/router';
 import { LeadingZeroPipe } from '../../Shared/pipes/leading-zero-pipe';
 import { DateWithSuffixPipe } from '../../Shared/pipes/date-with-suffix-pipe';
+import { ProjectService } from '../../Core/service/project.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +20,7 @@ import { DateWithSuffixPipe } from '../../Shared/pipes/date-with-suffix-pipe';
 export class Home {
 
   private _Employees = inject(Employees);
+  private _Project = inject(ProjectService);
   today = new Date();
   isLoading = signal(false);
   errorMessage = signal('');
@@ -25,16 +28,23 @@ export class Home {
   private routes  = inject(Router);
   baseimageUrl = `${environment.baseimageUrl}`;
   cards = signal<IEmployee[]>([]);
-projectItems = [
-  { label: 'Rising Talent', count: this.getProjectCounts().risingTalent },
-  { label: 'Design Star', count: this.getProjectCounts().designStar },
-  { label: 'Top Tier', count: this.getProjectCounts().topTier },
-  { label: 'The Maestro', count: this.getProjectCounts().maestro },
-];
+  Stats = signal<GetAllProjectsStats | null>(null);
+
   ngOnInit(): void {
     this.loadEmployees();
+    this.getStatusproject();
   }
 
+  getStatusproject(){
+  this._Project.getStatusProject().subscribe({
+    next: (res) => {
+      if (res?.success ) {
+        this.Stats.set(res.value);
+      }
+    },
+    error: (err) => console.error('❌ Failed to fetch project data:', err)
+  });
+  }
   loadEmployees(): void {
     this.isLoading.set(true);
     this.errorMessage.set('');
@@ -65,14 +75,7 @@ projectItems = [
   }
 
 
-getProjectCounts() {
-  const risingTalent = this.cards().filter(p => p.employeeBadge === 0).length;
-  const designStar = this.cards().filter(p => p.employeeBadge === 1).length;
-  const topTier = this.cards().filter(p => p.employeeBadge === 2).length;
-  const maestro = this.cards().filter(p => p.employeeBadge === 3).length;
 
-  return { risingTalent, designStar, topTier, maestro };
-}
   onDelete(card: IEmployee, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();

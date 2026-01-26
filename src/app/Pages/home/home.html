@@ -6,7 +6,7 @@
     </div>
     <div class=" p-md-5 p-3 rounded team-container">
         <div class=" row g-3 g-lg-4">
-            <div class="col-12 col-lg-6 pb-3 px-0 pe-3">
+            <div class="col-12 col-lg-6 pb-3 px-0 pe-3 statisOne">
                 <div class="d-flex flex-column justify-content-between h-100">
                     <h1 class="mb-0">{{ today | dateWithSuffix | uppercase }}</h1>
                     <h4>Hello, Youssef</h4>
@@ -15,26 +15,26 @@
 
                         <div class="p-0 text-center  mt-2 m-0 mb-0">
                             <p class="mb-0">Completed</p>
-                            <p class="mb-0 mt-2 fs-3">{{getProjectCounts().risingTalent| leadingZero}}</p>
+                            <p class="mb-0 mt-2 fs-3">{{Stats()?.completed| leadingZero}}</p>
                         </div>
                         <div class="p-0 text-center  mt-2 m-0 mb-0">
                             <p class="mb-0">Paused</p>
-                            <p class="mb-0  mt-2  fs-3">{{getProjectCounts().designStar| leadingZero}}</p>
+                            <p class="mb-0  mt-2  fs-3">{{Stats()?.paused| leadingZero}}</p>
                         </div>
                         <div class="p-0 text-center  mt-2 m-0 mb-0">
                             <p class="mb-0">In Progress </p>
-                            <p class="mb-0  mt-2  fs-3">{{getProjectCounts().topTier| leadingZero}}</p>
+                            <p class="mb-0  mt-2  fs-3">{{Stats()?.inProgress| leadingZero}}</p>
                         </div>
                       
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 pb-3 px-2  ">
+            <div class="col-lg-6 pb-3 px-2 statisTwo ">
                 <div class="p-md-4 p-3 mx-0 rounded row h-100 right-box pe-0">
-                    <div class=" inner-box col rounded " style="flex: 0;">
-                        <div class="p-3 d-flex gap-5 align-items-end   ">
+                    <div class=" inner-box col rounded ">
+                        <div class="p-3 d-flex gap-5 align-items-end  CompleteProjects  ">
                             <div class="">
-                                <h1 class="numOfEmployee mb-2">14</h1>
+                                <h1 class="numOfEmployee mb-2">{{Stats()?.totalCompletedAllTime}}</h1>
                                 <div class="mb-0 mt-2 " >
                                     <h6 class="fw-bolder fw-bold mt-2 h-auto mb-0">Completed</h6>
                                     projects
@@ -45,13 +45,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-7 ms-auto col-6 text-end px-0">
-                        <div class="mx-0 row">
+                    <div class="col-lg-6 col-sm-7 ms-auto leftBox col-6 text-end px-0">
+                        <div class="mx-0 row PSRCard ">
                             <h2 class="p-0 mt-1">PSR</h2>
                             <p class="p-0  mb-0  " style="white-space: pre-line;">
                                 PROJECT SUCCESS RATE
                             </p>
-                            <span class="px-0">87%</span>
+                            <span class="px-0">{{Stats()?.successRate}} %</span>
                         </div>
                     </div>
                 </div>

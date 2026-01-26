@@ -10,7 +10,7 @@
           <div class="headerBox d-flex justify-content-between align-items-start">
             <div class="text">
               <h2 class="mb-xl-3 mb-sm-4 mb-3">NEW CLIENTS</h2>
-              <p class="mb-0">IN THE PAST 30 DAYS</p>
+          <p class="mb-0">{{ periodText }}</p>
             </div>
             <div class="imageLeft">
               <img class="mb-3 pb-3 px-0" src="assets/img/Rectangle 721.png" alt="" />
@@ -18,16 +18,21 @@
           </div>
 
           <div class="bottomBox mt-3 d-flex mb-0 justify-content-between align-items-start">
-            <h6 class="text-white mb-0">15</h6>
+         <h6 class="text-white mb-0">
+              {{ analytics()?.currentPeriodCount ?? 0 }}
+            </h6>
 
             <div class="leftBottom h-100 ">
               <div class="mb-3">
-                <p class="p-0 m-0   align-content-start w-100">INCREASE</p>
+                  {{ (analytics()?.isIncreased ?? true) ? 'INCREASE' : 'DECREASE' }}
 
               </div>
               <div class="m-0 d-flex gap-2 align-items-end ">
-                <img class=" " width="22" src="assets/img/Arrow 1.svg" alt="">
-                <h5 class="p-0 h3 m-0  ">30%</h5>
+        <img
+                  width="22"
+                  [src]="(analytics()?.isIncreased ?? true) ? 'assets/img/Arrow 1.svg' : 'assets/img/ArrowDown.png'"
+                  alt=""
+                />                <h5 class="p-0 h3 m-0  "  [ngClass]="{ textColor: analytics()?.isIncreased === false }">   {{ analytics()?.differenceCount ?? 0 }}%</h5>
 
 
               </div>
@@ -47,11 +52,11 @@
               <span class="selected fs-2">{{ selected.label }}</span>
             </div>
             <p class="small mb-1 text-end">KEEP THE GOOD WORK!!</p>
-            <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
+                   <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
               @for (option of options; track option.value) {
-              <li (click)="selectOption(option)" [class.active]="selected.label === option.label">
-                {{ option.label }}
-              </li>
+                <li (click)="selectOption(option)" [class.active]="selected.label === option.label">
+                  {{ option.label }}
+                </li>
               }
             </ul>
           </div>
@@ -121,7 +126,7 @@
                   </div>
 
                   <div class="col text-end">
-                    @switch (project.clientProjectStatus) {
+                    @switch (project.clientType) {
                     @case (0) { <p class="mb-3 mb-0">In Progress </p> }
                     @case (1) { <p class="mb-3 mb-0">Paused</p> }
                     @case (2) { <p class="mb-3 mb-0">Completed </p> }
