@@ -245,9 +245,34 @@ margin-top: 5px !important;
         flex-direction: column !important;
     }
 }
+@media (max-width: 1000px) {
+.payments-container > .d-flex.justify-content-between {
+  flex-wrap: wrap;
+  gap: 30px !important;
+}
+.line{
+        width: 100%;
+    /* height: 430px; */
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.2509803922);
+    right: 54%;
+    margin-top: 5px;
+    /* padding: 4px 67px !important; */
+    margin: 0 23px;
 
+}
+}
 @media (max-width: 500px) {
     .payments button {
         flex-direction: column !important;
     }
+    .time-slots  , .payments {
+        padding: 0 !important;
+    }
+    .line{
+        width: 100%;
+         margin: 0 !important;
+    }
 }
+
+

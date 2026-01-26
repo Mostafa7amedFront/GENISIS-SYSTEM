@@ -23,7 +23,7 @@
       <!-- PAID -->
 
       <div class="IsPaid">
-        @for (payment of paidPayments(); track payment.id) {
+        @for (payment of unPaidPayments(); track payment.id) {
        <div class="paymentAdd mb-3 cr">
           <p class="mb-2">
             <span>{{ payment.clientName }} ({{ payment.projectName }})</span>
@@ -61,7 +61,7 @@
 
       <!-- UNPAID -->
       <div class="IsPaid">
-        @for (payment of unPaidPayments(); track payment.id) {
+        @for (payment of paidPayments(); track payment.id) {
         <div class="paymentAdd mb-3 cr">
           <p class="mb-2">
             <span>{{ payment.clientName }} ({{ payment.projectName }})</span>

@@ -91,17 +91,17 @@ unPaidPayments() {
 
   this._payments.togglePayment(payment.id, newValue).subscribe({
     next: res => {
-            if (!newValue) {
-        this.paymentSound.currentTime = 0; // يعيد الصوت من الأول
-        this.paymentSound.play();
-      }
+  
+           this.paymentSound.currentTime = 0;
+              this.paymentSound.play();
+
       this._alert.toast(
         newValue ? 'Payment marked as Paid.' : 'Payment marked as Unpaid.',
         'success'
       );
     },
     error: err => {
-      this._alert.toast('Failed to update payment status.', 'error');
+      this._alert.toast(err.error.detail, 'error');
 
       payment.isPaid = !newValue;
     }
