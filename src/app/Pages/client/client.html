@@ -43,7 +43,7 @@
       </div>
       <div class="col-12 col-lg-6 pb-3 mt-sm-2 pe-lg-4 mt-0">
         <div class="d-flex flex-column justify-content-between gap-1">
-          <div class="dropdown text-end">
+          <div class="dropdown text-end  ">
             <div class="select" (click)="toggleMenu()">
               <div class="caret">
                 <i class="fa-solid fa-angle-down fs-5" [class.rotate]="isOpen" style="color: #00bec5">
@@ -52,9 +52,9 @@
               <span class="selected fs-2">{{ selected.label }}</span>
             </div>
             <p class="small mb-1 text-end">KEEP THE GOOD WORK!!</p>
-                   <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isOpen">
+                   <ul class="p-3 rounded  menu list-unstyled text-end" [class.menu-open]="isOpen">
               @for (option of options; track option.value) {
-                <li (click)="selectOption(option)" [class.active]="selected.label === option.label">
+                <li (click)="selectOption(option)"  [class.active]="selected.label === option.label">
                   {{ option.label }}
                 </li>
               }

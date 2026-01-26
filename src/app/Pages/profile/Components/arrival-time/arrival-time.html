@@ -1,9 +1,8 @@
 <div class="my-8">
-    <div class="d-flex justify-content-end align-items-center headerText mt-5">
-    <h1 class="text-white text-end big">ARRIVAL TIME</h1>
-</div>
+    <h1 class="mt-5 text-white px-0 text-end big mb-4">ARRIVAL TIME</h1>
 
-<div class="payments-container text-white rounded mb-5 p-5  " style="background-color: #171818">
+
+<div class="payments-container text-white rounded mb-5 p-lg-5 p-md-4 p-3  " style="background-color: #171818">
       <div class="header">
     <button (click)="prevMonth()" class="routesX"><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z" fill="white"/>
@@ -53,12 +52,12 @@
 
     </div>
       <div class="footer">
-    <h2 class="m-0 routesX " (click)="nextWeek()" ><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <h2 class="m-0 routesX " (click)="nextWeek()" [class.disabled]="!canNextWeek()" ><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z" fill="white"/>
 </svg>
 </h2>
-    <h2 class="m-0 mt-2  ">WEEK {{ currentWeek() }}</h2>
-    <h2 class="m-0 " (click)="nextWeek()" ><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <h2 class="m-0 mt-2">{{ weekText() }}</h2>
+    <h2 class="m-0 " (click)="prevWeek()" [class.disabled]="!canPrevWeek()"><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z" fill="white"/>
 </svg>
 </h2>

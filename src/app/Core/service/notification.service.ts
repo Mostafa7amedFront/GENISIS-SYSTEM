@@ -10,8 +10,8 @@ import { environment } from '../../../environments/environment';
 })
 export class NotificationService {
   
-  private baseUrl = `${environment.baseimageUrl}/api/Notification`;
-private hubUrl = `${environment.baseimageUrl}/hubs/notification`;
+  private baseUrl = `${environment.baseimageUrl}api/Notification`;
+private hubUrl = `${environment.baseimageUrl}hubs/notification`;
 
 
   private hubConnection!: HubConnection;

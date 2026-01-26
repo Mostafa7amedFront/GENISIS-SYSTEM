@@ -1,6 +1,12 @@
 export interface WeeklyAttendanceResponse {
   success: boolean;
   value: AttendanceDayDto[];
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  totalCount: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface AttendanceDayDto {

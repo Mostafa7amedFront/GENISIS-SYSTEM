@@ -17,7 +17,7 @@
         width="214"
         height="214"
         style="object-fit: cover"
-        class="rounded-2"
+        class="rounded"
       />
     </div>
     <div class="ms-xl-5 ms-md-4 ms-3 w-100">
@@ -72,20 +72,19 @@
                                     <h4>AHMED</h4>
                                 </div>
                                 <div class="col px-0">
-                                    <div class="d-flex justify-content-end mt-2">
-                                        <div><img class="me-2" src="assets/img/Mask group (3).svg" alt=""></div>
-                                        <div><img src="assets/img/Mask group (3).svg" alt=""></div>
+                                    <div class="d-flex justify-content-end gap-3 flex-wrap mt-2 w-100">
+                                              @for( employess of aboutclient()?.employeesAssignedToClient; track employess.name){
+                                                    <div><img class=" rounded-2 object-fit-fill " width="80" height="80" src="{{ baseimageUrl + employess.imageUrl }}" alt=""></div>
+              
+
+                                              }
                                     </div>
                                 </div>
                                 <div class="d-flex rounded px-0">
                                     <div class="col ps-0 mt-auto ">
                                         <p class="small mb-0">4TH, OCT</p>
                                     </div>
-                                    <div class="col pe-0">
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <div><img src="assets/img/Mask group (3).svg" alt=""></div>
-                                        </div>
-                                    </div>
+                                
                             </div>
                         </div>
                     </div>

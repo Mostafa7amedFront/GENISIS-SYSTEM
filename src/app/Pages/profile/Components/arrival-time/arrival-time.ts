@@ -26,6 +26,21 @@ export class ArrivalTime {
   // state
   currentMonthIndex = signal(new Date().getMonth());
   currentWeek = signal<number>(1);
+// pagination meta from API
+pageNumber = signal<number>(1);
+pageSize = signal<number>(7);
+totalPages = signal<number>(1);
+totalCount = signal<number>(0);
+hasPreviousPage = signal<boolean>(false);
+hasNextPage = signal<boolean>(false);
+
+// UI helpers
+currentWeekLabel = computed(() => this.pageNumber()); // تعرض WEEK X
+canPrevWeek = computed(() => this.hasPreviousPage());
+canNextWeek = computed(() => this.hasNextPage());
+
+// optional: show "Week x of y"
+weekText = computed(() => `WEEK ${this.pageNumber()} / ${this.totalPages()}`);
 
   // date used for API
   selectedDate = signal<Date>(new Date());
@@ -50,28 +65,48 @@ export class ArrivalTime {
   }
 
   // ✅ called from HTML or buttons
-  loadWeek() {
-    this.loading.set(true);
-    this.errorMsg.set(null);
+loadWeek() {
+  this.loading.set(true);
+  this.errorMsg.set(null);
 
-    this.attendanceService
-      .getWeeklyAttendance(this.employeeId(), this.selectedDate(), this.currentWeek())
-      .pipe(finalize(() => this.loading.set(false)))
-      .subscribe({
-        next: (res) => {
-          if (!res?.success) {
-            this.errorMsg.set('Failed to load attendance.');
-            this.schedules.set([]);
-            return;
-          }
-          this.schedules.set(res.value.map(this.mapApiDayToSchedule));
-        },
-        error: (err) => {
-          this.errorMsg.set(err?.message ?? 'Network error.');
+  this.attendanceService
+    .getWeeklyAttendance(this.employeeId(), this.selectedDate(), this.currentWeek())
+    .pipe(finalize(() => this.loading.set(false)))
+    .subscribe({
+      next: (res) => {
+        if (!res?.success) {
+          this.errorMsg.set('Failed to load attendance.');
           this.schedules.set([]);
+          return;
         }
-      });
-  }
+
+        // ✅ schedules
+        this.schedules.set((res.value ?? []).map(this.mapApiDayToSchedule));
+
+        // ✅ pagination meta
+        this.pageNumber.set(res.pageNumber ?? 1);
+        this.pageSize.set(res.pageSize ?? 7);
+        this.totalPages.set(res.totalPages ?? 1);
+        this.totalCount.set(res.totalCount ?? 0);
+        this.hasPreviousPage.set(!!res.hasPreviousPage);
+        this.hasNextPage.set(!!res.hasNextPage);
+
+        // ✅ sync currentWeek with pageNumber
+        this.currentWeek.set(this.pageNumber());
+      },
+      error: (err) => {
+        this.errorMsg.set(err?.message ?? 'Network error.');
+        this.schedules.set([]);
+
+        // reset meta on error
+        this.pageNumber.set(1);
+        this.totalPages.set(1);
+        this.hasPreviousPage.set(false);
+        this.hasNextPage.set(false);
+      }
+    });
+}
+
 
   // ✅ update week from input or UI
   setWeekFromInput(value: string) {
@@ -105,38 +140,39 @@ export class ArrivalTime {
     return { date, day: dayUpper, time, status: uiStatus };
   };
 
-  nextWeek() {
-    this.currentWeek.update(v => v + 1);
-    this.loadWeek();
-  }
+nextWeek() {
+  if (!this.hasNextPage()) return;
+  this.currentWeek.update(v => v + 1);
+  this.loadWeek();
+}
 
-  prevWeek() {
-    if (this.currentWeek() > 1) {
-      this.currentWeek.update(v => v - 1);
-      this.loadWeek();
-    }
-  }
+prevWeek() {
+  if (!this.hasPreviousPage()) return;
+  this.currentWeek.update(v => v - 1);
+  this.loadWeek();
+}
 
 nextMonth() {
-  // move selectedDate +1 month
   const d = new Date(this.selectedDate());
   d.setMonth(d.getMonth() + 1);
 
   this.selectedDate.set(d);
   this.currentMonthIndex.set(d.getMonth());
 
-  this.loadWeek(); // ✅ call API
+  this.currentWeek.set(1); // ✅ reset to first week
+  this.loadWeek();
 }
 
 prevMonth() {
-  // move selectedDate -1 month
   const d = new Date(this.selectedDate());
   d.setMonth(d.getMonth() - 1);
 
   this.selectedDate.set(d);
   this.currentMonthIndex.set(d.getMonth());
 
-  this.loadWeek(); // ✅ call API
+  this.currentWeek.set(1); // ✅ reset to first week
+  this.loadWeek();
 }
+
 
 }

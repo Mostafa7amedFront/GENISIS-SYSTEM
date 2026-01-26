@@ -59,9 +59,17 @@ input[type="number"] {
 }
 .big {
     font-size: 60px;
+    white-space: nowrap;
 }
 .h-90{
     height: 90%;
+}
+.seletType{
+  background: #0B6B6E33;
+ padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 :root {
@@ -327,7 +335,7 @@ input[type="number"] {
 
 }
 .profile .right-box .text-end {
-    max-height: 100px;
+    max-height: fit-content;
 }
 .profile .inner-box h1 {
     max-height: 90px;
@@ -347,7 +355,7 @@ input[type="number"] {
 }
 @media (max-width:576px){
     .profile img {
-        max-width: 150px;
+        // max-width: 150px;
         margin-top: 10px;
     }
     .profile .top  {
@@ -565,6 +573,10 @@ body {
     .projects .small {
         font-size: 13px;
     }
+    .seletType{
+ font-size: 12px !important;
+    
+}
 }
 /* End Projects */
 
@@ -1338,13 +1350,15 @@ body {
 .client-profile{
     background-color: var(--dark);
     border-radius: 8px;
+    position: relative;
 }
 .client-profile .term {
     margin-top: -20px;
-    margin-right: -85px;
     background-color: #0B6B6E ;
     max-width: 250px;
     padding: 0px 37px;
+    position: absolute;
+    right: -30px !important;
 }
 .client-profile .small{
     font-size: 13px;

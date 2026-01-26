@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="mx-0 row ">
+        <div class="mx-0 row gap-4 ">
             <div class="px-0 col-lg-3 ">
                 <div class="image-flip">
 
@@ -46,7 +46,7 @@
                 <p class="mt-4 mb-0 small">{{aboutEmployees()?.createdAt | date:'mediumDate' }}</p>
                 <p class="fw-bold">Hello, {{aboutEmployees()?.name }}</p>
             </div>
-            <div class="px-0 col-lg-9 col">
+            <div class="px-0 col">
                 <h1 class="mb-0">{{aboutEmployees()?.userName }}</h1>
                 <p class="mb-0">{{aboutEmployees()?.jobTitle }}</p>
                 <div class="pt-1 rounded inner">
@@ -57,15 +57,15 @@
                         </div>
                         <div class="px-3 py-1 col pe-3 ps-0">
                             <p class="mt-2">BONUS</p>
-                            <p class="mb-0 fs-2">1,500</p>
+                            <p class="mb-0 fs-2">{{aboutEmployees()?.bonus }}</p>
                         </div>
                         <div class="px-lg-3 py-1 col pe-3 ps-0">
                             <p class="mt-2">DEDUCTION </p>
-                            <p class="mb-0 fs-2">500</p>
+                            <p class="mb-0 fs-2">{{aboutEmployees()?.deductions }}</p>
                         </div>
                         <div class="px-lg-3 py-1 col px-0">
                             <p class="mt-2">TOTAL</p>
-                            <p class="mb-0 fs-2">11,000</p>
+                            <p class="mb-0 fs-2">{{aboutEmployees()?.totalSalary ?? 0 }}</p>
                         </div>
                     </div>
                 </div>
@@ -103,8 +103,8 @@
                 </div>
             </div>
         </div>
-        <div class="mx-0 row gap-0">
-            <div class="col-lg-6 px-2 ms-1 pe-2 me-1 me-lg-0 pe-lg-4 pe-3 mx-lg-0">
+        <div class="mx-0 row cardKeep  gap-0">
+            <div class="col-lg-6 px-2 ms-1 pe-2 me-1 me-lg-0 pe-lg-4 pe-3 mx-lg-0 px-0 KEEPITUP">
                 <div class="p-md-4 p-3 pe-md-0 left-box row rounded" style="padding: 25px !important;">
                     <h3 class="m-0">KEEP IT UP !</h3>
                     <div class="col">
@@ -142,10 +142,10 @@
 
                 </div>
             </div>
-            <div class="col-lg-6  p-0 ps-lg-4 mx-lg-0 pt-lg-0 pt-3">
-                <div class="p-md-4 p-3 mx-0 rounded row h-100 right-box pe-0">
-                    <div class=" inner-box col rounded " style="flex: 0;">
-                        <div class="p-3 d-flex gap-5 align-items-end   ">
+            <div class="col-lg-6  p-0 ps-lg-4 mx-lg-0 pt-lg-0 pt-3 statisTwo">
+                <div class="p-md-4 p-3 mx-0 rounded row h-100 right-box pe-0 leftBox">
+                    <div class=" inner-box col rounded ">
+                        <div class="p-3 d-flex gap-5 align-items-end  CompleteProjects  ">
                             <div class="">
                                 <h1 class="numOfEmployee mb-2">{{
                                     aboutEmployees()?.projectsStats?.totalProjectsCompleted}}</h1>

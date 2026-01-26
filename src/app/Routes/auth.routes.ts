@@ -6,6 +6,7 @@ export const authRoutes: Routes = [
   {
     path: '',
     component: MainlayoutNonNav,
+    canActivate: [isAuthGuard],
     children: [
            
       {

@@ -11,6 +11,9 @@ export interface IEmployee {
   phoneNumber: number | null;
   feedback: IFeedback | null;
   projectsStats: IProjectsStats;
+  bonus: number;
+  deductions: number;
+  totalSalary: number;
 }
 export interface IProjectsStats {
   totalProjectsCompleted: number;

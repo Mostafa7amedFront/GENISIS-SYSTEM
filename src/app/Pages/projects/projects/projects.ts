@@ -101,11 +101,12 @@ export class Projects {
   // text under NEW PROJECTS
   get periodText(): string {
     const v = this.selectedPeriod().value;
-    if (v === 0) return 'ALL TIME';
-    if (v === 1) return 'IN THE PAST 30 DAYS';
-    if (v === 3) return 'IN THE PAST 3 MONTHS';
-    if (v === 6) return 'IN THE PAST 6 MONTHS';
-    return 'IN THE PAST YEAR';
+    if (v === null) return 'ALL TIME';
+    if (v === 0) return 'IN THE PAST 30 DAYS';
+    if (v === 1) return 'IN THE PAST 3 MONTHS';
+    if (v === 2) return 'IN THE PAST 6 MONTHS';
+    if (v === 3) return 'IN THE PAST YEAR';
+    return 'ALL TIME';
   }
 
   // ===== Load from server with filters =====
@@ -114,7 +115,7 @@ export class Projects {
     this.errorMessage.set('');
 
     const body = {
-      pageNumber: this.currentPage() - 1, // ✅ API 0-based
+      pageNumber: this.currentPage() , // ✅ API 0-based
       pageSize: this.pageSize,
       projectType: this.selectedProjectType(),        // null => all
       projectStatus: this.selectedStatus().value,     // null => all
