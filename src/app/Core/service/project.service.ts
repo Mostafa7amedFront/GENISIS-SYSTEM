@@ -25,7 +25,7 @@ export class ProjectService {
 
       },
     });
-    return this._httpClient.get<IPaginationResponse<IProject>>(`${this.API_URL}`, { params });
+    return this._httpClient.get<IPaginationResponse<IProject>>(`${this.API_URL}/GetAssignedProjects`, { params });
   }
   getStatusProject(): Observable<IResponseOf<GetAllProjectsStats>> {
 
@@ -41,7 +41,7 @@ getProjectEmployee(data: { pageNumber?: number; pageSize?: number; employeeId?: 
     },
   });
 
-  return this._httpClient.get<IPaginationResponse<IProject>>(`${this.API_URL}`, { params });
+  return this._httpClient.get<IPaginationResponse<IProject>>(`${this.API_URL}/GetAssignedProjects`, { params });
 }
 
 editProjectStatus(projectId: string, status: number) {
@@ -86,10 +86,10 @@ editProjectStatus(projectId: string, status: number) {
   }
 
   uploadMultipleRequests(projectId: string, files: File[]): Observable<any> {
-    const url = `${this.API_URL}/AddAttacment/${projectId}`;
+    const url = `${this.API_URL}/AddSubmission/${projectId}`;
     const formData = new FormData();
     files.forEach(file => {
-      formData.append('files', file);
+      formData.append('Attachments', file);
     });
     return this._httpClient.post(url, formData);
   }

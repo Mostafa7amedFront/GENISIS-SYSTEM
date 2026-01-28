@@ -75,7 +75,7 @@
                                 <div class="col px-0">
                                     <div class="d-flex justify-content-end gap-3 flex-wrap mt-2 w-100">
                                               @for( employess of aboutclient()?.employeesAssignedToClient; track employess.name){
-                                                    <div><img class=" rounded-2 object-fit-fill " width="60" height="60" src="{{ baseimageUrl + employess.imageUrl }}" alt=""></div>
+                                                    <div><img class=" rounded-2 object-fit-fill " width="70" height="70" src="{{ baseimageUrl + employess.imageUrl }}" alt=""></div>
               
 
                                               }
@@ -83,10 +83,7 @@
                                 </div>
                                 <div class="d-flex rounded px-0">
                                     <div class="col ps-0 mt-auto ">
-<p class="small mb-0">
-  {{ formatClientDate(aboutclient()?.createdAt) }}
-</p>
-                                    </div>
+                        </div>
                                 
                             </div>
                         </div>

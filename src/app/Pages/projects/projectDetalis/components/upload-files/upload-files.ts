@@ -15,7 +15,7 @@ import { Addpost } from "../addpost/addpost";
 import { MediaBuying } from "../media-buying/media-buying";
 import { DownloadFileService } from '../../../../../Core/service/download-file.service';
 import { Todolist } from "../todolist/todolist";
-import { Submission } from "../submission/submission";
+import { SubmissionComponent } from "../submission/submission";
 const statusTextMap = {
   0: 'In Progress',
   1: 'Paused',
@@ -23,7 +23,7 @@ const statusTextMap = {
 };
 @Component({
   selector: 'app-upload-files',
-  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Posts, ShowMeeting, MediaBuying, Todolist, Submission],
+  imports: [ShortenPipe, Feedback, ReactiveModeuls, Chat, Posts, ShowMeeting, MediaBuying, Todolist, SubmissionComponent],
   templateUrl: './upload-files.html',
   styleUrl: './upload-files.scss'
 })
@@ -52,6 +52,15 @@ export class UploadFiles {
   onUploadClick() {
     this.fileInput.nativeElement.click();
   }
+
+  isImage(file: string): boolean {
+  return /\.(png|jpg|jpeg|gif|webp)$/i.test(file);
+}
+
+isPdf(file: string): boolean {
+  return /\.pdf$/i.test(file);
+}
+
 changeStatus() {
   const project = this.aboutproject();
   if (!project) return;
@@ -135,13 +144,6 @@ downloadFile(fileUrl: any) {
       error: (err) => {
       }
     });
-  }
-  isImage(fileUrl: string): boolean {
-    return /\.(jpg|jpeg|png|gif|webp)$/i.test(fileUrl);
-  }
-
-  isPdf(fileUrl: string): boolean {
-    return /\.pdf$/i.test(fileUrl);
   }
 
   getFileUrl(fileUrl: string): string {

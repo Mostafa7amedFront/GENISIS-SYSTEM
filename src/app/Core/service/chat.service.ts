@@ -12,7 +12,7 @@ import { IChatAttachmentMessages, IChatLink } from '../Interface/ichat';
 })
 export class ChatService {
   private hubConnection!: signalR.HubConnection;
-  private API_URL = `${environment.baseimageUrl}/`;
+  private API_URL = `${environment.baseimageUrl}`;
   private token = localStorage.getItem('auth_token');
   private currentProjectId: string | null = null;
 

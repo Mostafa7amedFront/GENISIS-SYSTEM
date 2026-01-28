@@ -78,3 +78,24 @@ export interface ProjectsValue {
   items: IProject[];
   analytics: Analytics;
 }
+export interface SubmissionAttachment {
+  id: string;
+  fileUrl: string;
+  status: number; // backend: 0/1/2...
+}
+
+export interface Submission {
+  id: string;
+  userName: string;
+  userImage: string;
+  submittedAt: string; // ISO
+  quality: number | null;
+  comment: string | null;
+  attachments: SubmissionAttachment[];
+}
+
+export interface UpdateSubmissionPayload {
+  comment: string;
+  quality: number;
+  attachments: { id: string; status: number }[];
+}

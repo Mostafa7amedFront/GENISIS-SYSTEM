@@ -6,21 +6,21 @@
         <div class="col-xl-8 col-lg-9 text-md-start text-center">
           <div class="row">
             @switch (aboutproject()?.projectType) {
-            @case (0) { <h5 class="fw-bold mb-3 ps-0">Simple Prpject</h5>}
+            @case (0) { <h5 class="fw-bold mb-3 ps-0">One time Project</h5>}
             @case (1) { <h5 class="fw-bold mb-3 ps-0">Social Media</h5>
             }
             @case (2) { <h5 class="fw-bold mb-3 ps-0">Media Buying</h5>
             }
             }
-            <div class="me-0 pe-0 col-lg-2 ps-0 text-lg-start text-center">
+            <div class="me-0 pe-0 col-lg-2 ps-0 text-start ImageUser">
               <img [src]="baseimageUrl + aboutproject()?.clientImage" class="rounded-2 w-100" alt="" width="114"
                 height="114" />
             </div>
             <div class="col ps-lg-3 pt-xl-2 px-0">
-              <h6 class="mb-0 mt-lg-0 mt-3 text-lg-start text-center">
+              <h6 class="mb-0 mt-lg-0 mt-3 text-start">
                 {{ aboutproject()?.clientName }}
               </h6>
-              <p class="mb-2 low text-lg-start text-center">{{ aboutproject()?.projectTitle }}</p>
+              <p class="mb-2 low text-start">{{ aboutproject()?.projectTitle }}</p>
               <h6 class="mb-1 text-start">About {{ aboutproject()?.clientName }}</h6>
               <p class="mb-0 low lh-1 mb-2 px-lg-0 mx-lg-0 text-start" style="white-space: pre-line">
                  {{ aboutproject()?.clientAbout }}
@@ -33,7 +33,7 @@
           <div class="d-flex flex-lg-row-reverse gap-2">
             @for (employee of aboutproject()?.employees; track employee.id) {
             <div class="">
-              <img [src]="baseimageUrl + employee.imageUrl" class="rounded-2" alt="" width="63.15593719482422"
+              <img [src]="baseimageUrl + employee.imageUrl" class="rounded-2 "  alt="" width="63.15593719482422"
                 height="63" />
             </div>
             }
@@ -46,46 +46,43 @@
       </p>
         <h6 class="">ATTACHMENTS</h6>
      <div class="d-flex w-100 flex-wrap gap-2">
-  @for (file of aboutproject()?.projectAttachment; track $index) {
-    <div class="img-wrapper">
-      
-      <img
-        class="attach-img"
-        height="70"
-        width="100"
-        [src]="baseimageUrl + file"
-        alt=""
-      />
+@for (file of aboutproject()?.projectAttachment; track $index) {
+  <div class="img-wrapper">
 
-      <div
-        class="Icon"
-        (click)="downloadFile(file)"
-      >
-        <i class="fa-solid fa-download fs-5"></i>
-      </div>
+    <!-- IMAGE -->
+     @if(isImage(file)){
+ <img
+     
+      class="attach-img"
+      height="70"
+      width="70"
+      [src]="baseimageUrl + file"
+      style="object-fit: fill;"
+    />
 
+     }
+     @else{
+          <!-- PDF -->
+    <div  class="pdf-preview attach-img">
+      <i class="fa-solid fa-file-pdf fa-2x text-danger"></i>
     </div>
   }
+   
+
+
+    <!-- DOWNLOAD ICON -->
+    <div class="Icon" (click)="downloadFile(file)">
+      <i class="fa-solid fa-download fs-5"></i>
+    </div>
+
+  </div>
+}
+
 </div>
 
              
       <p class="small-2  mt-3">Add Attachment</p>
 
-      <div class="d-flex mt-3 flex-wrap gap-2">
-        @for (file of aboutproject()?.attachments; track $index ; let i = $index) {
-        @if (isPdf(file.fileUrl)) {
-        <a [href]="getFileUrl(file.fileUrl)" target="_blank" [download]="getFileName(file.fileUrl)"
-          class="file-card d-flex align-items-center gap-2">
-          <img class="attach-img" src="assets/img/new-document 2.svg" alt="" />
-          <div class="file-info text-lg-start">
-            <div class="file-name">File PDf {{ i }}</div>
-            <div class="file-size">1MB</div>
-          </div>
-        </a>
-
-        }
-        }
-      </div>
       <!-- drag -->
       <div class="drag-area text-center rounded p-4">
         <div class="dataShow d-flex align-items-center gap-2">
@@ -96,6 +93,7 @@
               <div class="file-name">{{ file.name | shorten }}</div>
               <div class="file-size">{{ file.size }}</div>
             </div>
+           
           </div>
           }
 

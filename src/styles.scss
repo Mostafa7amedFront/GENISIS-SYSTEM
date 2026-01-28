@@ -826,7 +826,17 @@ body {
     height: 50px;
     border-radius: 50%;
 }
-
+@media (max-width:600px){
+    .user-img {
+      display: none !important;
+    }
+    .addComment {
+        margin-inline-start: 0 !important;
+    }
+    .project-chat{
+        padding: 0 !important;
+    }
+}
 .message-content {
     background-color: #444;
     padding: 10px;

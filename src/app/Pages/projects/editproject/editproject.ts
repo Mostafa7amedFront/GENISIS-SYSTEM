@@ -8,7 +8,7 @@ import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
 import { ShortenPipe } from '../../../Shared/pipes/shorten-pipe';
 import { Clients } from '../../../Core/service/clients';
 import { Employees } from '../../../Core/service/employees';
-import { IClients } from '../../../Core/Interface/iclients';
+import { IClients, Item } from '../../../Core/Interface/iclients';
 import { IEmployee } from '../../../Core/Interface/iemployee';
 
 @Component({
@@ -27,7 +27,7 @@ export class Editproject {
   private _route = inject(ActivatedRoute);
     isLoading = signal(false);
 
-  Clients = signal<IClients[]>([]);
+  Clients = signal<Item[]>([]);
   Employee = signal<IEmployee[]>([]);
   baseimageUrl = `${environment.baseimageUrl}`;
 
@@ -70,7 +70,7 @@ export class Editproject {
 
     // Load Clients + Employees
     this._client.getAll({ pageNumber: 1, pageSize: 50, ProjectStatus: null }).subscribe({
-      // next: res => this.Clients.set(res.value)
+     next: res => this.Clients.set(res.value.items)
     });
 
     this._employee.getAll({}).subscribe({

@@ -3,7 +3,7 @@ import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
 import { Clients } from '../../../Core/service/clients';
 import { Employees } from '../../../Core/service/employees';
 import { ProjectService } from '../../../Core/service/project.service';
-import { IClients } from '../../../Core/Interface/iclients';
+import { IClients, Item } from '../../../Core/Interface/iclients';
 import { IEmployee } from '../../../Core/Interface/iemployee';
 import { ShortenPipe } from '../../../Shared/pipes/shorten-pipe';
 import { environment } from '../../../../environments/environment';
@@ -26,7 +26,7 @@ private _alert = inject(SweetAlert);
   private _location = inject(Location);
    isLoading = signal(false);
   //  Reactive Signals
-  Clients = signal<IClients[]>([]);
+  Clients = signal<Item[]>([]);
   Employee = signal<IEmployee[]>([]);
 @ViewChild('titleInput') titleInput!: ElementRef<HTMLInputElement>;
 @ViewChild('descInput') descInput!: ElementRef<HTMLInputElement>;
@@ -88,7 +88,7 @@ selectedType: string | null = null;
       pageSize: 50,
       ProjectStatus: null
     }).subscribe({
-      // next: (res) => this.Clients.set(res.value)
+      next: (res) => this.Clients.set(res.value.items)
     });
 
     this._employee.getAll({}).subscribe({

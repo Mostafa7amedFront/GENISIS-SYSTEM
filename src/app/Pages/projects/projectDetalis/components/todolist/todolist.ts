@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Note } from '../../../../../Core/Interface/iproject';
 import { ProjectService } from '../../../../../Core/service/project.service';
 import { ActivatedRoute } from '@angular/router';
+import { NotesService } from '../../../../../Core/service/notes.service';
 interface TodoItem {
   id: number;
   text: string;
@@ -17,75 +18,115 @@ interface TodoItem {
   styleUrl: './todolist.scss'
 })
 export class Todolist {
-newTodoText = '';
-  todoList: Note[] = [];
-  completedList: Note[] = [];
-  projectId!: any;
+ projectId!: any;
+  newTodoText = '';
 
-  constructor(private projectService: ProjectService , private _route:ActivatedRoute) {}
+  private _notesService = inject(NotesService);
+  private _route = inject(ActivatedRoute);
+
+  notes = signal<Note[]>([]);
+
+  completedList = computed(() =>
+    this.notes().filter((n) => n.isCompleted)
+  );
+
+  activeNotes = computed(() =>
+    this.notes().filter((n) => !n.isCompleted)
+  );
 
   ngOnInit(): void {
-          const idParam = this._route.snapshot.paramMap.get('id');
-
+    const idParam = this._route.snapshot.paramMap.get('id');
     this.projectId = idParam;
-    this.loadNotes();
+
+    if (this.projectId) {
+      this.loadNotes();
+    }
+
   }
 
-  // جلب البيانات من الـ API
   loadNotes(): void {
-    this.projectService.getById(this.projectId).subscribe({
+    this._notesService.getProjectNotes(this.projectId).subscribe({
       next: (res) => {
-        if (res?.success ) {
-          const project = res.value;
-          const notes: Note[] = project.notes || [];
-
-          this.todoList = notes.filter(n => !n.isCompleted);
-          this.completedList = notes.filter(n => n.isCompleted);
-        }
+        this.notes.set(res.value || []);
       },
-      error: (err) => console.error('❌ Failed to fetch project data:', err)
+      error: (err) => {
+      }
     });
   }
 
-  // إضافة نوت جديدة (محلياً فقط مؤقتاً)
-  addTodo(): void {
-    const text = this.newTodoText.trim();
-    if (!text) return;
-
-    const newNote: Note = {
-      id: +crypto.randomUUID(),
-      isCompleted: false,
-      isFav: false,
-      noteContent: text
+  updateNote(note: Note): void {
+    const updatedData = {
+      note: note.noteContent,
+      isFav: note.isFav,
+      isCompleted: note.isCompleted,
     };
 
-    this.todoList.push(newNote);
-    this.newTodoText = '';
+    this._notesService.editNote(note.id, updatedData).subscribe({
+      next: (res) => {
+      },
+      error: (err) => {
 
-    // إرسال للـ API لاحقًا (اختياري)
-    // this.projectService.addNote(this.projectId, newNote).subscribe();
+      },
+    });
+  }
+
+  toggleComplete(note: Note): void {
+    const updatedNote = { ...note, isCompleted: !note.isCompleted };
+
+    this.notes.update(notes =>
+      notes.map(n => n.id === note.id ? updatedNote : n)
+    );
+
+    this.updateNote(updatedNote);
+  }
+
+  toggleStar(note: Note): void {
+    const updatedNote = { ...note, isFav: !note.isFav };
+
+    this.notes.update(notes =>
+      notes.map(n => n.id === note.id ? updatedNote : n)
+    );
+
+    this.updateNote(updatedNote);
+  }
+
+  addTodo(): void {
+   const content = this.newTodoText.trim();
+  if (!content) return;
+
+  // البيانات اللي هتتبعت للسيرفر
+  const requestBody = {
+    note: content,
+    isFav: false,
+    isCompleted: false
+  };
+
+  this._notesService.addNote(this.projectId.toString(), requestBody).subscribe({
+    next: (res) => {
+
+      // ضيف الملاحظة الجديدة محلياً بنفس البنية اللي الـ API بيرجعها
+      const addedNote: Note = {
+        id: res.value,          // السيرفر رجّع UUID
+        noteContent: content,   // النص اللي المستخدم كتبه
+        isFav: false,
+        isCompleted: false
+      };
+
+      // أضفها في الأعلى
+      this.notes.update(notes => [addedNote, ...notes]);
+
+      // فضي حقل الإدخال
+      this.newTodoText = '';
+    },
+    error: (err) => {
+
+    }
+  });
   }
 
   handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
-      event.preventDefault();
       this.addTodo();
     }
   }
-
-  toggleComplete(note: Note, fromCompleted = false): void {
-    note.isCompleted = !note.isCompleted;
-    if (fromCompleted) {
-      this.completedList = this.completedList.filter(n => n.id !== note.id);
-      this.todoList.push(note);
-    } else {
-      this.todoList = this.todoList.filter(n => n.id !== note.id);
-      this.completedList.push(note);
-    }
-  }
-
-  toggleStar(note: Note): void {
-    note.isFav = !note.isFav;
-  }
-
 }
