@@ -8,7 +8,7 @@
                 <div class="d-flex align-items-center mt-0">
                     <div class="stars">
                         @for (s of [1, 2, 3, 4, 5]; track $index) {
-                        <button class="star-btn" [class.active]="s <= Feedbacks().overallRate">
+                        <button class="star-btn" [class.active]="s <= Feedbacks().overAllRate">
                             <i class="fa fa-star"></i>
                         </button>
                         }

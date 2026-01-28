@@ -5,6 +5,8 @@ export interface IFeedbackEmployee {
   meetingDeadlinesRate: number
   communicationRate: number
   overallRate: number
+  overAllRate: number
+
   questionTow: string
   questionThree: number
   dateTime: string
@@ -13,7 +15,7 @@ export interface IFeedbackEmployee {
 }
 
 export interface IFeedbackClients {
-  overallRate: number;
+  overAllRate: number;
   feedbacks: IFeedbackEmployee[];
 
 
