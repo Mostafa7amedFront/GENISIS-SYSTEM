@@ -7,6 +7,14 @@
     .ms-3{
         margin-inline-start: 0px !important;
     }
+    .imageClients {
+        height:  300px !important;
+        width: 100% !important;
+        object-fit: cover !important
+    }
+    .term{
+        display: none !important;
+    }
 }
 @media (max-width: 576px) {
        .client-profile .term
@@ -16,9 +24,18 @@
    .client-profile .right-box{
     max-height: none !important;
    }
+      .client-profile img.imageClients {
+        height:  300px !important;
+        width: 100% !important;
+        object-fit: cover !important
+    }
+   
 }
 .booked {
     color: #14d7e7 !important;
+}
+.left-box{
+    height: 200px;
 }
 .object-fit-fill{
     object-fit: cover !important;

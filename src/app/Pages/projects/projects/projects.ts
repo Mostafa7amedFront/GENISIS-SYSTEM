@@ -8,7 +8,11 @@ import { environment } from '../../../../environments/environment';
 import { ProjectService } from '../../../Core/service/project.service';
 import { Analytics, IProject, ProjectsValue } from '../../../Core/Interface/iproject';
 import { IResponsePage } from '../../../Shared/Interface/iresonse';
-
+type PeriodOption = {
+  id: number;
+  label: string;
+  value: number | null;
+};
 @Component({
   selector: 'app-projects',
   standalone: true,
@@ -58,20 +62,21 @@ export class Projects {
 
   // ===== Creation period dropdown (months) =====
   isPeriodOpen = false;
-  periodOptions = [
-    { label: 'ALL TIME', value: 0 },
-    { label: 'LAST MONTH', value: 1 },
-    { label: 'LAST 3 MONTHS', value: 3 },
-    { label: 'LAST 6 MONTHS', value: 6 },
-    { label: 'LAST YEAR', value: 12 },
-  ];
+periodOptions: PeriodOption[] = [
+  { id: 0, label: 'ALL TIME', value: null },
+  { id: 1, label: 'LAST MONTH', value: 1 },
+  { id: 3, label: 'LAST 3 MONTHS', value: 3 },
+  { id: 6, label: 'LAST 6 MONTHS', value: 6 },
+  { id: 12, label: 'LAST YEAR', value: 12 },
+];
+
   selectedPeriod = signal(this.periodOptions[0]);
 
   togglePeriodMenu() {
     this.isPeriodOpen = !this.isPeriodOpen;
   }
 
-  selectPeriod(option: { label: string; value: number }) {
+  selectPeriod(option: PeriodOption) {
     this.selectedPeriod.set(option);
     this.isPeriodOpen = false;
     this.currentPage.set(1);

@@ -17,13 +17,13 @@
         width="214"
         height="214"
         style="object-fit: cover"
-        class="rounded"
+        class="rounded imageClients"
       />
     </div>
-    <div class="ms-xl-5 ms-md-4 ms-3 w-100">
+    <div class="ms-xl-4 ms-md-4 ms-3 w-100">
       <h5 class="mb-md-2 mb-1">ABOUT {{ aboutclient()?.name  | uppercase}}</h5>
-      <p class="low small  mb-lg-4 pb--md-2" style="white-space: pre-line">
-        The design was great maybe the {{ aboutclient()?.about }}
+      <p class="low small  mb-lg-4 pb--md-2 w-75" style="white-space: pre-line">
+     {{ aboutclient()?.about }}
       </p>
       <h5 class="mb-2">SERVICES</h5>
 
@@ -68,13 +68,14 @@
                             <div class="d-flex row left-box rounded p-4">
                                 <div class="col px-0">
                                     <h6 class="low">ASSIGEND TO :</h6>
-                                    <h4 class="mb-0">YOUSSEF - AYMAN</h4>
-                                    <h4>AHMED</h4>
+                                  <h4 class="mb-0">
+  {{ getEmployeesFirstNames() }}
+</h4>
                                 </div>
                                 <div class="col px-0">
                                     <div class="d-flex justify-content-end gap-3 flex-wrap mt-2 w-100">
                                               @for( employess of aboutclient()?.employeesAssignedToClient; track employess.name){
-                                                    <div><img class=" rounded-2 object-fit-fill " width="80" height="80" src="{{ baseimageUrl + employess.imageUrl }}" alt=""></div>
+                                                    <div><img class=" rounded-2 object-fit-fill " width="60" height="60" src="{{ baseimageUrl + employess.imageUrl }}" alt=""></div>
               
 
                                               }
@@ -82,7 +83,9 @@
                                 </div>
                                 <div class="d-flex rounded px-0">
                                     <div class="col ps-0 mt-auto ">
-                                        <p class="small mb-0">4TH, OCT</p>
+<p class="small mb-0">
+  {{ formatClientDate(aboutclient()?.createdAt) }}
+</p>
                                     </div>
                                 
                             </div>
@@ -92,10 +95,14 @@
                         <div class=" right-box h-100 rounded p-4 ">
                             <div class="row ps-0 pe-3 ms-0">
                                 <div class="col-lg col-8 px-0 pe-0">
-                                    <h6 class="">GAFLA - SOCIAL MEDIA</h6>
-                                    <p class="low small mb-0" style="white-space: pre-line;">“The design was great maybe the quality of
-                                        the presentation could be much better,
-                                        thank you so much”</p>
+                                    <h6 class="">{{ aboutclient()?.lastClientProject?.title}}  - 
+                                        @switch (aboutclient()?.lastClientProject?.projectType) {
+                                        @case (0) { One time  Project  }
+                                        @case (1) { Social Media }
+                                        @case (2) { Media Buying  }
+                                        }
+                                    </h6>
+                                    <p class="low small mb-0" style="white-space: pre-line;">{{aboutclient()?.lastClientProject?.description}}</p>
                                 </div>
                                 <div class="col-lg-4 col-4 text-end px-0">
                                     <h1 class="mb-0">PSR</h1>
@@ -104,11 +111,24 @@
                             </div>
                             <div class="row px-0">
                                 <div class="col mt-auto margin">
-                                    <h6 class="">14, OCT 24</h6>
-                                    <img src="assets/img/4blue-star.png" alt="">
+                                    <h6 class="">{{ aboutclient()?.lastClientProject?.createdAt | date }}</h6>
+                                <div class="d-flex align-items-center mt-0">
+                   <div class="stars">
+  @for (s of [1, 2, 3, 4, 5]; track s) {
+    <button class="star-btn" type="button">
+      <i
+        class="fa fa-star"
+        [class.active]="s <= (aboutclient()?.lastClientProject?.feedbackRate ?? 0)"
+        >
+      </i>
+    </button>
+  }
+</div>
+
+                </div>
                                 </div>
                                 <div class="col text-end h1-span">
-                                    <p>87%</p>
+                                    <p>{{ aboutclient()?.lastClientProject?.successPercentage}} %</p>
                                 </div>
                             </div>
                     </div>
