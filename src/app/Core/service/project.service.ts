@@ -50,7 +50,7 @@ editProjectStatus(projectId: string, status: number) {
     null,
     {
       params: {
-        changeStatus: status
+        request: status
       }
     }
   );
