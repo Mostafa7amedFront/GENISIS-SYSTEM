@@ -36,7 +36,7 @@
                         <p class="mb-1 small">{{feedback.projectName}}</p>
                         <div class="stars mt-2 justify-content-end">
                             @for (s of [1, 2, 3, 4, 5]; track $index) {
-                            <button class="star-btn" [class.active]="s <= feedback.overAllRate">
+                            <button class="star-btn" [class.active]="s <= feedback.overallRate">
                                 <i class="fa fa-star"></i>
                             </button>
                             }

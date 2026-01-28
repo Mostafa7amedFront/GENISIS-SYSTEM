@@ -13,7 +13,7 @@ export interface IFeedbackEmployee {
 }
 
 export interface IFeedbackClients {
-  overAllRate: number;
+  overallRate: number;
   feedbacks: IFeedbackEmployee[];
 
 

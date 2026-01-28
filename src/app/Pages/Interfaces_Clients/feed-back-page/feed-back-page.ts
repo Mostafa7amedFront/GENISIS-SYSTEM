@@ -82,7 +82,7 @@ export class FeedBackPage {
       qualityOfRequirementsRate: this.ratings.quality,
       meetingDeadlinesRate: this.ratings.deadlines,
       communicationRate: this.ratings.communication,
-      overAllRate: this.ratings.satisfaction,
+      overallRate: this.ratings.satisfaction,
       questionTow: this.feedbackText,
       questionThree: recValue
     };

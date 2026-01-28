@@ -27,7 +27,7 @@ export class GetFeedbacksService {
     qualityOfRequirementsRate: number;
     meetingDeadlinesRate: number;
     communicationRate: number;
-    overAllRate: number;
+    overallRate: number;
     questionTow: string;
     questionThree: number;
   }): Observable<IResponseOf<any>> {
