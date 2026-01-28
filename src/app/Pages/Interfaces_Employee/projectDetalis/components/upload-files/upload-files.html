@@ -119,7 +119,7 @@
       <div class="row mx-0 mt-2">
         <div class="col-6 text-start  pt-md-3 pt-4 ps-0">
 <button
-  class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-4 end-but"
+  class="border-0 rounded-3 text-white small px-md-4 px-3 pt-1 mt-5 end-but"
   style="background-color: #0b6b6e"
   (click)="changeStatus()">
 
@@ -136,7 +136,7 @@
           <p class="small mb-0">{{aboutproject()?.clientName}}</p>
           <div class="stars mt-2 justify-content-end">
             @for (s of [1, 2, 3, 4, 5]; track $index) {
-            <button class="star-btn" [class.active]="s <= (aboutproject()?.projectFeedBack ?? 0)">
+            <button class="star-btn " [class.active]="s <= (aboutproject()?.projectFeedBack ?? 0)">
               <i class="fa fa-star"></i>
             </button>
             }

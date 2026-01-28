@@ -1,0 +1,37 @@
+.notif-link {
+  position: relative;
+  display: inline-block;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -5px;
+  right: -18px;
+
+  background: rgb(216, 37, 37);
+  color: white;
+
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p{
+     line-height: 0px;
+     height: 0;
+     margin-top: 5px;
+
+  }
+
+}

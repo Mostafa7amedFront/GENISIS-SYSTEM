@@ -42,6 +42,7 @@ export interface Item {
   websiteUrl: string;
   clientType: number;
   clientProjectStatus: number;
+  projectStatus: number;
   imageUrl: string;
   email: string;
   userName: string;

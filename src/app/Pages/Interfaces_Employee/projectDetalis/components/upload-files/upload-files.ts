@@ -45,27 +45,50 @@ export class UploadFiles {
    onUploadClick() {
      this.fileInput.nativeElement.click();
    }
- changeStatus() {
-   const project = this.aboutproject();
-   if (!project) return;
- 
-   const newStatus = (project.projectStatus + 1) % 3;
- 
-   this._project.editProjectStatus(project.id, newStatus).subscribe({
-     next: () => {
-       this.aboutproject.update(p => ({
-         ...p!,
-         projectStatus: newStatus
-       }));
- 
-       this._alert.toast('Project status updated successfully.', 'success');
-     },
-     error: () => {
-       this._alert.toast('Failed to update project status.', 'error');
-     }
-   });
- }
- 
+changeStatus() {
+  const project = this.aboutproject();
+  if (!project) return;
+
+  const newStatus = (project.projectStatus + 1) % 3;
+
+  // ✅ Confirm قبل التحديث
+  this._alert
+    .confirm(
+      'Do you really want to change the project status?',
+      'Confirm Status Change',
+      'Yes, update it!',
+      'Cancel'
+    )
+    .then((result) => {
+      if (result.isConfirmed) {
+
+        // ✅ لو المستخدم وافق
+        this._project.editProjectStatus(project.id, newStatus).subscribe({
+          next: () => {
+            this.aboutproject.update(p => ({
+              ...p!,
+              projectStatus: newStatus
+            }));
+
+            this._alert.toast(
+              'Project status updated successfully.',
+              'success'
+            );
+          },
+          error: () => {
+            this._alert.toast(
+              'Failed to update project status.',
+              'error'
+            );
+          }
+        });
+
+      } else {
+        this._alert.toast('Update cancelled.', 'info');
+      }
+    });
+}
+
  onFileSelected(event: Event) {
    const input = event.target as HTMLInputElement;
    if (input.files && input.files.length > 0) {

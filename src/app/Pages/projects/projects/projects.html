@@ -57,13 +57,13 @@
                                 <i class="fa-solid fa-angle-down fs-5" [class.rotate]="isPeriodOpen" style="color: #00bec5;">
                                 </i>
                             </div>
-                            <span class="selected fs-2">{{ selectedPeriod().label }}</span>
+                            <span class="selected fs-2">{{ selected.label}}</span>
 
                         </div>
             <p class="small mb-1 text-end">KEEP THE GOOD WORK!!</p>
                         <ul class="p-3 rounded menu list-unstyled text-end" [class.menu-open]="isPeriodOpen">
-                            <li *ngFor="let option of periodOptions" (click)="selectPeriod(option)"
-                                [class.active]="selectedPeriod() === option">
+                            <li *ngFor="let option of options" (click)="selectPeriod(option)"
+                                [class.active]="selected === option">
                                 {{ option.label }}
                             </li>
                         </ul>
@@ -125,7 +125,7 @@
                                 alt="{{ project.clientName }}">
                             <div class="pb-0 card-body">
                                 <h6 class="mb-1 fw-bold card-title">{{ project.clientName}}</h6>
-                                <h5 class="mb-1 card-text">{{ project.projectDescription| shorten: 20}}</h5>
+                                <h5 class="mb-1 card-text">{{ project.projectDescription| shorten: 15}}</h5>
                                 <p>{{ project.createdAt | date}}</p>
                                 <div class="mt-4 row">
                                     <div class="col ">

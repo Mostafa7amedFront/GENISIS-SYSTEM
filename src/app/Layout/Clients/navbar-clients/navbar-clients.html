@@ -32,11 +32,15 @@
               <a class="nav-link" routerLink="/client/payments" routerLinkActive="active">PAYMENT</a>
             </li>
       
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/client/notifications" routerLinkActive="active"
-                >NOTIFICATIONS</a
-              >
-            </li>
+        <a class="nav-link notif-link" routerLink="/client/notifications" routerLinkActive="active">
+    NOTIFICATIONS
+
+    <!-- Notification Badge -->
+    <div class="notif-badge" >
+      <p class="mb-0">  {{ notifCount() }}</p>
+    
+    </div>
+  </a>
             <li class="nav-item d-lg-none">
               <a
                 class="nav-link d-flex justify-content-center align-items-center gap-2 text-white"

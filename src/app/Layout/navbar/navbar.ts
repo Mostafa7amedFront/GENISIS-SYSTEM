@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from '../../Core/service/login';
 import { ReactiveModeuls } from '../../Shared/Modules/ReactiveForms.module';
+import { NotificationService } from '../../Core/service/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,41 +12,27 @@ import { ReactiveModeuls } from '../../Shared/Modules/ReactiveForms.module';
 })
 export class Navbar {
   _login = inject(LoginService);
+  _notification = inject(NotificationService);
 
+  notifCount = signal<number>(0);
+  isMenuOpen = false;
 
-
-  // 🔔 عدد الإشعارات
-  notifCount: number = 0;
-
-  // Menu Mobile
-  isMenuOpen: boolean = false;
+  private syncCount = effect(() => {
+    this.notifCount.set(this._notification.unreadCount());
+  });
 
   constructor() {}
 
   ngOnInit(): void {
-    // مثال: تحميل الإشعارات أول ما الصفحة تفتح
-    this.getNotificationsCount();
+    this._notification.loadUnreadCount();
+
+    this._notification.startConnection();
   }
 
-  // ✅ Function تجيب عدد الإشعارات
-  getNotificationsCount() {
-    // حاليا رقم تجريبي
-    this.notifCount = 5;
-
-    // بعدين لما تربط API هتبقى كده مثلا:
-    /*
-    this.notificationService.getCount().subscribe((res:any) => {
-      this.notifCount = res.count;
-    });
-    */
-  }
-
-  // ✅ Toggle Menu للموبايل
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  // ✅ Logout Function
   logout() {
     this._login.logout();
   }

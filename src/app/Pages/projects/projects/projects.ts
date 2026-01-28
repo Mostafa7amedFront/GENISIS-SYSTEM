@@ -62,22 +62,23 @@ export class Projects {
 
   // ===== Creation period dropdown (months) =====
   isPeriodOpen = false;
-periodOptions: PeriodOption[] = [
-  { id: 0, label: 'ALL TIME', value: null },
-  { id: 1, label: 'LAST MONTH', value: 1 },
-  { id: 3, label: 'LAST 3 MONTHS', value: 3 },
-  { id: 6, label: 'LAST 6 MONTHS', value: 6 },
-  { id: 12, label: 'LAST YEAR', value: 12 },
-];
+  options = [
+    { label: 'ALL TIME', value: null },
+    { label: 'LAST MONTH', value: 1 },
+    { label: 'LAST 3 MONTHS', value: 3 },
+    { label: 'LAST 6 MONTHS', value: 6 },
+    { label: 'LAST YEAR', value: 12 }
+  ];
+  selected = this.options[0];
 
-  selectedPeriod = signal(this.periodOptions[0]);
+
 
   togglePeriodMenu() {
     this.isPeriodOpen = !this.isPeriodOpen;
   }
 
-  selectPeriod(option: PeriodOption) {
-    this.selectedPeriod.set(option);
+  selectPeriod(option: any) {
+    this.selected = option;
     this.isPeriodOpen = false;
     this.currentPage.set(1);
     this.loadProjects();
@@ -105,13 +106,8 @@ periodOptions: PeriodOption[] = [
 
   // text under NEW PROJECTS
   get periodText(): string {
-    const v = this.selectedPeriod().value;
-    if (v === null) return 'ALL TIME';
-    if (v === 0) return 'IN THE PAST 30 DAYS';
-    if (v === 1) return 'IN THE PAST 3 MONTHS';
-    if (v === 2) return 'IN THE PAST 6 MONTHS';
-    if (v === 3) return 'IN THE PAST YEAR';
-    return 'ALL TIME';
+    const option = this.options.find(o => o.value === this.selected.value);
+    return option ? option.label : 'ALL TIME';
   }
 
   // ===== Load from server with filters =====
@@ -124,7 +120,7 @@ periodOptions: PeriodOption[] = [
       pageSize: this.pageSize,
       projectType: this.selectedProjectType(),        // null => all
       projectStatus: this.selectedStatus().value,     // null => all
-      creationPeriod: this.selectedPeriod().value     // 0/1/3/6/12
+      creationPeriod: this.selected.value ?? null,    // null => all().value     // 0/1/3/6/12
     };
 
     this._project.getAll(body).subscribe({
