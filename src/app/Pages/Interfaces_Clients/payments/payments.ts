@@ -28,11 +28,11 @@ userId = localStorage.getItem('Id_Clients') || '';
   }
 
     paidPayments() {
-  return this.payments().filter(p => p.isPaid);
+  return this.payments().filter(p => !p.isPaid);
 }
 
 unPaidPayments() {
-  return this.payments().filter(p => !p.isPaid);
+  return this.payments().filter(p => p.isPaid);
 }
 
 
