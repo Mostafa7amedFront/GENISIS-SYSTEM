@@ -32,6 +32,8 @@ aboutclient = signal<IClients >({} as IClients);
     this._client.getMy().subscribe({
       next: (res) => {
         this.aboutclient.set(res.value)
+        this.clientId = res.value.id;
+        localStorage.setItem('clientId', this.clientId);
 
       },
       error: (err) => {

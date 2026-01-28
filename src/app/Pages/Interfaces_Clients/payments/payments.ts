@@ -21,7 +21,7 @@ userId = localStorage.getItem('Id_Clients') || '';
 
   ngOnInit() {
     const currentDate = new Date();
-      this.userId = localStorage.getItem('Id_Clients') || '';
+      this.userId = localStorage.getItem('clientId') || '';
 
     this.generateMonths(currentDate);
     this.loadPayments(this.displayedMonths[this.selectedIndex].date);
