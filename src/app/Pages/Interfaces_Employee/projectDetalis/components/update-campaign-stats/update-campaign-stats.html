@@ -5,7 +5,7 @@
 
   <div class="fourth mt-1">
     <div
-      class="container-fluid text-white p-5 h-100"
+      class="container-fluid text-white p-5 fourthP  h-100"
       style="background-color: #171818; border-radius: 13px; height: 100%"
     >
       <div class="row">
@@ -49,7 +49,7 @@
       </div>
 
       <div class="p-3 rounded mt-5 field-box">
-        <div class="d-flex text-center">
+        <div class="statesCards">
           @for (f of fields(); track f; let i = $index) {
           <div class="col field-item">
             <input
@@ -84,10 +84,7 @@
       </div>
 
       <div class="d-flex justify-content- mt-4 w-100">
-        <button class="btn w-100 py-2" (click)="send()" 
-         [disabled]="isLoading()"
-  [style.cursor]="isLoading() ? 'not-allowed' : 'pointer'">
-         {{ isLoading() ? 'Updating...' : 'Update Stats' }}</button>
+        <button class="btn w-100 py-2" (click)="send()">Update Stats</button>
       </div>
     </div>
   </div>

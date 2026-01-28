@@ -1,4 +1,4 @@
-<div class="project-detail-page px-3">
+<!-- <div class="project-detail-page px-3">
   <div class="project-chat px-md-0 px-3">
     <h1 class="big text-end text-white mt-5 pt-5 mb-3">SUBMISSIONS</h1>
 
@@ -17,19 +17,17 @@
               }
 
               <div class="message p-0">
-                <p class="username">{{ sub.userName }}</p>
 
                 <div class="message-content-wrapper">
-                  <img [src]="'assets/img/chat.png'" class="user-img" />
 
                   <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
                     <div class="dataShow d-flex align-items-center gap-2">
 
-                      @for (att of sub.attachments; track att.id) {
+                      @for (att of sub.attachmentUrls; track att.id; let j = $index) {
                         <a
                           class="file-card d-flex align-items-end justify-content-between gap-2"
                           [ngClass]="statusClass(attachmentStatuses()[sub.id]?.[att.id] ?? att.status)"
-                          (click)="toggleAttachmentStatus(sub.id, att.id)"
+                         
                         >
                           <div class="d-flex gap-2">
                             <img class="attach-img" src="assets/img/new-document 2.svg" />
@@ -100,4 +98,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

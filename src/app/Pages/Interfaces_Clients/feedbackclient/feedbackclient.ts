@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { IFeedbackClients, IFeedbackEmployee } from '../../../Core/Interface/ifeedback';
 import { FeedbackClientsService } from '../../../Core/service/Clients/feedback-clients.service';
 import { DatePipe } from '@angular/common';
@@ -11,25 +11,22 @@ import { RouterLink } from "@angular/router";
   styleUrl: './feedbackclient.scss'
 })
 export class Feedbackclient {
-  private _feedbackService = inject(FeedbackClientsService)
+ 
+  private _feedbackService = inject(FeedbackClientsService);
+
   Feedbacks = signal<IFeedbackClients>({} as IFeedbackClients);
-currentYear = new Date().getFullYear();
 
+  currentYear = new Date().getFullYear();
 
-  ngOnInit() {
-    const storedId = localStorage.getItem("Id_Clients");
+  // ✅ Input ID from parent
+  @Input() id!: any;
 
-    if (storedId) {
-      this._feedbackService.getAll(storedId).subscribe({
-        next: (res) => {
-          if (res.success) {
-            this.Feedbacks.set(res.value);
-          }
-        },
-        error: (err) => console.error('❌ Error loading feedback:', err)
-      });
-    } else {
-    }
-  }
+ngOnChanges(changes: SimpleChanges): void {
+
+  this._feedbackService.getAll(this.id).subscribe(res => {
+    this.Feedbacks.set(res.value);
+  });
+}
+
 
 }

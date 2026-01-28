@@ -7,6 +7,7 @@ import { ReactiveModeuls } from '../../../../../Shared/Modules/ReactiveForms.mod
 import { DownloadFileService } from '../../../../../Core/service/download-file.service';
 import { ActivatedRoute } from '@angular/router';
 import { SweetAlert } from '../../../../../Core/service/sweet-alert';
+import { environment } from '../../../../../../environments/environment';
 
 export enum FileStatus {
   TryAgain = 0,
@@ -28,7 +29,7 @@ private _alert = inject(SweetAlert);
   projectId = inject(ActivatedRoute).snapshot.paramMap.get('id') ?? '';
   submissions = signal<Submission[]>([]);
   loading = signal(false);
-
+baseUrl = environment.baseimageUrl;
   comments = signal<Record<string, string>>({});
   qualities = signal<Record<string, number>>({});
 

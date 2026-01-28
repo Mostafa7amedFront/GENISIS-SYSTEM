@@ -107,7 +107,136 @@
   grid-template-columns: repeat(6, 1fr); // 6 كروت في الصف
   gap: 1rem; // المسافة بين الكروت أفقياً وعمودياً
 }
+.statesCards{
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1rem;
+}
 
-.stat-card {
+/* ============ Responsive Breakpoints ============ */
 
+/* XL */
+@media (max-width: 1200px){
+  .statesCards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* LG */
+@media (max-width: 992px){
+  /* خليك واثق إن الأعمدة تتظبط حتى لو Bootstrap موجود */
+  .fourth .row > .col-md-4,
+  .fourth .row > .col-md-8{
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .date-picker-box{
+    padding: 24px 16px;
+    margin-top: 16px;
+  }
+
+  .statesCards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* الأزرار تحت (Apply/Cancel) تبقى مرنة */
+  .btnEnd{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+/* MD */
+@media (max-width: 768px){
+  /* صندوق التاريخ: عمود بدل صف */
+  .date-picker-box{
+    flex-direction: column;
+    gap: 16px;
+  }
+  .quick-filters{
+    margin-inline-end: 0 !important;
+  }
+
+  .quick-filters{
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .filter-item{
+    padding: 8px 10px;
+    background: #1f1f1f;
+  }
+
+  /* الكاليندرين تحت بعض بدل جنب بعض */
+  .date-picker-box .d-flex.gap-4{
+    flex-direction: column;
+    gap: 14px !important;
+  }
+
+  .date-picker-box .w-50{
+    width: 100% !important;
+  }
+.Range{
+    padding: 0 10px !important;
+}
+  /* input range فوق: خليهم تحت بعض */
+  .date-picker-box .d-flex.mb-3.gap-2{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .date-picker-box .d-flex.mb-3.gap-2 span{
+    display:none;
+  }
+
+  .statesCards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* الهيدر بتاع Campaign Stats / Summary: خليهم يلفّوا */
+  .fourth .d-flex.justify-content-between.align-items-center{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+/* SM */
+@media (max-width: 576px){
+  /* padding أقل على الموبايل */
+  .fourth .text-white.p-5.mt-5{
+    padding: 16px !important;
+  }
+  .Campaign{
+    padding: 0 10px !important;
+  }
+
+  .date-picker-box{
+    padding: 16px 12px;
+  }
+
+  .campaign-btn{
+    font-size: 15px;
+    padding: 10px 12px !important;
+  }
+
+  .statesCards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* أزرار Apply/Cancel/Add تحت بعض */
+  .date-picker-box .d-flex.justify-content-between.gap-2.mt-3{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .btnadd button,
+  .btnEnd button{
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .btnEnd{
+    justify-content: stretch;
+  }
+  .x{
+    padding: 0 10px !important;
+  }
 }

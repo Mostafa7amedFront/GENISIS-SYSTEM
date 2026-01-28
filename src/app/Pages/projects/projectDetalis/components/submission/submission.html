@@ -20,7 +20,7 @@
                 <p class="username">{{ sub.userName }}</p>
 
                 <div class="message-content-wrapper">
-                  <img [src]="'assets/img/chat.png'" class="user-img" />
+                  <img [src]="baseUrl + sub.userImage"  class="user-img" />
 
                   <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
                     <div class="dataShow d-flex align-items-center gap-2">

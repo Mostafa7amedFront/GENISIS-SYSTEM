@@ -24,4 +24,115 @@
 }
 .booked {
     color: #14d7e7 !important;
+}/* ========== Tablet (<= 992px) ========== */
+@media (max-width: 992px) {
+  /* العنوان يقل */
+  .first h1[style*="font-size: 50px"]{
+    font-size: 36px !important;
+  }
+
+  /* padding يقل */
+  .firstcontainer{
+    padding: 24px !important; /* overrides inline p-5 look on smaller */
+  }
+
+  /* الصورة أصغر */
+  .firstcontainer img{
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  /* الجزء اللي تحت "Project Status + Late Payment" يتظبط */
+  .firstcontainer .d-flex.w-100{
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* خلي زر Project Status ما يثبت 250px */
+  .firstcontainer button[style*="width: 250px"]{
+    width: 100% !important;
+    max-width: 100% !important; /* اختياري */
+  }
+}
+
+/* ========== Mobile (<= 768px) ========== */
+@media (max-width: 768px) {
+  /* خلي layout عمودي */
+  .firstcontainer{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* بلوك الصورة يبقى في النص */
+  .firstcontainer > div.me-4{
+    margin-right: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
+
+  .firstcontainer img{
+    width: 100% !important;
+    height: 300px !important;
+    margin-bottom: 20px;
+  }
+
+  /* السطر اللي فيه الاسم + register date يتقسم تحت بعض */
+  .firstcontainer .d-flex.align-content-center.w-100{
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* خلى col-6 ياخد عرض كامل */
+  .firstcontainer .d-flex.align-content-center.w-100 .col-6{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .firstcontainer .text-end.ms-auto.col-6{
+    margin-left: 0 !important;
+    text-align: start !important;
+  }
+
+  /* الجزء السفلي (Project Status + Late Payment) يبقى تحت بعض */
+  .firstcontainer .d-flex.w-100{
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .firstcontainer .d-flex.w-100 .col-8,
+  .firstcontainer .d-flex.w-100 .col{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* زر late payment يفضل 100% */
+  .firstcontainer button[style*="border-radius: 11px"][style*="width: 100%"]{
+    width: 100% !important;
+    font-size: 16px !important;
+  }
+}
+
+/* ========== Small mobile (<= 576px) ========== */
+@media (max-width: 576px) {
+  .first h1[style*="font-size: 50px"]{
+    font-size: 28px !important;
+    text-align: start !important; /* لو تحبها تبقى start في الموبايل */
+  }
+
+  .firstcontainer{
+    padding: 16px !important;
+  }
+
+  .firstcontainer h1{
+    font-size: 22px;
+  }
+
+  .firstcontainer h4{
+    font-size: 18px;
+  }
+
+  .firstcontainer .quality p,
+  .firstcontainer p{
+    font-size: 14px !important;
+  }
 }

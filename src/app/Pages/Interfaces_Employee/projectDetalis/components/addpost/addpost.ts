@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../../../../../Core/service/post.service';
@@ -12,12 +12,11 @@ import { SweetAlert } from '../../../../../Core/service/sweet-alert';
   styleUrls: ['./addpost.scss']
 })
 export class Addpost {
-
-  form!: FormGroup;
+ form!: FormGroup;
   selectedFile!: File;
   coverFile!: File;
 coverPreviewUrl: string | null = null;
-
+  isLoading = signal(false);
 @ViewChild('coverInput') coverInput!: ElementRef;
 
   previewUrl: string | null = null;
@@ -93,6 +92,7 @@ onFileSelected(event: any) {
 
       return;
     }
+    this.isLoading.set(true);
 
     this.postService.addProjectPost(
       this.id,
@@ -114,10 +114,12 @@ onFileSelected(event: any) {
         this.coverPreviewUrl = null;
         this.selectedFile = null as any;
         this.coverFile = null as any;
+        this.isLoading.set(false);
         
       },
       error: (err) => {
       this._alert.toast('Error adding Post', 'error');
+        this.isLoading.set(false);
       }
     });
   }

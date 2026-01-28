@@ -52,12 +52,20 @@
               <div class="col">
                 <div class="d-flex justify-content-end mt-3 pt-1">
                   <p class="mb-1 me-auto ms-2 ps-1" style="font-size: 15px;">Late Payment</p>
-                  <p class="mb-1" style="font-size: 15px;">15, AUG</p>
+                  <p class="mb-1 p-0 ps-1 m-0" style="font-size: 15px;">{{aboutclient().lastUnPaidPayment.paymentDate | date}}</p>
                 </div>
-                <div class="d-flex justify-content-end ">
-                  <button class="py-2 text-white text-start ps-3"
+                <div class="d-flex justify-content-end  w-100 mt-2 ps-2 ">
+                  @if(aboutclient().lastUnPaidPayment) {
+                     <button class="py-2 text-white text-center "
                     style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
-                                                ;border-radius: 11px;width: 265px; font-size: 20px; border: 0.1px solid rgba(255, 255, 255, 0.425);">NO LATE PAYMENTS</button>
+                                                ;border-radius: 11px;width: 100%; font-size: 20px; border: 0.1px solid rgba(255, 255, 255, 0.425);">  {{ aboutclient().lastUnPaidPayment.amount  | number:'1.0-0' }} USD</button>
+                  }
+                  @else {
+                     <button class="py-2 text-white text-center "
+                    style="background: linear-gradient(90deg, #2D2D2D00 0%, #00BEC540 65%);
+                                                ;border-radius: 11px;width: 100%; font-size: 20px; border: 0.1px solid rgba(255, 255, 255, 0.425);">NO LATE PAYMENTS</button>
+                  }
+                 
                 </div>
               </div>
             </div>
@@ -69,4 +77,4 @@
 </div>
 <!-- end-first -->
   <app-project-client/>
- <app-feedbackclient/>
+ <app-feedbackclient [id]="aboutclient().id"/>

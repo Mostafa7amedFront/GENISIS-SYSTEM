@@ -17,12 +17,17 @@ export interface IClients {
   userName: string;
   phoneNumber: string;
   services: IService[];
-
+lastUnPaidPayment:IPiadedPayment
   analytics?: Analytics | null;
   employeesAssignedToClient?: EmployeeAssigned[];
   lastClientProject?: LastClientProject;
 }
+export interface IPiadedPayment {
+  amount: number;
 
+paymentDate:Date
+
+}
 /* ================= Response ================= */
 
 export interface ClientRes { 

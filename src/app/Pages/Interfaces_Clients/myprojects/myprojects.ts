@@ -8,6 +8,8 @@ import { environment } from '../../../../environments/environment';
 import { ProjectService } from '../../../Core/service/project.service';
 import { IProject } from '../../../Core/Interface/iproject';
 import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
+import { IMyProject } from '../../../Core/Interface/iproject-employee';
+import { FeedbackClientsService } from '../../../Core/service/Clients/feedback-clients.service';
 
 @Component({
   selector: 'app-myprojects',
@@ -16,7 +18,7 @@ import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
   styleUrl: './myprojects.scss'
 })
 export class Myprojects {
- isOpen = false;
+  isOpen = false;
   selected = signal('ALL PROJECTS');
   options = ['ALL PROJECTS', 'IN PROGRESS', 'PAUSED', 'COMPLETED'];
   selectedProjectType = signal<number | null>(null);
@@ -32,19 +34,14 @@ export class Myprojects {
   }
 
 
-  private _project = inject(ProjectService);
+  private _project = inject(FeedbackClientsService);
   today = new Date();
   isLoading = signal(false);
   errorMessage = signal('');
+
   baseimageUrl = `${environment.baseimageUrl}`;
-  projects = signal<IProject[]>([]);
-  currentPage = signal<number>(1);
-  totalPages = signal<number>(1);
-  totalCount = signal<number>(0);
-  hasPreviousPage = signal<boolean>(false);
-  hasNextPage = signal<boolean>(false);
-  pageSize = 12;
-  id!: any; // <-- خليها هنا بدون تهيئة فورية
+  projects = signal<IMyProject[]>([]);
+
 
   getProjectCounts() {
     const completed = this.projects().filter(p => p.projectStatus === 2).length;
@@ -53,8 +50,7 @@ export class Myprojects {
     return { completed, inProgress, paused };
   }
   ngOnInit(): void {
-        const storedId = localStorage.getItem("Id_Clients");
-    this.id = storedId ;
+
     this.loadEmployees();
   }
 
@@ -62,23 +58,12 @@ export class Myprojects {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this._project.getProjectClient({
-      pageNumber: this.currentPage(),
-      pageSize:   this.pageSize,
-      clientId: this.id
-    }).subscribe({
+    this._project.getMyProjects().subscribe({
       next: (response) => {
         this.isLoading.set(false);
 
-        if (response.success && response.value.length > 0) {
-          this.projects.set(response.value);
-                this.totalPages.set(response.totalPages);
-        this.totalCount.set(response.totalCount);
-        this.hasPreviousPage.set(response.hasPreviousPage);
-        this.hasNextPage.set(response.hasNextPage);
-        } else {
-          this.projects.set([]);
-        }
+               this.projects.set(response.projects);
+
       },
       error: (err) => {
         this.isLoading.set(false);
@@ -91,7 +76,6 @@ export class Myprojects {
           this.errorMessage.set('An unexpected error occurred while loading data.');
         }
 
-
       }
     });
   }
@@ -99,27 +83,13 @@ export class Myprojects {
 
   filteredProjects = computed(() => {
     let filtered = this.projects();
-
-    const selectedStatus = this.selected();
-    switch (selectedStatus) {
-      case 'IN PROGRESS':
-        filtered = filtered.filter(p => p.projectStatus === 0);
-        break;
-      case 'PAUSED':
-        filtered = filtered.filter(p => p.projectStatus === 1);
-        break;
-      case 'COMPLETED':
-        filtered = filtered.filter(p => p.projectStatus === 2);
-        break;
+    switch (this.selected()) {
+      case 'IN PROGRESS': return filtered.filter(p => p.projectStatus === 0);
+      case 'PAUSED': return filtered.filter(p => p.projectStatus === 1);
+      case 'COMPLETED': return filtered.filter(p => p.projectStatus === 2);
+      default: return filtered;
     }
-
-    if (this.selectedProjectType() !== null) {
-      filtered = filtered.filter(p => p.projectType === this.selectedProjectType());
-    }
-
-    return filtered;
   });
-
 
   selectProjectType(type: number) {
     if (this.selectedProjectType() === type) {
@@ -130,38 +100,4 @@ export class Myprojects {
   }
 
 
-   nextPage() {
-    if (this.hasNextPage()) {
-      this.currentPage.update(v => v + 1);
-      this.loadEmployees();
-    }
-  }
-get pagesArray() {
-  return Array.from({ length: this.totalPages() });
-}
-get visiblePages() {
-  const total = this.totalPages();
-  const current = this.currentPage();
-  const windowSize = 4;
-
-  let start = Math.max(1, current - Math.floor(windowSize / 2));
-  let end = start + windowSize - 1;
-
-  if (end > total) {
-    end = total;
-    start = Math.max(1, end - windowSize + 1);
-  }
-  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-}
-  prevPage() {
-    if (this.hasPreviousPage()) {
-      this.currentPage.update(v => v - 1);
-      this.loadEmployees();
-    }
-  }
-
-  goToPage(page: number) {
-    this.currentPage.set(page);
-    this.loadEmployees();
-  }
 }

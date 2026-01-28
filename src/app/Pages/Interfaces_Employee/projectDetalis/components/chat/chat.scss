@@ -81,3 +81,21 @@
   color: #aaa;
   font-size: 18px;
 }
+.image-card {
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.image-preview {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.attach-img{
+  object-fit: cover;
+  border-radius: 5px;
+}

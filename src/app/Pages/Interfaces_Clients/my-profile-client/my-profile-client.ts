@@ -6,10 +6,11 @@ import { IClients } from '../../../Core/Interface/iclients';
 import { OrdinalDatePipe } from '../../../Shared/pipes/ordinal-date-pipe';
 import { Feedbackclient } from '../feedbackclient/feedbackclient';
 import { ProjectClient } from "../project-client/project-client";
+import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
 
 @Component({
   selector: 'app-my-profile-client',
-  imports: [OrdinalDatePipe, Feedbackclient, ProjectClient],
+  imports: [OrdinalDatePipe, Feedbackclient,DatePipe, ReactiveModeuls,  ProjectClient],
   templateUrl: './my-profile-client.html',
   styleUrl: './my-profile-client.scss'
 })
@@ -31,7 +32,6 @@ aboutclient = signal<IClients >({} as IClients);
     this._client.getMy().subscribe({
       next: (res) => {
         this.aboutclient.set(res.value)
-        localStorage.setItem("Id_Clients", res.value.id.toString());
 
       },
       error: (err) => {

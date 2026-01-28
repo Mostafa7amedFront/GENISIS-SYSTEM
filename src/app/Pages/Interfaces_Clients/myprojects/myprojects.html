@@ -138,30 +138,7 @@
                 </div>
                 }
             </div>
-         @if (totalPages() > 1) {
-  <div class="pagination mt-5">
-    <button class="nav-btn" (click)="prevPage()" [disabled]="!hasPreviousPage()">
-      previous
-    </button>
 
-    <div class="pages">
-      @for (page of visiblePages; track page) {
-        <button 
-          class="page" 
-          [class.active]="page === currentPage()" 
-          [disabled]="page === currentPage()"
-          (click)="goToPage(page)"
-        >
-          {{ page }}
-        </button>
-      }
-    </div>
-
-    <button class="nav-btn" (click)="nextPage()" [disabled]="!hasNextPage()">
-      Next
-    </button>
-  </div>
-}
 
         </div>
     </div>
