@@ -14,6 +14,7 @@ export interface IEmployee {
   bonus: number;
   deductions: number;
   totalSalary: number;
+  currentRate: number;
 }
 export interface IProjectsStats {
   totalProjectsCompleted: number;

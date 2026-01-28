@@ -1,14 +1,217 @@
 .imageCover{
-    width: 90%;
-    height: 240px;
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover !important;
     border-radius: 8px;
 }
+
+.inner-box {
+  flex: 0;
+}
+@media (max-width: 1400px){
+  .statisTwo .ms-auto{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+}
+@media (max-width: 1300px){
+ .card-box{
+  grid-template-columns: repeat(3, 1fr); /* 👈 4 أعمدة ثابتة */
+
+  }
+ 
+}
+@media (max-width: 992px) { /* lg -> md */
+
+  .card-box{
+  grid-template-columns: repeat(2, 1fr); /* 👈 4 أعمدة ثابتة */
+
+  }
+  .cardKeep{
+    gap: 20px !important;
+  }
+  .KEEPITUP{
+  padding: 0 !important;
+}
+
+  .team .right-box .text-end{
+    max-height: none;
+  }
+  .row{
+  margin-left:  0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.statisTwo .leftBox {
+  width: 100% !important;
+}
+.statisTwo .row{
+  padding: 20px !important;
+}
+
+  .statisTwo , .statisOne{
+    padding: 0 !important;
+  }
+}
+@media (max-width: 768px) { /* lg -> md */
+
+.inner-box {
+  flex: none !important;
+}  
+
+.CompleteProjects{
+  justify-content: space-between !important;
+}
+.team .right-box .inner-box img{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.statisTwo .row{
+  width: 100% !important;
+   justify-content: end !important;
+   align-items: flex-start;
+   padding-bottom: 0 !important;
+   span{
+    line-height: 1 !important;
+    margin-top: 14px !important;
+   }
+   
+}
+}
+@media (max-width: 600px) {
+
+  .card-box{
+  grid-template-columns: repeat(1, 1fr); /* 👈 4 أعمدة ثابتة */
+
+  }
+}
+
+.project-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: fit-content;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+.numOfEmployee{
+  font-size: 90px !important;
+}
+.stat-card {
+  flex: 1 1 10px;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.stat-card p {
+  margin: 0;
+}
+
+.fs-3 {
+  font-size: 1.5rem; 
+}
+
+.col .smallMonth{
+    font-size: 8px;
+    width: fit-content;
+    padding-left: 5px;
+    margin-bottom: 4px !important;
+}
+.booked{
+    color:#00BEC5 !important;
+}
+
+.image-flip {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  perspective: 1000px;
+}
+
+.image-face {
+  position: absolute;
+  width: 100%;
+    height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.7s ease;
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  background: #1f1f1f;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.image-flip:hover .front {
+  transform: rotateY(180deg);
+}
+
+.image-flip:hover .back {
+  transform: rotateY(360deg);
+}
+
+
+.qr-image {
+  width: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+    /* Download Button */
+    .download-btn {
+    background: var(--blue);
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 9px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 90% !important;
+    bottom: 25px;
+    transition: 0.3s;
+    }
+
+    .download-btn:hover {
+    background: #009da3;
+    }
+
+@media (max-width: 576px) {
+  .stat-card {
+    flex: 1 1 40%;
+    margin: 5px 0;
+  }
+  .card-box .cards{
+    padding: 0 !important;
+  }
+  .mt-3{
+    padding: 0 !important;
+  }
+  .image-flip{
+    height: 300px;
+
+  }
+}
+
 
 @media (max-width: 576px) {
 
    .profile .right-box .text-end{
     max-height: none !important;
+    width: 100% !important;
    }
    .ms-auto{
     margin-left: 10px !important;

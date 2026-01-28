@@ -1,0 +1,103 @@
+<div class="project-detail-page px-3">
+  <div class="project-chat px-md-0 px-3">
+    <h1 class="big text-end text-white mt-5 pt-5 mb-3">SUBMISSIONS</h1>
+
+    <div class="project-chat-box rounded p-md-4 text-white">
+      <div class="chat-container">
+        <div class="chat-box">
+
+          @if (submissions().length === 0) {
+            <div class="no-chat-message">No Submissions Yet</div>
+          } @else {
+
+            @for (sub of submissions(); track sub.id; let i = $index) {
+
+              @if (i === 0) {
+                <div class="date-separator">Today</div>
+              }
+
+              <div class="message p-0">
+                <p class="username">{{ sub.userName }}</p>
+
+                <div class="message-content-wrapper">
+                  <img [src]="'assets/img/chat.png'" class="user-img" />
+
+                  <div class="d-flex flex-column-reverse gap-1 w-100 message-content">
+                    <div class="dataShow d-flex align-items-center gap-2">
+
+                      @for (att of sub.attachments; track att.id) {
+                        <a
+                          class="file-card d-flex align-items-end justify-content-between gap-2"
+                          [ngClass]="statusClass(attachmentStatuses()[sub.id]?.[att.id] ?? att.status)"
+                          (click)="toggleAttachmentStatus(sub.id, att.id)"
+                        >
+                          <div class="d-flex gap-2">
+                            <img class="attach-img" src="assets/img/new-document 2.svg" />
+                            <div class="file-info">
+                              <div class="file-name">File Name {{$index  +1}}</div>
+                              <div class="file-size">—</div>
+                            </div>
+                          </div>
+
+                       <div
+  class="Icon"
+  (click)="downloadFile(att.fileUrl); $event.stopPropagation()"
+>
+  <i class="fa-solid fa-download fs-5"></i>
+</div>
+
+                        </a>
+                      }
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timestamp-container mt-2">
+                  <span class="timestamp">
+                    {{ sub.submittedAt | date:'shortTime' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="addComment my-3 ms-5 ps-2">
+                <h5 class="mb-1">ADD A COMMENT</h5>
+
+                <input
+                  type="text"
+                  placeholder="write a comment"
+                  [value]="sub.comment ?? ''"
+ 
+          disabled
+                />
+
+                <div class="quality my-3 d-flex align-items-baseline justify-content-end gap-3">
+                  <p class="m-0">QUALITY OF SUBMISSION</p>
+
+                  <div class="d-flex align-items-center mt-3">
+      <div class="stars">
+  <button
+    *ngFor="let star of [1,2,3,4,5]"
+    class="star-btn m-0"
+    type="button"
+    [class.active]="star <= (sub.quality ?? 0)"
+    (click)="setQuality(sub.id, star)"
+  >
+    <i class="fa fa-star"></i>
+  </button>
+</div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="my-4"><hr /></div>
+            }
+          }
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

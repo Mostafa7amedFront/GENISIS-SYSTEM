@@ -25,17 +25,20 @@
               <a class="nav-link" routerLink="/employee/proflie" routerLinkActive="active">PROFILE</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/employee/projects" routerLinkActive="active">PROJECTS</a>
-            </li>
-                  <li class="nav-item">
-              <a class="nav-link" routerLink="/employee/feedback" routerLinkActive="active">FEEDBACKS</a>
-            </li>
-          
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/employee/notifications" routerLinkActive="active"
-                >NOTIFICATIONS</a
-              >
-            </li>
+              <a class="nav-link" routerLink="/employee/Submissions" routerLinkActive="active">SUBMISSIONS</a>
+  
+
+          <li class="nav-item position-relative">
+  <a class="nav-link notif-link" routerLink="/employee/notifications" routerLinkActive="active">
+    NOTIFICATIONS
+
+    <!-- Notification Badge -->
+    <div class="notif-badge" >
+      <p class="mb-0">  {{ notifCount }}</p>
+    
+    </div>
+  </a>
+</li>
             <li class="nav-item d-lg-none">
               <a
                 class="nav-link d-flex justify-content-center align-items-center gap-2 text-white"

@@ -52,7 +52,7 @@ private cdr = inject(ChangeDetectorRef);
           quality: fb.qualityOfRequirementsRate,
           deadlines: fb.meetingDeadlinesRate,
           communication: fb.communicationRate,
-          satisfaction: fb.overAllRate
+          satisfaction: fb.overallRate
         };
 
         // ⭐ Question 02

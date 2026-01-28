@@ -11,7 +11,7 @@ import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
 
 @Component({
   selector: 'app-myprojects',
-  imports: [LeadingZeroPipe , ReactiveModeuls , ShortenPipe ,DatePipe],
+  imports: [ReactiveModeuls ],
   templateUrl: './myprojects.html',
   styleUrl: './myprojects.scss'
 })

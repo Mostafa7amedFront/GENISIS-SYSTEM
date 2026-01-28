@@ -4,7 +4,7 @@ export interface IFeedbackEmployee {
   qualityOfRequirementsRate: number
   meetingDeadlinesRate: number
   communicationRate: number
-  overAllRate: number
+  overallRate: number
   questionTow: string
   questionThree: number
   dateTime: string

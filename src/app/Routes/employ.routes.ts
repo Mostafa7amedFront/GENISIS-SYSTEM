@@ -18,8 +18,8 @@ export const employeroutes: Routes = [
       },
     
       {
-        path:'projects',
-        loadComponent:()=> import('../Pages/Interfaces_Employee/myprojects/myprojects').then(m => m.Myprojects)
+        path:'Submissions',
+        loadComponent:()=> import('../Pages/Interfaces_Employee/submissions/submissions').then(m => m.Submissions)
       },
         {
         path: 'updateStats/:id',

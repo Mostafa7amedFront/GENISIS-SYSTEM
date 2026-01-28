@@ -9,6 +9,13 @@ import { ReactiveModeuls } from '../../../Shared/Modules/ReactiveForms.module';
 })
 export class NavbarEmployee {
   _login = inject(LoginService);
+  notifCount: number = 10;
+  isMenuOpen: boolean = false;
+  constructor() {}
+
+  ngOnInit(): void {
+
+  }
 
 
 
