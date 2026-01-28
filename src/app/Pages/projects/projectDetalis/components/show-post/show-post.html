@@ -1,35 +1,46 @@
-<div class="d-flex col p-4 rounded mt-5" style="background-color: #2d2d2d">
-  <div class="col-7 pe-3">
-    <div class="d-flex align-items-center">
-      <h3 class="mb-0">Post {{ posts().number }}</h3>
-      <div class="box row py-1 px-4 ms-auto rounded-3" style="background-color: #616161">
-        @if(posts().fileType === 0) { Static } @if(posts().fileType === 1) { Animated }
+<div class="post-details p-4 rounded mt-5" style="background-color: #2d2d2d">
+  <div class="row g-4 align-items-stretch">
+
+    <!-- TEXT -->
+    <div class="col-12 col-lg-7 order-2 order-lg-1">
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <h3 class="mb-0">Post {{ posts().number }}</h3>
+
+        <div class="box ms-auto rounded-3 px-3 py-1" style="background-color: #616161">
+          @if(posts().fileType === 0) { Static }
+          @if(posts().fileType === 1) { Animated }
+        </div>
       </div>
+
+      <h5 class="text-white-50">{{ posts().postingAt | monthDay }}</h5>
+
+      <h6 class="mt-4 pt-3">Title :</h6>
+      <p class="mb-0">{{ posts().title }}</p>
+
+      <h6 class="mt-4 pt-3">Caption :</h6>
+      <p class="decScroll mb-2" style="text-align: justify;">
+        {{ posts().captionEng }}
+      </p>
+
+      <p class="decScroll text-end mb-0" style="text-align: justify; font-family: cairo;">
+        {{ posts().captionAra }}
+      </p>
     </div>
 
+    <!-- MEDIA -->
+    <div class="col-12 col-lg-5 order-1 order-lg-2">
+      <div class="upload position-relative">
+        @if(posts().fileType === 0) {
+          <img [src]="baseurl + posts().file" class="preview-img rounded" />
+          <div class="btn_bo">
+            <button class="btn w-100" (click)="downloadFile(posts().file)">Download</button>
+          </div>
+        }
 
-
-    <h5 class="text-white-50">{{ posts().postingAt| monthDay }}</h5>
-    <h6 class="mt-4 pt-3">Title :</h6>
-    <p>{{ posts().title }}</p>
-    <h6 class="mt-4 pt-3">Caption :</h6>
-   <P style="text-align: justify;" class="decScroll">With Naseem, your products stay in polar conditions even in the peak of heat. With Naseem, your products stay in polar conditions even in the peak of heat. With Naseem, your products stay in polar conditions even in the peak of heat. conditions even in the peak of heat. conditions even in the peak of heat. </P>
-
-    <P class="text-end decScroll" style="text-align: justify;font-family: cairo;">مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر. مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر.مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر.مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر. مع نسيم، منتجاتك تفضل في أجواء قطبية حتى في عز الحر. مع نسيم، منتجاتك تفضل في أجواء قطبية</P>
-  </div>
-  <div class="col-5 ps-4">
-    <div class="upload position-relative">
-      @if(posts().fileType === 0) {
-      <img [src]="baseurl + posts().file" class="preview-img rounded" />
-      <div class="btn_bo">
-              <button class="btn w-100" (click)="downloadFile(posts().file)">Download</button>
-
+        @if(posts().fileType === 1) {
+          <video [src]="baseurl + posts().file" controls class="preview-video rounded"></video>
+        }
       </div>
-      } @if(posts().fileType === 1) {
-      <video [src]="baseurl + posts().file" controls class="preview-video rounded"></video>
-
-      }
-
     </div>
 
   </div>

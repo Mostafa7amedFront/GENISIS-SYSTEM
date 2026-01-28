@@ -1,74 +1,63 @@
 <div class="third">
   <div class="text-white p-4 mt-5" style="background-color: #171818; border-radius: 13px">
-    <div class="row">
-      <div class="d-flex justify-content-between mb-3">
+    <div class="row ">
+      <div class="d-flex dataSoiael justify-content-between mb-3">
         <div class="col-5">
-          <div
-            class="blue text-center p-2 rounded pe-2"
-            style="background-color: #0b6b6e; margin-left: -70px"
-          >
+          <div class="blue text-center p-2 rounded pe-2" style="background-color: #0b6b6e; margin-left: -70px">
             <h2 class="pe-4 mb-0">SOCIAL MEDIA</h2>
           </div>
         </div>
         <div class="col-2">
-          <div
-            class="blue btnlink text-center p-2 rounded pe-2"
-            style="background-color: #0b6b6e; margin-right: -70px"
-          >
+          <div class="blue btnlink text-center p-2 rounded pe-2" style="background-color: #0b6b6e; margin-right: -70px">
             <h2 class="pe-4 mb-0" (click)="goAddPost()">Add post</h2>
           </div>
         </div>
-      </div>
-      <div class="col-8 px-3">
-        <router-outlet></router-outlet>
-      </div>
-      <div class="d-flex col rounded px-3 ps-0" style="background-color: transparent">
-        <!-- month-picker.component.html -->
-        <div class="month-picker d-flex w-100 justify-content-between flex-column ">
-                <div class="header m-0">
+      </div> 
+
+
+    </div>
+    <div class="row g-3">
+  <div class="col-12 col-lg-8 px-3 rouetrP">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="col-12 col-lg-4 px-3 ps-lg-0 rouetrP ">
+      <div class="month-picker d-flex w-100 justify-content-between flex-column ">
+          <div class="header m-0">
             <span (click)="prevPage()" class="routesX">
               <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z" fill="white"/>
-</svg>
+                <path
+                  d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z"
+                  fill="white" />
+              </svg>
             </span>
             <span> Page {{ pageNumber }} </span>
-            <span (click)="nextPage()"
-              ><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z" fill="white"/>
-</svg>
+            <span (click)="nextPage()"><svg width="23" height="23" viewBox="0 0 23 23" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z"
+                  fill="white" />
+              </svg>
             </span>
           </div>
 
           <div class="grid post-card flex-grow-1 mb-2">
-            <div
-              *ngFor="let post of displayPosts; let i = index"
-              class="cardSelect"
-              style="cursor: pointer; border-radius: 5px"
-            >
-                  <ng-container *ngIf="post.file; else emptyDiv">
+            <div *ngFor="let post of displayPosts; let i = index" class="cardSelect"
+              style="cursor: pointer; border-radius: 5px">
+              <ng-container *ngIf="post.file; else emptyDiv">
                 @if(post.fileType === 0) {
-                <img
-                  [src]="baseurl + post.file"
-                  class="w-100 h-100 object-fit-cover rounded-1"
-                  [routerLink]="['posts', post.id]"
-                />
+                <img [src]="baseurl + post.file" class="w-100 h-100 object-fit-cover rounded-1"
+                  [routerLink]="['posts', post.id]" />
                 } @if(post.fileType === 1) {
-                  @if(post.cover) {
-                         <img
-                  [src]="baseurl + post.cover"
-                  class="w-100 h-100 object-fit-cover rounded-1"
-                  [routerLink]="['posts', post.id]"
-                />
-                  }
-                  @else {
-                     <img
-                  src="Image/video-frame-svgrepo-com.svg"
-                  class="w-100 h-100"
-                  style="object-fit: fill"
-                  [routerLink]="['posts', post.id]"
-                />
-                  }
-               
+                @if(post.cover) {
+                <img [src]="baseurl + post.cover" class="w-100 h-100 object-fit-cover rounded-1"
+                  [routerLink]="['posts', post.id]" />
+                }
+                @else {
+                <img src="Image/video-frame-svgrepo-com.svg" class="w-100 h-100" style="object-fit: fill"
+                  [routerLink]="['posts', post.id]" />
+                }
+
 
                 }
               </ng-container>
@@ -82,64 +71,65 @@
           </div>
 
           <div class="footer m-0">
-            <span (click)="prevMonth()" class="routesX">              <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z" fill="white"/>
-</svg>
+            <span (click)="prevMonth()" class="routesX"> <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z"
+                  fill="white" />
+              </svg>
             </span>
             <span>{{ monthNames[currentMonth()] }}</span>
-            <span (click)="nextMonth()"
-              >              <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z" fill="white"/>
-</svg>
+            <span (click)="nextMonth()"> <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22.0607 12.1066C22.6464 11.5208 22.6464 10.571 22.0607 9.98524L12.5147 0.439296C11.9289 -0.146491 10.9792 -0.146491 10.3934 0.439296C9.80761 1.02508 9.80761 1.97483 10.3934 2.56062L18.8787 11.0459L10.3934 19.5312C9.80761 20.117 9.80761 21.0667 10.3934 21.6525C10.9792 22.2383 11.9289 22.2383 12.5147 21.6525L22.0607 12.1066ZM0 11.0459L1.31134e-07 12.5459L21 12.5459L21 11.0459L21 9.5459L-1.31134e-07 9.5459L0 11.0459Z"
+                  fill="white" />
+              </svg>
             </span>
           </div>
         </div>
-      </div>
-
-      <div class="d-flex justify-content-between align-items-end px-0 my-3 px-3">
-        <p class="p-0 m-0">Project Progress</p>
-        <div class="d-flex gap-1 ps-5 ">
-  <button class="btn" (click)="updateProgress(0)">+25%</button>
-  <button class="btn" (click)="updateProgress(1)">+50%</button>
-  <button class="btn" (click)="updateProgress(2)">+75%</button>
-  <button class="btn" (click)="updateProgress(3)">+100%</button>
-        </div>
-      </div>
-   <div class="px-3">
-  <div class="loader rounded py-4 px-3" style="background-color: #2d2d2d; color: white">
-
-    <div class="d-flex w-100 align-items-start justify-content-between">
-      <div>
-        <h1 class="mb-0" style="font-size: 70px">
-          {{ progress }}
-          <span class="text-white-50">%</span>
-        </h1>
-      </div>
-
-      <div>
-        <p class="mb-0">Collaborators</p>
-        <div class="d-flex gap-1 justify-content-end">
-  <img
-    *ngFor="let emp of Collaborators()"
-    [src]="baseurl + emp.imageUrl"
-    [alt]="emp.name"
-    class=" rounded"
-    height="50"
-    width="50"
-  />
-</div>
-
-      </div>
-    </div>
-
-    <div class="bar-wrapper mt-3 rounded" style="height: 12px">
-      <div class="bar-glow" [style.width.%]="progress"></div>
-      <div class="bar-fill" [style.width.%]="progress"></div>
-    </div>
-
   </div>
 </div>
 
-    </div>
+    
+<div class="progress-actions-wrapper my-3 px-3 rouetrP">
+  <p class="m-0 progress-title">Project Progress</p>
+
+  <div class="progress-actions">
+    <button class="btn" (click)="updateProgress(0)">+25%</button>
+    <button class="btn" (click)="updateProgress(1)">+50%</button>
+    <button class="btn" (click)="updateProgress(2)">+75%</button>
+    <button class="btn" (click)="updateProgress(3)">+100%</button>
+  </div>
+</div>
+
+      <div class="px-3 rouetrP">
+        <div class="loader rounded py-4 px-3" style="background-color: #2d2d2d; color: white">
+
+          <div class="d-flex w-100 align-items-start justify-content-between">
+            <div>
+              <h1 class="mb-0" style="font-size: 70px">
+                {{ progress }}
+                <span class="text-white-50">%</span>
+              </h1>
+            </div>
+
+            <div>
+              <p class="mb-0">Collaborators</p>
+              <div class="d-flex gap-1 justify-content-end">
+                <img *ngFor="let emp of Collaborators()" [src]="baseurl + emp.imageUrl" [alt]="emp.name"
+                  class=" rounded" height="50" width="50" />
+              </div>
+
+            </div>
+          </div>
+
+          <div class="bar-wrapper mt-3 rounded" style="height: 12px">
+            <div class="bar-glow" [style.width.%]="progress"></div>
+            <div class="bar-fill" [style.width.%]="progress"></div>
+          </div>
+
+        </div>
+      </div>
   </div>
 </div>

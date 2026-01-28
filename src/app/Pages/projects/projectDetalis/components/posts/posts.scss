@@ -119,3 +119,231 @@
     width: 100px;
     color: #fff;
 }
+
+/* Header responsive without negative margins */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-title,
+.header-action {
+  min-width: 0;
+}
+
+.header-title .blue,
+.header-action .blue {
+  background-color: #0b6b6e;
+}
+
+/* keep titles from being huge on small screens */
+.header-row h2 {
+  font-size: clamp(16px, 2.2vw, 28px);
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+/* Mobile: stack header blocks */
+@media (max-width: 767.98px) {
+  .header-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .header-title .blue,
+  .header-action .blue {
+    width: 100%;
+  }
+  .header-row h2 {
+    text-align: center;
+  }
+  
+}
+
+/* Grid responsive */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 991.98px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .post-card img,
+  .cardEmpty {
+    height: 110px !important;
+  }
+}
+
+/* Progress buttons wrap nicely */
+.progress-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.progress-actions .btn {
+  width: auto;          /* بدل 100px ثابت */
+  min-width: 90px;
+  padding: 10px 12px;
+}
+
+/* Make collaborators wrap on small screens */
+.collab-wrap {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+}
+
+/* Loader header wraps instead of overflow */
+.loader-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.loader-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap; /* أهم حاجة */
+}
+
+.progress-value {
+  font-size: clamp(40px, 7vw, 70px); /* بدل 70 ثابت */
+  line-height: 1;
+}
+
+.collab-block {
+  min-width: 180px;
+  text-align: end;
+}
+
+.collab-wrap {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  flex-wrap: wrap; /* عشان الصور تنزل سطر */
+}
+
+@media (max-width: 575.98px) {
+  .collab-block {
+    width: 100%;
+    text-align: start;
+  }
+
+  .collab-wrap {
+    justify-content: flex-start;
+  }
+  .post-card img  , .cardEmpty{
+  height: 100%  !important;
+  min-height: 200px !important;
+
+}
+
+  .loader {
+    padding: 16px !important;
+  }
+}
+.progress-actions-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* buttons container */
+.progress-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;      /* أهم حاجة */
+  justify-content: flex-end;
+}
+
+/* title */
+.progress-title {
+  white-space: nowrap;
+}
+
+/* mobile */
+@media (max-width: 575.98px) {
+  .progress-actions-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .progress-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+.rouetrP{
+  padding: 0 !important;
+}
+  .progress-actions .btn {
+    flex: 1 1 calc(50% - 4px); /* 2 buttons في السطر */
+    min-width: unset;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .loader-header h1 {
+    font-size: 44px !important; /* بدل 70px على الموبايل */
+    line-height: 1;
+  }
+  .collab-wrap {
+    gap: 30px;
+
+  
+}
+
+}
+@media (max-width: 900px) {
+
+  /* خلّي الصف يتصرف كـ column */
+  .dataSoiael {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* الأعمدة تاخد عرض كامل */
+  .dataSoiael > .col-5,
+  .dataSoiael > .col-2 {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* إلغاء الـ negative margins */
+  .blue {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* العناوين في النص */
+  .blue h2 {
+    text-align: center;
+    padding-right: 0 !important;
+  }
+
+  /* مسافة بين العنصرين */
+  .row > .col-5 {
+    margin-bottom: 12px;
+  }
+}

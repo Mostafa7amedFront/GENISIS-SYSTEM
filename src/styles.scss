@@ -722,6 +722,9 @@ body {
     .project-detail-page .big {
         font-size: 25px;
     }
+    .project-detail-page {
+        padding: 0 !important;
+    }
     .project-detail-page p{
         font-size: 10px !important;
     }
@@ -833,7 +836,7 @@ body {
     .addComment {
         margin-inline-start: 0 !important;
     }
-    .project-chat{
+    .project-chat ,.todo-list , .completed-list{
         padding: 0 !important;
     }
 }

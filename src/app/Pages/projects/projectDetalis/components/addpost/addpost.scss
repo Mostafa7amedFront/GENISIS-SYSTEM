@@ -184,3 +184,73 @@ textarea {
     }
   }
 }
+/* ===== Responsive for Add Post layout (NO HTML/CLASS changes) ===== */
+
+/* من 900px وتحت: خليه ستون */
+@media (max-width: 900px) {
+  /* الـ wrapper الأساسي */
+  .d-flex.col.p-4.rounded.mt-5 {
+    flex-direction: column !important;
+    gap: 16px;
+  }
+
+  /* الفورم والميديا ياخدوا عرض كامل */
+  .d-flex.col.p-4.rounded.mt-5 > .col-7,
+  .d-flex.col.p-4.rounded.mt-5 > .col-5 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* شيل padding اللي كانت معمولة للـ desktop */
+  .d-flex.col.p-4.rounded.mt-5 > .col-7.pe-3 {
+    padding-right: 0 !important;
+  }
+  .d-flex.col.p-4.rounded.mt-5 > .col-5.ps-4 {
+    padding-left: 0 !important;
+  }
+
+  /* upload card: height مناسب للموبايل */
+  .upload-card {
+    max-height: 320px !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10; /* شكل لطيف للصورة/الفيديو */
+  }
+
+  /* خلي الفيديو/الصورة تملا الكارد */
+  .upload-card .preview-img,
+  .upload-card .preview-video {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* cover badge ما تكبّرش وتزق الفورم */
+  .upload-Cover {
+    width: 72px;
+    height: 72px;
+    right: 8px;
+  }
+}
+
+/* موبايل صغير جداً */
+@media (max-width: 575.98px) {
+  .d-flex.col.p-4.rounded.mt-5 {
+    padding: 16px !important;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+  }
+
+  .upload-card {
+    max-height: 260px !important;
+    aspect-ratio: 1 / 1; /* مربع على الموبايل الصغير */
+  }
+
+  .upload-Cover {
+    width: 64px;
+    height: 64px;
+    right: 6px;
+  }
+}

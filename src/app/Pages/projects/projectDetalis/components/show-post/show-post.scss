@@ -53,3 +53,84 @@
         background: #ffffff;
     }
 }
+
+.post-details {
+  width: 100%;
+}
+
+.upload {
+  width: 100%;
+  position: relative;
+
+  /* بدل height ثابت، نخليها ratio محترم */
+  aspect-ratio: 4 / 5;      // مناسب للموبايل (شبه بوست سوشيال)
+  max-height: 520px;        // سقف للديسكتوب
+  background: #1f1f1f;
+  border-radius: 12px;
+  overflow: hidden;
+
+  .preview-img,
+  .preview-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* button overlay */
+.btn_bo {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  width: 100%;
+  padding: 0 16px;
+
+  .btn {
+    backdrop-filter: blur(4px);
+    background: #00000033;
+    color: #fff;
+  }
+}
+
+/* captions */
+.decScroll {
+  max-height: 90px;          // شوية أكبر
+  padding-inline-end: 10px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-track { background: #1b1b1b; border-radius: 10px; }
+  &::-webkit-scrollbar-thumb { background: #dcdcdc; border-radius: 10px; border: 2px solid #1b1b1b; }
+  &::-webkit-scrollbar-thumb:hover { background: #ffffff; }
+}
+
+/* Mobile tweaks */
+@media (max-width: 900.98px) {
+  .post-details {
+    margin-top: 20px !important;
+  }    
+}
+@media (max-width: 575.98px) {
+  .post-details {
+    padding: 16px !important;
+    margin-top: 0 !important;
+  }
+.decScroll{
+    max-height: none;
+
+}
+
+  .upload {
+    aspect-ratio: 1 / 1;    // مربع على الموبايل (أريح)
+    max-height: 360px;
+  }
+
+  .box {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px ;
+  }
+}
