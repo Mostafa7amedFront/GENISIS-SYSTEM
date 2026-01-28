@@ -13,8 +13,8 @@ import { GetMediaBuyingFields, IResMediaBuying } from '../Interface/ires-media-b
 export class MediaBuyingService {
     private _httpClient = inject(HttpClient);
   private baseUrl = `${environment.apiUrl}Projects`;
-  addMediaBuyingField(projectId: string, campaignType: number, fields: any[]): Observable<any> {
-    const url = `${this.baseUrl}/AddMediaBuyingField/${projectId}?campaignType=${campaignType}`;
+  addMediaBuyingField(projectId: string, campaignType: number,   fields: { id: string; type: number ; name: string}[]): Observable<any> {
+    const url = `${this.baseUrl}/UpdateMediaBuyingField/${projectId}?campaignType=${campaignType}`;
     return this._httpClient.post(url, fields);
   }
   getSummary(projectId: string): Observable<IResponseOf<ISummary>> {

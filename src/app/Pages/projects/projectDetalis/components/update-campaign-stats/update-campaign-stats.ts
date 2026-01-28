@@ -12,6 +12,7 @@ enum CampaignType {
 }
 
 interface Field {
+  id: string;
   name: string;
   type: number;
 }
@@ -33,14 +34,14 @@ export class UpdateCampaignStats {
   campaignType = signal<CampaignType>(CampaignType.Engagement);
   id = signal<string>('');
 
-  // نستخدم signal array للحقول
+  // لازم الـ initial values تطابق الـ interface (فيها id)
   fields = signal<Field[]>([
-    { name: '', type: 0 },
-    { name: '', type: 0 },
-    { name: '', type: 0 },
-    { name: '', type: 0 },
-    { name: '', type: 0 },
-    { name: '', type: 0 }
+    { id: '', name: '', type: 0 },
+    { id: '', name: '', type: 0 },
+    { id: '', name: '', type: 0 },
+    { id: '', name: '', type: 0 },
+    { id: '', name: '', type: 0 },
+    { id: '', name: '', type: 0 }
   ]);
 
   hoverIndex: number | null = null;
@@ -52,7 +53,6 @@ export class UpdateCampaignStats {
     this.loadStats();
   }
 
-
   // ==========================
   // Load Stats
   // ==========================
@@ -61,11 +61,19 @@ export class UpdateCampaignStats {
 
     this.api.GetMediaBuyingFields(this.id(), this.campaignType())
       .subscribe({
-        next: res => { this.fields.set(res.value.map(f => ({ name: f.name, type: f.fieldType }))); },
-        error: err => this._alert.toast(err.error.detail, 'error')
+        next: res => {
+          // مهم: خزّن الـ id اللي راجع من الـ API
+          this.fields.set(
+            res.value.map((f: any) => ({
+              id: f.mediaBuyingFieldId ?? f.id ?? '',
+              name: f.name ?? '',
+              type: f.fieldType ?? 0
+            }))
+          );
+        },
+        error: err => this._alert.toast(err?.error?.detail ?? 'Error loading stats', 'error')
       });
   }
-
 
   selectCampaign(value: 'Engagement' | 'Awareness' | 'Sales') {
     const map = {
@@ -74,8 +82,7 @@ export class UpdateCampaignStats {
       Awareness: CampaignType.Awareness,
     };
     this.campaignType.set(map[value]);
-        this.loadStats();
-
+    this.loadStats();
   }
 
   setType(index: number, value: number) {
@@ -96,28 +103,33 @@ export class UpdateCampaignStats {
            t === 2 ? 'Count' : '';
   }
 
-  send() {
-    // تأكد من كل الحقول موجودة
-    const invalid = this.fields().some(f => !f.name.trim());
-    if (invalid) {
-      this._alert.toast('Please fill all field titles', 'warning');
-      return;
-    }
-    this.isLoading.set(true);
-
-    this.api.addMediaBuyingField(this.id(), this.campaignType(), this.fields())
-      .subscribe({
-        next: () => {
-          this._alert.toast('Updated Campaign Stats Successfully', 'success');
-          this.isLoading.set(false);
-        setTimeout(() => {
-          this.location.back();
-        }, 0);
-        },
-        error: () => {
-          this._alert.toast('Error updating Campaign Stats', 'error');
-          this.isLoading.set(false);
-        }
-      });
+send() {
+  const invalidName = this.fields().some(f => !f.name.trim());
+  if (invalidName) {
+    this._alert.toast('Please fill all field titles', 'warning');
+    return;
   }
+
+  const missingIds = this.fields().some(f => !f.id);
+  if (missingIds) {
+    this._alert.toast('Some fields are missing ids. Please reload stats.', 'warning');
+    return;
+  }
+
+  this.isLoading.set(true);
+
+  this.api.addMediaBuyingField(this.id(), this.campaignType(), this.fields())
+    .subscribe({
+      next: () => {
+        this._alert.toast('Updated Campaign Stats Successfully', 'success');
+        this.isLoading.set(false);
+        setTimeout(() => this.location.back(), 0);
+      },
+      error: (err) => {
+        this._alert.toast(err?.error?.detail ?? 'Error updating Campaign Stats', 'error');
+        this.isLoading.set(false);
+      }
+    });
+}
+
 }

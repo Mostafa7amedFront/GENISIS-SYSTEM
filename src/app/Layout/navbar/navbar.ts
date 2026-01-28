@@ -13,9 +13,11 @@ import { NotificationService } from '../../Core/service/notification.service';
 export class Navbar {
   _login = inject(LoginService);
   _notification = inject(NotificationService);
+userType = signal<string>('');
 
   notifCount = signal<number>(0);
   isMenuOpen = false;
+
 
   private syncCount = effect(() => {
     this.notifCount.set(this._notification.unreadCount());
@@ -27,8 +29,12 @@ export class Navbar {
     this._notification.loadUnreadCount();
 
     this._notification.startConnection();
+      const type = localStorage.getItem('user_type');
+  this.userType.set((type ?? '').toLowerCase());
   }
-
+isAdmin(): boolean {
+  return this.userType() === 'Admin';
+}
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
