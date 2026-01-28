@@ -722,8 +722,8 @@ body {
     .project-detail-page .big {
         font-size: 25px;
     }
-    .project-detail-page {
-        padding: 0 !important;
+    .project-detail-page , .mynotes  , .add-todo , .third {
+        padding: 0 10px !important;
     }
     .project-detail-page p{
         font-size: 10px !important;
