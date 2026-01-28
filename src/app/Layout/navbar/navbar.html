@@ -31,9 +31,18 @@
       <li class="nav-item">
               <a class="nav-link" routerLink="/arrival" routerLinkActive="active">ARRIVAL</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/notifications" routerLinkActive="active">NOTIFICATIONS</a>
-            </li>
+          <li class="nav-item position-relative">
+  <a class="nav-link notif-link" routerLink="/notifications" routerLinkActive="active">
+    NOTIFICATIONS
+
+    <!-- Notification Badge -->
+    <div class="notif-badge" *ngIf="notifCount > 0">
+      <p class="mb-0">  {{ notifCount }}</p>
+    
+    </div>
+  </a>
+</li>
+
             <li class="nav-item d-lg-none">
               <a class="nav-link d-flex justify-content-center align-items-center gap-2 text-white" (click)="logout()">
                 LOGOUT

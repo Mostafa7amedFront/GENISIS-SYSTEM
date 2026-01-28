@@ -13,12 +13,40 @@ export class Navbar {
   _login = inject(LoginService);
 
 
-isMenuOpen = false;
 
-toggleMenu() {
-  this.isMenuOpen = !this.isMenuOpen;
-}
-     logout() {
+  // 🔔 عدد الإشعارات
+  notifCount: number = 0;
+
+  // Menu Mobile
+  isMenuOpen: boolean = false;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    // مثال: تحميل الإشعارات أول ما الصفحة تفتح
+    this.getNotificationsCount();
+  }
+
+  // ✅ Function تجيب عدد الإشعارات
+  getNotificationsCount() {
+    // حاليا رقم تجريبي
+    this.notifCount = 5;
+
+    // بعدين لما تربط API هتبقى كده مثلا:
+    /*
+    this.notificationService.getCount().subscribe((res:any) => {
+      this.notifCount = res.count;
+    });
+    */
+  }
+
+  // ✅ Toggle Menu للموبايل
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  // ✅ Logout Function
+  logout() {
     this._login.logout();
   }
 }
